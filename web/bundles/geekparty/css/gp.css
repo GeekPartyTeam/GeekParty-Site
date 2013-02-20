@@ -1,0 +1,18 @@
+@font-face {
+    font-family: pixel_font;
+    src: url('uni05_53.ttf');
+}
+
+body {
+    background-color: #0c2633;
+    color: #ffffff;
+}
+
+div#head {
+
+}
+
+
+p.pixel {
+    font-family: pixel_font;
+}
