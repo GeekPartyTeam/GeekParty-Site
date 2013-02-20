@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./js/countdown.js"></script>
+    <link rel="stylesheet" href="./css/style.css" type="text/css" media="screen, projection" />
+    <!--[if lte IE 6]><link rel="stylesheet" href="./css/style_ie.css" type="text/css" media="screen, projection" /><![endif]-->
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <div id="header">
+       <a id="logo" href="./index.html"><img src="img/logo.jpg" alt="Geek Party"></a>
+
+       <div id="timer">
+           <p id="delimiters" class="timerLabel">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;:</p>
+           <p id="days" class="timerLabel">01</p>
+           <p id="hours" class="timerLabel">08</p>
+           <p id="minutes" class="timerLabel">23</p>
+       </div><!-- #timer-->
+
+       <div id="topNavbar">
+           <div id="topNav">
+               <ul>
+                   <li><a class="regForm" href="#">Login</a></li>
+                   <li>|</li>
+                   <li><a class="regForm" href="#">Register</a></li>
+               </ul>
+           </div>
+           <div id="GPheader"><h2 id="gpLogoText">GEEK PARTY</h2></div>
+
+       </div><!-- #navbar-->
+
+
+    </div><!-- #header-->
+
+
+
+
+    <div id="middle">
+
+        <div id="container">
+            <div id="content">
+
+
+                <div id="partyBreaf" class="itemBlock">
+                    <h2> Что такое geek party? </h2>
+                    <p>Гик-пати - это цифровое творчество в режиме реального времени.
+                    Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников, жжом.</p>
+                    <h2>Где и когда?</h2>
+                    <p>Гик-Пати №2 состоится 23 февраля 2013. Конечно никто не запрещает участвовать из дома в гордом одиночестве, но, как известно, вместе веселиться веселее.
+                       Поэтому заходите в раздел "Party places" и ищите помещения в своем городе. Если такого пока нет - в разделе "участники" можно поискать единомышленников и вместе наверняка
+                       вы придумаете где разместить вашу коолицию на время party.
+
+                    </p>
+                    <h2>Каков план мероприятия?</h2>
+                    <p>Весь день будем делать задорные игры на html5! А когда доделаем немного выпьем!</p>
+                </div>
+
+                <div id="participantForm" class="itemBlock">
+                    <h2>Хочу участвовать!</h2>
+                    <form action="/participate">
+                        <table>
+                            <tr>
+                                <td>
+                                    В каком городе:
+                                </td>
+                                <td>
+                                    <input type="text"></input>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Я в twitter:
+                                </td>
+                                <td>
+                                    <input type="text"></input>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Что могу делать:</td>
+                                <td>
+                                    code <input type="checkbox"/>
+                                    graphics <input type="checkbox"/><br/>
+                                    sound <input type="checkbox"/>
+                                    game design <input type="checkbox"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Мои скиллы:</td>
+                                <td><textarea rows="12" cols="20"></textarea></td>
+                            </tr>
+                        </table>
+
+                    </form>
+                </div>
+
+                <div id="geography" class="itemBlock">
+
+                    <p>Sed1 placerat accumsan ligula. Aliquam felis magna, congue quis, tempus eu, aliquam vitae, ante. Cras neque justo, ultrices at, rhoncus a, facilisis eget, nisl. Quisque vitae pede. Nam et augue. Sed a elit. Ut vel massa. Suspendisse nibh pede, ultrices vitae, ultrices nec, mollis non, nibh. In sit amet pede quis leo vulputate hendrerit. Cras laoreet leo et justo auctor condimentum. Integer id enim. Suspendisse egestas, dui ac egestas mollis, libero orci hendrerit lacus, et malesuada lorem neque ac libero. Morbi tempor pulvinar pede. Donec vel elit.</p>
+
+
+                </div>
+
+                <a href="#" class="expand">Expand column</a>			</div><!-- #content-->
+        </div><!-- #container-->
+
+        <div class="sidebar" id="sideLeft">
+            <ul id="leftNav">
+                <li class="active"><a class="leftMenuButton" href="#">Главная</a></li>
+                <li ><a class="leftMenuButton" href="#">Локации</a></li>
+                <li><a class="leftMenuButton" href="#">Работы</a></li>
+            </ul>
+        </div>
+
+    </div><!-- #middle-->
+
+    <div id="footer">
+        <strong>Footer:</strong> Mus elit Morbi mus enim lacus at quis Nam eget morbi. Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
+    </div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=2"></' + 'script>')</script>
+</body>
+</html>
