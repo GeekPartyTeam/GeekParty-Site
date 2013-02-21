@@ -1,0 +1,310 @@
+@import "./css/reset.css";
+@font-face {
+    font-family: "pixel_font";
+    src: url("../css/uni05_53.ttf");
+}
+html {
+    background: none repeat scroll 0 0 #091F2A;
+}
+#backgroundFX {
+    background: radial-gradient(ellipse at center center , #154863 0%, rgba(21, 72, 99, 0.78) 25%, rgba(19, 65, 90, 0.68) 37%, rgba(9, 31, 42, 0) 100%) repeat scroll 0 0 transparent;
+    height: 2000px;
+    position: absolute;
+    top: -1000px;
+    width: 100%;
+}
+#wrapper {
+    left: -80px;
+    margin: 0 auto;
+    position: relative;
+    width: 1150px;
+}
+#container {
+    padding-left: 160px;
+    width: 100%;
+}
+.p16 {
+    padding: 16px;
+}
+.usePixelFont {
+    font: 14px/18px pixel_font;
+}
+p {
+    color: white;
+}
+* {
+    font-family: Arial;
+}
+a {
+    color: #C1B400;
+}
+h2 {
+    color: #E3BA22;
+    font-size: 160%;
+    margin: 0;
+}
+span.orange {
+    color: #F69506;
+}
+.borderBlock {
+    border-image: url("../img/border.png") 14 14 14 14;
+    border-style: solid;
+    border-width: 14px;
+}
+#header {
+    height: 144px;
+}
+#sitelogo {
+    float: left;
+}
+#timer {
+    background: url("../img/timerBg.png") repeat scroll 0 0 transparent;
+    float: left;
+    height: 136px;
+    margin: 0 0 0 36px;
+    position: relative;
+    width: 455px;
+}
+.timerLabel {
+    margin: 0px;
+	color: #FFAA22;
+    float: left;
+    font: 75px/75px pixel_font;
+    position: absolute;
+    text-align: center;
+    top: 38px;
+    width: 100px;
+}
+#days {
+    left: 94px;
+}
+#dhColon {
+    left: 174px;
+    width: 20px;
+}
+#hours {
+    left: 205px;
+}
+#hmColon {
+    left: 310px;
+    width: 20px;
+}
+#minutes {
+    left: 340px;
+}
+#account {
+    float: right;
+    margin: 0 16px 0 0;
+}
+#accountLogin {
+    margin: 10px 0 0;
+    overflow: hidden;
+}
+.inputBg {
+    background: url("../img/textInputBg.png") scroll 0 0 transparent;
+    height: 30px;
+    margin: 4px 0 0;
+    width: 200px;
+}
+.loginForm input {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #F6F829;
+    float: left;
+    font-size: 18px;
+    outline: 0 none;
+    padding: 2px 6px;
+    width: 168px;
+}
+#accountActions {
+    margin: 10px 0 0;
+}
+#accountActions div {
+    overflow: hidden;
+}
+#doLogin, #doRegister, #separator {
+    color: #FFFAFF;
+}
+#doForget {
+    color: #A9AEB1;
+}
+#headerBorder {
+    background: url("../img/topbar.png") repeat scroll 0 0 transparent;
+    height: 42px;
+}
+#sidebar {
+    float: left;
+    position: absolute;
+    top: 226px;
+    width: 160px;
+}
+#sidebar #sidebarFX {
+    background: radial-gradient(ellipse at center center , #000000 0%, transparent 54%, transparent 100%) repeat scroll 0 0 transparent;
+    height: 500px;
+    position: absolute;
+    right: -30px;
+    top: -60px;
+    width: 60px;
+    z-index: 0;
+}
+#navigation {
+	overflow: hidden;
+	padding: 0px;
+	background: transparent;
+}
+#navigation li {
+    background: transparent url("../img/menu_btn_off.png") no-repeat scroll 0 -12px ;
+    height: 66px;
+    position: relative;
+}
+#navigation li a {
+    color: black;
+    font-family: pixel_font;
+    font-size: 17px;
+    left: 26px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    top: 16px;
+    width: 80px;
+}
+#navigation li:hover {
+    background: url("../img/menu_btn_over.png") no-repeat scroll 0 -12px transparent;
+    left: 0;
+}
+#navigation li:hover a {
+    color: #FFFFFF;
+    left: 26px;
+}
+#navigation .navActive {
+    background: transparent url("../img/menu_btn_on.png") no-repeat scroll 0 -12px;
+    left: 30px;
+}
+#navigation .navActive a {
+    left: 36px;
+}
+#page {
+    background: none repeat scroll 0 0 #0E3449;
+    padding: 16px 0 0;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
+#firstline {
+    overflow: hidden;
+}
+#firstline #brief {
+    float: left;
+    width: 60%;
+}
+#firstline #brief .briefLine {
+    border-bottom: 1px solid #185E82;
+    overflow: hidden;
+    padding: 16px;
+}
+#firstline #brief .briefLine:last-child {
+    border: medium none;
+}
+#firstline #brief .briefLine .briefImage {
+    float: left;
+    width: 10%;
+}
+#firstline #brief .briefLine .briefDescription {
+    color: white;
+    float: left;
+    width: 90%;
+}
+#firstline #twitter {
+    background: none repeat scroll 0 0 #000000;
+    float: left;
+    height: 120px;
+    width: 40%;
+}
+#entries {
+    clear: both;
+}
+#entries .entry {
+    float: left;
+    width: 50%;
+}
+#entries .entry .entryPadding {
+    margin: 0;
+    overflow: hidden;
+    padding: 0 8px 8px;
+    position: relative;
+}
+#entries .entry .entryPadding .entryLeftBar {
+    float: left;
+    width: 25%;
+}
+#entries .entry .entryPadding .entryLeftBar .playGame {
+    background: url("../img/button.png") repeat scroll 0 0 transparent;
+    display: block;
+    height: 54px;
+    position: relative;
+    width: 116px;
+}
+#entries .entry .entryPadding .entryLeftBar .playGame .playLabel {
+    color: black;
+    font-family: pixel_font;
+    font-size: 18px;
+    left: 10px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    width: 96px;
+}
+#entries .entry .entryPadding .entryLeftBar .playGame .playLabel:hover {
+    color: white;
+}
+#entries .entry .entryPadding .entryLeftBar .basic {
+    margin: 16px 0 0;
+}
+#entries .entry .entryPadding .entryLeftBar a.numVotes {
+    color: #AAAAAA;
+    float: right;
+    font-size: 14px;
+    margin: 0 12px 0 0;
+}
+#entries .entry .entryPadding .entryRightBar {
+    float: left;
+    width: 75%;
+}
+#entries .entry .entryPadding .entryRightBar .entryDescription {
+    height: 110px;
+    overflow: hidden;
+}
+#entries .entry .entryPadding .entryRightBar .entryDescription p {
+    line-height: 16px;
+}
+#entries .entry .entryPadding .entryRightBar .credits {
+    margin: 16px 0 0;
+}
+#entries .entry .entryPadding .entryRightBar .credits tr {
+    line-height: 1.4;
+}
+#entries .entry .entryPadding .entryRightBar .credits tr .detail {
+    color: #E2B02D;
+    width: 80px;
+}
+#entries .entry .entryPadding .entryRightBar .credits tr .description a {
+    color: #CDCFCC;
+}
+#entries .entry .entryPadding a.entryComments {
+    bottom: 0;
+    color: #CDCFCC;
+    float: right;
+    position: absolute;
+    right: 16px;
+}
+#footer #footerDescription {
+    float: right;
+    margin: 32px 0 6px;
+}
+#footer #footerBlock {
+    background: none repeat scroll 0 0 #144B69;
+    clear: both;
+    height: 32px;
+}

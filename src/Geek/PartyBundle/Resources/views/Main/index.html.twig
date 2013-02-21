@@ -6,127 +6,258 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/bundles/geekparty/js/countdown.js"></script>
-    <link rel="stylesheet" href="/bundles/geekparty/css/style.css" type="text/css" media="screen, projection" />
-    <!--[if lte IE 6]><link rel="stylesheet" href="/bundles/geekparty/css/style_ie.css" type="text/css" media="screen, projection" /><![endif]-->
+    <script type="text/javascript" src="/js/countdown.js"></script>
+	<script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
+	<script type="text/javascript" src="/js/jRating.jquery.js"></script>
+	
+    <link rel="stylesheet" type="text/css" href="/css/_style.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="/css/jRating.jquery.css" media="screen" />
 </head>
-
 <body>
-
-<div id="wrapper">
-
-    <div id="header">
-       <a id="logo" href="./index.html"><img src="/bundles/geekparty/img/logo.jpg" alt="Geek Party"></a>
-
-       <div id="timer">
-           <p id="delimiters" class="timerLabel">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;:</p>
-           <p id="days" class="timerLabel">01</p>
-           <p id="hours" class="timerLabel">08</p>
-           <p id="minutes" class="timerLabel">23</p>
-       </div><!-- #timer-->
-
-       <div id="topNavbar">
-           <div id="topNav">
-               <ul>
-                   <li><a class="regForm" href="#">Login</a></li>
-                   <li>|</li>
-                   <li><a class="regForm" href="#">Register</a></li>
-               </ul>
-           </div>
-           <div id="GPheader"><h2 id="gpLogoText">GEEK PARTY</h2></div>
-       </div><!-- #navbar-->
-    </div><!-- #header-->
-
-    <div id="middle">
-        <div id="container">
-            <div id="content">
-
-
-                <div id="partyBreaf" class="itemBlock">
-                    <h2> Что такое geek party? </h2>
-                    <p>Гик-пати - это цифровое творчество в режиме реального времени.
-                    Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников, жжом.</p>
-                    <h2>Где и когда?</h2>
-                    <p>Гик-Пати №2 состоится 23 февраля 2013. Конечно никто не запрещает участвовать из дома в гордом одиночестве, но, как известно, вместе веселиться веселее.
-                       Поэтому заходите в раздел "Party places" и ищите помещения в своем городе. Если такого пока нет - в разделе "участники" можно поискать единомышленников и вместе наверняка
-                       вы придумаете где разместить вашу коолицию на время party.
-
-                    </p>
-                    <h2>Каков план мероприятия?</h2>
-                    <p>Весь день будем делать задорные игры на html5! А когда доделаем немного выпьем!</p>
-                </div>
-
-                <div id="participantForm" class="itemBlock">
-                    <h2>Хочу участвовать!</h2>
-                    <form action="/participate">
-                        <table>
-                            <tr>
-                                <td>
-                                    В каком городе:
-                                </td>
-                                <td>
-                                    <input type="text"></input>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Я в twitter:
-                                </td>
-                                <td>
-                                    <input type="text"></input>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Что могу делать:</td>
-                                <td>
-                                    code <input type="checkbox"/>
-                                    graphics <input type="checkbox"/><br/>
-                                    sound <input type="checkbox"/>
-                                    game design <input type="checkbox"/>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Мои скиллы:</td>
-                                <td><textarea rows="12" cols="20"></textarea></td>
-                            </tr>
-                        </table>
-
-                    </form>
-                </div>
-
-                <div id="geography" class="itemBlock">
-
-                    <p>Sed1 placerat accumsan ligula. Aliquam felis magna, congue quis, tempus eu, aliquam vitae, ante. Cras neque justo, ultrices at, rhoncus a, facilisis eget, nisl. Quisque vitae pede. Nam et augue. Sed a elit. Ut vel massa. Suspendisse nibh pede, ultrices vitae, ultrices nec, mollis non, nibh. In sit amet pede quis leo vulputate hendrerit. Cras laoreet leo et justo auctor condimentum. Integer id enim. Suspendisse egestas, dui ac egestas mollis, libero orci hendrerit lacus, et malesuada lorem neque ac libero. Morbi tempor pulvinar pede. Donec vel elit.</p>
-
-                </div>
-
-                <div id="twitter" class="itemBlock">
+	<div id="backgroundFX"></div>
+	<div id="wrapper">
+		<div id="sidebar">
+			<div id="sidebarFX"></div>
+			<ul id="navigation">
+				<li class="navActive"><a href="">Main</a></li>
+				<li><a href="#">People</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Works</a></li>
+			</ul>
+		</div>
+		
+		<div id="container">
+			<div id="header">
+				<div id="sitelogo">
+					<a href="/">
+						<img src="/img/logo.png" alt="sdsd" />
+					</a>
+				</div>
+				<div id="timer">
+					<p id="days" class="timerLabel">01</p>
+					<p id="dhColon" class="timerLabel">:</p>
+					<p id="hours" class="timerLabel">08</p>
+					<p id="hmColon" class="timerLabel">:</p>
+					<p id="minutes" class="timerLabel">23</p>
+				</div>
+				<div id="account">
+					<div id="accountLogin">
+						<form class="loginForm" action="" method="">
+							<p class="inputBg"><input id="_login" class="usePixelFont" name="value1" type="text" value="Geeklogin" /></p>
+							<p class="inputBg"><input id="_password" class="usePixelFont" name="value2" type="text" value="Password" /></p>
+						</form>
+					</div>
+					<div id="accountActions">
+						<div class="usePixelFont">
+							<a id="doLogin" class="fRight" href="">Login</a>
+							<span id="separator" class="fRight">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+							<a id="doRegister" class="fRight" href="">Register</a>
+						</div>
+						<div>
+							<a id="doForget" class="fRight" href="">Забыли пароль?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="headerBorder"></div>
+			<div id="page">
+				<div id="firstline">
+					<div id="brief">
+						<div class="p16">
+							<div class="briefLine">
+								<div class="briefImage">
+									<img src="/img/icon_question.png" alt="what" />
+								</div>
+								<div class="briefDescription">
+									<h2>Что это такое?</h2>
+									<p><span class="orange">Гик-пати</span> - это цифровое творчество в режиме реального времени. Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников, жжом</p>
+								</div>
+							</div> <!-- briefLine -->
+							<div class="briefLine">
+								<div class="briefImage">
+									<img src="/img/icon_question.png" alt="what" />
+								</div>
+								<div class="briefDescription">
+									<h2>Где и когда?</h2>
+									<p>Гик-пати №2 состоится <span class="orange">23 февраля 2013</span>. Конечно никто не запрещает участвовать из дома в гордом одиночестве, но, как известно, вместе веселиться веселее. Поэтому заходите в раздел "<u>Party places</u>" и ищите помещения в своем городе. Если такого пока нет - в разделе "участники" можно поискать единомышленников и вместе наверняка вы придумаете где разместить вашу коалицию на время party.</p>
+								</div>
+							</div> <!-- briefLine -->
+							<div class="briefLine">
+								<div class="briefImage">
+									<img src="/img/icon_question.png" alt="what" />
+								</div>
+								<div class="briefDescription">
+									<h2>Каков план мероприятия?</h2>
+									<p>Весь день будем делать задорные игры на <u>html5</u>! А когда доделаем немного выпьем!</p>
+								</div>
+							</div> <!-- briefLine -->
+						</div>
+					</div>
+					<div id="twitter">
+						<div>
                     <a class="twitter-timeline" href="https://twitter.com/search?q=%23geekparty" data-widget-id="304351368582406145">Твиты о "#geekparty"</a>
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
+						</div>
+					</div>
+				</div> <!-- firstline -->	
+				<div id="content">
+					<h2>Работы участников / live стримы</h2>
+					<div id="entries">
+						<div class="entry">
+							<div class="entryPadding borderBlock">
+								<h2>Game name</h2>
+								<div class="entryLeftBar">
+									<img class="gameIcon" src="/img/game_icon.png" />
+									<a class="playGame" href=""><span class="playLabel">Play</span></a>
+									<div class="basic" data-average="3" data-id="1"></div>
+									<a class="numVotes" href="">18 votes</a>
+								</div>
+								<div class="entryRightBar">
+									<div class="entryDescription">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+									</div>
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								<a class="entryComments" href="">20 comments</a>
+							</div>
+						</div> <!-- entry -->
+						<div class="entry">
+							<div class="entryPadding borderBlock">
+								<h2>Game name</h2>
+								<div class="entryLeftBar">
+									<img class="gameIcon" src="/img/game_icon.png" />
+									<a class="playGame" href=""><span class="playLabel">Play</span></a>
+									<div class="basic" data-average="3" data-id="1"></div>
+									<a class="numVotes" href="">18 votes</a>
+								</div>
+								<div class="entryRightBar">
+									<div class="entryDescription">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+									</div>
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								<a class="entryComments" href="">20 comments</a>
+							</div>
+						</div> <!-- entry -->
+						<div class="entry">
+							<div class="entryPadding borderBlock">
+								<h2>Game name</h2>
+								<div class="entryLeftBar">
+									<img class="gameIcon" src="/img/game_icon.png" />
+									<a class="playGame" href=""><span class="playLabel">Play</span></a>
+									<div class="basic" data-average="3" data-id="1"></div>
+									<a class="numVotes" href="">18 votes</a>
+								</div>
+								<div class="entryRightBar">
+									<div class="entryDescription">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+									</div>
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								<a class="entryComments" href="">20 comments</a>
+							</div>
+						</div> <!-- entry -->
+						<div class="entry">
+							<div class="entryPadding borderBlock">
+								<h2>Game name</h2>
+								<div class="entryLeftBar">
+									<img class="gameIcon" src="/img/game_icon.png" />
+									<a class="playGame" href=""><span class="playLabel">Play</span></a>
+									<div class="basic" data-average="3" data-id="1"></div>
+									<a class="numVotes" href="">18 votes</a>
+								</div>
+								<div class="entryRightBar">
+									<div class="entryDescription">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+									</div>
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								<a class="entryComments" href="">20 comments</a>
+							</div>
+						</div> <!-- entry -->
+					</div> <!-- entries -->	
+				</div> <!-- content -->
+				<div id="footer">
+					<div id="footerDescription">
+						<p class="usePixelFont">GEEK PARTY (c) 2013 | info@geekparty.ru</p>
+					</div>
+					<div id="footerBlock"></div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
 
-                <a href="#" class="expand">Expand column</a>			</div><!-- #content-->
-        </div><!-- #container-->
-
-        <div class="sidebar" id="sideLeft">
-            <ul id="leftNav">
-                <li class="active"><a class="leftMenuButton" href="#">Главная</a></li>
-                <li ><a class="leftMenuButton" href="#">Локации</a></li>
-                <li><a class="leftMenuButton" href="#">Работы</a></li>
-            </ul>
-        </div>
-
-    </div><!-- #middle-->
-
-    <div id="footer">
-        <strong>Footer:</strong> Mus elit Morbi mus enim lacus at quis Nam eget morbi. Et semper urna urna non at cursus dolor vestibulum neque enim. Tellus interdum at laoreet laoreet lacinia lacinia sed Quisque justo quis. Hendrerit scelerisque lorem elit orci tempor tincidunt enim Phasellus dignissim tincidunt. Nunc vel et Sed nisl Vestibulum odio montes Aliquam volutpat pellentesque. Ut pede sagittis et quis nunc gravida porttitor ligula.
-    </div><!-- #footer -->
-
-</div><!-- #wrapper -->
-
-
+<script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//fix background gradient
+		var pageHeight = $(document).height();
+		//$('#backgroundFX').css({
+		//	'height'	: 2 * pageHeight,
+		//	'top' 		: -1 * pageHeight
+		//});
+		console.log("height: " + $(document).height());
+		
+		$(".basic").jRating({
+			step: true,
+			length: 5,
+			rateMax: 5,
+			decimal: 1
+		});
+	});
+</script>
 </body>
 </html>
