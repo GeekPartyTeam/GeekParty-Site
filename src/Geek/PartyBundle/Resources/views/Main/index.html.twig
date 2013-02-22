@@ -1,66 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title></title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/js/countdown.js"></script>
-	<script type="text/javascript" src="/js/jquery.animate-colors-min.js"></script>
-	<script type="text/javascript" src="/js/jRating.jquery.js"></script>
-	
-    <link rel="stylesheet" type="text/css" href="/css/_style.css" media="screen"/>
-	<link rel="stylesheet" type="text/css" href="/css/jRating.jquery.css" media="screen" />
-</head>
-<body>
-	<div id="backgroundFX"></div>
-	<div id="wrapper">
-		<div id="sidebar">
-			<div id="sidebarFX"></div>
-			<ul id="navigation">
-				<li class="navActive"><a href="">Main</a></li>
-				<li><a href="#">People</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Works</a></li>
-			</ul>
-		</div>
-		
-		<div id="container">
-			<div id="header">
-				<div id="sitelogo">
-					<a href="/">
-						<img src="/img/logo.png" alt="sdsd" />
-					</a>
-				</div>
-				<div id="timer">
-					<p id="days" class="timerLabel">01</p>
-					<p id="dhColon" class="timerLabel">:</p>
-					<p id="hours" class="timerLabel">08</p>
-					<p id="hmColon" class="timerLabel">:</p>
-					<p id="minutes" class="timerLabel">23</p>
-				</div>
-				<div id="account">
-					<div id="accountLogin">
-						<form class="loginForm" action="" method="">
-							<p class="inputBg"><input id="_login" class="usePixelFont" name="value1" type="text" value="Geeklogin" /></p>
-							<p class="inputBg"><input id="_password" class="usePixelFont" name="value2" type="text" value="Password" /></p>
-						</form>
-					</div>
-					<div id="accountActions">
-						<div class="usePixelFont">
-							<a id="doLogin" class="fRight" href="">Login</a>
-							<span id="separator" class="fRight">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-							<a id="doRegister" class="fRight" href="">Register</a>
-						</div>
-						<div>
-							<a id="doForget" class="fRight" href="">Забыли пароль?</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="headerBorder"></div>
-			<div id="page">
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block main %}
 				<div id="firstline">
 					<div id="brief">
 						<div class="p16">
@@ -101,6 +41,7 @@
 					</div>
 				</div> <!-- firstline -->	
 				<div id="content">
+                {#
 					<h2>Работы участников / live стримы</h2>
 					<div id="entries">
 						<div class="entry">
@@ -228,36 +169,6 @@
 							</div>
 						</div> <!-- entry -->
 					</div> <!-- entries -->	
+                #}
 				</div> <!-- content -->
-				<div id="footer">
-					<div id="footerDescription">
-						<p class="usePixelFont">GEEK PARTY (c) 2013 | info@geekparty.ru</p>
-					</div>
-					<div id="footerBlock"></div>
-				</div>
-			</div>
-		</div>
-	
-	</div>
-
-<script type="text/javascript" src="/js/less-1.3.3.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		//fix background gradient
-		var pageHeight = $(document).height();
-		//$('#backgroundFX').css({
-		//	'height'	: 2 * pageHeight,
-		//	'top' 		: -1 * pageHeight
-		//});
-		console.log("height: " + $(document).height());
-		
-		$(".basic").jRating({
-			step: true,
-			length: 5,
-			rateMax: 5,
-			decimal: 1
-		});
-	});
-</script>
-</body>
-</html>
+{% endblock %}

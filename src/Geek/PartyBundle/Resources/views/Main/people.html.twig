@@ -1,0 +1,8 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block main %}
+    {{ app.request.pathInfo }} | 
+    {{ app.request.requestUri }} |
+    {{ app.request.baseUrl }} |
+    {{ app.request.basePath }}
+{% endblock %}
