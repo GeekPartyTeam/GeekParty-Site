@@ -22,6 +22,10 @@ geek_works:
     pattern:  /works
     defaults: { _controller: GeekPartyBundle:Main:works }
 
+geek_test:
+    pattern:  /test
+    defaults: { _controller: GeekPartyBundle:Main:test }
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

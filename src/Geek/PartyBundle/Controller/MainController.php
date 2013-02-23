@@ -25,4 +25,9 @@ class MainController extends Controller
     {
         return $this->render('GeekPartyBundle:Main:works.html.twig');
     }
+
+    public function testAction()
+    {
+        return $this->render('GeekPartyBundle:Main:test.html.twig');
+    }
 }
