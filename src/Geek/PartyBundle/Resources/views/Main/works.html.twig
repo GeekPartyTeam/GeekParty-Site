@@ -1,0 +1,47 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} GeekParty :: Работы {% endblock %}
+
+{% block main %}
+
+				<div class="content">
+					<h2>Работы участников / live стримы</h2>
+					<div id="entries">
+                        {% for entry in entries %}
+						<div class="entry">
+							<div class="entryPadding borderBlock">
+								<h2>Game name</h2>
+								<div class="entryLeftBar">
+									<img class="gameIcon" src="/img/game_icon.png" />
+									<a class="playGame" href=""><span class="playLabel">Play</span></a>
+									<div class="basic" data-average="3" data-id="1"></div>
+									<a class="numVotes" href="">18 votes</a>
+								</div>
+								<div class="entryRightBar">
+									<div class="entryDescription">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+									</div>
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								<a class="entryComments" href="">20 comments</a>
+							</div>
+						</div> <!-- entry -->
+                        {% else %}
+                            Работ пока нет
+                        {% endfor %}
+					</div> <!-- entries -->	
+				</div> <!-- content -->
+{% endblock %}

@@ -1,8 +1,38 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
+{% block title %} GeekParty :: Участники {% endblock %}
+
 {% block main %}
-    {{ app.request.pathInfo }} | 
-    {{ app.request.requestUri }} |
-    {{ app.request.baseUrl }} |
-    {{ app.request.basePath }}
+<div class="borderBlock">
+    <table>
+        <thead>
+            <tr>
+                <td>twitter</td>
+                <td>city</td>
+                <td>code</td>
+                <td>gfx</td>
+                <td>sfx</td>
+                <td>gd</td>
+                <td>skills</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in people %}
+                <tr>
+                    <td>{{ item.twitter }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.code ? 'X' : '' }}</td>
+                    <td>{{ item.gfx ? 'X' : '' }}</td>
+                    <td>{{ item.sfx ? 'X' : '' }}</td>
+                    <td>{{ item.gd ? 'X' : '' }}</td>
+                    <td>{{ item.skills }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Пока никого нет</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

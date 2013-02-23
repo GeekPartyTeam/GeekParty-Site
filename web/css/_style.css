@@ -29,6 +29,12 @@ html {
 .usePixelFont {
     font: 14px/18px pixel_font;
 }
+#page {
+    color: white;
+}
+table thead td {
+    font: 14px/18px pixel_font;
+}
 p {
     color: white;
 }
@@ -307,4 +313,7 @@ span.orange {
     background: none repeat scroll 0 0 #144B69;
     clear: both;
     height: 32px;
+}
+.content {
+    padding: 32px;
 }
