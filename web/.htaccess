@@ -1,3 +1,5 @@
+Redirect 301 /gp2 /works/gp2
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 

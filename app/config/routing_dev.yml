@@ -25,7 +25,7 @@ _configurator:
 
 _geek_index_dev:
     pattern:  /geek
-    defaults: { _controller: GeekPartyBundle:Geek:index }
+    defaults: { _controller: GeekPartyBundle:Main:index }
 
 _main:
     resource: routing.yml
