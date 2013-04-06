@@ -15,16 +15,23 @@ class MainController extends Controller
         return [
             'gp1' => [
                 'halffinger' => [
-                    'id' => 'halffinger',
-                    'name' => 'Полпальца за принцессу'
+                    'id' => 'halfinger',
+                    'name' => 'Полпальца за принцессу',
+                    'width' => '480',
+                    'height' => '800'
+
                 ],
                 'exorcist' => [
                     'id' => 'exorcist',
-                    'name' => 'Экзорцист'
+                    'name' => 'Экзорцист',
+                    'width' => '480',
+                    'height' => '800'
                 ],
                 'hungrynya' => [
                     'id' => 'hungrynya',
-                    'name' => 'Голодный Ня'
+                    'name' => 'Голодный Ня',
+                    'width' => '640',
+                    'height' => '900'
                 ],
             ],
             'gp2' => [
@@ -32,6 +39,8 @@ class MainController extends Controller
                     'id' => 'bankjob',
                     'name' => 'Bank Job',
                     'description' => 'Ограбление банка',
+                    'width' => '800',
+                    'height' => '600'
                 ],
                 'bearit' => [
                     'id' => 'bearit',
@@ -51,7 +60,9 @@ class MainController extends Controller
                             'name' => 'Александра Горшунова',
                             'url' => 'http://vk.com/bgdel'
                         ]
-                    ]
+                    ],
+                    'width' => '800',
+                    'height' => '600'
                 ],
                 'mushroominvaders' => [
                     'id' => 'mushroominvaders',
@@ -63,16 +74,22 @@ class MainController extends Controller
                             'url' => 'http://vk.com/id2408548'
                         ]
                     ]
+                    , 'width' => '800'
+                    , 'height' => '600'
                 ],
                 'chelyaba' => [
                     'id' => 'chelyaba',
                     'name' => 'Chelyaba',
                     'description' => 'Игра про челябинского паренька, спасающего свой город от метеоритного дождя (музыка заменена на оригинальные 8bit, написанными на геймбое)',
+                    'width' => '800'
+                    , 'height' => '600'
                 ],
                 'runner' => [
                     'id' => 'runner',
                     'name' => 'Girl City Run',
                     'description' => 'Хоррор про женщину в ночном городе, полном страшных монстров, летающих по адовым синусам и косинусам',
+                    'width' => '800'
+                    , 'height' => '600'
                 ],
             ]
         ];
