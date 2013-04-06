@@ -4,30 +4,36 @@
 
 {% block main %}
 
-    <a href="/works/gp1">GP1</a>
-    <a href="/works/gp2">GP2</a>
+    
+	{% if party == 'gp1' %}
+		<span class="currentParty">GP1</span>
+		<a href="/works/gp2">GP2</a>
+	{% else %}
+		<a href="/works/gp1">GP1</a>
+		<span class="currentParty">GP2</span>
+	{% endif %}
 				<div class="content">
 					<h2>Работы участников</h2>
 					<div id="entries">
                         {% for entry in works[party] %}
 						<div class="entry">
 							<div class="entryPadding borderBlock">
-								<h2>{{ entry.name }}</h2>
 								<div class="entryLeftBar">
-									<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
+									<a href="/works/{{ party }}/{{ entry.id }}">
+										<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
+									</a>
 									<a class="playGame" href="/works/{{ party }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
-                                    <!-- COMMENTS --> <a href="/works/{{ party }}/{{ entry.id }}#disqus_thread">Link</a>
 								</div>
 								<div class="entryRightBar">
+									<a href="/works/{{ party }}/{{ entry.id }}"><h2>{{ entry.name }}</h2></a>
 									<div class="entryDescription">
 										<p>{{ entry.description }}.</p>
 									</div>
-
 									<table cellspacing="0" cellpadding="0" class="credits">
                                         {% if entry.source is defined %}
                                             <tr>
                                                 <td class="detail">Source:</td>
-                                                <td class="description"><a href={{ entry.source }}"">{{ entry.source }}</a></td>
+                                                <td class="description"><a href="{{ entry.source }}">{{ entry.source }}</a></td>
                                             </tr>
                                         {% endif %}
                                         {% if entry.authors is defined %}
@@ -41,6 +47,7 @@
                                             </tr>
                                         {% endif %}
 									</table>
+									<!-- COMMENTS --> <a class="entryComments" href="/works/{{ party }}/{{ entry.id }}#disqus_thread">comments</a>
 								</div>
 							</div>
 						</div> <!-- entry -->

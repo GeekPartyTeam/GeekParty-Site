@@ -7,17 +7,23 @@ html {
     background: none repeat scroll 0 0 #091F2A;
 }
 #backgroundFX {
-    background: radial-gradient(ellipse at center center , #154863 0%, rgba(21, 72, 99, 0.78) 25%, rgba(19, 65, 90, 0.68) 37%, rgba(9, 31, 42, 0) 100%) repeat scroll 0 0 transparent;
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(21,72,99,1) 0%, rgba(21,72,99,0.78) 25%, rgba(19,65,90,0.68) 37%, rgba(9,31,42,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(21,72,99,1)), color-stop(25%,rgba(21,72,99,0.78)), color-stop(37%,rgba(19,65,90,0.68)), color-stop(100%,rgba(9,31,42,0))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(21,72,99,1) 0%,rgba(21,72,99,0.78) 25%,rgba(19,65,90,0.68) 37%,rgba(9,31,42,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(21,72,99,1) 0%,rgba(21,72,99,0.78) 25%,rgba(19,65,90,0.68) 37%,rgba(9,31,42,0) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(21,72,99,1) 0%,rgba(21,72,99,0.78) 25%,rgba(19,65,90,0.68) 37%,rgba(9,31,42,0) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(21,72,99,1) 0%,rgba(21,72,99,0.78) 25%,rgba(19,65,90,0.68) 37%,rgba(9,31,42,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#154863', endColorstr='#00091f2a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     height: 2000px;
     position: absolute;
     top: -1000px;
-    width: 100%;
+    width: 99%;
 }
 #wrapper {
     left: -80px;
     margin: 0 auto;
     position: relative;
-    width: 1150px;
+	width: 960px;
 }
 #container {
     padding-left: 160px;
@@ -76,7 +82,7 @@ span.orange {
     width: 100px;
 }
 #days {
-    left: 94px;
+    left: 70px;
 }
 #dhColon {
     left: 174px;
@@ -93,6 +99,7 @@ span.orange {
     left: 340px;
 }
 #account {
+	display: none;
     float: right;
     margin: 0 16px 0 0;
 }
@@ -139,7 +146,13 @@ span.orange {
     width: 160px;
 }
 #sidebar #sidebarFX {
-    background: radial-gradient(ellipse at center center , #000000 0%, transparent 54%, transparent 100%) repeat scroll 0 0 transparent;
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%, rgba(0,0,0,0) 54%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,1)), color-stop(54%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 54%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 54%,rgba(0,0,0,0) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 54%,rgba(0,0,0,0) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 54%,rgba(0,0,0,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     height: 500px;
     position: absolute;
     right: -30px;
@@ -148,6 +161,7 @@ span.orange {
     z-index: 0;
 }
 #navigation {
+	list-style-type: none;
     background: none repeat scroll 0 0 transparent;
     overflow: hidden;
     padding: 0;
@@ -278,6 +292,17 @@ span.orange {
 #entries .entry .entryPadding .entryRightBar .entryDescription p {
     line-height: 16px;
 }
+
+#gameContainer {
+	width: 800px;
+	margin: 0 auto;
+}
+
+span.currentParty {
+	color: white;
+	font-weight: bold;
+}
+
 .credits {
     margin: 0;
 }
@@ -293,8 +318,8 @@ tr .description a {
 }
 #entries .entry .entryPadding a.entryComments {
     bottom: 0;
-    color: #CDCFCC;
-    display: none;
+    /*color: #CDCFCC;*/
+    /*display: none;*/
     float: right;
     position: absolute;
     right: 16px;
