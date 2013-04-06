@@ -4,39 +4,44 @@
 
 {% block main %}
 
+    <a href="/works/gp1">GP1</a>
+    <a href="/works/gp2">GP2</a>
 				<div class="content">
-					<h2>Работы участников / live стримы</h2>
+					<h2>Работы участников</h2>
 					<div id="entries">
-                        {% for entry in entries %}
+                        {% for entry in works[party] %}
 						<div class="entry">
 							<div class="entryPadding borderBlock">
-								<h2>Game name</h2>
+								<h2>{{ entry.name }}</h2>
 								<div class="entryLeftBar">
-									<img class="gameIcon" src="/img/game_icon.png" />
-									<a class="playGame" href=""><span class="playLabel">Play</span></a>
-									<div class="basic" data-average="3" data-id="1"></div>
-									<a class="numVotes" href="">18 votes</a>
+									<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
+									<a class="playGame" href="/works/{{ party }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
+                                    <!-- COMMENTS --> <a href="/works/{{ party }}/{{ entry.id }}#disqus_thread">Link</a>
 								</div>
 								<div class="entryRightBar">
 									<div class="entryDescription">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
+										<p>{{ entry.description }}.</p>
 									</div>
+
 									<table cellspacing="0" cellpadding="0" class="credits">
-										<tr>
-											<td class="detail">Source:</td>
-											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
-										</tr>
-										<tr>
-											<td class="detail">Authors:</td>
-											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
-										</tr>
-										<tr>
-											<td class="detail">Group:</td>
-											<td class="description"><a href="">#funkygeeks</a></td>
-										</tr>
+                                        {% if entry.source is defined %}
+                                            <tr>
+                                                <td class="detail">Source:</td>
+                                                <td class="description"><a href={{ entry.source }}"">{{ entry.source }}</a></td>
+                                            </tr>
+                                        {% endif %}
+                                        {% if entry.authors is defined %}
+                                            <tr>
+                                                <td class="detail">Authors:</td>
+                                                <td class="description">
+                                                    {% for author in entry.authors %}
+                                                        <a href="{{ author.url }}">{{ author.name }}</a>&nbsp;
+                                                    {% endfor %}
+                                                </td>
+                                            </tr>
+                                        {% endif %}
 									</table>
 								</div>
-								<a class="entryComments" href="">20 comments</a>
 							</div>
 						</div> <!-- entry -->
                         {% else %}
@@ -44,4 +49,17 @@
                         {% endfor %}
 					</div> <!-- entries -->	
 				</div> <!-- content -->
+    <!-- DISQUS -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
 {% endblock %}
