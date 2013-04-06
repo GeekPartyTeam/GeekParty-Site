@@ -22,12 +22,24 @@ geek_default_works:
     pattern:  /works
     defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
 
+geek_default_works_:
+    pattern:  /works/
+    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
+
 geek_party_works:
     pattern:  /works/{party}
     defaults: { _controller: GeekPartyBundle:Main:works }
 
+geek_party_works_:
+    pattern:  /works/{party}/
+    defaults: { _controller: GeekPartyBundle:Main:works }
+
 geek_work:
     pattern:  /works/{party}/{work}
+    defaults: { _controller: GeekPartyBundle:Main:workPage }
+
+geek_work_:
+    pattern:  /works/{party}/{work}/
     defaults: { _controller: GeekPartyBundle:Main:workPage }
 
 geek_test:

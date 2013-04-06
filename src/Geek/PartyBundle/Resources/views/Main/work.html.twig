@@ -6,7 +6,7 @@
 
     <div class="content">
         <h2><a href="/works/{{ party }}">{{ party }}</a>/{{ work.name }}</h2>
-        <iframe src="/works/{{ party }}/{{ work.id }}/index.html" width="800" height="600"></iframe>
+        <iframe src="/works/{{ party }}/{{ work.id }}/index.html" width="{{ work.width }}" height="{{ work.height }}" scrolling="no"></iframe>
 
         <!-- DUSQUS -->
         <div id="disqus_thread"></div>
