@@ -1,5 +1,5 @@
 $(function() {
-    var targetData = new Date(2013,1,23,12,1);
+    var targetData = new Date(2013,4,14,12,0);
     var timer;
 
     var setTimer =  function(){
