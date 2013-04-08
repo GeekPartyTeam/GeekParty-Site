@@ -34,11 +34,40 @@
 						</div>
 					</div>
 					<div id="twitter">
-						<div>
-<a class="twitter-timeline" href="https://twitter.com/search?q=%23geekparty.ru" data-widget-id="320529890162122752">Твиты о "#geekparty.ru"</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        <div id="tweets">
+                        </div>
 
-						</div>
-					</div>
+                        <script type="text/javascript">
+                            $('#tweets').jTweetsAnywhere({
+                                searchParams: 'q=%23geekpartyru',
+                                count: 20,
+                                showTweetFeed: {
+                                    showProfileImages: true,
+                                    showUserScreenNames: true,
+                                    showActionReply: true,
+                                    showActionRetweet: true,
+                                    showActionFavorite: true,
+                                    paging: {
+                                        mode: 'endless-scroll'
+                                    }
+                                },
+                                showTimestamp: {
+                                    refreshInterval: 15
+                                },
+                                autorefresh: {
+                                    mode: 'trigger-insert',
+                                    interval: 30
+                                },
+                                onDataRequestHandler: function(stats) {
+                                    if (stats.dataRequestCount < 11) {
+                                        return true;
+                                    }
+                                    else {
+                                        alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
 				</div> <!-- firstline -->	
 {% endblock %}
