@@ -230,7 +230,7 @@ span.orange {
     width: 90%;
 }
 #firstline #twitter {
-    background: none repeat scroll 0 0 #000000;
+    background: none repeat scroll 0 0;
     float: left;
     height: 120px;
     width: 40%;
