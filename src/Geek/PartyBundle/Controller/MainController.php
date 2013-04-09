@@ -14,7 +14,7 @@ class MainController extends Controller
     {
         return [
             'gp1' => [
-                'halffinger' => [
+                'halfinger' => [
                     'id' => 'halfinger',
                     'name' => 'Полпальца за принцессу',
 					'description' => 'Король Артур уехал в поход. Вы играете за Ланцелота. Вы должны воспользоваться отсутствием Артура и разбудить прекрасную принцессу, которую охраняет бдительный страж с топором. Эротическая мелодрамма.',
@@ -41,9 +41,15 @@ class MainController extends Controller
                 'bankjob' => [
                     'id' => 'bankjob',
                     'name' => 'Bank Job',
-                    'description' => 'Ограбление банка',
-                    'width' => '800',
-                    'height' => '600'
+                    'description' => 'Беглый зек решил ограбить банк и грабит его, пока не будет пойман, либо не попадет в смертельные ловушки. Игра разбита на уровни. Мега хит',
+					'authors' => [
+                        [
+                            'name' => 'sk1e и др.',
+                            'url' => 'http://vk.com/geekparty'
+                        ]
+                    ]
+                    ,'width' => '800',
+                    'height' => '480'
                 ],
                 'bearit' => [
                     'id' => 'bearit',
@@ -64,8 +70,8 @@ class MainController extends Controller
                             'url' => 'http://vk.com/bgdel'
                         ]
                     ],
-                    'width' => '800',
-                    'height' => '600'
+                    'width' => '960',
+                    'height' => '640'
                 ],
                 'mushroominvaders' => [
                     'id' => 'mushroominvaders',
@@ -77,21 +83,33 @@ class MainController extends Controller
                             'url' => 'http://vk.com/id2408548'
                         ]
                     ]
-                    , 'width' => '800'
-                    , 'height' => '600'
+                    , 'width' => '1024'
+                    , 'height' => '768'
                 ],
                 'chelyaba' => [
                     'id' => 'chelyaba',
                     'name' => 'Chelyaba',
                     'description' => 'Игра про челябинского паренька, спасающего свой город от метеоритного дождя (музыка заменена на оригинальные 8bit, написанными на геймбое)',
-                    'width' => '800'
+					'authors' => [
+                        [
+                            'name' => 'bl00rise, serebroff и др.',
+                            'url' => 'http://vk.com/geekparty'
+                        ]
+                    ]
+                    ,'width' => '800'
                     , 'height' => '600'
                 ],
                 'runner' => [
                     'id' => 'runner',
                     'name' => 'Girl City Run',
                     'description' => 'Хоррор про женщину в ночном городе, полном страшных монстров, летающих по адовым синусам и косинусам',
-                    'width' => '800'
+					'authors' => [
+                        [
+                            'name' => 'random + Елизавета',
+                            'url' => 'http://vk.com/geekparty'
+                        ]
+                    ]
+                    ,'width' => '800'
                     , 'height' => '600'
                 ],
             ]
