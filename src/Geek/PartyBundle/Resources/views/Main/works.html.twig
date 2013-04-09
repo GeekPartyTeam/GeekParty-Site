@@ -3,70 +3,78 @@
 {% block title %} GeekParty :: Работы {% endblock %}
 
 {% block main %}
-
-    
-	{% if party == 'gp1' %}
-		<span class="currentParty">GP1</span>
-		<a href="/works/gp2">GP2</a>
-	{% else %}
-		<a href="/works/gp1">GP1</a>
-		<span class="currentParty">GP2</span>
-	{% endif %}
-				<div class="content">
-					<h2>Работы участников</h2>
+				<div id="content">
+					<div id="partySwitcher">
+						<h2>Работы участников</h2>
+						<div id="partyNavigation">
+							<ul>
+								{% if party == 'gp1' %}
+								<li><span class="currentParty">GP1</span></li>
+								<li><a href="/works/gp2">GP2</a></li>
+								{% else %}
+								<li><a href="/works/gp1">GP1</a></li>
+								<li><span class="currentParty">GP2</span></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
 					<div id="entries">
-                        {% for entry in works[party] %}
-						<div class="entry">
-							<div class="entryPadding borderBlock">
-								<div class="entryLeftBar">
-									<a href="/works/{{ party }}/{{ entry.id }}">
-										<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
-									</a>
-									<a class="playGame" href="/works/{{ party }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
-								</div>
-								<div class="entryRightBar">
-									<a href="/works/{{ party }}/{{ entry.id }}"><h2>{{ entry.name }}</h2></a>
-									<div class="entryDescription">
-										<p>{{ entry.description }}.</p>
+						{% for entry in works[party] %}
+							<div class="entry">
+								<div class="entryPadding borderBlock">
+									<div class="entryLeftBar">
+										<a href="/works/{{ party }}/{{ entry.id }}">
+											<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
+										</a>
+										<a class="playGame" href="/works/{{ party }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
+									
+										<!--<a href=""><img class="gameIcon" src="./img/game_icon.png" /></a>-->
+										<!--<a class="playGame" href=""><span class="playLabel">Play</span></a>-->
 									</div>
-									<table cellspacing="0" cellpadding="0" class="credits">
-                                        {% if entry.source is defined %}
-                                            <tr>
-                                                <td class="detail">Source:</td>
-                                                <td class="description"><a href="{{ entry.source }}">{{ entry.source }}</a></td>
-                                            </tr>
-                                        {% endif %}
-                                        {% if entry.authors is defined %}
-                                            <tr>
-                                                <td class="detail">Authors:</td>
-                                                <td class="description">
-                                                    {% for author in entry.authors %}
-                                                        <a href="{{ author.url }}">{{ author.name }}</a>&nbsp;
-                                                    {% endfor %}
-                                                </td>
-                                            </tr>
-                                        {% endif %}
-									</table>
-									<!-- COMMENTS --> <a class="entryComments" href="/works/{{ party }}/{{ entry.id }}#disqus_thread">comments</a>
+									<div class="entryRightBar">
+										<a href="/works/{{ party }}/{{ entry.id }}"><h2>{{ entry.name }}</h2></a>
+										<div class="entryDescription">
+											<p>{{ entry.description }}.</p>
+										</div>
+										<table cellspacing="0" cellpadding="0" class="credits">
+											{% if entry.source is defined %}
+												<tr>
+													<td class="detail">Source:</td>
+													<td class="description"><a href="{{ entry.source }}">{{ entry.source }}</a></td>
+												</tr>
+											{% endif %}
+											{% if entry.authors is defined %}
+												<tr>
+													<td class="detail">Authors:</td>
+													<td class="description">
+														{% for author in entry.authors %}
+															<a href="{{ author.url }}">{{ author.name }}</a>&nbsp;
+														{% endfor %}
+													</td>
+												</tr>
+											{% endif %}
+										</table>
+									</div>
+									<!-- COMMENTS --> <a class="entryComments" href="/works/{{ party }}/{{ entry.id }}#disqus_thread"></a>
 								</div>
-							</div>
-						</div> <!-- entry -->
-                        {% else %}
-                            Работ пока нет
-                        {% endfor %}
+							</div> <!-- entry -->
+						{% else %}
+							Работ пока нет
+						{% endfor %}
 					</div> <!-- entries -->	
 				</div> <!-- content -->
-    <!-- DISQUS -->
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
+				<!-- DISQUS -->
+				<script type="text/javascript">
+					/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+					var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function () {
-            var s = document.createElement('script'); s.async = true;
-            s.type = 'text/javascript';
-            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
-    </script>
+					/* * * DON'T EDIT BELOW THIS LINE * * */
+					(function () {
+						var s = document.createElement('script'); s.async = true;
+						s.type = 'text/javascript';
+						s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+						(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+					}());
+				</script>
+				<!-- DISQUS END -->
 {% endblock %}

@@ -3,36 +3,52 @@
 {% block title %} GeekParty :: Просмотр работы {{ work.name }} {% endblock %}
 
 {% block main %}
+				<div class="content">
+					<div id="singleEntry">
+						<div class="entryPadding borderBlock">
+							<h2><a href="/works/{{ party }}">{{ party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
+							<div class="entryDescription">
+								<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>-->
+							</div>
+							<div id="gameContainer">
+								<iframe src="/works/{{ party }}/{{ work.id }}/index.html" width="{{ work.width }}" height="{{ work.height }}" scrolling="no"></iframe>
+								<!--
+								<div id="gameDescription">
+									<table cellspacing="0" cellpadding="0" class="credits">
+										<tr>
+											<td class="detail">Source:</td>
+											<td class="description"><a href="">http://gamehub.com/gamename</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Authors:</td>
+											<td class="description"><a href="">@ololo</a>, <a href="">@nlo</a></td>
+										</tr>
+										<tr>
+											<td class="detail">Group:</td>
+											<td class="description"><a href="">#funkygeeks</a></td>
+										</tr>
+									</table>
+								</div>
+								-->
+							</div>
+						</div>
+					</div>
+		
+					<!-- DUSQUS -->
+					<div id="disqus_thread"></div>
+					<script type="text/javascript">
+						/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+						var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
 
-    <div class="content">
-		<div id="singleEntry">
-			<div class="entryPadding borderBlock">
-				<h2><a href="/works/{{ party }}">{{ party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
-				<div class="entryDescription">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus venenatis dui a tortor rutrum sed facilisis velit volutpat. Cras cursus felis vel diam blandit rutrum.</p>
-				</div>
-				
-				<div id="gameContainer">
-					<iframe src="/works/{{ party }}/{{ work.id }}/index.html" width="{{ work.width }}" height="{{ work.height }}" scrolling="no"></iframe>
-				</div>
-			</div>
-		</div>
-
-        <!-- DUSQUS -->
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    </div> <!-- content -->
+						/* * * DON'T EDIT BELOW THIS LINE * * */
+						(function() {
+							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+							dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+					</script>
+					<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+					<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+					<!-- DUSQUS END-->
+				</div> <!-- content -->
 {% endblock %}

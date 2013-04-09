@@ -1,88 +1,88 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% block main %}
-				<div id="firstline">
-					<div id="brief">
-						<div class="p16">
+				<div id="content">
+					<div id="firstline">
+						<div id="brief">
 							<div class="briefLine">
 								<div class="briefImage">
-									<img src="/img/icon_question.png" alt="what" />
+									<img src="./img/icon_question.png" alt="what" />
 								</div>
 								<div class="briefDescription">
-									<h2>Что это такое?</h2>
-									<p><span class="orange">Гик-пати</span> &mdash; это цифровое творчество в режиме реального времени. Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников, жжом.</p>
-									<p>Компьютер - совершенное орудие для творчества. Наша цель - объединить близких по духу людей, увлеченных технологиями, и вместе менять мир к лучшему. Компьютер дает нам свободу: творить, мыслить и жить как хочется. Все, кто умеет  (или хочет научится!) выражать себя в цифре - добро пожаловать.
-									</p>
+									<h2>Что такое Гик-пати?</h2>
+									<p><span class="orange">Гик-пати</span> &mdash; это цифровое творчество в режиме реального времени. Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников.</p>
+									<p>Чтобы понять, что происходит на Гик-пати, посмотрите результаты предыдущих пати в разделе <a href="/works">Works</a></p>
 								</div>
 							</div> <!-- briefLine -->
 							<div class="briefLine">
 								<div class="briefImage">
-									<img src="/img/icon_question.png" alt="what" />
+									<img src="./img/icon_question.png" alt="what" />
 								</div>
 								<div class="briefDescription">
-									<h2>Где и когда?</h2>
-									<p>Гик-пати №3 состоится <span class="orange">14 апреля 2013</span>. В этот раз мы будем цифрово отжигать на Юнити. Все подробности в разделе &laquo;<a href="/about">About</a>&raquo;. 
-									</p>
+									<h2>Зачем все это?</h2>
+									<p>Компьютер - совершенное орудие для творчества. Наша цель - объединить близких по духу людей, увлеченных технологиями, и вместе менять мир к лучшему. Компьютер дает нам свободу: творить, мыслить и жить как хочется. Все, кто умеет  (или хочет научится!) выражать себя в цифре - добро пожаловать.</p>
+									<p>Принять участие очень просто, см. раздел <a href="/people">People</a></p>
+									<!--&laquo;<a href="/about">About</a>&raquo;-->
 								</div>
 							</div> <!-- briefLine -->
 							<div class="briefLine">
 								<div class="briefImage">
-									<img src="/img/icon_question.png" alt="what" />
+									<img src="./img/icon_question.png" alt="what" />
 								</div>
 								<div class="briefDescription">
-									<h2>Каков план мероприятия?</h2>
-									<p>Весь день будем делать задорные игры на <u>html5</u>! А когда доделаем, немного выпьем!</p>
+									<h2>Когда и где?</h2>
+									<p>Гикпати №3 состоится <span class="orange">14 апреля 2013 года</span>, в Санкт-Петербурге. В этот раз мы будем цифрово отжигать на Unity. На пати мы узнаем, что значит сделать игры на Юнити с нуля до релиза и зарелизим все наши творения онлайн. И будем делать не что-нибудь, а <b>шутеры от первого лица</b>, простые, но умопомрачительные. Выдержит ли Юнити тест на простоту и удобство? Справится ли с креативом необъятным гиковским? Интрига 100% чистоты!</p>
+									<p>Есть свободные места! Скорее <a href="/people">регистрируйтесь</a>.</p>
+									<p>Подробности о месте, программе, играх см. раздел <a href="/about">About</a>.</p>
 								</div>
 							</div> <!-- briefLine -->
-						</div>
-					</div>
-					<div id="twitter">
-                        <div id="tweets" class="borderBlock">
-                        </div>
-						<a href="https://twitter.com/intent/tweet?button_hashtag=geekpartyru" class="twitter-hashtag-button" data-lang="ru" data-size="large" data-related="serebroff">Tweet #geekpartyru</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-                        <script type="text/javascript">
-                            $('#tweets').jTweetsAnywhere({
-                                searchParams: 'q=%23geekpartyru',
-                                count: 10,
-                                showTweetFeed: {
-                                    showProfileImages: true,
-                                    showUserScreenNames: true,
-                                    showActionReply: true,
-                                    showActionRetweet: true,
-                                    showActionFavorite: true,
-                                    paging: {
-                                        mode: 'endless-scroll'
-                                    }
-                                },
-								 showTweetBox:{
-									counter: true,
-									width: 380,
-									height: 65,
-									label: '<span style="color: #A4A4A4">What\'s happening?</span>',
-									defaultContent: '#geekpartyru',
-									onTweet: function(textTweet, htmlTweet){
-										alert('You tweeted: ' + textTweet);
+						</div> <!-- brief -->
+						<div id="twitter">
+							<div id="tweets" class="borderBlock"></div>
+							<a href="https://twitter.com/intent/tweet?button_hashtag=geekpartyru" class="twitter-hashtag-button" data-lang="ru" data-size="large" data-related="serebroff">Tweet #geekpartyru</a>
+							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+							<script type="text/javascript">
+								$('#tweets').jTweetsAnywhere({
+									searchParams: 'q=%23geekpartyru',
+									count: 10,
+									showTweetFeed: {
+										showProfileImages: true,
+										showUserScreenNames: true,
+										showActionReply: true,
+										showActionRetweet: true,
+										showActionFavorite: true,
+										paging: {
+											mode: 'endless-scroll'
+										}
+									},
+									 showTweetBox:{
+										counter: true,
+										width: 380,
+										height: 65,
+										label: '<span style="color: #A4A4A4">What\'s happening?</span>',
+										defaultContent: '#geekpartyru',
+										onTweet: function(textTweet, htmlTweet){
+											alert('You tweeted: ' + textTweet);
+										}
+									},
+									showTimestamp: {
+										refreshInterval: 15
+									},
+									autorefresh: {
+										mode: 'trigger-insert',
+										interval: 10
+									},
+									onDataRequestHandler: function(stats) {
+										if (stats.dataRequestCount < 11) {
+											return true;
+										}
+										else {
+											alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
+										}
 									}
-								},
-                                showTimestamp: {
-                                    refreshInterval: 15
-                                },
-                                autorefresh: {
-                                    mode: 'trigger-insert',
-                                    interval: 10
-                                },
-                                onDataRequestHandler: function(stats) {
-                                    if (stats.dataRequestCount < 11) {
-                                        return true;
-                                    }
-                                    else {
-                                        alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
-                                    }
-                                }
-                            });
-                        </script>
-                    </div>
-				</div> <!-- firstline -->	
+								});
+							</script>
+						</div> <!-- Twatter -->	
+					</div> <!-- firstline -->
+				</div> <!-- content -->
 {% endblock %}
