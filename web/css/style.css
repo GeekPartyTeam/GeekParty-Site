@@ -383,12 +383,12 @@ ul.briefList {
 #vk_like {
 }
 
-.fb-like {
+.socialContainer .fb-like {
     top: 5px;
     display: block;
     z-index: 1000;
 }
 
-.socialTwitterButton {
+.socialContainer .socialTwitterButton {
     padding-top: 10px
 }
