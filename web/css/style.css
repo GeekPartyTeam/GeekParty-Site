@@ -377,16 +377,17 @@ ul.briefList {
 
 .socialContainer {
     float: right;
+    margin-top: 32px;
 }
 
 #vk_like {
 }
 
 .fb-like {
-    top: -4px;
+    top: 5px;
     display: block;
 }
 
 .socialTwitterButton {
-    padding-left: 39px;
+    padding-top: 10px
 }
