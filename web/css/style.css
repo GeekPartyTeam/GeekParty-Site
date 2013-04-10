@@ -375,20 +375,18 @@ ul.briefList {
 
 /* Social buttons */
 
-div.socialContainer {
-    padding-top: 0;
-    overflow: visible;
+.socialContainer {
+    float: right;
 }
 
 #vk_like {
-    display: inline;
 }
 
 .fb-like {
     top: -4px;
+    display: block;
 }
 
 .socialTwitterButton {
-    display: inline;
     padding-left: 39px;
 }
