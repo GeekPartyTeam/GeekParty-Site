@@ -392,3 +392,23 @@ ul.briefList {
 .socialContainer .socialTwitterButton {
     padding-top: 10px
 }
+
+.socialContainerGame {
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding-top: 5px;
+}
+
+.socialContainerGame #vk_like_game {
+    display: inline;
+}
+
+.socialContainerGame #fb-like {
+    top: -3px;
+}
+
+.socialContainerGame .socialTwitterButton {
+    display: inline;
+    padding-left: 38px;
+}
