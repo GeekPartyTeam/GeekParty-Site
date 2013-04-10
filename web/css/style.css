@@ -386,6 +386,7 @@ ul.briefList {
 .fb-like {
     top: 5px;
     display: block;
+    z-index: 1000;
 }
 
 .socialTwitterButton {
