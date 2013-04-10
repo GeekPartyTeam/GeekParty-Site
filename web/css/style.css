@@ -377,6 +377,7 @@ ul.briefList {
 
 div.socialContainer {
     padding-top: 0;
+    overflow: visible;
 }
 
 #vk_like {
