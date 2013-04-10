@@ -373,3 +373,21 @@ ul.briefList {
     margin: 0 auto;
 }
 
+/* Social buttons */
+
+.socialContainer {
+    padding-top: 0;
+}
+
+#vk_like {
+    display: inline;
+}
+
+.fb-like {
+    top: -4px;
+}
+
+.socialTwitterButton {
+    display: inline;
+    padding-left: 39px;
+}
