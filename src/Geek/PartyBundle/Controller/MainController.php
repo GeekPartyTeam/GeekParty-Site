@@ -2,10 +2,20 @@
 
 namespace Geek\PartyBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller
+    , Symfony\Component\HttpFoundation\Response
+    ;
 
 class MainController extends Controller
 {
+    public function render($view, array $parameters = array(), Response $response = null)
+    {
+        $now = new \DateTime();
+        $showtime = new \DateTime("2013-04-14 12:00");
+        $parameters['showtime'] = $now >= $showtime;
+        return parent::render($view, $parameters, $response);
+    }
+
     /**
      * Получить список работ
      * @return array

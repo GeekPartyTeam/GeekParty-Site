@@ -52,12 +52,16 @@
 						<img src="/img/logo.png" alt="sdsd" />
 					</a>
 				</div>
-				<div id="timer">
+				<div id="timer {% if showtime %}showtime{% endif %}">
+                    {% if showtime %}
+                    <p class="timerLabel showtime">Гик-пати началось!</p>
+                    {% else %}
 					<p id="days" class="timerLabel">01</p>
 					<p id="dhColon" class="timerLabel">:</p>
 					<p id="hours" class="timerLabel">08</p>
 					<p id="hmColon" class="timerLabel">:</p>
 					<p id="minutes" class="timerLabel">23</p>
+                    {% endif %}
 				</div>
                 <div class="socialContainer">
                     <div id="vk_like"></div>

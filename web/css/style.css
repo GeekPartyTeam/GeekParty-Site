@@ -412,3 +412,12 @@ ul.briefList {
     display: inline;
     padding-left: 38px;
 }
+
+.timerLabel.showtime {
+    width: 100%;
+    font: font: 42px/75px pixel_font;
+}
+
+.timer.showtime {
+    background: none;
+}
