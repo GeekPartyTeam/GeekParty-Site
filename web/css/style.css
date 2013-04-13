@@ -418,6 +418,6 @@ ul.briefList {
     font: font: 42px/75px pixel_font;
 }
 
-.timer.showtime {
+#timer.showtime {
     background: none;
 }
