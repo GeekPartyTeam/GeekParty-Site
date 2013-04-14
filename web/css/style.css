@@ -415,9 +415,10 @@ ul.briefList {
 
 .timerLabel.showtime {
     width: 100%;
-    font: font: 42px/75px pixel_font;
+    font: 42px/75px pixel_font;
 }
 
 #timer.showtime {
     background: none;
+    display: block;
 }
