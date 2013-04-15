@@ -151,7 +151,7 @@ class MainController extends Controller
 					'description' => 'Четкий классический зомбо-истребитель.',
 					'width' => '960',
 					'height' => '600'
-				]
+				],
 				'pussyrush' => [
 					'id' => 'pussyrush',
 					'name' => 'Киськина ересь / Pussyrush',
