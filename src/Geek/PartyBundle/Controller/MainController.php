@@ -127,28 +127,35 @@ class MainController extends Controller
 				'fastfooder' => [
 					'id' => 'fastfooder',
 					'name' => 'Fastfooder',
-					'description' => 'Description',
+					'description' => 'Вы работник МакДоналдса. На вас наступают немного проголодавшиеся посетители. Вы от них отстреливаетесь гамбургерами (Кликайте правой клавшией, переходите в fullscreen - так эффектнее).',
 					'width' => '960',
 					'height' => '600'
 				],
 				'fastfooder2' => [
 					'id' => 'fastfooder2',
-					'name' => 'Fastfooder2',
-					'description' => 'Description2',
+					'name' => 'Fastfooder (extra-physics edition)',
+					'description' => 'Та же игра, но без Gamr Over, без очков, но с физикой мебели.',
 					'width' => '960',
 					'height' => '600'
 				],
 				'pixobots' => [
 					'id' => 'pixobots',
 					'name' => 'Pixobots',
-					'description' => 'Description for pixobots',
+					'description' => 'Настоящий 3Д шутер, в антураже sci-fi, с монстрами, оружием уровнями и возможностью вращать мир вокруг своей оси. Безусловный хит.',
 					'width' => '800',
 					'height' => '600'
 				],
+				'zombiecrash' => [
+					'id' => 'zombiecrash',
+					'name' => 'Zombie crash',
+					'description' => 'Четкий классический зомбо-истребитель.',
+					'width' => '960',
+					'height' => '600'
+				]
 				'pussyrush' => [
 					'id' => 'pussyrush',
-					'name' => 'Киськина ересь',
-					'description' => 'Description for pussy rush',
+					'name' => 'Киськина ересь / Pussyrush',
+					'description' => 'Вы играете за священнослужителя, на церковь которого нападают pussyriot. Ваша задача с помощью осиновых колов не дать осквернить святыню богомерзкими танцами.',
 					'width' => '960',
 					'height' => '600'
 				]
