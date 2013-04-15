@@ -11,9 +11,17 @@
 								{% if party == 'gp1' %}
 								<li><span class="currentParty">GP1</span></li>
 								<li><a href="/works/gp2">GP2</a></li>
-								{% else %}
+								<li><a href="/works/gp3">GP3</a></li>
+								{% endif %}
+								{% if party == 'gp2' %}
 								<li><a href="/works/gp1">GP1</a></li>
 								<li><span class="currentParty">GP2</span></li>
+								<li><a href="/works/gp3">GP3</a></li>
+								{% endif %}
+								{% if party == 'gp3' %}
+								<li><a href="/works/gp1">GP1</a></li>
+								<li><a href="/works/gp2">GP2</a></li>
+								<li><span class="currentParty">GP3</span></li>
 								{% endif %}
 							</ul>
 						</div>

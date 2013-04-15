@@ -122,7 +122,37 @@ class MainController extends Controller
                     ,'width' => '800'
                     , 'height' => '600'
                 ],
-            ]
+            ],
+			'gp3' => [
+				'fastfooder' => [
+					'id' => 'fastfooder',
+					'name' => 'Fastfooder',
+					'description' => 'Description',
+					'width' => '960',
+					'height' => '600'
+				],
+				'fastfooder2' => [
+					'id' => 'fastfooder2',
+					'name' => 'Fastfooder2',
+					'description' => 'Description2',
+					'width' => '960',
+					'height' => '600'
+				],
+				'pixobots' => [
+					'id' => 'pixobots',
+					'name' => 'Pixobots',
+					'description' => 'Description for pixobots',
+					'width' => '800',
+					'height' => '600'
+				],
+				'pussyrush' => [
+					'id' => 'pussyrush',
+					'name' => 'Киськина ересь',
+					'description' => 'Description for pussy rush',
+					'width' => '960',
+					'height' => '600'
+				]
+			]
         ];
     }
 
