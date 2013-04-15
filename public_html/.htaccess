@@ -7,10 +7,6 @@ Redirect 301 /gp2 /works/gp2
     #    RewriteBase /
     #</IfModule>
 
-    RewriteCond %{HTTP_HOST} ^geekparty.ru$ [OR]
-    RewriteCond %{HTTP_HOST} ^www.geekparty.ru$
-    RewriteRule (.*)$ http://geekparty.su/$1 [R=301,L]
-
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>
