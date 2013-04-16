@@ -209,7 +209,15 @@ span.orange {
 #page {
     background: none repeat scroll 0 0 #0E3449;
     padding: 16px 0 0;
+    /*position: absolute;*/
+    z-index: 999;
+}
+#pageSingle {
+	background: none repeat scroll 0 0 #0E3449;
+    padding: 16px 0 0;
     position: absolute;
+    /*width: 100%;*/
+    z-index: 999;
 }
 #firstline {
     overflow: hidden;
@@ -298,8 +306,7 @@ div.briefLine {
 }
 
 #gameContainer {
-	width: 800px;
-	margin: 0 auto;
+	width: 960px;
 }
 
 span.currentParty {
