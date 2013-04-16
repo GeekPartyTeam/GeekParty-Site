@@ -25,9 +25,16 @@ html {
     position: relative;
 	width: 960px;
 }
+#wrapperSingle {
+	margin: 0 auto;
+	width: 960px;
+}
 #container {
     padding-left: 160px;
     width: 100%;
+}
+#containerSingle {
+	overflow: hidden;
 }
 .p16 {
     padding: 16px;
