@@ -18,6 +18,7 @@ html {
     position: absolute;
     top: -1000px;
     width: 99%;
+	z-index:-1;
 }
 #wrapper {
     left: -80px;

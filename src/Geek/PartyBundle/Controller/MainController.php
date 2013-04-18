@@ -143,7 +143,7 @@ class MainController extends Controller
 					'description' => 'Четкий классический зомбо-истребитель',
 					'authors' => [
                         [
-                            'name' => 'Александр Иванов + 1 кодер (кто ты? напиши!)',
+                            'name' => 'Александр Иванов, Игорь Кириченко',
                             'url' => 'http://vk.com/geekparty'
                         ]
                     ],
