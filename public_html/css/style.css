@@ -210,7 +210,8 @@ span.orange {
 #page {
     background: none repeat scroll 0 0 #0E3449;
     padding: 16px 0 0;
-    /*position: absolute;*/
+    width: 960px;
+	position: absolute;
     z-index: 999;
 }
 #pageSingle {
