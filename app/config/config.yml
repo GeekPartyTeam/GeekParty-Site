@@ -18,6 +18,14 @@ framework:
     trusted_proxies: ~
     session:         ~
 
+services:
+    "geek.controller_listener":
+        class: Geek\PartyBundle\EventListener\ControllerArgumentsListener
+        arguments: ["@serializer"]
+        tags:
+            - {name: "kernel.event_listener", event: "kernel.controller", method: "onKernelController"}
+        
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
@@ -65,3 +73,16 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Geek\PartyBundle\Entity\User
+
+fos_rest:
+    routing_loader:
+        default_format: json
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+
+sensio_framework_extra:
+    view:    { annotations: false }
+    router:  { annotations: true }

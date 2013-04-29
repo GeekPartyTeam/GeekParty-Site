@@ -64,3 +64,16 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+admin_party:
+    resource: "@GeekPartyBundle/Controller/PartyController.php"
+    type:     annotation
+
+admin_work:
+    resource: "@GeekPartyBundle/Controller/WorkController.php"
+    type:     annotation
+
+api_users:
+    type:     rest
+    prefix:   /api
+    resource: "@GeekPartyBundle/Controller/API/UserController.php"
