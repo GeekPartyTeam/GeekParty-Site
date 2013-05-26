@@ -77,3 +77,8 @@ api_users:
     type:     rest
     prefix:   /api
     resource: "@GeekPartyBundle/Controller/API/UserController.php"
+
+api_parties:
+    type:     rest
+    prefix:   /api
+    resource: "@GeekPartyBundle/Controller/API/PartyController.php"
