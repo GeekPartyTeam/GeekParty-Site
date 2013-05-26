@@ -43,7 +43,7 @@ html {
 .usePixelFont {
     font: 14px/18px pixel_font;
 }
-p {
+p, td {
     color: white;
 	line-height: 24px;
 }
@@ -435,4 +435,12 @@ ul.briefList {
 #timer.showtime {
     background: none;
     display: block;
+}
+
+.memberRow.new .removeMember {
+    display: none;
+}
+
+#createTeam {
+    color: white;
 }

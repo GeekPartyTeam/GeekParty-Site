@@ -3,38 +3,52 @@
 {% block title %} GeekParty :: Участники {% endblock %}
 
 {% block main %}
-				<!--
-					<table>
-						<thead>
-							<tr>
-								<td>twitter</td>
-								<td>city</td>
-								<td>code</td>
-								<td>gfx</td>
-								<td>sfx</td>
-								<td>gd</td>
-								<td>skills</td>
-							</tr>
-						</thead>
-						<tbody>
-							{% for item in people %}
-								<tr>
-									<td>{{ item.twitter }}</td>
-									<td>{{ item.city }}</td>
-									<td>{{ item.code ? 'X' : '' }}</td>
-									<td>{{ item.gfx ? 'X' : '' }}</td>
-									<td>{{ item.sfx ? 'X' : '' }}</td>
-									<td>{{ item.gd ? 'X' : '' }}</td>
-									<td>{{ item.skills }}</td>
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="7">Пока никого нет</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				-->
+                <div id="createTeam">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        Чтобы создать команду, войдите через фейсбук: 
+                        {{ facebook_login_button({'autologoutlink': true}) }}
+                    {% else %}
+                        Привет, {{ app.user.username }}                       
+                        {% if team %}
+                            <a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a>
+                        {% else %}
+                            <a href="{{ path('team_new') }}">Создать команду</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Название</td>
+                            <td>Описание</td>
+                            <td>Контакты</td>
+                            <td>Состав</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for team in teams %}
+                            <tr>
+                                <td>{{ team.name }}</td>
+                                <td>{{ team.description }}</td>
+                                <td>{{ team.contacts }}</td>
+                                <td>
+                                    <table>
+                                        {% for member in team.members %}
+                                            <tr>
+                                                <td>{{ member.name }}</td>
+                                                <td>{{ member.description }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">Пока никого нет</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 				<div id="content">
 					<div class="entryPadding">
 						<div class="briefLine">

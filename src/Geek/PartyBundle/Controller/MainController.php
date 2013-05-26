@@ -2,11 +2,10 @@
 
 namespace Geek\PartyBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller
-    , Symfony\Component\HttpFoundation\Response
+use Symfony\Component\HttpFoundation\Response
     ;
 
-class MainController extends Controller
+class MainController extends BaseController
 {
     public function render($view, array $parameters = array(), Response $response = null)
     {
@@ -202,7 +201,18 @@ class MainController extends Controller
      */
     public function peopleAction()
     {
-        $params = ['people' => []];
+        $params = [
+            'teams' => $this->getDoctrine()->getRepository('GeekPartyBundle:Team')->findAll()
+        ];
+        $securityContext = $this->container->get('security.context');
+        if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $securityContext->getToken()->getUser();
+            $team = $this->getDoctrine()
+                ->getRepository('GeekPartyBundle:Team')
+                ->findOneBy(['leader' => $user]);
+            $params['user'] = $user;
+            $params['team'] = $team;
+        }
         return $this->render('GeekPartyBundle:Main:people.html.twig', $params);
     }
 

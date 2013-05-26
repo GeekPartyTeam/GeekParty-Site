@@ -46,3 +46,8 @@ _security_check:
 _security_logout:
     pattern:  /logout
     defaults: { _controller: GeekPartyBundle:Auth:logout }
+
+_edit_team:
+    resource: "@GeekPartyBundle/Controller/TeamController.php"
+    type:     annotation
+    prefix:   /edit
