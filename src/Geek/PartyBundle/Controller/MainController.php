@@ -202,7 +202,8 @@ class MainController extends Controller
      */
     public function peopleAction()
     {
-        return $this->render('GeekPartyBundle:Main:people.html.twig');
+        $params = ['people' => []];
+        return $this->render('GeekPartyBundle:Main:people.html.twig', $params);
     }
 
     /**
