@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             //
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\FacebookBundle\FOSFacebookBundle(),
             //
             new Geek\PartyBundle\GeekPartyBundle(),
         );

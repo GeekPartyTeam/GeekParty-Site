@@ -1,5 +1,9 @@
 {
-    "hash": "3306aafba494ba2a7cbc12aa4cdba2a6",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "31f9d764b23e5cbff09bc54cb07ee000",
     "packages": [
         {
             "name": "doctrine/common",
@@ -18,7 +22,6 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "2012-09-19 22:55:18",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -68,7 +71,8 @@
                 "eventmanager",
                 "persistence",
                 "spl"
-            ]
+            ],
+            "time": "2012-09-19 22:55:18"
         },
         {
             "name": "doctrine/dbal",
@@ -88,7 +92,6 @@
                 "doctrine/common": "2.3.*",
                 "php": ">=5.3.2"
             },
-            "time": "2013-01-07 20:03:43",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -131,7 +134,8 @@
                 "dbal",
                 "persistence",
                 "queryobject"
-            ]
+            ],
+            "time": "2013-01-07 20:03:43"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -163,7 +167,6 @@
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle."
             },
-            "time": "2013-01-12 13:20:23",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -200,7 +203,8 @@
                 "dbal",
                 "orm",
                 "persistence"
-            ]
+            ],
+            "time": "2013-01-12 13:20:23"
         },
         {
             "name": "doctrine/orm",
@@ -225,7 +229,6 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "2013-01-07 20:05:04",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -270,7 +273,109 @@
             "keywords": [
                 "database",
                 "orm"
-            ]
+            ],
+            "time": "2013-01-07 20:05:04"
+        },
+        {
+            "name": "facebook/php-sdk",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/facebook-php-sdk.git",
+                "reference": "v3.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/facebook-php-sdk/zipball/v3.2.0",
+                "reference": "v3.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Facebook",
+                    "homepage": "https://github.com/facebook/facebook-php-sdk/contributors"
+                }
+            ],
+            "description": "Facebook PHP SDK",
+            "homepage": "https://github.com/facebook/facebook-php-sdk",
+            "keywords": [
+                "facebook",
+                "sdk"
+            ],
+            "time": "2012-08-14 17:28:20"
+        },
+        {
+            "name": "friendsofsymfony/facebook-bundle",
+            "version": "1.1.0",
+            "target-dir": "FOS/FacebookBundle",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/FriendsOfSymfony/FOSFacebookBundle.git",
+                "reference": "1.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FriendsOfSymfony/FOSFacebookBundle/archive/1.1.0.zip",
+                "reference": "1.1.0",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/php-sdk": "v3.2",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<2.3",
+                "symfony/security-bundle": ">=2.1,<2.3",
+                "symfony/twig-bundle": ">=2.1,<2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\FacebookBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSFacebookBundle/contributors"
+                }
+            ],
+            "description": "Integrate the Facebook Platform into your Symfony2 application.",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "facebook"
+            ],
+            "time": "2013-01-20 19:15:02"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -300,7 +405,6 @@
                 "twig/twig": "*",
                 "willdurand/propel-typehintable-behavior": "dev-master"
             },
-            "time": "2013-02-20 08:35:53",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -335,7 +439,8 @@
             "homepage": "http://friendsofsymfony.github.com",
             "keywords": [
                 "User management"
-            ]
+            ],
+            "time": "2013-02-20 08:35:53"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -354,7 +459,6 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-12-22 21:46:50",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -382,7 +486,8 @@
             "keywords": [
                 "highlight",
                 "sql"
-            ]
+            ],
+            "time": "2012-12-22 21:46:50"
         },
         {
             "name": "jms/aop-bundle",
@@ -403,7 +508,6 @@
                 "jms/cg": "1.0.0",
                 "symfony/framework-bundle": "2.*"
             },
-            "time": "2012-01-02 12:50:26",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -426,7 +530,8 @@
             "keywords": [
                 "annotations",
                 "aop"
-            ]
+            ],
+            "time": "2012-01-02 12:50:26"
         },
         {
             "name": "jms/cg",
@@ -445,7 +550,6 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 12:40:52",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -467,7 +571,8 @@
             "description": "Toolset for generating PHP code",
             "keywords": [
                 "code generation"
-            ]
+            ],
+            "time": "2012-01-02 12:40:52"
         },
         {
             "name": "jms/di-extra-bundle",
@@ -504,7 +609,6 @@
                 "symfony/validator": "*",
                 "symfony/yaml": "*"
             },
-            "time": "2012-09-21 01:56:32",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -528,7 +632,8 @@
             "keywords": [
                 "annotations",
                 "dependency injection"
-            ]
+            ],
+            "time": "2012-09-21 01:56:32"
         },
         {
             "name": "jms/metadata",
@@ -547,7 +652,6 @@
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2012-01-02 13:32:49",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -572,7 +676,8 @@
                 "metadata",
                 "xml",
                 "yaml"
-            ]
+            ],
+            "time": "2012-01-02 13:32:49"
         },
         {
             "name": "jms/security-extra-bundle",
@@ -610,7 +715,6 @@
                 "symfony/validator": "*",
                 "symfony/yaml": "*"
             },
-            "time": "2012-09-06 09:12:03",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -637,7 +741,8 @@
                 "expression",
                 "secure",
                 "security"
-            ]
+            ],
+            "time": "2012-09-06 09:12:03"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -675,7 +780,6 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "twig/twig": "Assetic provides the integration with the Twig templating engine"
             },
-            "time": "2013-01-12 22:20:24",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -707,7 +811,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "2013-01-12 22:20:24"
         },
         {
             "name": "monolog/monolog",
@@ -734,7 +839,6 @@
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
                 "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server"
             },
-            "time": "2012-08-29 04:53:20",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -763,7 +867,8 @@
             "keywords": [
                 "log",
                 "logging"
-            ]
+            ],
+            "time": "2012-08-29 04:53:20"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -783,7 +888,6 @@
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "2013-01-04 17:11:22",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -809,7 +913,8 @@
             "keywords": [
                 "configuration",
                 "distribution"
-            ]
+            ],
+            "time": "2013-01-04 17:11:22"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -830,7 +935,6 @@
                 "doctrine/common": ">=2.1,<2.4-dev",
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "2013-01-04 17:06:26",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -856,7 +960,8 @@
             "keywords": [
                 "annotations",
                 "controllers"
-            ]
+            ],
+            "time": "2013-01-04 17:06:26"
         },
         {
             "name": "sensio/generator-bundle",
@@ -882,7 +987,6 @@
                 "symfony/doctrine-bridge": "2.1.*",
                 "twig/twig": ">=1.8,<2.0-dev"
             },
-            "time": "2013-01-04 17:09:08",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -904,7 +1008,8 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "This bundle generates code for you"
+            "description": "This bundle generates code for you",
+            "time": "2013-01-04 17:09:08"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -923,7 +1028,6 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-10-25 01:30:40",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -953,7 +1057,8 @@
             "keywords": [
                 "mail",
                 "mailer"
-            ]
+            ],
+            "time": "2012-10-25 01:30:40"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -987,7 +1092,6 @@
             "suggest": {
                 "symfony/twig-bundle": "2.1.*"
             },
-            "time": "2012-08-28 03:22:44",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1016,7 +1120,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "2012-08-28 03:22:44"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1044,7 +1149,6 @@
                 "symfony/config": ">=2.1.0,<2.3-dev",
                 "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-07 10:57:41",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1075,7 +1179,8 @@
             "keywords": [
                 "log",
                 "logging"
-            ]
+            ],
+            "time": "2013-01-07 10:57:41"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1103,7 +1208,6 @@
                 "symfony/http-kernel": ">=2.1.0,<2.3-dev",
                 "symfony/yaml": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-04 17:04:29",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1130,7 +1234,8 @@
                 }
             ],
             "description": "Symfony SwiftmailerBundle",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "2013-01-04 17:04:29"
         },
         {
             "name": "symfony/symfony",
@@ -1192,7 +1297,6 @@
                 "monolog/monolog": ">=1.0,<1.3-dev",
                 "propel/propel1": "dev-master"
             },
-            "time": "2013-01-17 21:21:51",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -1218,7 +1322,8 @@
             "homepage": "http://symfony.com",
             "keywords": [
                 "framework"
-            ]
+            ],
+            "time": "2013-01-17 21:21:51"
         },
         {
             "name": "twig/extensions",
@@ -1237,7 +1342,6 @@
             "require": {
                 "twig/twig": "1.*"
             },
-            "time": "2013-01-04 16:55:05",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1265,7 +1369,8 @@
                 "debug",
                 "i18n",
                 "text"
-            ]
+            ],
+            "time": "2013-01-04 16:55:05"
         },
         {
             "name": "twig/twig",
@@ -1284,7 +1389,6 @@
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-01-15 20:03:52",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1314,10 +1418,13 @@
             "homepage": "http://twig.sensiolabs.org",
             "keywords": [
                 "templating"
-            ]
+            ],
+            "time": "2013-01-15 20:03:52"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
@@ -1326,5 +1433,11 @@
         "twig/extensions": 20,
         "kriswallsmith/assetic": 20,
         "friendsofsymfony/user-bundle": 20
-    }
+    },
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": [
+
+    ]
 }
