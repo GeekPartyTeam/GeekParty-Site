@@ -22,5 +22,12 @@ monolog:
 assetic:
     use_controller: true
 
+fos_facebook:
+    alias:  facebook
+    app_id: 554560297916061
+    secret: bfb545cda70b4fb92dc5cbfeb39352b9
+    cookie: true
+    permissions: [email]
+
 #swiftmailer:
 #    delivery_address: me@example.com

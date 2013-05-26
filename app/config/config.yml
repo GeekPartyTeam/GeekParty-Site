@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: facebook.yml }
 
 framework:
     #esi:             ~
@@ -65,3 +66,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Geek\PartyBundle\Entity\User
+
+services:
+    my.facebook.user:
+        class: Geek\PartyBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"

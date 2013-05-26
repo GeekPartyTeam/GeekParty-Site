@@ -18,21 +18,9 @@ geek_about:
     pattern:  /about
     defaults: { _controller: GeekPartyBundle:Main:about }
 
-geek_default_works:
-    pattern:  /works
-    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
-
-geek_default_works_:
-    pattern:  /works/
-    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
-
-geek_party_works:
+geek_works:
     pattern:  /works/{party}
-    defaults: { _controller: GeekPartyBundle:Main:works }
-
-geek_party_works_:
-    pattern:  /works/{party}/
-    defaults: { _controller: GeekPartyBundle:Main:works }
+    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
 
 geek_work:
     pattern:  /works/{party}/{work}
@@ -49,18 +37,12 @@ geek_test:
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
-
-fos_user_register:
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
-
-fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
-
-fos_user_change_password:
-    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /profile
+# _security_login:
+#     pattern:  /login
+#     defaults: { _controller: GeekPartyBundle:Auth:login }
+_security_check:
+    pattern:  /login_check
+    defaults: { _controller: GeekPartyBundle:Auth:check }
+_security_logout:
+    pattern:  /logout
+    defaults: { _controller: GeekPartyBundle:Auth:logout }
