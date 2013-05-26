@@ -1480,6 +1480,50 @@
         ]
     },
     {
+        "name": "simplethings/form-serializer-bundle",
+        "version": "v0.2",
+        "version_normalized": "0.2.0.0",
+        "target-dir": "SimpleThings/FormSerializerBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/simplethings/SimpleThingsFormSerializerBundle.git",
+            "reference": "v0.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/simplethings/SimpleThingsFormSerializerBundle/zipball/v0.2",
+            "reference": "v0.2",
+            "shasum": ""
+        },
+        "require": {
+            "symfony/form": "2.1.*",
+            "symfony/http-foundation": "2.1.*",
+            "symfony/serializer": "2.1.*"
+        },
+        "require-dev": {
+            "jms/serializer-bundle": "dev-master"
+        },
+        "time": "2012-07-19 04:57:12",
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "SimpleThings\\FormSerializerBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            }
+        ],
+        "description": "(De-)Serialization of Object-Graphs into XML/JSON based on Form Types"
+    },
+    {
         "name": "kriswallsmith/assetic",
         "version": "dev-master",
         "version_normalized": "9999999-dev",

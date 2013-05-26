@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ac332b64cedc820dd146998538bce87b",
+    "hash": "03233d436f61b0449d6a987a04b87dff",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1166,6 +1166,48 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2013-01-04 17:09:08"
+        },
+        {
+            "name": "simplethings/form-serializer-bundle",
+            "version": "v0.2",
+            "target-dir": "SimpleThings/FormSerializerBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplethings/SimpleThingsFormSerializerBundle.git",
+                "reference": "v0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/simplethings/SimpleThingsFormSerializerBundle/zipball/v0.2",
+                "reference": "v0.2",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/form": "2.1.*",
+                "symfony/http-foundation": "2.1.*",
+                "symfony/serializer": "2.1.*"
+            },
+            "require-dev": {
+                "jms/serializer-bundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "SimpleThings\\FormSerializerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                }
+            ],
+            "description": "(De-)Serialization of Object-Graphs into XML/JSON based on Form Types",
+            "time": "2012-07-19 04:57:12"
         },
         {
             "name": "swiftmailer/swiftmailer",

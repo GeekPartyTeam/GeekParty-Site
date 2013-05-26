@@ -21,7 +21,8 @@
         "kriswallsmith/assetic": "1.1.*-dev",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "0.10.*",
-        "jms/serializer-bundle": "0.9.*"
+        "jms/serializer-bundle": "0.9.*",
+        "simplethings/form-serializer-bundle": "0.2"
     },
     "scripts": {
         "post-install-cmd": [

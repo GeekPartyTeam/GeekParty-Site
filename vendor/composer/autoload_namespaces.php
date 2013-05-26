@@ -12,6 +12,7 @@ return array(
     'Symfony\\Bundle\\MonologBundle' => $vendorDir . '/symfony/monolog-bundle',
     'Symfony\\Bundle\\AsseticBundle' => $vendorDir . '/symfony/assetic-bundle',
     'Symfony' => $vendorDir . '/symfony/symfony/src',
+    'SimpleThings\\FormSerializerBundle\\' => $vendorDir . '/simplethings/form-serializer-bundle',
     'SessionHandlerInterface' => $vendorDir . '/symfony/symfony/src/Symfony/Component/HttpFoundation/Resources/stubs',
     'Sensio\\Bundle\\GeneratorBundle' => $vendorDir . '/sensio/generator-bundle',
     'Sensio\\Bundle\\FrameworkExtraBundle' => $vendorDir . '/sensio/framework-extra-bundle',
