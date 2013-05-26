@@ -26,23 +26,33 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=452612894814235";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        function goLogIn(){
+            window.location.href = "{{ path('_security_check') }}";
+        }
+
+        function onFbInit() {
+            if (typeof(FB) != 'undefined' && FB != null ) {              
+                FB.Event.subscribe('auth.statusChange', function(response) {
+                    if (response.session || response.authResponse) {
+                        setTimeout(goLogIn, 500);
+                    } else {
+                        window.location.href = "{{ path('_security_logout') }}";
+                    }
+                });
+            }
+        }
+    </script>
+    {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 	<div id="backgroundFX"></div>
 	<div id="wrapper">
 		<div id="sidebar">
 			<div id="sidebarFX"></div>
 			<ul id="navigation">
 				<li{% if app.request.requestUri == '/' %} class="navActive"{% endif %}><a href="/">Main</a></li>
-				<li{% if app.request.requestUri == '/people' %} class="navActive"{% endif %}><a href="/people">People</a></li>
+				<li{% if app.request.requestUri == '/people' %} class="navActive"{% endif %}><a href="{{ path('geek_people') }}">People</a></li>
 				<li{% if app.request.requestUri == '/about' %} class="navActive"{% endif %}><a href="/about">About</a></li>
-				<li{% if '/works' in app.request.requestUri  %} class="navActive"{% endif %}><a href="/works">Works</a></li>
+				<li{% if '/works' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('geek_works') }}">Works</a></li>
 			</ul>
 		</div>
 		
