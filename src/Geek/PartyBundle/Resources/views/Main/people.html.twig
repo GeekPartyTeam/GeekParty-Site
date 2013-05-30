@@ -3,19 +3,7 @@
 {% block title %} GeekParty :: Участники {% endblock %}
 
 {% block main %}
-                <div id="createTeam">
-                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                        Чтобы создать команду, войдите через фейсбук: 
-                        {{ facebook_login_button({'autologoutlink': true}) }}
-                    {% else %}
-                        Привет, {{ app.user.username }}                       
-                        {% if team %}
-                            <a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a>
-                        {% else %}
-                            <a href="{{ path('team_new') }}">Создать команду</a>
-                        {% endif %}
-                    {% endif %}
-                </div>
+               
                 <!--<table>
                     <thead>
                         <tr>
@@ -50,7 +38,21 @@
                     </tbody>
                 </table>-->
 				<div id="content">
-					<div class="entryPadding">
+					<!--<div class="entryPadding">-->
+						<div id="createTeam">
+							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+								Чтобы создать команду, войдите через фейсбук: 
+								{{ facebook_login_button({'autologoutlink': true}) }}
+							{% else %}
+								Привет, {{ app.user.username }}                       
+								{% if team %}
+									<a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a>
+								{% else %}
+									<a href="{{ path('team_new') }}">Создать команду</a>
+								{% endif %}
+							{% endif %}
+						</div>
+					
 						<div id="participantsTable">
 							<table id="participants" summary="test">
 								<thead>
@@ -133,6 +135,6 @@
 								<p>Скоро мы реализуем возможность участвовать в Гикпати удаленно из любой точки планеты. Следите за анонсами.</p>
 							</div>
 						</div>
-					</div>
+					<!--</div>-->
 				</div> <!-- content -->
 {% endblock %}
