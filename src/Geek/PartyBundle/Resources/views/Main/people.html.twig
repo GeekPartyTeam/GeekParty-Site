@@ -16,7 +16,7 @@
                         {% endif %}
                     {% endif %}
                 </div>
-                <table>
+                <!--<table>
                     <thead>
                         <tr>
                             <td>Название</td>
@@ -48,9 +48,66 @@
                             </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table>-->
 				<div id="content">
 					<div class="entryPadding">
+						<div id="participantsTable">
+							<table id="participants" summary="test">
+								<thead>
+									<tr>
+										<th>
+											<p>Название</p>
+										</th>
+										<th>
+											<p>Описание</p>
+										</th>
+										<th>
+											<p>Контакты</p>
+										</th>
+										<th>
+											<p>Состав</p>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for team in teams %}
+									<tr>
+										<td>{{ team.name }}</td>
+										<td>{{ team.description }}</td>
+										<td>{{ team.contacts }}</td>
+										<th>
+											<p>{{ team.name }}</p>
+										</th>
+										<td>
+											<p>{{ team.description }}</p>
+										</td>
+										<td>
+											<p>{{ team.contacts }}</p>
+										</td>
+										<td>
+											{% for member in team.members %}
+                                            <p>{{ member.name }} &nbsp;:&nbsp; {{ member.description }}</p>
+											{% endfor %}
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="7"><p>Пока никого нет</p></td>
+									</tr>
+								{% endfor %}
+								</tbody>
+								<!--
+								<tfoot>
+									<tr>
+									<th scope="row">Total</th>
+									<td colspan="3">4 team</td>
+									</tr>
+								</tfoot>-->
+							</table>
+						</div> <!-- participantsTable -->
+					
+					
+					
 						<div class="briefLine">
 							<div class="briefImage">
 								<img src="./img/icon_rule.png" alt="rule" />
