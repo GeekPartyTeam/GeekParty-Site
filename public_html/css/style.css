@@ -246,7 +246,8 @@ div.briefLine {
 	overflow: hidden;
 }
 #firstline #twitter {
-    float: left;
+    padding-left: 16px;
+	float: left;
     width: 40%;
 }
 #entries {

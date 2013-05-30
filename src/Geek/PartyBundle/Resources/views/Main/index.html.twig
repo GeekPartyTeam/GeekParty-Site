@@ -39,11 +39,53 @@
 						</div> <!-- brief -->
 						<div id="twitter">
 							<h2>Твитим про GP здесь</h2>
-							<div id="tweets" class="borderBlock">
+							<div id="tweets">
 							
-							<!-- new twatter -->
-							<a class="twitter-timeline" href="https://twitter.com/search?q=%23geekpartyru" data-widget-id="286831719544397827">Tweets about "#geekpartyru"</a>
-							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								<!-- new twatter -->
+								<a class="twitter-timeline" href="https://twitter.com/search?q=%23geekpartyru" data-widget-id="286831719544397827">Tweets about "#geekpartyru"</a>
+								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+								
+								<script type="text/javascript">
+									$('#tweets').jTweetsAnywhere({
+										searchParams: 'q=%23geekpartyru',
+										count: 10,
+										showTweetFeed: {
+											showProfileImages: true,
+											showUserScreenNames: true,
+											showActionReply: true,
+											showActionRetweet: true,
+											showActionFavorite: true,
+											paging: {
+												mode: 'endless-scroll'
+											}
+										},
+										 showTweetBox:{
+											counter: true,
+											width: 380,
+											height: 65,
+											label: '<span style="color: #A4A4A4">What\'s happening?</span>',
+											defaultContent: '#geekpartyru',
+											onTweet: function(textTweet, htmlTweet){
+												alert('You tweeted: ' + textTweet);
+											}
+										},
+										showTimestamp: {
+											refreshInterval: 15
+										},
+										autorefresh: {
+											mode: 'trigger-insert',
+											interval: 10
+										},
+										onDataRequestHandler: function(stats) {
+											if (stats.dataRequestCount < 11) {
+												return true;
+											}
+											else {
+												alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
+											}
+										}
+									});
+								</script>
 							
 							</div>
 							<!-- old twatter -->
@@ -51,47 +93,7 @@
 							<a href="https://twitter.com/intent/tweet?button_hashtag=geekpartyru" class="twitter-hashtag-button" data-lang="ru" data-size="large" data-related="serebroff">Tweet #geekpartyru</a>
 							<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 							-->
-							<script type="text/javascript">
-								$('#tweets').jTweetsAnywhere({
-									searchParams: 'q=%23geekpartyru',
-									count: 10,
-									showTweetFeed: {
-										showProfileImages: true,
-										showUserScreenNames: true,
-										showActionReply: true,
-										showActionRetweet: true,
-										showActionFavorite: true,
-										paging: {
-											mode: 'endless-scroll'
-										}
-									},
-									 showTweetBox:{
-										counter: true,
-										width: 380,
-										height: 65,
-										label: '<span style="color: #A4A4A4">What\'s happening?</span>',
-										defaultContent: '#geekpartyru',
-										onTweet: function(textTweet, htmlTweet){
-											alert('You tweeted: ' + textTweet);
-										}
-									},
-									showTimestamp: {
-										refreshInterval: 15
-									},
-									autorefresh: {
-										mode: 'trigger-insert',
-										interval: 10
-									},
-									onDataRequestHandler: function(stats) {
-										if (stats.dataRequestCount < 11) {
-											return true;
-										}
-										else {
-											alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
-										}
-									}
-								});
-							</script>
+							
 						</div> <!-- Twatter -->	
 					</div> <!-- firstline -->
 				</div> <!-- content -->
