@@ -42,9 +42,25 @@
 						<div id="createTeam">
 							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 								Чтобы создать команду, войдите через фейсбук: 
-								{{ facebook_login_button({'autologoutlink': true}) }}
+                                <script type="text/javascript">
+                                    function fbSignIn() {
+                                        FB.getLoginStatus(function (r) {
+                                            if (r.status != 'connected') {
+                                                FB.login()
+                                            } else {
+                                                goLogIn()
+                                            }
+                                        })
+                                    }
+                                </script>
+                                <button class="btn" onclick="fbSignIn()"><i class="icon-fb"></i> Войти</button>
 							{% else %}
-								Привет, {{ app.user.username }}                       
+								<p>
+                                    Привет, {{ app.user.firstname }} {{ app.user.lastname }}
+                                    <form class="form-inline" method="post" action="{{ path('fos_user_security_logout') }}">
+                                        <input type="submit" class="btn" value="Выйти"/>
+                                    </form>
+								</p>
 								{% if team %}
 									<a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a>
 								{% else %}
