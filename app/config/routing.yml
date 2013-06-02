@@ -55,3 +55,8 @@ _edit_team:
     resource: "@GeekPartyBundle/Controller/TeamController.php"
     type:     annotation
     prefix:   /edit
+
+_admin_work:
+    resource: "@GeekPartyBundle/Controller/PartyController.php"
+    type:     annotation
+    prefix:   /admin

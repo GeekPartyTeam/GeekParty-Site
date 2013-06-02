@@ -1,0 +1,24 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} GeekParty :: Новая пати {% endblock %}
+
+{% block main %}
+
+<h1>Party creation</h1>
+
+<form action="{{ path('party_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('party') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

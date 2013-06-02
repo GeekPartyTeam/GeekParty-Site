@@ -53,6 +53,9 @@
 				<li{% if app.request.requestUri == '/people' %} class="navActive"{% endif %}><a href="{{ path('geek_people') }}">People</a></li>
 				<li{% if app.request.requestUri == '/about' %} class="navActive"{% endif %}><a href="/about">About</a></li>
 				<li{% if '/works' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('geek_works') }}">Works</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li{% if '/admin' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('party') }}">Party</a></li>
+                {% endif %}
 			</ul>
 		</div>
 		
