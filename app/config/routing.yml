@@ -37,6 +37,10 @@ geek_test:
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
+fos_user_security_register:
+    prefix: /register
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+
 # _security_login:
 #     pattern:  /login
 #     defaults: { _controller: GeekPartyBundle:Auth:login }
