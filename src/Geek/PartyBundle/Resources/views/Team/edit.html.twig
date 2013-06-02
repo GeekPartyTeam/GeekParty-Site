@@ -99,7 +99,8 @@
 							
                                 <h2>Управление командой</h2>
                                 {% if entity.id %}
-                                    <form action="{{ path('team_delete', {'id': entity.id}) }}">
+                                    <form action="{{ path('team_delete', {'id': entity.id}) }}" method="post">
+                                        {{ form_rest(delete_form) }}
                                         <input type="submit" value="Удалить команду"/>
                                     </form>
                                 {% endif %}

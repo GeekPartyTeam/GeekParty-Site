@@ -57,21 +57,21 @@ class User extends BaseUser
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    protected $firstname;
+    protected $firstname = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    protected $lastname;
+    protected $lastname = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="facebookId", type="string", length=255)
      */
-    public $facebookId;
+    public $facebookId = '';
 
     public function serialize()
     {

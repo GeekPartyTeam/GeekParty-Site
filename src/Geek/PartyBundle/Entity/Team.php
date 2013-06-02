@@ -32,7 +32,7 @@ class Team
     protected $contacts;
     
     /**
-     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="team", cascade="all")
      */
     protected $members;
 

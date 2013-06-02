@@ -17,6 +17,74 @@ use Geek\PartyBundle\Form\TeamType;
  */
 class TeamController extends BaseController
 {
+    public function checkRights(Team $entity)
+    {
+        if ((!$this->getUser() || $entity->getLeader() != $this->getUser()) && 
+            !$this->get('security.context')->isGranted('ROLE_ADMIN')) 
+        {
+            return $this->redirect($this->generateUrl('geek_people'));
+        }
+
+        return null;
+    }
+
+    public function update(Request $request, $id = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $response = [];
+
+        if ($id) {
+            $entity = $em->getRepository('GeekPartyBundle:Team')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Team entity.');
+            }
+
+            if (null !== ($redirect = $this->checkRights($entity))) {
+                return $redirect;
+            }
+
+            $response['delete_form'] = $this->createDeleteForm($id);
+        } else {
+            $entity = new Team();
+        }
+
+        $editForm = $this->createForm(new TeamType(), $entity);
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+            foreach ($entity->getMembers() as $member) {
+                $em->remove($member);
+            }
+            $entity->getMembers()->clear();
+            foreach ($request->get('member')['name'] as $index => $name) {
+                if ($name) {
+                    $member = new TeamMember();
+                    $member->setName($name);
+                    $member->setDescription($request->get('member')['description'][$index]);
+                    $member->setTeam($entity);
+                    $entity->getMembers()->add($member);
+                    $em->persist($member);
+                }
+            }
+            $user = $this->container
+                ->get('security.context')
+                ->getToken()
+                ->getUser();
+            $entity->setLeader($user);
+            $em->persist($entity);
+            $em->flush();
+
+            // return $this->redirect($this->generateUrl('team_edit', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('geek_people'));
+        }
+
+        $response['entity']      = $entity;
+        $response['edit_form']   = $editForm->createView();
+        return $this->arrayResponse($response);
+    }
+
     /**
      * Lists all Team entities.
      *
@@ -75,59 +143,6 @@ class TeamController extends BaseController
         ));
     }
 
-    public function update(Request $request, $id = null)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $response = [];
-
-        if ($id) {
-            $entity = $em->getRepository('GeekPartyBundle:Team')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Team entity.');
-            }
-
-            $response['delete_form'] = $this->createDeleteForm($id);
-        } else {
-            $entity = new Team();
-        }
-
-        $editForm = $this->createForm(new TeamType(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            foreach ($entity->getMembers() as $member) {
-                $em->remove($member);
-            }
-            $entity->getMembers()->clear();
-            foreach ($request->get('member')['name'] as $index => $name) {
-                if ($name) {
-                    $member = new TeamMember();
-                    $member->setName($name);
-                    $member->setDescription($request->get('member')['description'][$index]);
-                    $member->setTeam($entity);
-                    $entity->getMembers()->add($member);
-                    $em->persist($member);
-                }
-            }
-            $user = $this->container
-                ->get('security.context')
-                ->getToken()
-                ->getUser();
-            $entity->setLeader($user);
-            $em->persist($entity);
-            $em->flush();
-
-            // return $this->redirect($this->generateUrl('team_edit', array('id' => $entity->getId())));
-            return $this->redirect($this->generateUrl('geek_people'));
-        }
-
-        $response['entity']      = $entity;
-        $response['edit_form']   = $editForm->createView();
-        return $this->arrayResponse($response);
-    }
-
     /**
      * Creates a new Team entity.
      *
@@ -150,6 +165,7 @@ class TeamController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var $entity Team */
         $entity = $em->getRepository('GeekPartyBundle:Team')->find($id);
 
         if (!$entity) {
@@ -197,11 +213,15 @@ class TeamController extends BaseController
                 throw $this->createNotFoundException('Unable to find Team entity.');
             }
 
+            if (null !== ($redirect = $this->checkRights($entity))) {
+                return $redirect;
+            }
+
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('team'));
+        return $this->redirect($this->generateUrl('geek_people'));
     }
 
     private function createDeleteForm($id)
