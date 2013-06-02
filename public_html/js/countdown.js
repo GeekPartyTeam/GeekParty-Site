@@ -1,10 +1,10 @@
 $(function() {
-    var targetData = new Date(2013,4,14,12,0);
+    var targetDate = window.targetDate ? new Date(window.targetDate) : null;
     var timer;
 
-    if (targetData - new Date >= 0) {
+    if (targetDate - new Date >= 0) {
         var setTimer =  function(){
-            var remaining = targetData - new Date,
+            var remaining = targetDate - new Date,
                 milli = 864e5,
                 a_days = remaining / milli,
                 days = Math.floor(a_days),

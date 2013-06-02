@@ -93,4 +93,9 @@ class Party
     {
         return $this->endTime;
     }
+
+    public function getName()
+    {
+        return preg_replace('/gp(.*)/', 'GP#$1', $this->getId());
+    }
 }

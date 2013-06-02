@@ -8,11 +8,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller
 
 class BaseController extends Controller
 {
-    public function isShowTime()
+    public function getCurrentParty()
     {
         $now = new \DateTime();
-        $showtime = new \DateTime("2013-04-14 12:00");
-        return $now >= $showtime;
+
+        $em = $this->getDoctrine()->getManager();
+        $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p WHERE p.endTime > :time ORDER BY p.endTime ASC")
+            ->setParameter('time', new \DateTime())
+            ->getResult();
+
+        if (count($parties) == 0) {
+            $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p ORDER BY p.endTime DESC")
+                ->getResult();
+        }
+
+        return count($parties) > 0 ? $parties[0] : null;
     }
 
     public function render($view, array $parameters = array(), Response $response = null)
@@ -22,7 +32,7 @@ class BaseController extends Controller
 
     public function arrayResponse(array $parameters)
     {
-        $parameters['showtime'] = $this->isShowTime();
+        $parameters['current_party'] = $this->getCurrentParty();
         return $parameters;
     }
 }
