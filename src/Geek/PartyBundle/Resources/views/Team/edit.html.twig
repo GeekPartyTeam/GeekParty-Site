@@ -33,10 +33,11 @@
 
 	var removeRow = function(id) {
 		$('#participantrow'+id).remove();
+		formChanged();
 	}
 
 	var submitForm = function() {
-		$('#teamForm').submit();
+		$('#teamEditorMain').submit();
 
 		formIsChanged = false;
 		validateChangeAlert();
