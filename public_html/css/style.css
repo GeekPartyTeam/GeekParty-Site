@@ -542,6 +542,7 @@ p.inputLabel {
 }
 #participantsTable td * {
     line-height: 20px;
+	margin: 0px;
 }
 #participantsTable #participantsTableRowName {
     width: 15%;

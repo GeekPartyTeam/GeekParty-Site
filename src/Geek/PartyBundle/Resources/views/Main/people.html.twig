@@ -8,6 +8,7 @@
 						<div class="briefImage">
 							<img src="./img/team/edit_team.png" alt="edit" />
 						</div>
+						<div class="briefDescription">
 						<div id="createTeam">
 							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 								Чтобы создать команду, войдите через фейсбук: 
@@ -48,7 +49,7 @@
 							{% for team in teams %}
 								<tr>
 									<td>
-										{{ team.name }}
+										<p>{{ team.name }}</p>
 										{% if is_granted('ROLE_ADMIN') %}
 											<a href="{{ path('team_edit', {'id':team.id}) }}"><i class="icon-edit icon-white"></i></a>
 										{% endif %}
@@ -74,7 +75,7 @@
 							{% endfor %}
 							</tbody>
 						</table> <!-- participantsTable -->
-						
+						</div> <!-- briefDescription -->
 					</div> <!-- briefLine -->
 					
 					<div class="briefLine">
