@@ -254,7 +254,7 @@ div.briefLine {
 #firstline #twitter {
     padding-left: 16px;
 	float: left;
-    width: 40%;
+    width: 38%;
 }
 #entries {
     clear: both;
@@ -567,7 +567,7 @@ p.inputLabel {
     float: right;
     margin: 16px 50px 0 0;
 }
-input[type="button"] {
+input[type="button"], input[type="submit"] {
     cursor: pointer;
 }
 .inlineBlock {
