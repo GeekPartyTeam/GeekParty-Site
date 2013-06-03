@@ -206,6 +206,14 @@ span.orange {
     color: #FFFFFF;
     left: 26px;
 }
+#navigation li[class="navActive"]:hover a { 
+	left: 26px;
+	color: black;
+}
+#navigation li[class="navActive"]:hover {
+	background: url("../img/menu_btn_on.png") no-repeat scroll -10px -12px transparent;
+	left: 40px;
+}
 #navigation .navActive {
 	background: transparent url("../img/menu_btn_on.png") no-repeat scroll 0 -12px;
     left: 30px;
@@ -254,7 +262,7 @@ div.briefLine {
 #firstline #twitter {
     padding-left: 16px;
 	float: left;
-    width: 40%;
+    width: 38%;
 }
 #entries {
     clear: both;
@@ -567,7 +575,7 @@ p.inputLabel {
     float: right;
     margin: 16px 50px 0 0;
 }
-input[type="button"] {
+input[type="button"], input[type="submit"] {
     cursor: pointer;
 }
 .inlineBlock {
