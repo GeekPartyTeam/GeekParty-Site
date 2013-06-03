@@ -58,6 +58,12 @@ h2 {
     font-size: 160%;
     margin: 0;
 }
+h3 {
+	color: #FF9307;
+	font-size: 100%;
+	font-weight:bold;
+	margin: 0;
+}
 span.orange {
     color: #F69506;
 }
@@ -446,12 +452,113 @@ ul.briefList {
     color: white;
 }
 
+/************************************/
+/*				NEW STYLES			*/
+/************************************/
 
+/*
+#teamEditorMain #teamEditorLeft {
+    float: left;
+    width: 50%;
+}
+#teamEditorMain #teamEditorLeft #rightBorder {
+    border-right: 3px solid #195B7E;
+    margin-right: 32px;
+}
+#teamEditorMain #teamEditorRight {
+    float: left;
+    width: 50%;
+}
+#teamEditorMain .teamEditorEntry {
+    margin-bottom: 16px;
+    padding-left: 10px;
+    position: relative;
+    width: 225px;
+}
+#teamEditorMain .teamEditorEntry .deleteEntryButton {
+    background: url("../img/team/delete.png") no-repeat scroll right center transparent;
+    border: medium none;
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    text-align: left;
+    text-decoration: underline;
+    top: -5px;
+    width: 95px;
+}
+#teamEditorMain .teamEditorEntry a.deleteButton {
+    background-image: url("../img/team/delete.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+#teamEditorMain .teamEditorControlBlock {
+    margin-bottom: 16px;
+}
+#teamEditorMain input {
+    background: none repeat scroll 0 0 #0A212E;
+    border: 1px solid #185C80;
+    color: white;
+    outline: 0 none;
+    padding: 5px;
+    width: 200px;
+}
+#teamEditorMain textarea {
+    background: none repeat scroll 0 0 #0A212E;
+    border: 1px solid #185C80;
+    color: white;
+    max-width: 340px;
+    outline: 0 none;
+    padding: 5px;
+    resize: none;
+}
+p.inputLabel {
+    color: #B9BFC4;
+    font-size: 80%;
+    line-height: 90%;
+    margin-bottom: 6px;
+}
+.darkInput {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 none;
+    outline: 0 none;
+    padding: 5px;
+    width: 200px;
+}*/
+#participantsTable {
+    margin-top: 16px;
+}
+#participantsTable th {
+    background: none repeat scroll 0 0 #175A7D;
+    padding: 6px;
+    text-align: center;
+}
+#participantsTable th, #participantsTable td {
+    border: 3px solid #175A7D;
+}
+#participantsTable td {
+    font-size: 14px;
+    padding: 16px;
+}
+#participantsTable td * {
+    line-height: 20px;
+}
+#participantsTable #participantsTableRowName {
+    width: 15%;
+}
+#participantsTable #participantsTableRowDescription {
+    width: 35%;
+}
+#participantsTable #participantsTableRowTeam {
+    width: 30%;
+}
 
-
+/* TODO удалить после проверки  Competitors LIST */
 /************************************/
 /*			Competitors LIST		*/
 /************************************/
+
+/*
 div#participantsTable {
 	width: 90%;
 	margin: 0 auto;
@@ -473,7 +580,6 @@ table#participants thead th {
     border-style: solid;
     border-width: 5px 1px;
     color: #FFFFFF;
-    /*font-size: 14px;*/
     height: 30px;
     text-align: center;
 }
@@ -482,7 +588,6 @@ table#participants tbody td {
     background: none repeat scroll 0 0 #2D3134;
     border: 1px solid #373B3E;
     color: #FFFFFF;
-    /*font-size: 10px;*/
     font-size: 80%;
     height: 40px;
     padding-left: 3px;
@@ -571,7 +676,7 @@ table#participants table caption {
     padding-top: 10px;
     text-align: center;
 }
-
+*/
 /************************************/
 /*			TEAM EDITOR				*/
 /************************************/
@@ -633,6 +738,8 @@ table#participants table caption {
     padding: 4px;
     width: 80px;
 }
+
+
 
 i {
     display: inline-block;
