@@ -206,6 +206,14 @@ span.orange {
     color: #FFFFFF;
     left: 26px;
 }
+#navigation li[class="navActive"]:hover a { 
+	left: 26px;
+	color: black;
+}
+#navigation li[class="navActive"]:hover {
+	background: url("../img/menu_btn_on.png") no-repeat scroll -10px -12px transparent;
+	left: 40px;
+}
 #navigation .navActive {
 	background: transparent url("../img/menu_btn_on.png") no-repeat scroll 0 -12px;
     left: 30px;
