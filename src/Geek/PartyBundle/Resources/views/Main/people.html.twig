@@ -58,7 +58,7 @@
 							{% for team in teams %}
 								<tr>
 									<td>
-										{{ team.name }}
+										<p>{{ team.name }}</p>
 										{% if is_granted('ROLE_ADMIN') %}
 											<a href="{{ path('team_edit', {'id':team.id}) }}"><i class="icon-edit icon-white"></i></a>
 										{% endif %}
