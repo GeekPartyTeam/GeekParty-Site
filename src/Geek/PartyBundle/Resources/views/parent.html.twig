@@ -26,23 +26,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 </head>
 <body>
-    <script>
-        function goLogIn(){
-            window.location.href = "{{ path('_security_check') }}";
-        }
-
-        function onFbInit() {
-            if (typeof(FB) != 'undefined' && FB != null ) {              
-                FB.Event.subscribe('auth.statusChange', function(response) {
-                    if (response.session || response.authResponse) {
-                        setTimeout(goLogIn, 500);
-                    } else {
-                        window.location.href = "{{ path('_security_logout') }}";
-                    }
-                });
-            }
-        }
-    </script>
+    <script type="text/javascript" src="/js/script.js"></script>
     {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
 	<div id="backgroundFX"></div>
 	<div id="wrapper">
@@ -67,7 +51,7 @@
 					</a>
 				</div>
                 {% if current_party %}
-				<div id="timer" class="{% if current_party and current_party.startTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}showtime{%endif%}">
+                    <div id="timer" class="{% if current_party and current_party.startTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}showtime{%endif%}">
                     {% if current_party.endTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}
                         {# Последнее пати закончилось #}
                         <p class="timerLabel showtime">{{ current_party.name }} состоялось!</p>
@@ -91,7 +75,7 @@
                         <p id="hmColon" class="timerLabel">:</p>
                         <p id="minutes" class="timerLabel">23</p>
                     {% endif %}
-				</div>
+                    </div>
                 {% endif %}
                 <div class="socialContainer">
                     <div id="vk_like"></div>
