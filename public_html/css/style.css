@@ -58,6 +58,12 @@ h2 {
     font-size: 160%;
     margin: 0;
 }
+h3 {
+	color: #FF9307;
+	font-size: 100%;
+	font-weight:bold;
+	margin: 0;
+}
 span.orange {
     color: #F69506;
 }
