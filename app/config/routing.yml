@@ -61,6 +61,16 @@ _admin_party:
     type:     annotation
     prefix:   /admin
 
+_admin_work:
+    resource: "@GeekPartyBundle/Controller/WorkController.php"
+    type:     annotation
+    prefix:   /admin
+
+_admin_workauthor:
+    resource: "@GeekPartyBundle/Controller/WorkAuthorController.php"
+    type:     annotation
+    prefix:   /admin
+
 admin:
     pattern: /admin
     defaults: {_controller:GeekPartyBundle:Main:admin}

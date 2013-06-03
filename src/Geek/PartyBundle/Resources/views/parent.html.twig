@@ -44,7 +44,7 @@
                     <li{% if route == current_route %} class="navActive"{% endif %}><a href="{{ path(route) }}">{{page}}</a></li>
                 {% endfor %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li{% if '/admin' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('admin') }}">Party</a></li>
+                    <li{% if '/admin' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('admin') }}">Admin</a></li>
                 {% endif %}
 			</ul>
 		</div>

@@ -3,5 +3,9 @@
 {% block title %} GeekParty :: Админка {% endblock %}
 
 {% block main %}
-    <a href="{{ path('party') }}">Parties</a>
+    <ul>
+        <li><a href="{{ path('party') }}">Parties</a></li>
+        <li><a href="{{ path('work') }}">Works</a></li>
+        <li><a href="{{ path('workauthor') }}">WorksAuthor</a></li>
+    </ul>
 {% endblock %}
