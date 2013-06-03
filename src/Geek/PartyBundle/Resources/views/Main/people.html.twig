@@ -4,124 +4,116 @@
 
 {% block main %}
 				<div id="content">
-					<!--<div class="entryPadding">-->
+					<div class="briefLine">
+						<div class="briefImage">
+							<img src="./img/team/edit_team.png" alt="edit" />
+						</div>
 						<div id="createTeam">
 							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-								Чтобы создать команду, войдите через фейсбук: 
-                                <script type="text/javascript">
-                                    function fbSignIn() {
-                                        FB.getLoginStatus(function (r) {
-                                            if (r.status != 'connected') {
-                                                FB.login()
-                                            } else {
-                                                goLogIn()
-                                            }
-                                        }, true)
-                                    }
-                                </script>
-                                <button class="btn" onclick="fbSignIn()"><i class="icon-fb"></i> Войти</button>
+								<p>Чтобы создать команду, войдите через фейсбук: 
+								<script type="text/javascript">
+									function fbSignIn() {
+										FB.getLoginStatus(function (r) {
+											if (r.status != 'connected') {
+												FB.login()
+											} else {
+												goLogIn()
+											}
+										}, true)
+									}
+								</script>
+								<button class="btn" onclick="fbSignIn()"><i class="icon-fb"></i> Войти</button>
 							{% else %}
-								<p>
-                                    Привет, {{ app.user.firstname }} {{ app.user.lastname }}
-                                    <form class="form-inline" method="post" action="{{ path('fos_user_security_logout') }}">
-                                        <input type="submit" class="btn" value="Выйти"/>
-                                    </form>
+								<p>Привет, {{ app.user.firstname }} {{ app.user.lastname }}
+									<form class="form-inline" method="post" action="{{ path('fos_user_security_logout') }}">
+										<input type="submit" class="btn" value="Выйти"/>
+									</form>
 								</p>
 								{% if team %}
-									<a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a>
+									<h2><a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a></h2>
 								{% else %}
-									<a href="{{ path('team_new') }}">Создать команду</a>
+									<h2><a href="{{ path('team_new') }}">Создать команду</a></h2>
 								{% endif %}
 							{% endif %}
 						</div>
+						
+						<table id="participantsTable">
+							<thead>
+								<tr>
+									<th id="participantsTableRowName">
+										<h3>Имя</h3>
+									</th>
+									<th id="participantsTableRowDescription">
+										<h3>Описание</h3>
+									</th>
+									<th id="participantsTableRowTeam">
+										<h3>Состав</h3>
+									</th>
+									<th id="participantsTableRowContacts">
+										<h3>Контакты</h3>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+							{% for team in teams %}
+								<tr>
+									<td>
+										{{ team.name }}
+										{% if is_granted('ROLE_ADMIN') %}
+											<a href="{{ path('team_edit', {'id':team.id}) }}"><i class="icon-edit icon-white"></i></a>
+										{% endif %}
+									</td>
+									<td>
+										<p>{{ team.description }}</p>
+									</td>
+									<td>
+										{% for member in team.members %}
+										<p>{{ member.name }} &nbsp;:&nbsp; {{ member.description }}</p>
+										{% endfor %}
+									</td>
+									<td>
+										<p>{{ team.contacts }}</p>
+										<!--<p>skype: <a href="">nulldivide</a></p>
+										<p>email: <a href="">nulldivide</a></p>-->
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="4" style="text-align: center"><p>Пока никого нет</p></td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table> <!-- participantsTable -->
+						
+					</div> <!-- briefLine -->
 					
-						<div id="participantsTable">
-							<table id="participants" summary="test">
-								<thead>
-									<tr>
-										<th>
-											<p>Название</p>
-										</th>
-										<th>
-											<p>Описание</p>
-										</th>
-										<th>
-											<p>Контакты</p>
-										</th>
-										<th>
-											<p>Состав</p>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-								{% for team in teams %}
-									<tr>
-										<th>
-											<p>
-                                                {{ team.name }}
-                                                {% if is_granted('ROLE_ADMIN') %}
-                                                    <a href="{{ path('team_edit', {'id':team.id}) }}"><i class="icon-edit icon-white"></i></a>
-                                                {% endif %}
-                                            </p>
-										</th>
-										<td>
-											<p>{{ team.description }}</p>
-										</td>
-										<td>
-											<p>{{ team.contacts }}</p>
-										</td>
-										<td>
-											{% for member in team.members %}
-                                            <p>{{ member.name }} &nbsp;:&nbsp; {{ member.description }}</p>
-											{% endfor %}
-										</td>
-									</tr>
-								{% else %}
-									<tr>
-										<td colspan="7"><p>Пока никого нет</p></td>
-									</tr>
-								{% endfor %}
-								</tbody>
-								<!--
-								<tfoot>
-									<tr>
-									<th scope="row">Total</th>
-									<td colspan="3">4 team</td>
-									</tr>
-								</tfoot>-->
-							</table>
-						</div> <!-- participantsTable -->
-					
-					
-					
-						<div class="briefLine">
-							<div class="briefImage">
-								<img src="./img/icon_rule.png" alt="rule" />
-							</div>
-							<div class="briefDescription">
-								<h2>Участие</h2>
-								<p><span class="orange">Регистрация на GP3 окончена!</span> Больше уже не влезает в помещение.  Можем рассмотреть вашу заявку, только если вы Стивен Хокинг, при этом вы гуру в Юнити и одновременно отпетый 3Д художник. Тогда пишите на <a href="mailto:geekparty.ru@gmail.com">geekparty.ru@gmail.com</a> (тема "Гик-пати №3").</p>
-								<p><span class="orange">ВНИМАНИЕ!</span>Все, кто зарегистрировался, приходите со СВОИМ НОУТБУКОМ (планшетом, миди-клавой, или что вам надо для отжига), на котором стоит нужный софт / framework. Не забудте скачать <a href="http://unity3d.com/unity/download/">Unity 3d Free Full version</a> и установить ее, чтобы не заниматься этим на пати. Также не забудьте взять мышь.</p>
-								<p>Если вы не регистрировались, но хотите повтыкать на происходящее, - приходите. Наличие сидячих мест и свободных столов не гарантированно, однако можно будет выпить стаканчик у стойки бара, позаглядывать в мониторы пребывающих в цифровой нирване гиков.</p>
-								<p>Особое предпочтение гостям:</p>
-								<ul class="briefList">
-									<li>Блоггерам (с условием написать пост про GeekParty)</li>
-									<li>Фотографам (зафотать событие)</li>
-									<li>Симпатичным девушкам (встретить своего Цукерберга, ну или просто порадовать гиков своей улыбкой :)</li>
-								</ul>
-							</div>
+					<div class="briefLine">
+						<div class="briefImage">
+							<img src="./img/icon_rule.png" alt="rule" />
 						</div>
-						<div class="briefLine">
-							<div class="briefImage">
-								<img src="./img/icon_rule.png" alt="rule" />
-							</div>
-							<div class="briefDescription">
-								<h2>Участие онлайн - coming soon!</h2>
-								<p>Главный штаб Гик-пати находиться в Санкт-Петербурге, где обитают организаторы. Однако в скором времени на сайте появится возможность регистрировать штабы в любом другом городе и приглашать в них людей. В Гик-пати можно будет участвовать удаленно, как сидя у себя дома одному, так и зарегистрировав свой штаб в любом месте: в кафе, в коворкинг-центре, на квартире друга, на подводной лодке.</p>
-								<p>Единственное необходимое условие для удаленного участия: у вас должна быть настроена видео трансляция из места, где вы жжоте, чтобы мы могли организовать на сайте телемост в режиме реального времени со всеми штабами. Одному творить, конечно, хорошо, но гораздо веселее и полезнее это делать в кругу единомышленников.</p>
-								<p>Скоро мы реализуем возможность участвовать в Гикпати удаленно из любой точки планеты. Следите за анонсами.</p>
-							</div>
+						<div class="briefDescription">
+							<h2>Участие</h2>
+							<p><span class="orange">Регистрация на GP3 окончена!</span> Больше уже не влезает в помещение.  Можем рассмотреть вашу заявку, только если вы Стивен Хокинг, при этом вы гуру в Юнити и одновременно отпетый 3Д художник. Тогда пишите на <a href="mailto:geekparty.ru@gmail.com">geekparty.ru@gmail.com</a> (тема "Гик-пати №3").</p>
+							<p><span class="orange">ВНИМАНИЕ!</span>Все, кто зарегистрировался, приходите со СВОИМ НОУТБУКОМ (планшетом, миди-клавой, или что вам надо для отжига), на котором стоит нужный софт / framework. Не забудте скачать <a href="http://unity3d.com/unity/download/">Unity 3d Free Full version</a> и установить ее, чтобы не заниматься этим на пати. Также не забудьте взять мышь.</p>
+							<p>Если вы не регистрировались, но хотите повтыкать на происходящее, - приходите. Наличие сидячих мест и свободных столов не гарантированно, однако можно будет выпить стаканчик у стойки бара, позаглядывать в мониторы пребывающих в цифровой нирване гиков.</p>
+							<p>Особое предпочтение гостям:</p>
+							<ul class="briefList">
+								<li>Блоггерам (с условием написать пост про GeekParty)</li>
+								<li>Фотографам (зафотать событие)</li>
+								<li>Симпатичным девушкам (встретить своего Цукерберга, ну или просто порадовать гиков своей улыбкой :)</li>
+							</ul>
 						</div>
-					<!--</div>-->
+					</div>
+					<div class="briefLine">
+						<div class="briefImage">
+							<img src="./img/icon_rule.png" alt="rule" />
+						</div>
+						<div class="briefDescription">
+							<h2>Участие онлайн - coming soon!</h2>
+							<p>Главный штаб Гик-пати находиться в Санкт-Петербурге, где обитают организаторы. Однако в скором времени на сайте появится возможность регистрировать штабы в любом другом городе и приглашать в них людей. В Гик-пати можно будет участвовать удаленно, как сидя у себя дома одному, так и зарегистрировав свой штаб в любом месте: в кафе, в коворкинг-центре, на квартире друга, на подводной лодке.</p>
+							<p>Единственное необходимое условие для удаленного участия: у вас должна быть настроена видео трансляция из места, где вы жжоте, чтобы мы могли организовать на сайте телемост в режиме реального времени со всеми штабами. Одному творить, конечно, хорошо, но гораздо веселее и полезнее это делать в кругу единомышленников.</p>
+							<p>Скоро мы реализуем возможность участвовать в Гикпати удаленно из любой точки планеты. Следите за анонсами.</p>
+						</div>
+					</div>
 				</div> <!-- content -->
 {% endblock %}
