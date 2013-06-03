@@ -8,18 +8,8 @@
 						<div id="createTeam">
 							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 								Чтобы создать команду, войдите через фейсбук: 
-                                <script type="text/javascript">
-                                    function fbSignIn() {
-                                        FB.getLoginStatus(function (r) {
-                                            if (r.status != 'connected') {
-                                                FB.login()
-                                            } else {
-                                                goLogIn()
-                                            }
-                                        }, true)
-                                    }
-                                </script>
-                                <button class="btn" onclick="fbSignIn()"><i class="icon-fb"></i> Войти</button>
+                                <button class="btn facebook-login"><i class="icon-fb"></i> Войти</button>
+                                <i class="l facebook-wait"></i>
 							{% else %}
 								<p>
                                     Привет, {{ app.user.firstname }} {{ app.user.lastname }}

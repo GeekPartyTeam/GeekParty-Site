@@ -701,3 +701,16 @@ i {
 	background: url('/img/fb.png');
 }
 
+.facebook-login {
+    display:none;
+}
+
+.facebook-wait {
+}
+
+.l {
+    background: url("../img/l.gif");
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
