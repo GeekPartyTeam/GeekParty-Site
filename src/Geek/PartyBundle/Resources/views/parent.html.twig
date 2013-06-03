@@ -66,6 +66,7 @@
 						<img src="/img/logo.png" alt="sdsd" />
 					</a>
 				</div>
+                {% if current_party %}
 				<div id="timer" class="{% if current_party and current_party.startTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}showtime{%endif%}">
                     {% if current_party.endTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}
                         {# Последнее пати закончилось #}
@@ -91,6 +92,7 @@
                         <p id="minutes" class="timerLabel">23</p>
                     {% endif %}
 				</div>
+                {% endif %}
                 <div class="socialContainer">
                     <div id="vk_like"></div>
                     <script type="text/javascript">
