@@ -4,25 +4,20 @@
 
 {% macro teamMember(member) %}
 
-									<table class="memberRow">
-										<tbody>
-											<tr>
-												<th id="memberRowCol1"><p>Nickname</p></th>
-												<th><p>skill, tools</p></th>
-											</tr>
-											<tr>
-												<td valign="top">
-													<input class="participant" type="text" name="member[name][]" {%if member %}value="{{member.name}}"{%endif%}/>
-												</td>
-												<td>
-													<textarea class="participant" name="member[description][]" cols="28" rows="5">{% if member %}{{member.description}}{%endif%}</textarea>
-												</td>
-												<td>
-													<input class="removeMember" type="button" value="Удалить" />
-												</td>
-											</tr>
-										</tbody>
-									</table>
+									<div class="memberRow borderBlock teamEditorEntry">
+										<input class="deleteEntryButton" type="button" value="Удалить"/>
+										<div class="teamEditorControlBlock">
+											<h3>Имя</h3>
+											<p class="inputLabel">Максимум 30 символов</p>
+											<input class="participant" type="text" name="member[name][]" {%if member %}value="{{member.name}}"{%endif%}  maxlength="30"/>
+										</div>
+										
+										<div class="teamEditorControlBlock">
+											<h3>Skills</h3>
+											<p class="inputLabel">Максимум 40 символов</p>
+											<textarea class="participant" name="member[description][]" cols="28" rows="5"  maxlength="40">{% if member %}{{member.description}}{%endif%}</textarea>
+										</div>
+									</div>
 {% endmacro %}
 
 {% block main %}
@@ -30,7 +25,7 @@
         {{ _self.teamMember() }}
     </div>
     <script>
-     var formIsChanged = false;
+	var formIsChanged = false;
 
 	var templateRow = function(id) {
 		return '';
@@ -48,7 +43,9 @@
 	}
 
 	var formChanged = function() {
-
+		
+		console.log("hello");
+		
 		formIsChanged = true;
 		validateChangeAlert();
 	}
@@ -60,7 +57,7 @@
 	}
 
 	var validateChangeAlert = function() {
-		$('#teamEditorTopSave').toggle(formIsChanged)
+		$('#saveTeamButton').toggle(formIsChanged)
 		$('#teamEditorBotSave').toggle(formIsChanged)
 	}
 		
@@ -68,12 +65,13 @@
 		memberTemplate = $('#teamMemberTemplate').find('.memberRow')
 
 		// Кнопка удаления члена команды
-		$(document).on('click', '.removeMember', function () {
+		$(document).on('click', '.deleteEntryButton', function () {
 			$(this).parents('.memberRow').remove()
 		})
 
 		// Изменение формы при изменении члена команды
-		$(document).on('change', '.memberRow input, .memberRow textarea', formChanged)
+		//$(document).on('change', '.memberRow input, .memberRow textarea, #teamEditorMain input, #teamEditorMain textarea', formChanged)
+		$(document).on('change', '#teamEditorMain input, #teamEditorMain textarea', formChanged)
 
 		// Изменение пустой формы
 		$(document).on('change', '.memberRow.new input', function () {
@@ -83,93 +81,80 @@
 
 		validateChangeAlert();
 
-		$('#teamAttributes input').change(formChanged);
+		$('#teamEditorMain input, #teamEditorMain textarea').change(formChanged);
 		$('.submitTeamReg').click(submitForm);
 
-		renderBlankMemberForm()
-
-
-		//less.watch();
+		renderBlankMemberForm();
+		
+		$('#addNewParticipant').click(function() {
+			renderBlankMemberForm();
+			return false;
+		});
 	});
     </script>
-	
-						<div id="content">
-							<div id="teamEditorBlock">
-								<p><a href="{{ path('geek_people') }}">&larr; назад к списку команд</a></p>
-							
-                                <h2>Управление командой</h2>
-                                {% if entity.id %}
-                                    <form action="{{ path('team_delete', {'id': entity.id}) }}" method="post">
-                                        {{ form_rest(delete_form) }}
-                                        <input type="submit" value="Удалить команду"/>
-                                    </form>
-                                {% endif %}
-								<form id="teamEditorForm"  action="{%if entity.id %}{{ path('team_update', { 'id': entity.id }) }}{% else %}{{ path('team_create') }}{% endif %}" method="post" {{ form_enctype(edit_form) }}>
-									{% if entity.id %}
-										<input type="hidden" name="id" value="{{entity.id}}"/>
-									{% endif %}
-
-                                    {{ form_errors(edit_form) }}
-									
-									<div id="teamEditorTopSave">
-										<span>Данные команды были изменены</span>
-										<input class="submitTeamReg" type="submit" value="Сохранить"/>
-									</div>
-							
-									<table id="teamAttributes">
-										<tbody>
-											<tr>
-												<th>
-													<p>Название</p>
-												</th>
-												<td>
-													{{ form_widget(edit_form.name) }}
-													<!--
-													<input type="text" name="name" id="name" /> 
-													<label for="name">Name</label> 
-													-->
-												</td>
-											</tr>
-											<tr>
-												<th>
-													<p>Описание</p>
-												</th>
-												<td>
-													{{ form_widget(edit_form.description) }}
-													<!--
-													<input type="text" name="description" id="description" />  
-													<label for="description">140</label> 
-													-->
-												</td>
-											</tr>
-											<tr>
-												<th>
-													<p>Контакты</p>
-												</th>
-												<td>
-													{{ form_widget(edit_form.contacts) }}
-													<!--
-													<input type="text" name="contacts" id="contacts" />  
-													<label for="contacts">Skype, вконтакте, и т.п.</label> 
-													-->
-												</td>
-											</tr>
-										</tbody>
-										<tfoot>
-										</tfoot>
-									</table>
-									
-									<h2>Участники</h2>
-									<div id="regFormParticipants">
-										{% for member in entity.members %}
-											{{ _self.teamMember(member) }}
-										{% endfor %}
+						<div class="briefLine">
+							<div class="briefImage">
+								<img src="./img/team/edit_team.png" alt="edit" />
+							</div>
+							<div class="briefDescription">
+								<a href="{{ path('geek_people') }}">&larr; назад к списку команд</a>
+								<h2 class="inlineBlock">Редактировать команду</h2>
+								
+								{% if entity.id %}
+									<form class="inlineBlock" action="{{ path('team_delete', {'id': entity.id}) }}" method="post">
+										{{ form_rest(delete_form) }}
+										<input class="inlineBlock" id="deleteTeamWithH" type="submit" value="Удалить"/>
+									</form>
+								{% endif %}
+								
+								<br />
+								<br />
+								
+								<form id="teamEditorMain" action="{%if entity.id %}{{ path('team_update', { 'id': entity.id }) }}{% else %}{{ path('team_create') }}{% endif %}" method="post" {{ form_enctype(edit_form) }}>
+									<div id="teamEditorLeft">
+										{% if entity.id %}
+											<input type="hidden" name="id" value="{{entity.id}}"/>
+										{% endif %}
+										{{ form_errors(edit_form) }}
+										
+										<div id="rightBorder">
+											<div class="teamEditorControlBlock">
+												<h3>Имя</h3>
+												<p class="inputLabel">Максисмум 30 символов</p>
+												<!--<input type="text" name="name" id="name" maxlength="30"/> -->
+												{{ form_widget(edit_form.name) }}
+											</div>
+											
+											<div class="teamEditorControlBlock">
+												<h3>Контакты</h3>
+												<p class="inputLabel">Скайп и т.п.</p>
+												{{ form_widget(edit_form.contacts) }}
+												<!--<input type="text" name="contacts" id="contacts" /> -->
+											</div>
+											
+											<div class="teamEditorControlBlock">
+												<h3>Описание</h3>
+												<p class="inputLabel">Максисмум 140 символов</p>
+												{{ form_widget(edit_form.description) }}
+												<!--<textarea name="member[description][]" cols="28" rows="5" maxlength="140"></textarea>-->
+											</div>
+											
+											<div class="teamEditorControlBlock relativeDiv teamEditorBotSave">
+												<input id="saveTeamButton" class="submitTeamReg teamButton" type="button" value=""/>
+											</div>
+										</div>
 									</div>
 									
-									<div id="teamEditorBotSave">
-										<span>Данные команды были изменены</span>
-										<input class="submitTeamReg" type="submit" value="Сохранить"/>
+									<div id="teamEditorRight">
+										<h3><a href="#" id="addNewParticipant">Добавить участника</a></h3>
+										<br />
+										<div id="regFormParticipants">
+											{% for member in entity.members %}
+												{{ _self.teamMember(member) }}
+											{% endfor %}
+										</div>
 									</div>
+									<div style="clear:both"></div>
 
                                     {{ form_rest(edit_form) }}
 								</form>

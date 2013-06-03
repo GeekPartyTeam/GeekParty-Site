@@ -456,7 +456,7 @@ ul.briefList {
 /*				NEW STYLES			*/
 /************************************/
 
-/*
+
 #teamEditorMain #teamEditorLeft {
     float: left;
     width: 50%;
@@ -524,7 +524,8 @@ p.inputLabel {
     outline: 0 none;
     padding: 5px;
     width: 200px;
-}*/
+}
+
 #participantsTable {
     margin-top: 16px;
 }
@@ -552,6 +553,38 @@ p.inputLabel {
 }
 #participantsTable #participantsTableRowTeam {
     width: 30%;
+}
+
+.relativeDiv {
+    position: relative;
+}
+#teamEditorMain .teamButton {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    height: 52px;
+    width: 130px;
+}
+#teamEditorMain #saveTeamButton {
+    background-image: url("../img/team/save_red.png");
+    float: right;
+    margin: 16px 50px 0 0;
+}
+input[type="button"] {
+    cursor: pointer;
+}
+.inlineBlock {
+    display: inline-block;
+}
+#deleteTeamWithH {
+    background: url("../img/team/delete.png") no-repeat scroll right center transparent;
+    border: medium none;
+    color: red;
+    height: 30px;
+    margin-left: 60px;
+    outline: medium none;
+    text-align: left;
+    text-decoration: underline;
+    width: 100px;
 }
 
 /* TODO удалить после проверки  Competitors LIST */
@@ -681,7 +714,7 @@ table#participants table caption {
 /************************************/
 /*			TEAM EDITOR				*/
 /************************************/
-
+/*
 #teamEditorBlock #teamEditorTopSave span, #teamEditorBlock #teamEditorBotSave span {
     color: #DD0000;
     font-size: 95%;
@@ -739,7 +772,7 @@ table#participants table caption {
     padding: 4px;
     width: 80px;
 }
-
+*/
 
 
 i {
