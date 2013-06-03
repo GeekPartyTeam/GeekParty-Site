@@ -263,4 +263,9 @@ class MainController extends BaseController
     {
         return $this->render('GeekPartyBundle:Main:test.html.twig');
     }
+
+    public function adminAction()
+    {
+        return $this->render('GeekPartyBundle:Main:admin.html.twig');
+    }
 }

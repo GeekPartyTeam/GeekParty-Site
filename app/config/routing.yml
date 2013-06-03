@@ -56,7 +56,11 @@ _edit_team:
     type:     annotation
     prefix:   /edit
 
-_admin_work:
+_admin_party:
     resource: "@GeekPartyBundle/Controller/PartyController.php"
     type:     annotation
     prefix:   /admin
+
+admin:
+    pattern: /admin
+    defaults: {_controller:GeekPartyBundle:Main:admin}
