@@ -19,7 +19,7 @@ geek_about:
     defaults: { _controller: GeekPartyBundle:Main:about }
 
 geek_works:
-    pattern:  /works/{party}
+    pattern:  /works/{party}/
     defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
 
 geek_works_:
