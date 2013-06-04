@@ -137,7 +137,7 @@
 												<h3>Описание команды</h3>
 												<p class="inputLabel">Если вам не хватает в команду специалиста - укажите и он придет!</p>
 												<p class="inputLabel">Максисмум 140 символов</p>
-												{{ form_widget(edit_form.description) }}
+												{{ form_widget(edit_form.description,  { 'attr': {'class': 'foo'} }) }}
 												<!--<textarea name="member[description][]" cols="28" rows="5" maxlength="140"></textarea>-->
 											</div>
 											
