@@ -120,21 +120,22 @@
 										
 										<div id="rightBorder">
 											<div class="teamEditorControlBlock">
-												<h3>Имя</h3>
+												<h3>Имя команды</h3>
 												<p class="inputLabel">Максисмум 30 символов</p>
 												<!--<input type="text" name="name" id="name" maxlength="30"/> -->
 												{{ form_widget(edit_form.name) }}
 											</div>
 											
 											<div class="teamEditorControlBlock">
-												<h3>Контакты</h3>
-												<p class="inputLabel">Скайп и т.п.</p>
+												<h3>Контакты капитана</h3>
+												<p class="inputLabel">Скайп, e-mail, страница vk и т.п.</p>
 												{{ form_widget(edit_form.contacts) }}
 												<!--<input type="text" name="contacts" id="contacts" /> -->
 											</div>
 											
 											<div class="teamEditorControlBlock">
-												<h3>Описание</h3>
+												<h3>Описание команды</h3>
+												<p class="inputLabel">Если вам не хватает в команду специалиста - укажите и он придет!</p>
 												<p class="inputLabel">Максисмум 140 символов</p>
 												{{ form_widget(edit_form.description) }}
 												<!--<textarea name="member[description][]" cols="28" rows="5" maxlength="140"></textarea>-->
