@@ -15,7 +15,7 @@
 										<div class="teamEditorControlBlock">
 											<h3>Skills</h3>
 											<p class="inputLabel">Максимум 40 символов</p>
-											<textarea class="participant" name="member[description][]" cols="22" rows="2"  maxlength="40">{% if member %}{{member.description}}{%endif%}</textarea>
+											<textarea class="participant" name="member[description][]" cols="30" rows="2"  maxlength="40">{% if member %}{{member.description}}{%endif%}</textarea>
 										</div>
 									</div>
 {% endmacro %}
@@ -137,7 +137,7 @@
 												<h3>Описание команды</h3>
 												<p class="inputLabel">Если вам не хватает в команду специалиста - укажите и он придет!</p>
 												<p class="inputLabel">Максисмум 140 символов</p>
-												{{ form_widget(edit_form.description,  { 'attr': {'class': 'foo', 'cols' : '28', 'rows' : '5', 'maxlength' : '140'} }) }}
+												{{ form_widget(edit_form.description,  { 'attr': {'class': 'foo', 'cols' : '40', 'rows' : '5', 'maxlength' : '140'} }) }}
 											</div>
 											
 											<div class="teamEditorControlBlock relativeDiv teamEditorBotSave">
