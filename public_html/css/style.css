@@ -1,4 +1,4 @@
-@import "./css/reset.css";
+@import "reset.css";
 @font-face {
     font-family: "pixel_font";
     src: url("../css/uni05_53.ttf");
