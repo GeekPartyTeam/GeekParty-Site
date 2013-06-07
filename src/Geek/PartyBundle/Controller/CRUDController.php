@@ -14,17 +14,17 @@ abstract class CRUDController extends BaseController
 {
     public function getEntity()
     {
-        return 'GeekPartyBundle:Team';       
-    }
-
-    public function getFormClass()
-    {
-        return 'TeamType';
+        return 'Team';       
     }
 
     public function getRedirectPath()
     {
         return 'geek_people';
+    }
+
+    public function getFormClass()
+    {
+        return 'Geek\\PartyBundle\\Form\\' . $this->getEntity() . 'Type';
     }
 
     public function checkRights()
@@ -36,6 +36,11 @@ abstract class CRUDController extends BaseController
     {
     }
 
+    public function actionAction($action, $id)
+    {
+        return call_user_func([$this, "{$action}Action"], $this->getRequest(), $id);
+    }
+
     public function update(Request $request, $id = null)
     {
         $em = $this->getDoctrine()->getManager();
@@ -43,7 +48,7 @@ abstract class CRUDController extends BaseController
         $response = [];
 
         if ($id) {
-            $entity = $em->getRepository($this->getEntity())->find($id);
+            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find entity.');
@@ -55,7 +60,7 @@ abstract class CRUDController extends BaseController
 
             $response['delete_form'] = $this->createDeleteForm($id);
         } else {
-            $class = $em->getRepository($this->getEntity())->getClassName();
+            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
             $entity = new $class();
         }
 
@@ -75,7 +80,7 @@ abstract class CRUDController extends BaseController
 
         $response['entity']      = $entity;
         $response['edit_form']   = $editForm->createView();
-        return $this->arrayResponse($response);
+        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':edit.html.twig', $response);
     }
 
     /**
@@ -84,15 +89,15 @@ abstract class CRUDController extends BaseController
      * @Route("/", name="team")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository($this->getEntity())->findAll();
+        $entities = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->findAll();
 
-        return array(
+        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':index.html.twig', [
             'entities' => $entities,
-        );
+        ]);
     }
 
     /**
@@ -101,11 +106,11 @@ abstract class CRUDController extends BaseController
      * @Route("/{id}/show", name="team_show")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository($this->getEntity())->find($id);
+        $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find entity.');
@@ -120,57 +125,39 @@ abstract class CRUDController extends BaseController
     }
 
     /**
-     * Displays a form to create a new entity.
-     *
-     * @Route("/new", name="team_new")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $class = $em->getRepository($this->getEntity())->getClassName();
-        $formClass = $this->getFormClass();
-        $entity = new $class();
-        $form   = $this->createForm(new $formClass(), $entity);
-
-        return $this->arrayResponse(array(
-            'entity' => $entity,
-            'edit_form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a new entity.
-     */
-    public function createAction(Request $request)
-    {
-        return $this->update($request);
-    }
-
-    /**
      * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="team_edit")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository($this->getEntity())->find($id);
+        if ($id != -1) {
+            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find entity.');
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find entity.');
+            }
+        } else {
+            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
+            $entity = new $class();
         }
 
         $formClass = $this->getFormClass();
         $editForm = $this->createForm(new $formClass(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
-        return $this->arrayResponse(array(
+        $params = [
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        ];
+
+        if ($id != -1) {
+            $params['delete_form'] = $this->createDeleteForm($id)->createView();
+        }
+
+        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':edit.html.twig', $params);
     }
 
     /**
@@ -191,7 +178,7 @@ abstract class CRUDController extends BaseController
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository($this->getEntity())->find($id);
+            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find entity.');

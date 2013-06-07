@@ -65,10 +65,11 @@ _admin_party:
     type:     annotation
     prefix:   /admin
 
-_admin_work:
-    resource: "@GeekPartyBundle/Controller/WorkController.php"
-    type:     annotation
-    prefix:   /admin
+admin_works:
+    pattern: /admin/work/{action}/{id}
+    defaults: { _controller: GeekPartyBundle:Work:action, action: index, id: -1 }
+    requirements:
+        action: edit|index|update|delete
 
 _admin_workauthor:
     resource: "@GeekPartyBundle/Controller/WorkAuthorController.php"

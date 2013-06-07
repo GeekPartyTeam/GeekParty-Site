@@ -1,6 +1,10 @@
-<h1>Work creation</h1>
+{% extends 'GeekPartyBundle::parent.html.twig' %}
 
-<form action="{{ path('work_create') }}" method="post" {{ form_enctype(form) }}>
+{% block title %} GeekParty :: Новая работа {% endblock %}
+
+{% block main %}
+
+<form action="{{ path('admin_works', {'action': 'edit'}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
         <button type="submit">Create</button>
@@ -9,8 +13,9 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('work') }}">
+        <a href="{{ path('admin_works') }}">
             Back to the list
         </a>
     </li>
 </ul>
+{% endblock %}

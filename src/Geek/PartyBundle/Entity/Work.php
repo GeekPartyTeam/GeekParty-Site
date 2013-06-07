@@ -41,7 +41,7 @@ class Work
     protected $height;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkAuthor", mappedBy="work", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="WorkAuthor", mappedBy="work", cascade={"persist","remove"})
      */
     protected $authors;
     /**
@@ -199,6 +199,8 @@ class Work
     public function addAuthor(\Geek\PartyBundle\Entity\WorkAuthor $authors)
     {
         $this->authors[] = $authors;
+
+        $authors->setWork($this);
     
         return $this;
     }
@@ -210,6 +212,8 @@ class Work
      */
     public function removeAuthor(\Geek\PartyBundle\Entity\WorkAuthor $authors)
     {
+        $authors->setWork(null);
+
         $this->authors->removeElement($authors);
     }
 

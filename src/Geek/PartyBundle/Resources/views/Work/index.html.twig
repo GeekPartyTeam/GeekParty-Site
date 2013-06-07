@@ -1,3 +1,8 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} GeekParty :: Список работ {% endblock %}
+
+{% block main %}
 <h1>Work list</h1>
 
 <table class="records_list">
@@ -15,7 +20,7 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('work_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('admin_works', { 'action': 'edit', 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
             <td>{{ entity.source }}</td>
@@ -24,10 +29,7 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('work_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('work_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_works', { 'action': 'edit', 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
             </td>
@@ -38,8 +40,9 @@
 
 <ul>
     <li>
-        <a href="{{ path('work_new') }}">
+        <a href="{{ path('admin_works', {'action': 'edit'}) }}">
             Create a new entry
         </a>
     </li>
 </ul>
+{% endblock %}

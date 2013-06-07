@@ -1,22 +1,54 @@
-<h1>Work edit</h1>
+{% extends 'GeekPartyBundle::parent.html.twig' %}
 
-<form action="{{ path('work_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+{% block title %} GeekParty :: Редактирование работы {% endblock %}
+
+{% block main %}
+<form action="{{ path('admin_works', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
+        <button id="addAuthor">Add author</button>
         <button type="submit">Edit</button>
     </p>
+
+    <script type="text/javascript">
+        $(function () {
+            var authorsContainer = $('#geek_partybundle_worktype_authors'),
+                prototype = authorsContainer.attr('data-prototype'),
+                index = authorsContainer[0].childNodes.length;
+
+            function addDeleteButton($form) {
+                $form.append($('<button>Delete author</button>')
+                    .click(function () {
+                        $form.remove();
+                    }));
+            }
+
+            authorsContainer.children().each(function () {
+                addDeleteButton($(this));
+            })
+
+            $('#addAuthor').click(function () {
+                var newAuthors = $(prototype.replace(/__name__/g, index++));
+                addDeleteButton(newAuthors);
+                authorsContainer.append(newAuthors);
+            })
+        })
+    </script>
 </form>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('work') }}">
+        <a href="{{ path('admin_works') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <form action="{{ path('work_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+        <form action="{{ path('admin_works', { 'action': 'delete', 'id': entity.id }) }}" method="post">
+            {% if delete_form is defined %}
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            {% endif %}
         </form>
     </li>
 </ul>
+{% endblock %}
