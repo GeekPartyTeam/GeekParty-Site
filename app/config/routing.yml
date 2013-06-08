@@ -60,10 +60,11 @@ _edit_team:
     type:     annotation
     prefix:   /edit
 
-_admin_party:
-    resource: "@GeekPartyBundle/Controller/PartyController.php"
-    type:     annotation
-    prefix:   /admin
+admin_parties:
+    pattern: /admin/party/{action}/{id}
+    defaults: { _controller: GeekPartyBundle:Party:action, action: index, id: -1 }
+    requirements:
+        action: edit|index|update|delete
 
 admin_works:
     pattern: /admin/work/{action}/{id}

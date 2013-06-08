@@ -47,7 +47,7 @@ abstract class CRUDController extends BaseController
 
         $response = [];
 
-        if ($id) {
+        if ($id != -1) {
             $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
 
             if (!$entity) {
