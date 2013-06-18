@@ -18,21 +18,13 @@ geek_about:
     pattern:  /about
     defaults: { _controller: GeekPartyBundle:Main:about }
 
-geek_works:
-    pattern:  /works/{party}/
-    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
+geek_browse:
+    pattern:  /browse/{party}
+    defaults: { _controller: GeekPartyBundle:Browse:party, party: latest }
 
-geek_works_:
-    pattern:  /works/
-    defaults: { _controller: GeekPartyBundle:Main:works, party: gp2 }
-
-geek_work:
-    pattern:  /works/{party}/{work}
-    defaults: { _controller: GeekPartyBundle:Main:workPage }
-
-geek_work_:
-    pattern:  /works/{party}/{work}/
-    defaults: { _controller: GeekPartyBundle:Main:workPage }
+geek_browse_work:
+    pattern:  /browse/{party}/{work}
+    defaults: { _controller: GeekPartyBundle:Browse:work, party: latest }
 
 geek_test:
     pattern:  /test

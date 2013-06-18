@@ -8,39 +8,31 @@
 						<h2>Работы участников</h2>
 						<div id="partyNavigation">
 							<ul>
-								{% if party == 'gp1' %}
-								<li><span class="currentParty">GP1</span></li>
-								<li><a href="/works/gp2">GP2</a></li>
-								<li><a href="/works/gp3">GP3</a></li>
-								{% endif %}
-								{% if party == 'gp2' %}
-								<li><a href="/works/gp1">GP1</a></li>
-								<li><span class="currentParty">GP2</span></li>
-								<li><a href="/works/gp3">GP3</a></li>
-								{% endif %}
-								{% if party == 'gp3' %}
-								<li><a href="/works/gp1">GP1</a></li>
-								<li><a href="/works/gp2">GP2</a></li>
-								<li><span class="currentParty">GP3</span></li>
-								{% endif %}
+                                {% for p in parties %}
+                                    <li>
+                                        {% if party == p %}
+                                            <span class="currentParty">{{ p.id | upper }}</span>
+                                        {% else %}
+                                            <li><a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a></li>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
 							</ul>
 						</div>
 					</div>
 					<div id="entries">
-						{% for entry in works[party] %}
+						{% for entry in works %}
+                            {% set entryPage = path('geek_browse_work', { party: party.id, work: entry.id }) %}
 							<div class="entry">
 								<div class="entryPadding borderBlock">
 									<div class="entryLeftBar">
-										<a href="/works/{{ party }}/{{ entry.id }}">
-											<div style="width:119px;height:110px;background:url('/img/{{ party }}/{{ entry.id }}.png')"></div>
+										<a href="{{ entryPage }}">
+											<div style="width:119px;height:110px;background:url('/img/{{ party.id }}/{{ entry.id }}.png')"></div>
 										</a>
-										<a class="playGame" href="/works/{{ party }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
-									
-										<!--<a href=""><img class="gameIcon" src="./img/game_icon.png" /></a>-->
-										<!--<a class="playGame" href=""><span class="playLabel">Play</span></a>-->
+										<a class="playGame" href="/works/{{ party.id }}/{{ entry.id }}"><span class="playLabel">Play</span></a>
 									</div>
 									<div class="entryRightBar">
-										<a href="/works/{{ party }}/{{ entry.id }}"><h2>{{ entry.name }}</h2></a>
+										<a href="{{ entryPage }}"><h2>{{ entry.name }}</h2></a>
 										<div class="entryDescription">
 											<p>{{ entry.description }}.</p>
 										</div>
@@ -63,7 +55,7 @@
 											{% endif %}
 										</table>
 									</div>
-									<!-- COMMENTS --> <a class="entryComments" href="/works/{{ party }}/{{ entry.id }}#disqus_thread"></a>
+									<!-- COMMENTS --> <a class="entryComments" href="{{ entryPage }}#disqus_thread"></a>
 								</div>
 							</div> <!-- entry -->
 						{% else %}

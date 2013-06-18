@@ -44,6 +44,12 @@ class Work
      * @ORM\OneToMany(targetEntity="WorkAuthor", mappedBy="work", cascade={"persist","remove"})
      */
     protected $authors;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Party")
+     */
+    protected $party;
+
     /**
      * Constructor
      */
@@ -230,5 +236,28 @@ class Work
     public function __toString()
     {
         return $this->getId();
+    }
+
+    /**
+     * Set party
+     *
+     * @param \Geek\PartyBundle\Entity\Party $party
+     * @return Work
+     */
+    public function setParty(\Geek\PartyBundle\Entity\Party $party = null)
+    {
+        $this->party = $party;
+    
+        return $this;
+    }
+
+    /**
+     * Get party
+     *
+     * @return \Geek\PartyBundle\Entity\Party 
+     */
+    public function getParty()
+    {
+        return $this->party;
     }
 }

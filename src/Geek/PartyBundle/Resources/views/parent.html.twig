@@ -38,7 +38,7 @@
                     'geek_index': 'Main',  
                     'geek_people': 'People',
                     'geek_about': 'About',
-                    'geek_works': 'Works'
+                    'geek_browse': 'Works'
                     } %}
                 {% for route, page in menu %}
                     <li{% if route == current_route %} class="navActive"{% endif %}><a href="{{ path(route) }}">{{page}}</a></li>
