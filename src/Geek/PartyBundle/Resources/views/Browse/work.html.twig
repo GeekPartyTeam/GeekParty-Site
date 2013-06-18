@@ -30,7 +30,7 @@
 	<div id="wrapperSingle">
 		<div id="pageSingle">
 			<div id="headerBorder"></div>
-			<h2><a href="/works/{{ party }}">{{ party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
+			<h2><a href="{{ path('geek_browse', { party: party }) }}">{{ party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
 			<div id="gameContainer">
 				<div id="gameFrame" align="center" width="{{ work.width }}" height="{{ work.height }}">
 					<iframe src="/works/{{ party }}/{{ work.id }}/index.html" width="{{ work.width }}" height="{{ work.height }}" scrolling="no" style="border: none;"></iframe>
