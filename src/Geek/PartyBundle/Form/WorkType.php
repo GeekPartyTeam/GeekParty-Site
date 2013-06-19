@@ -17,6 +17,10 @@ class WorkType extends AbstractType
             ->add('source')
             ->add('width')
             ->add('height')
+            ->add('party', 'entity', [
+                    'class' => 'GeekPartyBundle:Party',
+                    'property' => 'id'
+                ])
             ->add('authors', 'collection', [
                     'type'         => new WorkAuthorType(),
                     'allow_add'    => true,

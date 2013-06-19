@@ -85,9 +85,6 @@ abstract class CRUDController extends BaseController
 
     /**
      * Lists all entities.
-     *
-     * @Route("/", name="team")
-     * @Template()
      */
     public function indexAction(Request $request, $id)
     {

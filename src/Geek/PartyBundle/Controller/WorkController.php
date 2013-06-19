@@ -24,4 +24,26 @@ class WorkController extends CRUDController
     {
         return 'admin_works';
     }
+
+    /**
+     * Lists all entities.
+     */
+    public function indexAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('GeekPartyBundle:Work')->findAll();
+
+        usort($entities, function ($a, $b) {
+            if (!$a->getParty() || !$b->getParty()) {
+                return 0;
+            }
+            return strcmp($a->getParty()->getId(), $b->getParty()->getId());
+        });
+
+        return $this->render('GeekPartyBundle:Work:index.html.twig', [
+            'entities' => $entities,
+            'parties'  => $em->getRepository('GeekPartyBundle:Party')->findAll()
+        ]);
+    }
 }
