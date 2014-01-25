@@ -24,12 +24,12 @@ class Team
     /**
      * @ORM\Column
      */
-    protected $description;
+    protected $description = '';
 
     /**
      * @ORM\Column
      */
-    protected $contacts;
+    protected $contacts = '';
     
     /**
      * @ORM\OneToMany(targetEntity="TeamMember", mappedBy="team", cascade="all")
