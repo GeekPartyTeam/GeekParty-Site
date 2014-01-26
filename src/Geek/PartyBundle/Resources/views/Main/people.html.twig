@@ -24,7 +24,7 @@
 						<h2>Команды</h2>
 						<div id="createTeam">
 							{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-								Чтобы создать команду, войдите через фейсбук: 
+								Чтобы создать команду и загрузить работу, войдите через фейсбук: 
                                 <button class="btn facebook-login"><i class="icon-fb"></i> Войти</button>
                                 <i class="l facebook-wait"></i>
 							{% else %}
@@ -35,8 +35,16 @@
 								</p>
 								{% if team %}
 									<h2><a href="{{ path('team_edit', {'id':team.id}) }}">Редактировать мою команду</a></h2>
+                                    {% if works %}
+                                        {% for work in works %}
+                                            <h2><a href="{{ path('project_edit', {'id':work.id}) }}">Редактировать работу {{ work.id }}</a></h2>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <h2><a href="{{ path('project_new') }}">Загрузить новую работу</a></h2>
 								{% else %}
 									<h2><a href="{{ path('team_new') }}">Создать команду</a></h2>
+
+                                    <p>Чтобы загрузить работу, сначала создайте команду</p>
 								{% endif %}
 							{% endif %}
 						</div>

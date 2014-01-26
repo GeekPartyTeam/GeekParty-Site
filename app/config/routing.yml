@@ -52,6 +52,11 @@ _edit_team:
     type:     annotation
     prefix:   /edit
 
+_edit_prject:
+    resource: "@GeekPartyBundle/Controller/ProjectController.php"
+    type:     annotation
+    prefix:   /edit
+
 admin_parties:
     pattern: /admin/party/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Party:action, action: index, id: -1 }

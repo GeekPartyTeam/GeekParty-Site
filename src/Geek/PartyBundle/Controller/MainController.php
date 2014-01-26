@@ -26,13 +26,15 @@ class MainController extends BaseController
             'teams' => $this->getDoctrine()->getRepository('GeekPartyBundle:Team')->findAll()
         ];
         $securityContext = $this->container->get('security.context');
-        if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $securityContext->getToken()->getUser();
             $team = $this->getDoctrine()
                 ->getRepository('GeekPartyBundle:Team')
                 ->findOneBy(['leader' => $user]);
             $params['user'] = $user;
             $params['team'] = $team;
+            $params['works'] = $this->getDoctrine()->getRepository('GeekPartyBundle:Work')
+                ->findBy(['team' => $params['team']]);
         }
         return $this->render('GeekPartyBundle:Main:people.html.twig', $params);
     }

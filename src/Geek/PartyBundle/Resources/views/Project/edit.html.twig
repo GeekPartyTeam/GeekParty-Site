@@ -1,0 +1,84 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} GeekParty :: Редактирование проекта {% endblock %}
+
+{% block main %}
+						<div class="briefLine">
+							<div class="briefImage">
+								<img src="http://geekparty.ru/img/team/edit_team.png" alt="edit" />
+							</div>
+							<div class="briefDescription">
+								<p><a href="{{ path('geek_people') }}">&larr; назад к списку команд</a></p>
+								<h2 class="inlineBlock">Редактировать проект</h2>
+								
+								{% if entity.id %}
+									<form class="inlineBlock" action="{{ path('project_delete', {'id': entity.id}) }}" method="post">
+										{{ form_rest(delete_form) }}
+										<input class="inlineBlock" id="deleteTeamWithH" type="submit" value="Удалить"/>
+									</form>
+								{% endif %}
+								
+								<br />
+								<br />
+								
+								<form id="teamEditorMain" action="{%if entity.id %}{{ path('project_update', { 'id': entity.id }) }}{% else %}{{ path('project_create') }}{% endif %}" method="post" {{ form_enctype(edit_form) }}>
+									<div id="teamEditorLeft">
+										{{ form_errors(edit_form) }}
+										
+										<div id="rightBorder">
+											<div class="teamEditorControlBlock">
+												<h3>Идентификатор проекта</h3>
+												<p class="inputLabel">Только английские буквы и цифры, без пробелов</p>
+												{{ form_widget(edit_form.id) }}
+											</div>
+
+											<div class="teamEditorControlBlock">
+												<h3>Название проекта</h3>
+												<p class="inputLabel">Максисмум 30 символов</p>
+												{{ form_widget(edit_form.name) }}
+											</div>
+											
+											<div class="teamEditorControlBlock">
+												<h3>Описание проекта</h3>
+												<p class="inputLabel"></p>
+												{{ form_widget(edit_form.description) }}
+											</div>
+
+											<div class="teamEditorControlBlock">
+												<h3>Ссылка на исходники</h3>
+												<p class="inputLabel">не обязательно</p>
+												{{ form_widget(edit_form.source) }}
+											</div>
+
+											<div class="teamEditorControlBlock">
+												<h3>Ширина фрейма</h3>
+												<p class="inputLabel"></p>
+												{{ form_widget(edit_form.width) }}
+											</div>
+
+											<div class="teamEditorControlBlock">
+												<h3>Высота фрейма</h3>
+												<p class="inputLabel"></p>
+												{{ form_widget(edit_form.height) }}
+											</div>
+
+                                            <div class="teamEditorControlBlock">
+                                                <h3>ZIP-архив с игрой</h3>
+                                                <p class="inputLabel"></p>
+                                                {{ form_widget(edit_form.file) }}
+                                            </div>
+											
+											<div class="teamEditorControlBlock relativeDiv teamEditorBotSave">
+												<input id="saveTeamButton" class="submitTeamReg teamButton" type="button" value=""/>
+											</div>
+										</div>
+									</div>
+									
+									<div style="clear:both"></div>
+
+                                    {{ form_rest(edit_form) }}
+								</form>
+							</div> <!-- teamEditorBlock -->
+					</div> <!-- content -->
+{% endblock %}
+

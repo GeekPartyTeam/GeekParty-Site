@@ -28,7 +28,7 @@ class Work
     /**
      * @ORM\Column
      */
-    protected $source;
+    protected $source = '';
     
     /**
      * @ORM\Column(type="integer")
@@ -49,6 +49,11 @@ class Work
      * @ORM\ManyToOne(targetEntity="Party")
      */
     protected $party;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Team")
+     */
+    protected $team;
 
     /**
      * Constructor
@@ -259,5 +264,28 @@ class Work
     public function getParty()
     {
         return $this->party;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \Geek\PartyBundle\Entity\Team $team
+     * @return Work
+     */
+    public function setTeam(\Geek\PartyBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+    
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Geek\PartyBundle\Entity\Team 
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }
