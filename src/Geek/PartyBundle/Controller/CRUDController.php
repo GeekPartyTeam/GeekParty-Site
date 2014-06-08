@@ -74,7 +74,6 @@ abstract class CRUDController extends BaseController
             $em->persist($entity);
             $em->flush();
 
-            // return $this->redirect($this->generateUrl('team_edit', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl($this->getRedirectPath()));
         }
 

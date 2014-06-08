@@ -241,7 +241,6 @@ span.orange {
 }
 #firstline #brief {
     float: left;
-    width: 60%;
 }
 /*#firstline #brief */
 div.briefLine {
@@ -594,7 +593,7 @@ input[type="button"], input[type="submit"] {
     width: 100px;
 }
 
-/* TODO удалить после проверки  Competitors LIST */
+/* TODO пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  Competitors LIST */
 /************************************/
 /*			Competitors LIST		*/
 /************************************/
@@ -668,3 +667,68 @@ i {
 	background: url('/img/fb.png');
 }
 
+.Button {
+    display: table-row;
+    height: 36px;
+}
+
+.Button .LeftEdge {
+    background: url("/img/btn_edge.png");
+    width: 10px;
+    display: table-cell;
+}
+
+.Button .Body {
+    display: table-cell;
+    background: url("/img/btn_body.png");
+    height: 36px;
+    top: 0;
+    margin-top: 0;
+    padding-top: 18px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.Button .RightEdge {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    background: url("/img/btn_edge.png");
+    width: 10px;
+    min-width: 5px;
+    display: table-cell;
+}
+
+.Button a {
+    font-family: "pixel_font";
+    color: black;
+    text-decoration: none;
+}
+
+.Button a:hover {
+    color: white;
+}
+
+.PullRight {
+    float: right;
+}
+
+.Clear {
+    clear: both;
+}
+
+.News h2 {
+    float: left;
+}
+
+.NewsList {
+    padding-left: 0;
+}
+
+.NewsArticle {
+    list-style: none;
+}

@@ -1,95 +1,36 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% block main %}
-				<div id="content">
-					<div id="firstline">
-						<div id="brief">
-							<div class="briefLine">
-								<div class="briefImage">
-									<img src="./img/icon_question.png" alt="what" />
-								</div>
-								<div class="briefDescription">
-									<h2>Что такое Гик-пати?</h2>
-									<p><span class="orange">Гик-пати</span> &mdash; это цифровое творчество в режиме реального времени. Делаем задорные цифровые отжиги, втыкаем в произведения цифрового искусства, делимся, общаемся в теплом кругу единомышленников.</p>
-									<p>Чтобы понять, что происходит на Гик-пати, посмотрите результаты предыдущих пати в разделе <a href="/browse">Works</a></p>
-								</div>
-							</div> <!-- briefLine -->
-							<div class="briefLine">
-								<div class="briefImage">
-									<img src="./img/icon_question.png" alt="what" />
-								</div>
-								<div class="briefDescription">
-									<h2>Зачем все это?</h2>
-									<p>Компьютер - совершенное орудие для творчества. Наша цель - объединить близких по духу людей, увлеченных технологиями, и вместе менять мир к лучшему. Компьютер дает нам свободу: творить, мыслить и жить как хочется. Все, кто умеет  (или хочет научится!) выражать себя в цифре - добро пожаловать.</p>
-									<p>Принять участие очень просто, нужно просто придти на пати со своим ноутом и закодить игру за 8 часов. Вход свободный, места должно хватить всем.</p>
-									<!--&laquo;<a href="/about">About</a>&raquo;-->
-								</div>
-							</div> <!-- briefLine -->
-							<div class="briefLine">
-								<div class="briefImage">
-									<img src="./img/icon_question.png" alt="what" />
-								</div>
-								<div class="briefDescription">
-									<h2>Когда и где?</h2>
-									<p>Гикпати №6 состоится <span class="orange">25 января 2014 года</span>, в Санкт-Петербурге. Оно пройдет в <a href="http://vk.com/id212028009">IT-баре Ключ</a>, по адресу ул. Чехова, д. 3. Сбор в 13.00, начало в 14.00. Мы будем делать <b>fighting игры</b>. Технология - любая, какая вам нравиться. По правилам пати нужно, чтобы ваше творение работало онлайн, поэтому рекомендуются Flash, html5, HaXe и Unity.</p>
-									<p>Приносите с собой ноуты, планшеты, берите художников и звуковиков. Отожжом не по- детски.</p>
-									</div>
-							</div> <!-- briefLine -->
-						</div> <!-- brief -->
-						<div id="twitter">
-							<h2>Твитим про GP здесь</h2>
-							<div id="tweets">
-							
-								<!-- new twatter -->
-								<a class="twitter-timeline" href="https://twitter.com/search?q=%23geekpartyru" data-widget-id="286831719544397827">Tweets about "#geekpartyru"</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-								
-								<!--
-								<script type="text/javascript">
-									$('#tweets').jTweetsAnywhere({
-										searchParams: 'q=%23geekpartyru',
-										count: 10,
-										showTweetFeed: {
-											showProfileImages: true,
-											showUserScreenNames: true,
-											showActionReply: true,
-											showActionRetweet: true,
-											showActionFavorite: true,
-											paging: {
-												mode: 'endless-scroll'
-											}
-										},
-										 showTweetBox:{
-											counter: true,
-											width: 380,
-											height: 65,
-											label: '<span style="color: #A4A4A4">What\'s happening?</span>',
-											defaultContent: '#geekpartyru',
-											onTweet: function(textTweet, htmlTweet){
-												alert('You tweeted: ' + textTweet);
-											}
-										},
-										showTimestamp: {
-											refreshInterval: 15
-										},
-										autorefresh: {
-											mode: 'trigger-insert',
-											interval: 10
-										},
-										onDataRequestHandler: function(stats) {
-											if (stats.dataRequestCount < 11) {
-												return true;
-											}
-											else {
-												alert("To avoid struggling with Twitter's rate limit, we stop loading data after 10 API calls.");
-											}
-										}
-									});
-								</script>
-								-->
-							
-							</div>
-						</div> <!-- Twatter -->	
-					</div> <!-- firstline -->
-				</div> <!-- content -->
+    <div id="content">
+        <div id="firstline">
+            <div id="brief">
+                <div>
+                    {{ text.body|purify }}
+                </div>
+
+                <div class="News">
+                    <h2>Новости</h2>
+                    <div class="PullRight">
+                        <div class="Button">
+                            <div class="LeftEdge"></div>
+                            <div class="Body"><a href="{{ path("_edit_article",
+                                {"action":"edit"}) }}">Добавить новость</a></div>
+                            <div class="RightEdge"></div>
+                        </div>
+                    </div>
+                    <div class="Clear"></div>
+                    <ul class="NewsList">
+                    {% for article in articles %}
+                        <li class="NewsArticle">
+                            <h3>{{ article.title }}</h3>
+                            <div>
+                                {{ article.body|purify }}
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div> <!-- brief -->
+        </div> <!-- firstline -->
+    </div> <!-- content -->
 {% endblock %}

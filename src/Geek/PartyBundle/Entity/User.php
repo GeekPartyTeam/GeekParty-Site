@@ -80,8 +80,11 @@ class User extends BaseUser
 
     public function unserialize($data)
     {
-        list($this->facebookId, $parentData) = unserialize($data);
-        parent::unserialize($parentData);
+        $raw = unserialize($data);
+        if (is_array($raw)) {
+            list($this->facebookId, $parentData) = unserialize($data);
+            parent::unserialize($parentData);
+        }
     }
 
     /**

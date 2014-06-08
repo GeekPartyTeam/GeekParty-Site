@@ -3,6 +3,13 @@
 {% block title %} GeekParty :: Админка {% endblock %}
 
 {% block main %}
+
+    <h4>Текстовые блоки</h4>
+    <ul>
+        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': indexText.id}) }}">Главная страница</a></li>
+        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': aboutText.id}) }}">About</a></li>
+    </ul>
+
     <ul>
         <li><a href="{{ path('admin_parties') }}">Parties</a></li>
         <li><a href="{{ path('admin_works') }}">Works</a></li>

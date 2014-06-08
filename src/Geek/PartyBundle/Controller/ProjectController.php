@@ -63,7 +63,7 @@ class ProjectController extends BaseController
 
         if ($editForm->isValid()) {
 
-            $entity->setTeam()
+            //$entity->setTeam()
 
             $currentParty = $this->getCurrentParty();
             $entity->setParty($currentParty);

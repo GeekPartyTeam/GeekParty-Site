@@ -13,7 +13,16 @@ class MainController extends BaseController
      */
     public function indexAction()
     {
-        return $this->render('GeekPartyBundle:Main:index.html.twig');
+        $text = $this->getDoctrine()
+            ->getRepository('GeekPartyBundle:Text')
+            ->findOneBy(['name' => 'index']);
+        $articles = $this->getDoctrine()->
+            getRepository('GeekPartyBundle:Article')
+            ->findBy([], ['time' => 'DESC']);
+        return $this->render('GeekPartyBundle:Main:index.html.twig', [
+            'text' => $text,
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -89,6 +98,12 @@ class MainController extends BaseController
 
     public function adminAction()
     {
-        return $this->render('GeekPartyBundle:Main:admin.html.twig');
+        // Make sure that 'index' and 'about' text blocks exists in DB
+        /** @var \Geek\PartyBundle\Entity\Repository\Text $repo */
+        $repo = $this->getDoctrine()->getManager()->getRepository('GeekPartyBundle:Text');
+        return $this->render('GeekPartyBundle:Main:admin.html.twig', [
+            'indexText' => $repo->fetch('index'),
+            'aboutText' => $repo->fetch('about'),
+        ]);
     }
 }
