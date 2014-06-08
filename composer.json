@@ -20,7 +20,9 @@
         "jms/di-extra-bundle": "1.1.*",
         "kriswallsmith/assetic": "1.1.*@dev",
         "friendsofsymfony/user-bundle": "dev-master",
-        "friendsofsymfony/facebook-bundle": "1.1.*"
+        "friendsofsymfony/facebook-bundle": "1.1.*",
+        "stfalcon/tinymce-bundle": "dev-master",
+        "Exercise/HTMLPurifier-Bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

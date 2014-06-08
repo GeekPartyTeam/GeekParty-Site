@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             //
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             //
             new Geek\PartyBundle\GeekPartyBundle(),
         );
