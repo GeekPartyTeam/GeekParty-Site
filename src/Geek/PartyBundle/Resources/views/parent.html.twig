@@ -53,7 +53,7 @@
 			<div id="header">
 				<div id="sitelogo">
 					<a href="/">
-						<img src="/img/logo.png" alt="sdsd" />
+						<img src="{{ asset("img/logo.png") }}" alt="GeekParty" />
 					</a>
 				</div>
                 {% if current_party %}
@@ -86,7 +86,7 @@
                 <div class="socialContainer">
                     <div id="vk_like"></div>
                     <script type="text/javascript">
-                        VK.Widgets.Like("vk_like", {type:"button",pageImage:"http://geekparty.su/img/logo.png",pageUrl:"http://geekparty.ru/",text:"Гикпати.Ру - хорошее мерориятие"});
+                        VK.Widgets.Like("vk_like", {type:"button",pageImage:"http://geekparty.ru/img/logo.png",pageUrl:"http://geekparty.ru/",text:"Гикпати.Ру - хорошее мерориятие"});
                     </script>
                     <div class="fb-like" data-href="http://geekparty.ru/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
                     <div class="socialTwitterButton">
