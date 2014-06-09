@@ -241,6 +241,7 @@ span.orange {
 }
 #firstline #brief {
     float: left;
+    width: 100%;
 }
 /*#firstline #brief */
 div.briefLine {
