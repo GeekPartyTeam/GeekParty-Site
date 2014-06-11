@@ -14,6 +14,10 @@ class ProjectType extends AbstractType
             ->add('id')
             ->add('name')
             ->add('description', 'textarea', ['attr' => ['cols' => 50, 'rows' => 10]])
+            ->add('longDescription', 'textarea', ['attr' => [
+                'class' => 'tinymce',
+                'data-theme' => 'advanced'
+            ]])
             ->add('icon', 'file', ['mapped' => false, 'required' => false])
             ->add('file', 'file', ['mapped' => false, 'required' => false])
         ;
