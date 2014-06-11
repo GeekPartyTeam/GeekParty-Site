@@ -24,6 +24,12 @@ class WorkController extends CRUDController
         return 'admin_works';
     }
 
+    public function getFormClass()
+    {
+        return 'Geek\PartyBundle\Form\ProjectType';
+    }
+
+
     /**
      * Lists all entities.
      */
