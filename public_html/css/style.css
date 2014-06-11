@@ -199,6 +199,12 @@ span.orange {
     top: 16px;
     width: 80px;
 }
+#navigation li.Special a {
+    color: red;
+}
+.Special {
+    color: red;
+}
 #navigation li:hover {
     background: url("../img/menu_btn_over.png") no-repeat scroll 0 -12px transparent;
     left: 0;
@@ -704,13 +710,19 @@ i {
     display: table-cell;
 }
 
-.Button a {
+.Button a, .Button button {
     font-family: "pixel_font";
     color: black;
     text-decoration: none;
+    border: none;
+    background: none;
+    font-size: 17px;
+    padding-top: 0;
+    margin-top: 0;
+    cursor: pointer;
 }
 
-.Button a:hover {
+.Button a:hover, .Button button:hover {
     color: white;
 }
 
