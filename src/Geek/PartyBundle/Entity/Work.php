@@ -18,12 +18,17 @@ class Work
     /**
      * @ORM\Column
      */
-    protected $name;
+    protected $name = '';
     
     /**
      * @ORM\Column
      */
-    protected $description;
+    protected $description = '';
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $longDescription = '';
 
     /**
      * @ORM\Column
@@ -245,5 +250,28 @@ class Work
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Set longDescription
+     *
+     * @param string $longDescription
+     * @return Work
+     */
+    public function setLongDescription($longDescription)
+    {
+        $this->longDescription = $longDescription;
+    
+        return $this;
+    }
+
+    /**
+     * Get longDescription
+     *
+     * @return string 
+     */
+    public function getLongDescription()
+    {
+        return $this->longDescription;
     }
 }
