@@ -34,7 +34,7 @@ security:
                 server_url: "http://localhost/facebookApp/"
                 login_path: /login
                 check_path: /login_check
-                default_target_path: /people
+                default_target_path: /
                 provider: my_fos_facebook_provider
             anonymous: true
             logout: true
