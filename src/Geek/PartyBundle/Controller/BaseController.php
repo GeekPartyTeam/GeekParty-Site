@@ -33,6 +33,7 @@ class BaseController extends Controller
     public function arrayResponse(array $parameters)
     {
         $parameters['current_party'] = $this->getCurrentParty();
+        $parameters['current_user'] = $this->getUser();
         return $parameters;
     }
 }
