@@ -42,8 +42,8 @@ class MainController extends BaseController
                 ->findOneBy(['leader' => $user]);
             $params['user'] = $user;
             $params['team'] = $team;
-            $params['works'] = $this->getDoctrine()->getRepository('GeekPartyBundle:Work')
-                ->findBy(['team' => $params['team']]);
+            $params['works'] = []; /*$this->getDoctrine()->getRepository('GeekPartyBundle:Work')
+                ->findBy(['team' => $params['team']]);*/
         }
         return $this->render('GeekPartyBundle:Main:people.html.twig', $params);
     }
