@@ -47,6 +47,12 @@
                         </div>
 
                         <div class="teamEditorControlBlock">
+                            <h3>Подробное описание</h3>
+                            <p class="inputLabel"></p>
+                            {{ form_widget(edit_form.longDescription) }}
+                        </div>
+
+                        <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>
                             {% if entity.id %}
                                 <img src="{{ asset('works/' ~ entity.party.id ~ '/' ~ entity.id ~ '_icon.png') }}"/>
@@ -68,6 +74,7 @@
                 <div style="clear:both"></div>
 
                 {{ form_rest(edit_form) }}
+                {{ tinymce_init() }}
             </form>
         </div> <!-- teamEditorBlock -->
     </div> <!-- content -->
