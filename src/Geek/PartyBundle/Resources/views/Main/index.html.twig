@@ -7,7 +7,9 @@
         <div id="firstline">
             <div id="brief">
                 <div>
-                    {{ text.body|purify }}
+                    {% if text.body is not null %}
+                        {{ text.body|purify }}
+                    {% end if %}
                 </div>
 
                 <div class="News">
