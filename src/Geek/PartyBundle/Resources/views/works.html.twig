@@ -1,0 +1,28 @@
+<div id="entries">
+    {% for entry in works %}
+        {% set partyId = entry.party is not null ? entry.party.id : null %}
+        {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+        <div class="entry">
+            <div class="entryPadding borderBlock">
+                <div class="entryLeftBar">
+                    <a href="{{ entryPage }}">
+                        <div style="width:120px;height:110px;background:url('/works/{{ partyId }}/{{ entry.id }}_icon.png') no-repeat"></div>
+                    </a>
+                    <a class="playGame" href="{{ entryPage }}"><span class="playLabel">Play</span></a>
+                </div>
+                <div class="entryRightBar">
+                    <a href="{{ entryPage }}"><h2>{{ entry.name }}</h2></a>
+                    <div class="entryDescription">
+                        <p>{{ entry.description }}.</p>
+                    </div>
+                    {% if entry.author == current_user and current_user is not null %}
+                        <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+                    {% endif %}
+                </div>
+                <!-- COMMENTS --> <a class="entryComments" href="{{ entryPage }}#disqus_thread"></a>
+            </div>
+        </div> <!-- entry -->
+    {% else %}
+        Работ пока нет
+    {% endfor %}
+</div> <!-- entries -->

@@ -36,15 +36,17 @@
                 {% set current_route = app.request.attributes.get('_route') %}
                 {% set menu = { 
                     'geek_index': 'Main',  
-                    'geek_people': 'People',
                     'geek_about': 'About',
                     'geek_browse': 'Works'
                     } %}
                 {% for route, page in menu %}
                     <li{% if route == current_route %} class="navActive"{% endif %}><a href="{{ path(route) }}">{{page}}</a></li>
                 {% endfor %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="Special{% if '/edit' in app.request.requestUri  %} navActive{% endif %}"><a href="{{ path('project') }}">Upload</a></li>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li{% if '/admin' in app.request.requestUri  %} class="navActive"{% endif %}><a href="{{ path('admin') }}">Admin</a></li>
+                    <li class="Special{% if '/admin' in app.request.requestUri  %} navActive{% endif %}"><a href="{{ path('admin') }}">Admin</a></li>
                 {% endif %}
 			</ul>
 		</div>
@@ -122,7 +124,7 @@
 				{% block main %} {% endblock %}
 				<div id="footer">
 					<div id="footerDescription">
-						<p class="usePixelFont">GEEK PARTY (c) 2013 | info@geekparty.ru</p>
+						<p class="usePixelFont">GEEK PARTY (c) 2014 | info@geekparty.ru</p>
 					</div>
 					<div id="footerBlock"></div>
 				</div>

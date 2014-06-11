@@ -3,78 +3,35 @@
 {% block title %} GeekParty :: Работы {% endblock %}
 
 {% block main %}
-				<div id="content">
-					<div id="partySwitcher">
-						<h2>Работы участников</h2>
-						<div id="partyNavigation">
-							<ul>
-                                {% for p in parties %}
-                                    <li>
-                                        {% if party == p %}
-                                            <span class="currentParty">{{ p.id | upper }}</span>
-                                        {% else %}
-                                            <li><a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a></li>
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-							</ul>
-						</div>
-					</div>
-					<div id="entries">
-						{% for entry in works %}
-                            {% set entryPage = path('geek_browse_work', { party: party.id, work: entry.id }) %}
-							<div class="entry">
-								<div class="entryPadding borderBlock">
-									<div class="entryLeftBar">
-										<a href="{{ entryPage }}">
-											<div style="width:119px;height:110px;background:url('/img/{{ party.id }}/{{ entry.id }}.png')"></div>
-										</a>
-										<a class="playGame" href="{{ entryPage }}"><span class="playLabel">Play</span></a>
-									</div>
-									<div class="entryRightBar">
-										<a href="{{ entryPage }}"><h2>{{ entry.name }}</h2></a>
-										<div class="entryDescription">
-											<p>{{ entry.description }}.</p>
-										</div>
-										<table cellspacing="0" cellpadding="0" class="credits">
-											{% if entry.source is defined %}
-												<tr>
-													<td class="detail">Source:</td>
-													<td class="description"><a href="{{ entry.source }}">{{ entry.source }}</a></td>
-												</tr>
-											{% endif %}
-											{% if entry.authors is defined %}
-												<tr>
-													<td class="detail">Authors:</td>
-													<td class="description">
-														{% for author in entry.authors %}
-															<a href="{{ author.url }}">{{ author.name }}</a>&nbsp;
-														{% endfor %}
-													</td>
-												</tr>
-											{% endif %}
-										</table>
-									</div>
-									<!-- COMMENTS --> <a class="entryComments" href="{{ entryPage }}#disqus_thread"></a>
-								</div>
-							</div> <!-- entry -->
-						{% else %}
-							Работ пока нет
-						{% endfor %}
-					</div> <!-- entries -->	
-				</div> <!-- content -->
-				<!-- DISQUS -->
-				<script type="text/javascript">
-					/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-					var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
+    <div id="content">
+        <div id="partySwitcher">
+            <h2>Работы участников</h2>
+            <div id="partyNavigation">
+                <ul>
+                    {% for p in parties %}
+                        {% if party == p %}
+                            <li><span class="currentParty">{{ p.id | upper }}</span></li>
+                        {% else %}
+                            <li><a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
+    </div> <!-- content -->
+    <!-- DISQUS -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'geekparty'; // required: replace example with your forum shortname
 
-					/* * * DON'T EDIT BELOW THIS LINE * * */
-					(function () {
-						var s = document.createElement('script'); s.async = true;
-						s.type = 'text/javascript';
-						s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-						(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-					}());
-				</script>
-				<!-- DISQUS END -->
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- DISQUS END -->
 {% endblock %}

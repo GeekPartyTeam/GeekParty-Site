@@ -1,0 +1,9 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} GeekParty :: Мои работы {% endblock %}
+
+{% block main %}
+    {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+    {{ macros.button('Добавить работу', path('project_new')) }}
+    {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
+{% endblock %}

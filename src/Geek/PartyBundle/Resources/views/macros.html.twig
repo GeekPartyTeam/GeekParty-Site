@@ -1,0 +1,15 @@
+{% macro button(text, link, class) %}
+    <div class="Button {{ class }}">
+        <div class="LeftEdge"></div>
+        <div class="Body"><a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a></div>
+        <div class="RightEdge"></div>
+    </div>
+{% endmacro %}
+
+{% macro submit(text, class) %}
+    <div class="Button {{ class }}">
+        <div class="LeftEdge"></div>
+        <div class="Body"><button type="submit">{{ text }}</button></div>
+        <div class="RightEdge"></div>
+    </div>
+{% endmacro %}

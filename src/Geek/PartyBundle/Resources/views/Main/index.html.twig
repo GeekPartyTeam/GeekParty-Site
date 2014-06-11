@@ -1,5 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
 {% block main %}
     <div id="content">
         <div id="firstline">
@@ -11,12 +13,12 @@
                 <div class="News">
                     <h2>Новости</h2>
                     <div class="PullRight">
-                        <div class="Button">
-                            <div class="LeftEdge"></div>
-                            <div class="Body"><a href="{{ path("_edit_article",
-                                {"action":"edit"}) }}">Добавить новость</a></div>
-                            <div class="RightEdge"></div>
-                        </div>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
+                        {% else %}
+                            {{ macros.button('Войти', null, 'facebook-login') }}
+                            <i class="l facebook-wait"></i>
+                        {% endif %}
                     </div>
                     <div class="Clear"></div>
                     <ul class="NewsList">
