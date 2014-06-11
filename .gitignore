@@ -4,3 +4,4 @@ app/logs
 vendor
 app/config/facebook.yml
 app/config/parameters.yml
+public_html/works
