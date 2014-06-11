@@ -33,27 +33,22 @@ class Work
     /**
      * @ORM\Column(type="integer")
      */
-    protected $width;
+    protected $width = 640;
     
     /**
      * @ORM\Column(type="integer")
      */
-    protected $height;
+    protected $height = 480;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkAuthor", mappedBy="work", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="User")
      */
-    protected $authors;
+    protected $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Party")
      */
     protected $party;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Team")
-     */
-    protected $team;
 
     /**
      * Constructor
@@ -155,89 +150,6 @@ class Work
         return $this->source;
     }
 
-    /**
-     * Set width
-     *
-     * @param integer $width
-     * @return Work
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-    
-        return $this;
-    }
-
-    /**
-     * Get width
-     *
-     * @return integer 
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Set height
-     *
-     * @param integer $height
-     * @return Work
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
-    
-        return $this;
-    }
-
-    /**
-     * Get height
-     *
-     * @return integer 
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Add authors
-     *
-     * @param \Geek\PartyBundle\Entity\WorkAuthor $authors
-     * @return Work
-     */
-    public function addAuthor(\Geek\PartyBundle\Entity\WorkAuthor $authors)
-    {
-        $this->authors[] = $authors;
-
-        $authors->setWork($this);
-    
-        return $this;
-    }
-
-    /**
-     * Remove authors
-     *
-     * @param \Geek\PartyBundle\Entity\WorkAuthor $authors
-     */
-    public function removeAuthor(\Geek\PartyBundle\Entity\WorkAuthor $authors)
-    {
-        $authors->setWork(null);
-
-        $this->authors->removeElement($authors);
-    }
-
-    /**
-     * Get authors
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAuthors()
-    {
-        return $this->authors;
-    }
-
     public function __toString()
     {
         return $this->getId();
@@ -267,25 +179,25 @@ class Work
     }
 
     /**
-     * Set team
+     * Get author
      *
-     * @param \Geek\PartyBundle\Entity\Team $team
-     * @return Work
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setTeam(\Geek\PartyBundle\Entity\Team $team = null)
+    public function getAuthor()
     {
-        $this->team = $team;
-    
-        return $this;
+        return $this->author;
     }
 
     /**
-     * Get team
+     * Set author
      *
-     * @return \Geek\PartyBundle\Entity\Team 
+     * @param \Geek\PartyBundle\Entity\User $author
+     * @return Work
      */
-    public function getTeam()
+    public function setAuthor(\Geek\PartyBundle\Entity\User $author = null)
     {
-        return $this->team;
+        $this->author = $author;
+    
+        return $this;
     }
 }

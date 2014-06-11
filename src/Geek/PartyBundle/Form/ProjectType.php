@@ -13,11 +13,9 @@ class ProjectType extends AbstractType
         $builder
             ->add('id')
             ->add('name')
-            ->add('description')
-            ->add('source')
-            ->add('width')
-            ->add('height')
-            ->add('file', 'file', ['mapped' => false])
+            ->add('description', 'textarea', ['attr' => ['cols' => 50, 'rows' => 10]])
+            ->add('icon', 'file', ['mapped' => false, 'required' => false])
+            ->add('file', 'file', ['mapped' => false, 'required' => false])
         ;
     }
 

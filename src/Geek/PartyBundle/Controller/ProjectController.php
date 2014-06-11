@@ -19,7 +19,7 @@ class ProjectController extends BaseController
 {
     public function checkRights(Work $entity)
     {
-        if ((!$this->getUser() || $entity->getTeam()->getLeader() !== $this->getUser()) && 
+        if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&
             !$this->get('security.context')->isGranted('ROLE_ADMIN')) 
         {
             return $this->redirect($this->generateUrl('geek_people'));
@@ -33,13 +33,6 @@ class ProjectController extends BaseController
         $em = $this->getDoctrine()->getManager();
 
         $response = [];
-
-        $user = $this->container
-                        ->get('security.context')
-                        ->getToken()
-                        ->getUser();
-        $team = $em->getRepository('GeekPartyBundle:Team')
-            ->findOneBy(['leader' => $user]);
 
         /** @var $entity \Geek\PartyBundle\Entity\Work */
         if ($id) {
@@ -63,29 +56,39 @@ class ProjectController extends BaseController
 
         if ($editForm->isValid()) {
 
-            //$entity->setTeam()
-
             $currentParty = $this->getCurrentParty();
             $entity->setParty($currentParty);
+
+            if ($file = $editForm['icon']->getData()) {
+                /** @var $file UploadedFile */
+                $dir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
+                $filename = $entity->getId() . '_icon.png';
+                $path = $dir . '/' . $filename;
+                $file->move($dir, $filename);
+                $im = new \Imagick($path);
+                $im->resizeimage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
+                $im->writeimage($path);
+            }
 
             if ($file = $editForm['file']->getData()) {
                 /** @var $file UploadedFile */
                 $dir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId() . '/' . $entity->getId();
+                $path = $dir . '/archive.zip';
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
                 }
-                $file = $file->move($dir . '/archive.zip');
+                $file = $file->move($dir, 'archive.zip');
                 $zip = new \ZipArchive();
-                if (!$zip->open($file->getRealPath())) {
+                if ($zip->open($path)) {
                     $zip->extractTo($dir);
                 }
-                unlink($file->getRealPath());
+                unlink($path);
             }
 
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('geek_people'));
+            return $this->redirect($this->generateUrl('project'));
         }
 
         $response['entity']      = $entity;
@@ -103,11 +106,13 @@ class ProjectController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('GeekPartyBundle:Work')->findAll();
+        $entities = $em->getRepository('GeekPartyBundle:Work')->findBy([
+            'author' => $this->getUser()
+        ]);
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->arrayResponse(array(
+            'works' => $entities,
+        ));
     }
 
     /**
