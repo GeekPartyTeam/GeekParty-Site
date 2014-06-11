@@ -1,15 +1,24 @@
 {% macro button(text, link, class) %}
-    <div class="Button {{ class }}">
-        <div class="LeftEdge"></div>
-        <div class="Body"><a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a></div>
-        <div class="RightEdge"></div>
-    </div>
+    {% embed 'GeekPartyBundle::button.html.twig' %}
+        {% block content %}
+            <a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
+        {% endblock %}
+    {% endembed %}
 {% endmacro %}
 
 {% macro submit(text, class) %}
-    <div class="Button {{ class }}">
-        <div class="LeftEdge"></div>
-        <div class="Body"><button type="submit">{{ text }}</button></div>
-        <div class="RightEdge"></div>
-    </div>
+    {% embed 'GeekPartyBundle::button.html.twig' %}
+        {% block content %}
+            <button type="submit">{{ text }}</button>
+        {% endblock %}
+    {% endembed %}
+{% endmacro %}
+
+{% macro play_button(work) %}
+    {% set class = '' %}
+    {% embed 'GeekPartyBundle::button.html.twig' %}
+        {% block content %}
+            <a target="_blank" href="{{ '/works/' ~ work.party.id ~ '/' ~ work.id ~ '/index.html' }}">Play</a>
+        {% endblock %}
+    {% endembed %}
 {% endmacro %}

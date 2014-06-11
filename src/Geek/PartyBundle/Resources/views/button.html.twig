@@ -1,0 +1,9 @@
+<div class="Button {{ class }}">
+    <div class="LeftEdge"></div>
+    <div class="Body">
+        {% block content %}
+            <a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
+        {% endblock %}
+    </div>
+    <div class="RightEdge"></div>
+</div>
