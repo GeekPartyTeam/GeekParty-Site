@@ -2,3 +2,5 @@
 app/cache
 app/logs
 vendor
+app/config/facebook.yml
+app/config/parameters.yml
