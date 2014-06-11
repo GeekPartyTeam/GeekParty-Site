@@ -15,6 +15,7 @@
                     <div class="entryDescription">
                         <p>{{ entry.description }}.</p>
                     </div>
+                    <a href="{{ entryPage }}">Подробнее</a>
                     {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
                         <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
                     {% endif %}
