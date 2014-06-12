@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="News">
-                    <h2>Новости</h2>
+                    <h2 class="PullLeft">Новости</h2>
                     <div class="PullRight">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
