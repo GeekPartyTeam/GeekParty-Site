@@ -28,7 +28,7 @@
 
     function fbSignIn() {
         if (fbAuthStatus.status != 'connected') {
-            FB.login()
+            FB.login(function () {}, {scope: 'public_profile,email'})
         } else {
             goLogIn()
         }
