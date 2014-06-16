@@ -1,6 +1,6 @@
 <?php
 
-namespace Geek\PartyBundle\Controller;
+namespace Geek\PartyBundle\Controller\Base;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
@@ -21,7 +21,7 @@ abstract class CRUDController extends BaseController
 
     public function getRedirectPath()
     {
-        return 'geek_people';
+        return 'geek_index';
     }
 
     public function getFormClass()

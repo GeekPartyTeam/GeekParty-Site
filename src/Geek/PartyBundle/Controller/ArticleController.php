@@ -8,7 +8,7 @@ namespace Geek\PartyBundle\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
-class ArticleController extends CRUDController
+class ArticleController extends Base\CRUDController
 {
     public function getEntity()
     {

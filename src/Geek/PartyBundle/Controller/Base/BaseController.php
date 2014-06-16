@@ -1,6 +1,6 @@
 <?php
 
-namespace Geek\PartyBundle\Controller;
+namespace Geek\PartyBundle\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller
     , Symfony\Component\HttpFoundation\Response

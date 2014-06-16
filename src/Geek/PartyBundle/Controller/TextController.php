@@ -5,7 +5,7 @@
 
 namespace Geek\PartyBundle\Controller;
 
-class TextController extends CRUDController
+class TextController extends Base\CRUDController
 {
     public function getEntity()
     {

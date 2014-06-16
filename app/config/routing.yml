@@ -1,94 +1,50 @@
-# Internal routing configuration to handle ESI
-# ****** WARNING ******
-# This route should be enabled with caution as it can open a security vulnerability
-# see http://symfony.com/blog/security-release-symfony-2-0-20-and-2-1-5-released for more information
-# ****** WARNING ******
-#_internal:
-#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#    prefix:   /_internal
+# Main
 geek_index:
     pattern:  /
     defaults: { _controller: GeekPartyBundle:Main:index }
-
-geek_people:
-    pattern:  /people
-    defaults: { _controller: GeekPartyBundle:Main:people }
-
 geek_about:
     pattern:  /about
     defaults: { _controller: GeekPartyBundle:Main:about }
+admin:
+    pattern: /admin
+    defaults: {_controller:GeekPartyBundle:Main:admin}
 
+# Browse
 geek_browse:
     pattern:  /browse/{party}
     defaults: { _controller: GeekPartyBundle:Browse:party, party: latest }
-
 geek_browse_work:
     pattern:  /browse/{party}/{work}
     defaults: { _controller: GeekPartyBundle:Browse:work, party: latest }
 
-geek_test:
-    pattern:  /test
-    defaults: { _controller: GeekPartyBundle:Main:test }
-
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
-fos_user_security_register:
-    prefix: /register
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-
-fos_facebook_channel:
-    resource: "@FOSFacebookBundle/Resources/config/routing.xml"
-
-# _security_login:
-#     pattern:  /login
-#     defaults: { _controller: GeekPartyBundle:Auth:login }
-_security_check:
-    pattern:  /login_check
-    defaults: { _controller: GeekPartyBundle:Auth:check }
-_security_logout:
-    pattern:  /logout
-    defaults: { _controller: GeekPartyBundle:Auth:logout }
-
-_edit_team:
-    resource: "@GeekPartyBundle/Controller/TeamController.php"
-    type:     annotation
-    prefix:   /edit
-
-_edit_prject:
-    resource: "@GeekPartyBundle/Controller/ProjectController.php"
-    type:     annotation
-    prefix:   /edit
-
+# Admin
 admin_parties:
     pattern: /admin/party/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Party:action, action: index, id: -1 }
     requirements:
         action: edit|index|update|delete
-
 admin_works:
     pattern: /admin/work/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Work:action, action: index, id: -1 }
     requirements:
         action: edit|index|update|delete
-
 admin_text:
     pattern: /admin/text/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Text:action, action: index, id: -1 }
     requirements:
         action: edit|index|update|delete
-
 _edit_article:
     pattern: /article/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Article:action, action: index, id: -1 }
     requirements:
         action: edit|index|update|delete
 
-_admin_workauthor:
-    resource: "@GeekPartyBundle/Controller/WorkAuthorController.php"
+# Upload & edit project
+_edit_prject:
+    resource: "@GeekPartyBundle/Controller/ProjectController.php"
     type:     annotation
-    prefix:   /admin
+    prefix:   /edit
 
-admin:
-    pattern: /admin
-    defaults: {_controller:GeekPartyBundle:Main:admin}
+# Auth & security
+_auth:
+    resource: routing_security.yml

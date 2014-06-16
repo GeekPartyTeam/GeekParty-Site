@@ -15,14 +15,14 @@ use Geek\PartyBundle\Form\ProjectType;
  *
  * @Route("/project")
  */
-class ProjectController extends BaseController
+class ProjectController extends Base\BaseController
 {
     public function checkRights(Work $entity)
     {
         if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&
             !$this->get('security.context')->isGranted('ROLE_ADMIN')) 
         {
-            return $this->redirect($this->generateUrl('geek_people'));
+            return $this->redirect($this->generateUrl('geek_index'));
         }
 
         return null;
@@ -240,7 +240,7 @@ class ProjectController extends BaseController
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('geek_people'));
+        return $this->redirect($this->generateUrl('geek_index'));
     }
 
     private function createDeleteForm($id)

@@ -13,7 +13,7 @@ use Geek\PartyBundle\Form\PartyType;
 /**
  * Party controller.
  */
-class PartyController extends CRUDController
+class PartyController extends Base\CRUDController
 {
     public function getEntity()
     {
