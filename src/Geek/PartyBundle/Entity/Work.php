@@ -26,7 +26,7 @@ class Work
     protected $description = '';
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text",nullable=true)
      */
     protected $longDescription = '';
 

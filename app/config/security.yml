@@ -36,6 +36,7 @@ security:
                 check_path: /login_check
                 default_target_path: /
                 provider: my_fos_facebook_provider
+                require_previous_session: false
             anonymous: true
             logout: true
 
