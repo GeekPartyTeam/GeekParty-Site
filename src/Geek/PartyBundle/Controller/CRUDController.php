@@ -2,6 +2,8 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,13 +29,20 @@ abstract class CRUDController extends BaseController
         return 'Geek\\PartyBundle\\Form\\' . $this->getEntity() . 'Type';
     }
 
-    public function checkRights()
+    public function checkRights($entity)
     {
         return null;
     }
 
-    public function updateEntity($entity, Request $request)
+    /**
+     * @param $entity
+     * @param Request $request
+     * @param \Symfony\Component\Form\Form $form
+     * @return bool
+     */
+    public function updateEntity($entity, Request $request, Form $form)
     {
+        return true;
     }
 
     public function actionAction($action, $id)
@@ -69,12 +78,11 @@ abstract class CRUDController extends BaseController
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $this->updateEntity($entity, $request);
-
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl($this->getRedirectPath()));
+            if ($this->updateEntity($entity, $request, $editForm)) {
+                $em->persist($entity);
+                $em->flush();
+                return $this->redirect($this->generateUrl($this->getRedirectPath()));
+            }
         }
 
         $response['entity']      = $entity;

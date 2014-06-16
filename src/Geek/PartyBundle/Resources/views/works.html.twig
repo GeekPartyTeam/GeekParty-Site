@@ -1,3 +1,4 @@
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
 <div id="entries">
     {% for entry in works %}
         {% set partyId = entry.party is not null ? entry.party.id : null %}
@@ -8,7 +9,7 @@
                     <a href="{{ entryPage }}">
                         <div style="width:120px;height:110px;background:url('/works/{{ partyId }}/{{ entry.id }}_icon.png') no-repeat"></div>
                     </a>
-                    <a class="playGame" href="{{ entryPage }}"><span class="playLabel">Play</span></a>
+                    {{ macros.play_button(entry) }}
                 </div>
                 <div class="entryRightBar">
                     <a href="{{ entryPage }}"><h2>{{ entry.name }}</h2></a>

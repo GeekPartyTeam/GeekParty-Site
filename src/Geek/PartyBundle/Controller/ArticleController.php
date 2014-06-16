@@ -5,6 +5,7 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends CRUDController
@@ -19,10 +20,11 @@ class ArticleController extends CRUDController
         return 'geek_index';
     }
 
-    public function updateEntity($entity, Request $request)
+    public function updateEntity($entity, Request $request, Form $form)
     {
         /** @var \Geek\PartyBundle\Entity\Article $entity */
         $entity->setAuthor($this->getUser());
         $entity->setTime(new \DateTime());
+        return true;
     }
 }

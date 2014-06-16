@@ -12,6 +12,7 @@ class BrowseController extends BaseController
     /**
      * Список работ
      * @param $party string Идентификатор пати — gp1, gp2 или gp3
+     * @return array
      * @Template()
      */
     public function partyAction($party)
@@ -44,6 +45,7 @@ class BrowseController extends BaseController
      * Страница работы
      * @param $party string Идентификатор пати — gp1, gp2 или gp3
      * @param $work string Строковый идентификатор работы
+     * @return array
      * @Template()
      */
     public function workAction($party, $work)

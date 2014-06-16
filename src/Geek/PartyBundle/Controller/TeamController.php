@@ -35,6 +35,7 @@ class TeamController extends BaseController
         $response = [];
 
         if ($id) {
+            /** @var \Geek\PartyBundle\Entity\Team $entity */
             $entity = $em->getRepository('GeekPartyBundle:Team')->find($id);
 
             if (!$entity) {
@@ -207,6 +208,7 @@ class TeamController extends BaseController
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /** @var \Geek\PartyBundle\Entity\Team $entity */
             $entity = $em->getRepository('GeekPartyBundle:Team')->find($id);
 
             if (!$entity) {

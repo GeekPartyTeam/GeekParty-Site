@@ -8,10 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller
 
 class BaseController extends Controller
 {
+    /**
+     * @return \Geek\PartyBundle\Entity\Party
+     */
     public function getCurrentParty()
     {
-        $now = new \DateTime();
-
         $em = $this->getDoctrine()->getManager();
         $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p WHERE p.endTime > :time ORDER BY p.endTime ASC")
             ->setParameter('time', new \DateTime())

@@ -57,7 +57,12 @@ class ProjectController extends BaseController
         if ($editForm->isValid()) {
 
             $currentParty = $this->getCurrentParty();
-            $entity->setParty($currentParty);
+            if (!$entity->getParty()) {
+                $entity->setParty($currentParty);
+            }
+            if (!$entity->getAuthor()) {
+                $entity->setAuthor($this->getUser());
+            }
 
             if ($file = $editForm['icon']->getData()) {
                 /** @var $file UploadedFile */
@@ -220,6 +225,7 @@ class ProjectController extends BaseController
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            /** @var \Geek\PartyBundle\Entity\Work $entity */
             $entity = $em->getRepository('GeekPartyBundle:Work')->find($id);
 
             if (!$entity) {
