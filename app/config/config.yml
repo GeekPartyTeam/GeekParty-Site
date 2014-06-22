@@ -91,6 +91,6 @@ services:
             validator: "@validator"
     geek.twig.twig_extension:
         class: Geek\PartyBundle\Twig\GeekExtension
-        arguments: [ @security.context ]
+        arguments: [ @security.context, @kernel ]
         tags:
             - { name: twig.extension }

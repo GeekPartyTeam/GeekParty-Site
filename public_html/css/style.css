@@ -728,6 +728,18 @@ i {
     color: white;
 }
 
+.Button.GrayButton .LeftEdge {
+    background: url("../img/btn_edge_gray.png");
+}
+
+.Button.GrayButton .Body {
+    background: url("../img/btn_body_gray.png");
+}
+
+.Button.GrayButton .RightEdge {
+    background: url("../img/btn_edge_gray.png");
+}
+
 .PullLeft {
     float: left;
 }

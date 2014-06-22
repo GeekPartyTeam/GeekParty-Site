@@ -5,6 +5,7 @@
 
 namespace Geek\PartyBundle\Twig;
 
+use AppKernel;
 use Geek\PartyBundle\Entity\User;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -12,10 +13,13 @@ class GeekExtension extends \Twig_Extension
 {
     /** @var \Symfony\Component\Security\Core\SecurityContext */
     private $context;
+    /** @var \AppKernel */
+    private $kernel;
 
-    function __construct(SecurityContext $context)
+    function __construct(SecurityContext $context, AppKernel $kernel)
     {
         $this->context = $context;
+        $this->kernel = $kernel;
     }
 
     /**
@@ -32,6 +36,7 @@ class GeekExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('is_owner_or_admin', [$this, 'isOwnerOrAdmin'])
+            , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
         ];
     }
 
@@ -42,5 +47,10 @@ class GeekExtension extends \Twig_Extension
         }
 
         return $user && $user === $this->context->getToken()->getUser();
+    }
+
+    public function fileExists($path)
+    {
+        return file_exists($this->kernel->getRootDir() . '/../public_html' . $path);
     }
 }

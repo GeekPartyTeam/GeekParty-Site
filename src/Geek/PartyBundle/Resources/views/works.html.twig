@@ -9,7 +9,11 @@
                     <a href="{{ entryPage }}">
                         <div style="width:120px;height:110px;background:url('/works/{{ partyId }}/{{ entry.id }}_icon.png') no-repeat"></div>
                     </a>
-                    {{ macros.play_button(entry) }}
+                    {% if file_exists('/works/' ~ entry.party.id ~ '/' ~ entry.id ~ '/index.html') %}
+                        {{ macros.play_button(entry) }}
+                    {% else %}
+                        {{ macros.button('Not uploaded', '', 'GrayButton') }}
+                    {% endif %}
                 </div>
                 <div class="entryRightBar">
                     <a href="{{ entryPage }}"><h2>{{ entry.name }}</h2></a>
