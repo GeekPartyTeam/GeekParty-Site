@@ -76,7 +76,9 @@ stfalcon_tinymce:
 
 exercise_html_purifier:
     default:
-        HTML.Allowed: p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src]
+        HTML.Allowed: >
+          p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src],
+          h1,h2,h3,h4,h5
         HTML.SafeIframe: true
         URI.SafeIframeRegexp: $youtube.com/embed/$
 
