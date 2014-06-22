@@ -66,6 +66,9 @@ class ProjectController extends Base\BaseController
 
             if ($file = $editForm['icon']->getData()) {
                 /** @var $file UploadedFile */
+                if ($file->getSize() > 50*1024*1024 || $file->getMimeType() != 'application/zip') {
+
+                }
                 $dir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
                 $filename = $entity->getId() . '_icon.png';
                 $path = $dir . '/' . $filename;
