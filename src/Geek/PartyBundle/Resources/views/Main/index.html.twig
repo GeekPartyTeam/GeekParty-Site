@@ -26,8 +26,15 @@
                     <ul class="NewsList">
                     {% for article in articles %}
                         <li class="NewsArticle">
-                            <h3>{{ article.title }}</h3>
-                            <div>
+                            <h3 class="PullLeft">{{ article.title }}</h3>
+                            <div class="PullRight">
+                                by <span class="Hightlight">{{ article.author.firstname }} {{ article.author.lastname }}</span>
+                                @<span class="Hightlight">{{ article.time|date("Y-m-d H:i:s") }}</span>
+                                {% if is_owner_or_admin(article.author) %}
+                                    <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}" class="Special">Edit</a>
+                                {% endif %}
+                            </div>
+                            <div class="Clear">
                                 {{ article.body|purify }}
                             </div>
                         </li>

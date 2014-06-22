@@ -87,3 +87,8 @@ services:
             facebook: "@fos_facebook.api"
             userManager: "@fos_user.user_manager"
             validator: "@validator"
+    geek.twig.twig_extension:
+        class: Geek\PartyBundle\Twig\GeekExtension
+        arguments: [ @security.context ]
+        tags:
+            - { name: twig.extension }

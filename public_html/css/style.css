@@ -44,7 +44,7 @@ html {
 .usePixelFont {
     font: 14px/18px pixel_font;
 }
-p, td {
+p, td, .News {
     color: white;
 	line-height: 24px;
 }
@@ -746,4 +746,8 @@ i {
 
 .NewsArticle {
     list-style: none;
+}
+
+.Hightlight {
+    color: #F69506;
 }

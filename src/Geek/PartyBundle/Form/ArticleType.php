@@ -18,7 +18,6 @@ class ArticleType extends AbstractType
                     'data-theme' => 'advanced'
                 ]
             ])
-            ->add('author', 'hidden')
         ;
     }
 
