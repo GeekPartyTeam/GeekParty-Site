@@ -8,7 +8,7 @@
             <div id="brief">
                 <div>
                     {% if text.body is not null %}
-                        {{ text.body|purify }}
+                        {{ text.body|raw }}
                     {% endif %}
                 </div>
 

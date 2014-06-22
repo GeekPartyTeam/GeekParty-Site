@@ -1,47 +1,11 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% block main %}
-				<div id="content">
-					<div class="briefLine">
-						<div class="briefImage">
-							<img src="./img/icon_place.png" alt="place"/>
-						</div>
-						<div class="briefDescription">
-							<h2>Игры на GP#6</h2>
-							<p>В этот раз на Гик-пати мы будем создавать <span class="orange">fighting игры</span>. </p>
-							<p>Технологию вы выбираете сами. Как обычно, наше главное правило - чтобы ваше творение игралось онлайн, и любой человек мог оценить его, зайдя к нам на сайт. Мы рекомендуем Flash, Haxe, HTML5 или Unity. Все они прекрасно работают в браузере. Можно приходить со своими заготовками по коду. По сеттингу также ограничений нет. Если кто-то хочет делать эрогуро с расчленёнкой или драчки про котиков и бабочек - ради бога. Главное, чтобы ваше творение содержало в себе отжиг и задор.</p>
-							<p>В 13.00 сбор на Гикпати, в 14.00 - старт разработки. В 22.00 уже начнем показ работ.</p>
-						</div>
-					</div> <!-- briefLine -->
-					<div class="briefLine">
-						<div class="briefImage">
-							<img src="./img/icon_place.png" alt="place"/>
-						</div>
-						<div class="briefDescription">
-							<h2>Программа GP</h2>
-							<p>В день пати случится следующее: </p>
-								<ul class="briefList">
-									<li>13.00. Сбор Гик-Пати, со вступительной речью.</li>
-									<li>14.00 - 22.00. Дикий цифровой отжиг.</li>
-									<li>22.00 -23.00. Показ работ.</li>
-									<li>23.00 - 6.00. Веселие, концерт.</li>
-								</ul>
-						</div>
-					</div> <!-- briefLine -->
-					<div class="briefLine">
-						<div class="briefImage">
-							<img src="./img/icon_place.png" alt="place"/>
-						</div>
-						<div class="briefDescription">
-							<h2>Время и место GP#6</h2>
-							<p><b>Время:</b> 25 января, 2014, в субботу, начало в 13.00. Вход свободный.</p>
-							<p><b>Место:</b> <a href="http://vk.com/id212028009">IT-бар Ключ</a>. Ул. Чехова, д. 3.</p>
-							<p><b>Метро:</b> Маяковская, пл. Восстания</p>
-							
-<script type="text/javascript" charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=aIKMn6xrLQAnS4Me1HJryGDOwIfC7l42&width=600&height=450"></script>
-							
-							<p>Наш имейл: <a href="mailto:geekparty.ru@gmail.com">geekparty.ru@gmail.com</a>.</p>
-						</div>
-					</div> <!-- briefLine -->
-				</div> <!-- content -->
+    <div id="content">
+        <div>
+            {% if text.body is not null %}
+                {{ text.body|raw }}
+            {% endif %}
+        </div>
+    </div> <!-- content -->
 {% endblock %}

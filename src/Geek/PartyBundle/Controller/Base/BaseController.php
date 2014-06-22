@@ -37,4 +37,12 @@ class BaseController extends Controller
         $parameters['current_user'] = $this->getUser();
         return $parameters;
     }
+
+    protected function findTextBlock($name)
+    {
+        /** @var $repo \Geek\PartyBundle\Entity\Repository\Text */
+        $repo = $this->getDoctrine()
+            ->getRepository('GeekPartyBundle:Text');
+        return $repo->fetch(['name' => $name]);
+    }
 }
