@@ -95,35 +95,13 @@
                         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                     </div>
                 </div>
-				<div id="account">
-					<div id="accountLogin">
-                    {#
-						<form class="loginForm" action="" method="">
-							<p class="inputBg"><input id="_login" class="usePixelFont" name="value1" type="text" value="Geeklogin" /></p>
-							<p class="inputBg"><input id="_password" class="usePixelFont" name="value2" type="text" value="Password" /></p>
-						</form>
-                    #}
-					</div>
-					<div id="accountActions">
-                    {#
-						<div class="usePixelFont">
-							<a id="doLogin" class="fRight" href="">Login</a>
-							<span id="separator" class="fRight">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-							<a id="doRegister" class="fRight" href="">Register</a>
-						</div>
-						<div>
-							<a id="doForget" class="fRight" href="">Забыли пароль?</a>
-						</div>
-                    #}
-					</div>
-				</div>
 			</div>
 			<div id="headerBorder"></div>
 			<div id="page">
 				{% block main %} {% endblock %}
 				<div id="footer">
 					<div id="footerDescription">
-						<p class="usePixelFont">GEEK PARTY (c) 2014 | info@geekparty.ru</p>
+						<p class="usePixelFont">GEEK PARTY (c) {{ "now"|date('Y') }} | info@geekparty.ru</p>
 					</div>
 					<div id="footerBlock"></div>
 				</div>
