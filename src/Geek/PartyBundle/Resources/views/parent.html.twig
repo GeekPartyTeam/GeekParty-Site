@@ -5,12 +5,9 @@
     <title>{% block title %} GeekParty {% endblock %}</title>
     <meta name="keywords" content="geekparty" />
     <meta name="description" content="Гик-пати — это цифровое творчество в режиме реального времени" />
+    <meta name="vk:app_id" content="3561840" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="{{ asset("js/countdown.js") }}"></script>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?87"></script>
-    <script type="text/javascript">
-        VK.init({apiId: 3561840, onlyWidgets: true});
-    </script>
 
     <link rel="stylesheet" type="text/css" href="{{ asset("css/style.css") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/disqusFix.css") }}" media="screen"/>
@@ -79,8 +76,18 @@
                 {% endif %}
                 <div class="socialContainer">
                     <div id="vk_like"></div>
+                    <div id="vk_api_transport"></div>
                     <script type="text/javascript">
-                        VK.Widgets.Like("vk_like", {type:"button",pageImage:"http://geekparty.ru/img/logo.png",pageUrl:"http://geekparty.ru/",text:"Гикпати.Ру - хорошее мерориятие"});
+                        window.vkAsyncInit = function() {
+                            VK.Widgets.Like("vk_like", {type:"mini",pageImage:"http://geekparty.ru/img/logo.png",pageUrl:"http://geekparty.ru/",text:"Гикпати.Ру - хорошее мерориятие"});
+                        };
+                        setTimeout(function() {
+                            var el = document.createElement("script");
+                            el.type = "text/javascript";
+                            el.src = "//vk.com/js/api/openapi.js";
+                            el.async = true;
+                            document.getElementById("vk_api_transport").appendChild(el);
+                        }, 0);
                     </script>
                     <div class="fb-like" data-href="http://geekparty.ru/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
                     <div class="socialTwitterButton">
