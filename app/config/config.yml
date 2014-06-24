@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: facebook.yml }
 
 framework:
     #esi:             ~
@@ -22,6 +21,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        fb_app_id: %fb_app_id%
 
 # Doctrine Configuration
 doctrine:
@@ -50,7 +51,7 @@ swiftmailer:
 
 fos_user:
     db_driver: orm
-    firewall_name: main
+    firewall_name: public
     user_class: Geek\PartyBundle\Entity\User
 
 stfalcon_tinymce:
@@ -82,13 +83,27 @@ exercise_html_purifier:
         HTML.SafeIframe: true
         URI.SafeIframeRegexp: $youtube.com/embed/$
 
+hwi_oauth:
+    connect:
+        account_connector: my_user_provider
+    firewall_name: public
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           %fb_app_id%
+            client_secret:       %fb_secret%
+            scope:               email
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookId
+
 services:
-    my.facebook.user:
-        class: Geek\PartyBundle\Security\User\Provider\FacebookProvider
+    my_user_provider:
+        class: Geek\PartyBundle\Security\User\Provider\FOSUBUserProvider
         arguments:
-            facebook: "@fos_facebook.api"
-            userManager: "@fos_user.user_manager"
-            validator: "@validator"
+            - @fos_user.user_manager
+            - { facebook: facebookId }
     geek.twig.twig_extension:
         class: Geek\PartyBundle\Twig\GeekExtension
         arguments: [ @security.context, @kernel ]

@@ -1,16 +1,23 @@
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
-fos_user_security_register:
-    prefix: /register
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#fos_user_security_register:
+#    prefix: /register
+#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
 
-fos_facebook_channel:
-    resource: "@FOSFacebookBundle/Resources/config/routing.xml"
+# app/config/routing.yml
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+facebook_login:
+    pattern: /login/check-facebook
 
-_security_check:
-    pattern:  /login_check
-    defaults: { _controller: GeekPartyBundle:Auth:check }
-_security_logout:
-    pattern:  /logout
-    defaults: { _controller: GeekPartyBundle:Auth:logout }
+#_security_check:
+#    pattern:  /login_check
+#    defaults: { _controller: GeekPartyBundle:Auth:check }
+#_security_logout:
+#    pattern:  /logout
+#    defaults: { _controller: GeekPartyBundle:Auth:logout }

@@ -13,7 +13,7 @@
         "jms/security-extra-bundle": "*",
         "jms/di-extra-bundle": "*",
         "friendsofsymfony/user-bundle": "dev-master",
-        "friendsofsymfony/facebook-bundle": "*",
+        "hwi/oauth-bundle": "0.4.*@dev",
         "stfalcon/tinymce-bundle": "dev-master",
         "Exercise/HTMLPurifier-Bundle": "dev-master",
         "symfony/swiftmailer-bundle": "*",

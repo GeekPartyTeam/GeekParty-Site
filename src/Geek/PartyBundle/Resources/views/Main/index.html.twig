@@ -18,8 +18,7 @@
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
                         {% else %}
-                            {{ macros.button('Войти', null, 'facebook-login') }}
-                            <i class="l facebook-wait"></i>
+                            {{ macros.button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                         {% endif %}
                     </div>
                     <div class="Clear"></div>
