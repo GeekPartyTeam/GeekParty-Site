@@ -43,6 +43,6 @@ class BaseController extends Controller
         /** @var $repo \Geek\PartyBundle\Entity\Repository\Text */
         $repo = $this->getDoctrine()
             ->getRepository('GeekPartyBundle:Text');
-        return $repo->fetch(['name' => $name]);
+        return $repo->fetch($name);
     }
 }
