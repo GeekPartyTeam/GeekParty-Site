@@ -2,6 +2,8 @@
 
 {% block title %} GeekParty :: Работы {% endblock %}
 
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
 {% block main %}
     <div id="content">
         <div id="partySwitcher">
@@ -16,6 +18,13 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
+            </div>
+            <div class="PullRight">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {{ macros.button('Добавить работу', path('project_new')) }}
+                {% else %}
+                    {{ macros.button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                {% endif %}
             </div>
         </div>
         {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
