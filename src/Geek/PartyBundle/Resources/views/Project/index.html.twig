@@ -12,5 +12,6 @@
         </div>
         <div class="Clear"></div>
         {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
+        {{ macros.button('Выйти', path('fos_user_security_logout')) }}
     </div>
 {% endblock %}

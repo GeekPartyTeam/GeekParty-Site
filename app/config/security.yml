@@ -20,6 +20,7 @@ security:
     firewalls:
         public:
             anonymous: ~
+            logout: true
             oauth:
                 resource_owners:
                     facebook:           "/login/check-facebook"
