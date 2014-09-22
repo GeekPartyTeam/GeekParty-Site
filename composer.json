@@ -21,7 +21,8 @@
         "sensio/framework-extra-bundle": "*",
         "sensio/distribution-bundle": "*",
         "sensio/generator-bundle": "*",
-        "symfony/assetic-bundle": "*"
+        "symfony/assetic-bundle": "*",
+	    "symfony/console": "2.3.*"
     },
     "scripts": {
         "post-install-cmd": [

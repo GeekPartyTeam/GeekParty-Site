@@ -10,7 +10,9 @@ namespace Geek\PartyBundle\Controller;
 
 
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\HttpFoundation\Response;
 
 class GitHubController extends Controller
@@ -29,6 +31,10 @@ class GitHubController extends Controller
 
         $output = implode("\n", $output);
         $logger->info($output);
+
+        $input = new ArgvInput(['console','cache:clear', '--env=prod']);
+        $application = new Application($this->get('kernel'));
+        $application->run($input);
 
         $response = new Response($output);
         return $response;
