@@ -64,15 +64,20 @@ class ProjectController extends Base\BaseController
                 $entity->setAuthor($this->getUser());
             }
 
+            $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
+            if (!is_dir($partyDir)) {
+                mkdir($partyDir, 0777, true);
+            }
+
             if ($file = $editForm['icon']->getData()) {
                 /** @var $file UploadedFile */
                 if ($file->getSize() > 50*1024*1024 || $file->getMimeType() != 'application/zip') {
 
                 }
-                $dir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
+
                 $filename = $entity->getId() . '_icon.png';
-                $path = $dir . '/' . $filename;
-                $file->move($dir, $filename);
+                $path = $partyDir . '/' . $filename;
+                $file->move($partyDir, $filename);
                 $im = new \Imagick($path);
                 $im->resizeimage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
                 $im->writeimage($path);
@@ -80,7 +85,7 @@ class ProjectController extends Base\BaseController
 
             if ($file = $editForm['file']->getData()) {
                 /** @var $file UploadedFile */
-                $dir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId() . '/' . $entity->getId();
+                $dir = $partyDir. '/' . $entity->getId();
                 $path = $dir . '/archive.zip';
                 if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);

@@ -5,3 +5,4 @@ vendor
 app/config/facebook.yml
 app/config/parameters.yml
 public_html/works
+public_html/bundles

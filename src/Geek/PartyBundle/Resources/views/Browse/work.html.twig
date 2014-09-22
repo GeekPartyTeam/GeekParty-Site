@@ -11,7 +11,11 @@
     <div class="borderBlock">
         {{ work.longDescription|purify }}
 
-        {{ macros.play_button(work) }}
+        {% if is_work_uploaded(work) %}
+            {{ macros.play_button(work) }}
+        {% else %}
+            {{ macros.button('Not uploaded', '', 'GrayButton') }}
+        {% endif %}
 
         {% if (work.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
             <p><a href="{{ path('project_edit', {'id': work.id}) }}" class="Special">Редактировать</a></p>

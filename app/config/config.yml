@@ -10,7 +10,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: "%kernel.debug%"
     form:            true
-    csrf_protection: true
+    csrf_protection: false
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
@@ -79,7 +79,7 @@ exercise_html_purifier:
     default:
         HTML.Allowed: >
           p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src],
-          h1,h2,h3,h4,h5
+          h1,h2,h3,h4,h5,br
         HTML.SafeIframe: true
         URI.SafeIframeRegexp: $youtube.com/embed/$
 
