@@ -1,6 +1,7 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "GeekParty-Site",
+    "description": "GeekParty site sources (geekparty.ru)",
+    "version": "0.1",
     "autoload": {
         "psr-0": { "": "src/" }
     },
