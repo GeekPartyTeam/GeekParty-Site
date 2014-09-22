@@ -25,7 +25,7 @@
                     <ul class="NewsList">
                     {% for article in articles %}
                         <li class="NewsArticle">
-                            <h3 class="PullLeft">{{ article.title }}</h3>
+                            <h2 class="PullLeft">{{ article.title }}</h2>
                             <div class="PullRight">
                                 by <span class="Hightlight">{{ article.author.firstname }} {{ article.author.lastname }}</span>
                                 @<span class="Hightlight">{{ article.time|date("Y-m-d H:i:s") }}</span>
