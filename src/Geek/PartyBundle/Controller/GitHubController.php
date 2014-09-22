@@ -13,7 +13,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\Response;
 
 class GitHubController extends Controller
@@ -34,10 +33,7 @@ class GitHubController extends Controller
 
         $input = new ArgvInput(['console','cache:clear', '--env=prod']);
         $application = new Application($this->get('kernel'));
-        $consoleOutput = new BufferedOutput();
-        $application->run($input, $consoleOutput);
-
-        $output .= "<br/>" . $consoleOutput->fetch();
+        $application->run($input);
 
         $response = new Response($output);
         return $response;
