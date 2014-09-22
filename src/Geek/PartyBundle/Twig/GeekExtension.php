@@ -7,6 +7,7 @@ namespace Geek\PartyBundle\Twig;
 
 use AppKernel;
 use Geek\PartyBundle\Entity\User;
+use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\Security\Core\SecurityContext;
 
 class GeekExtension extends \Twig_Extension
@@ -37,6 +38,7 @@ class GeekExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('is_owner_or_admin', [$this, 'isOwnerOrAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
+            , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
         ];
     }
 
@@ -52,5 +54,10 @@ class GeekExtension extends \Twig_Extension
     public function fileExists($path)
     {
         return file_exists($this->kernel->getRootDir() . '/../public_html' . $path);
+    }
+
+    public function isWorkUploaded(Work $work)
+    {
+        return $this->fileExists('/works/' . $work->getParty()->getId() . '/' . $work->getId() . '/index.html');
     }
 }

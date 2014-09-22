@@ -1,5 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
 {% block title %} GeekParty :: Редактирование текстового блока {% endblock %}
 
 {% block main %}
@@ -7,14 +9,14 @@
     (edit_form) }}>
         {{ form_widget(edit_form) }}
         <p>
-            <button type="submit">Edit</button>
+            {{ macros.submit("Сохранить") }}
         </p>
     </form>
     {% if delete_form is defined %}
         <form action="{{ path('_edit_article', {'action':'delete', 'id': entity.id}) }}">
             {{ form_widget(delete_form) }}
             <p>
-                <button type="submit">Remove</button>
+                <input class="inlineBlock" id="deleteTeamWithH" type="submit" value="Удалить"/>
             </p>
         </form>
     {% endif %}
