@@ -28,7 +28,7 @@ class GitHubController extends Controller
         $branch = $this->container->getParameter('branch') ?: 'master';
         /** @var AppKernel $kernel */
         $kernel = $this->get('kernel');
-        $dir = $kernel->getRootDir();
+        $dir = dirname($kernel->getRootDir());
         $command = "/usr/bin/git --work-tree={$dir} pull http {$branch} 2>&1";
         $output = [];
         exec($command, $output, $return_code);
