@@ -8,6 +8,9 @@ geek_about:
 admin:
     pattern: /admin
     defaults: {_controller:GeekPartyBundle:Main:admin}
+github_hook:
+  pattern: /github_hook
+  defaults: {_controller:GeekPartyBundle:GitHub:hook}
 
 # Browse
 geek_browse:
