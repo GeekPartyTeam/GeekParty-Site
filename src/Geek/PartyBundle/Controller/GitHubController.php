@@ -22,7 +22,8 @@ class GitHubController extends Controller
         $logger->info('Github hook triggered');
         $logger->debug($this->getRequest()->getContent());
 
-        $command = '/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http master 2>&1';
+        $branch = $this->container->getParameter('branch') ?: 'master';
+        $command = "/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http {$branch} 2>&1";
         $output = [];
         exec($command, $output, $return_code);
 
