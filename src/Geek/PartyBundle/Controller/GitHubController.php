@@ -9,6 +9,7 @@
 namespace Geek\PartyBundle\Controller;
 
 
+use AppKernel;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +26,10 @@ class GitHubController extends Controller
         $logger->debug($this->getRequest()->getContent());
 
         $branch = $this->container->getParameter('branch') ?: 'master';
-        $command = "/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http {$branch} 2>&1";
+        /** @var AppKernel $kernel */
+        $kernel = $this->get('kernel');
+        $dir = dirname($kernel->getRootDir());
+        $command = "/usr/bin/git --work-tree={$dir} pull http {$branch} 2>&1";
         $output = [];
         exec($command, $output, $return_code);
 
@@ -33,7 +37,7 @@ class GitHubController extends Controller
         $logger->info($output);
 
         $input = new ArgvInput(['console','cache:clear', '--env=prod']);
-        $application = new Application($this->get('kernel'));
+        $application = new Application($kernel);
         $application->run($input);
 
         $response = new Response($output);
