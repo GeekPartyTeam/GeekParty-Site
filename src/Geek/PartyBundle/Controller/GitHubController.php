@@ -22,7 +22,7 @@ class GitHubController extends Controller
         $logger->info('Github hook triggered');
         $logger->debug($this->getRequest()->getContent());
 
-        $command = '/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http develop 2>&1';
+        $command = '/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http master 2>&1';
         $output = [];
         exec($command, $output, $return_code);
 
