@@ -409,6 +409,7 @@ ul.briefList {
 .socialContainer {
     float: right;
     margin-top: 32px;
+    display: none;
 }
 
 #vk_like {
