@@ -9,11 +9,11 @@
 namespace Geek\PartyBundle\Controller;
 
 
+use AppKernel;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\Response;
 
 class GitHubController extends Controller
@@ -25,7 +25,11 @@ class GitHubController extends Controller
         $logger->info('Github hook triggered');
         $logger->debug($this->getRequest()->getContent());
 
-        $command = '/usr/bin/git --work-tree=/usr/share/nginx/html/geekparty pull http master 2>&1';
+        $branch = $this->container->getParameter('branch') ?: 'master';
+        /** @var AppKernel $kernel */
+        $kernel = $this->get('kernel');
+        $dir = dirname($kernel->getRootDir());
+        $command = "/usr/bin/git --work-tree={$dir} pull http {$branch} 2>&1";
         $output = [];
         exec($command, $output, $return_code);
 
@@ -33,11 +37,8 @@ class GitHubController extends Controller
         $logger->info($output);
 
         $input = new ArgvInput(['console','cache:clear', '--env=prod']);
-        $application = new Application($this->get('kernel'));
-        $consoleOutput = new BufferedOutput();
-        $application->run($input, $consoleOutput);
-
-        $output .= "<br/>" . $consoleOutput->fetch();
+        $application = new Application($kernel);
+        $application->run($input);
 
         $response = new Response($output);
         return $response;
