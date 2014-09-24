@@ -7,6 +7,15 @@
 html {
     /*background: none repeat scroll 0 0 #091F2A;*/
     background: #2dc4f3;
+    background: #091F2A;
+}
+
+#gradient {
+    background: url("../img/tileable-bg-gradient.png") repeat-x;
+    height: 600px;
+    width: 100%;
+    position: absolute;
+    top: 0;
 }
 
 #clouds {
@@ -14,6 +23,7 @@ html {
     height: 200px;
     width: 100%;
     position: absolute;
+    top: 0;
 }
 
 #wrapper {
@@ -73,6 +83,9 @@ span.orange {
 }
 #sitelogo {
     float: left;
+}
+#cross-site-logo {
+    float: right;
 }
 #timer {
 	background: url("../img/timerBg.png") repeat scroll 0 0 transparent;
