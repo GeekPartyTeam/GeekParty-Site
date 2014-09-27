@@ -25,6 +25,20 @@ class GitHubController extends Controller
         $logger->info('Github hook triggered');
         $logger->debug($this->getRequest()->getContent());
 
+        $output = $this->updateCode();
+        $logger->info(implode("\n", $output));
+
+        $this->clearCache();
+
+        $response = new Response('OK');
+        return $response;
+    }
+
+    /**
+     * @return array
+     */
+    private function updateCode()
+    {
         $branch = $this->container->getParameter('branch') ?: 'master';
         /** @var AppKernel $kernel */
         $kernel = $this->get('kernel');
@@ -32,15 +46,16 @@ class GitHubController extends Controller
         $command = "/usr/bin/git --work-tree={$dir} pull http {$branch} 2>&1";
         $output = [];
         exec($command, $output, $return_code);
+        return $output;
+    }
 
-        $output = implode("\n", $output);
-        $logger->info($output);
+    private function clearCache()
+    {
+        /** @var AppKernel $kernel */
+        $kernel = $this->get('kernel');
 
         $input = new ArgvInput(['console','cache:clear', '--env=prod']);
         $application = new Application($kernel);
         $application->run($input);
-
-        $response = new Response($output);
-        return $response;
     }
 } 
