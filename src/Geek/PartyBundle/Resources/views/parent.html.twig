@@ -78,7 +78,8 @@
           }
     </script>
     <script type="text/javascript" src="{{ asset("js/script.js") }}"></script>
-	<div id="backgroundFX"></div>
+	<div id="gradient"></div>
+    <div id="clouds"></div>
 	<div id="wrapper">
 		<div id="sidebar">
 			<div id="sidebarFX"></div>
@@ -105,7 +106,7 @@
 			<div id="header">
 				<div id="sitelogo">
 					<a href="/">
-						<img src="{{ asset("img/logo.png") }}" alt="GeekParty" />
+						<img src="{{ asset("img/logo-gp.png") }}" alt="GeekParty" />
 					</a>
 				</div>
                 {% if current_party %}
@@ -135,6 +136,11 @@
                     {% endif %}
                     </div>
                 {% endif %}
+                <div id="cross-site-logo">
+                    <a href="http://nextcastle.ru/" target="_blank">
+						<img src="{{ asset("img/logo-nc.png") }}" alt="NextCastle" />
+					</a>
+                </div>
                 <div class="socialContainer">
                     <div id="vk_like"></div>
                     <div id="vk_api_transport"></div>
