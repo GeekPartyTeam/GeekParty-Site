@@ -30,6 +30,12 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="boolean")
      */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->emailCanonical = '';
+    }
+
     public $skill_code = false;
 
     /**
