@@ -98,4 +98,10 @@ class Party
     {
         return preg_replace('/gp(.*)/', 'GP#$1', $this->getId());
     }
+
+    public function isCurrent()
+    {
+        $now = new \DateTime();
+        return $now >= $this->getStartTime() && $now <= $this->getEndTime();
+    }
 }

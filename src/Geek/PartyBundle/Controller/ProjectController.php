@@ -3,18 +3,17 @@
 namespace Geek\PartyBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Exception\InvalidUploadedFile;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Geek\PartyBundle\Entity\Work;
 use Geek\PartyBundle\Form\ProjectType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Project (Work) controller.
@@ -75,8 +74,8 @@ class ProjectController extends Base\BaseController
                 return $this->render('GeekPartyBundle:Project:new.html.twig', $parameters);
             }
 
-            $currentParty = $this->getCurrentParty();
             if (!$entity->getParty()) {
+                $currentParty = $this->getCurrentParty();
                 $entity->setParty($currentParty);
             }
             if (!$entity->getAuthor()) {
@@ -87,8 +86,9 @@ class ProjectController extends Base\BaseController
             $em->flush();
 
             $response = new RedirectResponse($this->generateUrl('project'), 302);
+
             try {
-                $this->uploadFiles($currentParty, $editForm, $entity);
+                $this->uploadFiles($editForm, $entity);
             } catch (InvalidUploadedFile $e) {
                 $this->addErrorMessage($e->getMessage());
             }
@@ -297,22 +297,27 @@ class ProjectController extends Base\BaseController
     }
 
     /**
-     * @param $currentParty
      * @param $editForm
      * @param $entity
      */
-    private function uploadFiles(Party $currentParty, Form $editForm, Work $entity)
+    private function uploadFiles(Form $editForm, Work $entity)
     {
-        $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
+        $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $entity->getParty()->getId();
         if (!is_dir($partyDir)) {
             mkdir($partyDir, 0777, true);
         }
 
         if ($iconFile = $editForm['icon']->getData()) {
-            $this->uploadIcon($iconFile, $partyDir, $entity->getId());
+            $this->uploadIcon($iconFile, $entity->getId(), $partyDir);
         }
         if ($gameFile = $editForm['file']->getData()) {
-            $this->uploadGame($gameFile, $partyDir, $entity->getId());
+            if ($entity->getParty()->isCurrent()) {
+                $this->uploadGame($gameFile, $entity->getId(), $partyDir);
+            } else {
+                $message = "Событие " . $entity->getParty()->getName() . " еще не началось или уже закончилось.
+                    Чтобы обновить работу, обратитесь к администрации сайта.";
+                $this->addErrorMessage($message);
+            }
         }
     }
 
