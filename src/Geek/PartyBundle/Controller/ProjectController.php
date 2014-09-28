@@ -2,6 +2,11 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Geek\PartyBundle\Entity\Party;
+use Geek\PartyBundle\Exception\InvalidUploadedFile;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -9,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Geek\PartyBundle\Entity\Work;
 use Geek\PartyBundle\Form\ProjectType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Project (Work) controller.
@@ -20,8 +26,8 @@ class ProjectController extends Base\BaseController
     public function checkRights(Work $entity)
     {
         if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&
-            !$this->get('security.context')->isGranted('ROLE_ADMIN')) 
-        {
+            !$this->get('security.context')->isGranted('ROLE_ADMIN')
+        ) {
             return $this->redirect($this->generateUrl('geek_index'));
         }
 
@@ -30,13 +36,15 @@ class ProjectController extends Base\BaseController
 
     public function update(Request $request, $id = null)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        $workEntityRepository = $em->getRepository('GeekPartyBundle:Work');
 
         $response = [];
 
         /** @var $entity \Geek\PartyBundle\Entity\Work */
         if ($id) {
-            $entity = $em->getRepository('GeekPartyBundle:Work')->find($id);
+            $entity = $workEntityRepository->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Work entity.');
@@ -52,9 +60,20 @@ class ProjectController extends Base\BaseController
         }
 
         $editForm = $this->createForm(new ProjectType(), $entity);
-        $editForm->bind($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
+
+            $workWithSameId = $workEntityRepository->find($entity->getId());
+            if ($workWithSameId && $workWithSameId !== $entity) {
+                $this->addErrorMessage('Работа с таким идентификатором уже существует');
+
+                $parameters = $this->arrayResponse([
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                ]);
+                return $this->render('GeekPartyBundle:Project:new.html.twig', $parameters);
+            }
 
             $currentParty = $this->getCurrentParty();
             if (!$entity->getParty()) {
@@ -64,48 +83,21 @@ class ProjectController extends Base\BaseController
                 $entity->setAuthor($this->getUser());
             }
 
-            $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
-            if (!is_dir($partyDir)) {
-                mkdir($partyDir, 0777, true);
-            }
-
-            if ($file = $editForm['icon']->getData()) {
-                /** @var $file UploadedFile */
-                if ($file->getSize() > 50*1024*1024 || $file->getMimeType() != 'application/zip') {
-
-                }
-
-                $filename = $entity->getId() . '_icon.png';
-                $path = $partyDir . '/' . $filename;
-                $file->move($partyDir, $filename);
-                $im = new \Imagick($path);
-                $im->resizeimage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
-                $im->writeimage($path);
-            }
-
-            if ($file = $editForm['file']->getData()) {
-                /** @var $file UploadedFile */
-                $dir = $partyDir. '/' . $entity->getId();
-                $path = $dir . '/archive.zip';
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0777, true);
-                }
-                $file = $file->move($dir, 'archive.zip');
-                $zip = new \ZipArchive();
-                if ($zip->open($path)) {
-                    $zip->extractTo($dir);
-                }
-                unlink($path);
-            }
-
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('project'));
+            $response = new RedirectResponse($this->generateUrl('project'), 302);
+            try {
+                $this->uploadFiles($currentParty, $editForm, $entity);
+            } catch (InvalidUploadedFile $e) {
+                $this->addErrorMessage($e->getMessage());
+            }
+
+            return $response;
         }
 
-        $response['entity']      = $entity;
-        $response['edit_form']   = $editForm->createView();
+        $response['entity'] = $entity;
+        $response['edit_form'] = $editForm->createView();
         return $this->arrayResponse($response);
     }
 
@@ -255,7 +247,82 @@ class ProjectController extends Base\BaseController
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param $entityId
+     * @param $partyDir
+     * @throws InvalidUploadedFile
+     * @return array
+     */
+    private function uploadIcon(UploadedFile $file, $entityId, $partyDir)
+    {
+        if (strpos($file->getMimeType(), 'image/') !== 0) {
+            throw new InvalidUploadedFile('Иконка должна быть картинкой PNG или JPG');
+        }
+
+        $filename = $entityId . '_icon.png';
+        $path = $partyDir . '/' . $filename;
+        $file->move($partyDir, $filename);
+        $im = new \Imagick($path);
+        $im->resizeimage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
+        $im->writeimage($path);
+        return array($file, $path);
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param $entityId
+     * @param $partyDir
+     * @throws InvalidUploadedFile
+     */
+    private function uploadGame(UploadedFile $file, $entityId, $partyDir)
+    {
+        if ($file->getMimeType() != 'application/zip') {
+            throw new InvalidUploadedFile('Архив должен быть в формате ZIP');
+        }
+        $dir = $partyDir . '/' . $entityId;
+        $path = $dir . '/archive.zip';
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        $file->move($dir, 'archive.zip');
+        $zip = new \ZipArchive();
+        if ($zip->open($path)) {
+            $zip->extractTo($dir);
+        }
+        unlink($path);
+    }
+
+    /**
+     * @param $currentParty
+     * @param $editForm
+     * @param $entity
+     */
+    private function uploadFiles(Party $currentParty, Form $editForm, Work $entity)
+    {
+        $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $currentParty->getId();
+        if (!is_dir($partyDir)) {
+            mkdir($partyDir, 0777, true);
+        }
+
+        if ($iconFile = $editForm['icon']->getData()) {
+            $this->uploadIcon($iconFile, $partyDir, $entity->getId());
+        }
+        if ($gameFile = $editForm['file']->getData()) {
+            $this->uploadGame($gameFile, $partyDir, $entity->getId());
+        }
+    }
+
+    /**
+     * @param $message
+     */
+    private function addErrorMessage($message)
+    {
+        /** @var Session $session */
+        $session = $this->get('session');
+        $session->getFlashBag()->add('notice', $message);
     }
 }

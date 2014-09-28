@@ -165,6 +165,11 @@
 			</div>
 			<div id="headerBorder"></div>
 			<div id="page">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="error-message">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
 				{% block main %} {% endblock %}
 				<div id="footer">
 					<div id="footerDescription">
