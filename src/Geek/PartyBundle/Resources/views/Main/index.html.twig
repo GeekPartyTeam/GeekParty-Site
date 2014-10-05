@@ -34,7 +34,7 @@
                                 {% endif %}
                             </div>
                             <div class="Clear">
-                                {{ article.body|purify }}
+                                {{ article.body|raw }}
                             </div>
                         </li>
                     {% endfor %}
