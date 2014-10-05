@@ -55,3 +55,7 @@ _auth:
 PrismPollBundle_backend:
     prefix: /poll/backend
     resource: "@PrismPollBundle/Resources/config/routing/backend.yml"
+
+PrismPollBundle_frontend:
+    prefix: /poll
+    resource: "@PrismPollBundle/Resources/config/routing/frontend.yml"
