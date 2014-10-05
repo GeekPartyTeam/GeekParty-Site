@@ -7,8 +7,8 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.3.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "symfony/symfony": "2.4.*",
+        "doctrine/orm": "2.4.*",
         "doctrine/doctrine-bundle": "*",
         "symfony/monolog-bundle": "*",
         "jms/security-extra-bundle": "*",
@@ -22,7 +22,7 @@
         "sensio/distribution-bundle": "*",
         "sensio/generator-bundle": "*",
         "symfony/assetic-bundle": "*",
-	    "symfony/console": "2.3.*"
+	    "symfony/console": "2.4.*"
     },
     "scripts": {
         "post-install-cmd": [
