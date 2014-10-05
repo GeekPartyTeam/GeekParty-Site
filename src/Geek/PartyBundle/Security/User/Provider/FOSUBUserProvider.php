@@ -62,8 +62,13 @@ class FOSUBUserProvider extends BaseClass
             $user->setEmail($response->getEmail());
             $user->setPassword('');
             $user->setEnabled(true);
-            $user->setFirstname($response->getResponse()['first_name']);
-            $user->setLastname($response->getResponse()['last_name']);
+
+            $socialData = $response->getResponse();
+            if ($service == 'vkontakte') {
+                $socialData = $socialData['response'][0];
+            }
+            $user->setFirstname($socialData['first_name']);
+            $user->setLastname($socialData['last_name']);
 
             $this->userManager->updateUser($user);
             return $user;
