@@ -5,10 +5,10 @@
 
 namespace Geek\PartyBundle\Security\User\Provider;
 
-use Geek\PartyBundle\Entity\User;
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
-use Symfony\Component\Security\Core\User\UserInterface;
+    use Geek\PartyBundle\Entity\User;
+    use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+    use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+    use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProvider extends BaseClass
 {

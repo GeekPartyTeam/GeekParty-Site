@@ -97,17 +97,19 @@ hwi_oauth:
             type:                vkontakte
             client_id:           %vk_app_id%
             client_secret:       %vk_app_secret%
+            scope:               email
     fosub:
         username_iterations: 30
         properties:
             facebook: facebookId
+            vkontakte: vkontakteId
 
 services:
     my_user_provider:
         class: Geek\PartyBundle\Security\User\Provider\FOSUBUserProvider
         arguments:
             - @fos_user.user_manager
-            - { facebook: facebookId }
+            - { facebook: facebookId, vkontakte: vkontakteId }
     geek.twig.twig_extension:
         class: Geek\PartyBundle\Twig\GeekExtension
         arguments: [ @security.context, @kernel ]
