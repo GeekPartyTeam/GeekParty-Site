@@ -6,6 +6,22 @@
     {% endembed %}
 {% endmacro %}
 
+{% macro fb_button(text, link, class) %}
+    {% embed 'GeekPartyBundle::button.html.twig' %}
+        {% block content %}
+            <a href="{{ link|default('javascript:void(0)') }}"><img src="/img/fb.png"/>{{ text }}</a>
+        {% endblock %}
+    {% endembed %}
+{% endmacro %}
+
+{% macro vk_button(text, link, class) %}
+    {% embed 'GeekPartyBundle::button.html.twig' %}
+        {% block content %}
+            <a href="{{ link|default('javascript:void(0)') }}"><img src="/img/vk.png"/>{{ text }}</a>
+        {% endblock %}
+    {% endembed %}
+{% endmacro %}
+
 {% macro submit(text, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
