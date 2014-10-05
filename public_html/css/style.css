@@ -698,8 +698,9 @@ i {
 }
 
 .Button {
-    display: table-row;
+    display: table-cell;
     height: 36px;
+    padding-right: 5px;
 }
 
 .Button .LeftEdge {
@@ -749,6 +750,10 @@ i {
 
 .Button a:hover, .Button button:hover {
     color: white;
+}
+
+.Button a img {
+    margin-right: 3px;
 }
 
 .Button.GrayButton .LeftEdge {
