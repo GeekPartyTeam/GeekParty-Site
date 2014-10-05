@@ -40,7 +40,7 @@ _edit_article:
     pattern: /article/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Article:action, action: index, id: -1 }
     requirements:
-        action: edit|index|update|delete
+        action: edit|index|update|delete|vote
 
 # Upload & edit project
 _edit_prject:
@@ -51,3 +51,7 @@ _edit_prject:
 # Auth & security
 _auth:
     resource: routing_security.yml
+
+PrismPollBundle_backend:
+    prefix: /poll/backend
+    resource: "@PrismPollBundle/Resources/config/routing/backend.yml"

@@ -3,14 +3,16 @@
 {% block title %} GeekParty :: Админка {% endblock %}
 
 {% block main %}
-
-    <h4>Текстовые блоки</h4>
-    <ul>
-        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': indexText.id}) }}">Главная страница</a></li>
-        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': aboutText.id}) }}">About</a></li>
-    </ul>
-
-    <ul>
-        <li><a href="{{ path('admin_parties') }}">Parties</a></li>
-    </ul>
+    <div id="content">
+        <h3>Текстовые блоки</h3>
+        <ul>
+            <li><a href="{{ path('admin_text', {'action': 'edit', 'id': indexText.id}) }}">Главная страница</a></li>
+            <li><a href="{{ path('admin_text', {'action': 'edit', 'id': aboutText.id}) }}">About</a></li>
+        </ul>
+        <h3>Управление сущностями</h3>
+        <ul>
+            <li><a href="{{ path('admin_parties') }}">Геймджемы</a></li>
+            <li><a href="{{ path('PrismPollBundle_backend_poll_list') }}">Голосования</a></li>
+        </ul>
+    </div>
 {% endblock %}

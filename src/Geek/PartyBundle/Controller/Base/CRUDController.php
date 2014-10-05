@@ -136,30 +136,7 @@ abstract class CRUDController extends BaseController
      */
     public function editAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        if ($id != -1) {
-            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find entity.');
-            }
-        } else {
-            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
-            $entity = new $class();
-        }
-
-        $formClass = $this->getFormClass();
-        $editForm = $this->createForm(new $formClass(), $entity);
-
-        $params = [
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-        ];
-
-        if ($id != -1) {
-            $params['delete_form'] = $this->createDeleteForm($id)->createView();
-        }
+        $params = $this->edit($id);
 
         return $this->render('GeekPartyBundle:' . $this->getEntity() . ':edit.html.twig', $params);
     }
@@ -205,5 +182,39 @@ abstract class CRUDController extends BaseController
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    protected function edit($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($id != -1) {
+            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find entity.');
+            }
+        } else {
+            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
+            $entity = new $class();
+        }
+
+        $formClass = $this->getFormClass();
+        $editForm = $this->createForm(new $formClass(), $entity);
+
+        $params = [
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+        ];
+
+        if ($id != -1) {
+            $params['delete_form'] = $this->createDeleteForm($id)->createView();
+            return $params;
+        }
+        return $params;
     }
 }

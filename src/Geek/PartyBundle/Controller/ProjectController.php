@@ -320,14 +320,4 @@ class ProjectController extends Base\BaseController
             }
         }
     }
-
-    /**
-     * @param $message
-     */
-    private function addErrorMessage($message)
-    {
-        /** @var Session $session */
-        $session = $this->get('session');
-        $session->getFlashBag()->add('notice', $message);
-    }
 }

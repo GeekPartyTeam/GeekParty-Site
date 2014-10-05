@@ -791,3 +791,7 @@ i {
 .Hightlight {
     color: #F69506;
 }
+
+.Poll li {
+    list-style: none;
+}

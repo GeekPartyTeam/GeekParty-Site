@@ -3,7 +3,10 @@
     "description": "GeekParty site sources (geekparty.ru)",
     "version": "0.1",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": {
+            "Geek\\": "src/",
+            "Prism\\": "src/"
+        }
     },
     "require": {
         "php": ">=5.3.3",

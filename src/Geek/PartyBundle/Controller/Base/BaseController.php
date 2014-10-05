@@ -5,6 +5,7 @@ namespace Geek\PartyBundle\Controller\Base;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller
     , Symfony\Component\HttpFoundation\Response
     ;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class BaseController extends Controller
 {
@@ -44,5 +45,15 @@ class BaseController extends Controller
         $repo = $this->getDoctrine()
             ->getRepository('GeekPartyBundle:Text');
         return $repo->fetch($name);
+    }
+
+    /**
+     * @param $message
+     */
+    protected function addErrorMessage($message)
+    {
+        /** @var Session $session */
+        $session = $this->get('session');
+        $session->getFlashBag()->add('notice', $message);
     }
 }

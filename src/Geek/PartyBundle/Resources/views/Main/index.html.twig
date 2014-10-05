@@ -35,8 +35,28 @@
                                 {% endif %}
                             </div>
                             <div class="Clear">
-                                {{ article.body|raw }}
+                                {{ article.body|purify }}
                             </div>
+                            {% if article.poll is not null %}
+                                <div class="Clear">
+                                    <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" class="Poll">
+                                        <input type="hidden" name="poll" value="{{ article.poll.id }}"/>
+                                        <div class="Hightlight">{{ article.poll.name }}</div>
+                                        <ul>
+                                            {% for opinion in article.poll.opinions %}
+                                                <li>
+                                                    <label><input name="opinion[{{ opinion.id }}]" type="checkbox"/>{{ opinion.name }}</label>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% if app.request.cookies.get('prism_poll_' ~ article.poll.id) is null %}
+                                        <button type="submit">Sumbit</button>
+                                        {% else %}
+                                            Вы уже принимали участие в этом голосовании
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            {% endif %}
                         </li>
                     {% endfor %}
                     </ul>
