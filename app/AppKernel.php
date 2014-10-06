@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new Prism\PollBundle\PrismPollBundle(),
             //
             new Geek\PartyBundle\GeekPartyBundle(),
         );

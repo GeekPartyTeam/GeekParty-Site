@@ -33,4 +33,36 @@
             goLogIn()
         }
     }
-}()
+
+    var vkFunctions = []
+        , vkInitialized = false;
+    window.runAfterVkInit = function (fun) {
+        if (!vkInitialized) {
+            vkFunctions.push(fun);
+        } else {
+            fun();
+        }
+    };
+    window.vkAsyncInit = function() {
+        vkInitialized = true;
+        for (var i in vkFunctions) {
+            vkFunctions[i]();
+        }
+    };
+    setTimeout(function() {
+        var el = document.createElement("script");
+        el.type = "text/javascript";
+        el.src = "//vk.com/js/api/openapi.js";
+        el.async = true;
+        document.getElementById("vk_api_transport").appendChild(el);
+    }, 0);
+
+    // VK polls
+    window.runAfterVkInit(function () {
+        $('[data-vk-poll]').each(function () {
+            var pollId = $(this).data('vk-poll');
+            $(this).attr('id', pollId);
+            VK.Widgets.Poll(pollId, {width: "300"}, pollId);
+        })
+    })
+}();

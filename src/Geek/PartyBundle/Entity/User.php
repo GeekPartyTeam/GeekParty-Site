@@ -30,6 +30,12 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="boolean")
      */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->emailCanonical = '';
+    }
+
     public $skill_code = false;
 
     /**
@@ -73,17 +79,31 @@ class User extends BaseUser
      */
     public $facebookId = '';
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vkontakteId", type="string", length=255)
+     */
+    public $vkontakteId = '';
+
     public function serialize()
     {
-        return serialize(array($this->facebookId, parent::serialize()));
+        $parent = parent::serialize();
+        $data = [
+            'parent' => $parent,
+            'facebookId' => $this->facebookId,
+            'vkontakteId' => $this->vkontakteId,
+        ];
+        return serialize($data);
     }
 
     public function unserialize($data)
     {
-        $raw = unserialize($data);
-        if (is_array($raw)) {
-            list($this->facebookId, $parentData) = unserialize($data);
-            parent::unserialize($parentData);
+        $data = unserialize($data);
+        if (is_array($data)) {
+            $this->setVkontakteId($data['vkontakteId']);
+            $this->setFacebookId($data['facebookId']);
+            parent::unserialize($data['parent']);
         }
     }
 
@@ -336,5 +356,29 @@ class User extends BaseUser
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * Set vkontakteId
+     *
+     * @param string $vkontakteId
+     * @return User
+     */
+    public function setVkontakteId($vkontakteId)
+    {
+        $this->vkontakteId = $vkontakteId;
+        $this->setUsername($vkontakteId);
+
+        return $this;
+    }
+
+    /**
+     * Get vkontakteId
+     *
+     * @return string 
+     */
+    public function getVkontakteId()
+    {
+        return $this->vkontakteId;
     }
 }

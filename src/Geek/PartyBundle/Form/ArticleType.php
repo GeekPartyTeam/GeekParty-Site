@@ -18,6 +18,11 @@ class ArticleType extends AbstractType
                     'data-theme' => 'advanced'
                 ]
             ])
+            ->add('poll', 'entity', [
+                'class' => 'Prism\PollBundle\Entity\Poll',
+                'empty_value' => 'No poll',
+                'required' => false,
+            ])
         ;
     }
 

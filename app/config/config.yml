@@ -4,7 +4,8 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:
+        fallback: ru
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -40,6 +41,7 @@ doctrine:
         mappings:
             FOSUserBundle: ~
             GeekPartyBundle: ~
+            PrismPollBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -93,17 +95,23 @@ hwi_oauth:
             client_id:           %fb_app_id%
             client_secret:       %fb_secret%
             scope:               email
+        vkontakte:
+            type:                vkontakte
+            client_id:           %vk_app_id%
+            client_secret:       %vk_app_secret%
+            scope:               email
     fosub:
         username_iterations: 30
         properties:
             facebook: facebookId
+            vkontakte: vkontakteId
 
 services:
     my_user_provider:
         class: Geek\PartyBundle\Security\User\Provider\FOSUBUserProvider
         arguments:
             - @fos_user.user_manager
-            - { facebook: facebookId }
+            - { facebook: facebookId, vkontakte: vkontakteId }
     geek.twig.twig_extension:
         class: Geek\PartyBundle\Twig\GeekExtension
         arguments: [ @security.context, @kernel ]

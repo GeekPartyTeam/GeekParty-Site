@@ -5,10 +5,10 @@
 
 namespace Geek\PartyBundle\Security\User\Provider;
 
-use Geek\PartyBundle\Entity\User;
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
-use Symfony\Component\Security\Core\User\UserInterface;
+    use Geek\PartyBundle\Entity\User;
+    use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+    use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+    use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProvider extends BaseClass
 {
@@ -62,8 +62,13 @@ class FOSUBUserProvider extends BaseClass
             $user->setEmail($response->getEmail());
             $user->setPassword('');
             $user->setEnabled(true);
-            $user->setFirstname($response->getResponse()['first_name']);
-            $user->setLastname($response->getResponse()['last_name']);
+
+            $socialData = $response->getResponse();
+            if ($service == 'vkontakte') {
+                $socialData = $socialData['response'][0];
+            }
+            $user->setFirstname($socialData['first_name']);
+            $user->setLastname($socialData['last_name']);
 
             $this->userManager->updateUser($user);
             return $user;

@@ -3,6 +3,7 @@
 namespace Geek\PartyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Prism\PollBundle\Entity\Poll;
 
 /**
  * Article
@@ -45,6 +46,12 @@ class Article
      * @ORM\Column(type="datetime")
      */
     protected $time;
+
+    /**
+     * @var Poll
+     * @ORM\ManyToOne(targetEntity="Prism\PollBundle\Entity\Poll")
+     */
+    protected $poll;
 
     /**
      * Get id
@@ -146,5 +153,28 @@ class Article
     public function getTime()
     {
         return $this->time;
+    }
+
+    /**
+     * Set poll
+     *
+     * @param Poll $poll
+     * @return Article
+     */
+    public function setPoll(Poll $poll = null)
+    {
+        $this->poll = $poll;
+
+        return $this;
+    }
+
+    /**
+     * Get poll
+     *
+     * @return Poll
+     */
+    public function getPoll()
+    {
+        return $this->poll;
     }
 }

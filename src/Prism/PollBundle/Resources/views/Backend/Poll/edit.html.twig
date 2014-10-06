@@ -1,0 +1,58 @@
+{% extends 'PrismPollBundle:Backend:layout.html.twig' %}
+{% form_theme form 'PrismPollBundle:Backend:form_custom_layout.html.twig' %}
+
+{% block content %}
+    <div id="edit_poll">
+
+        <a href="{{ path('PrismPollBundle_backend_poll_list') }}" id="back">Back to the list</a>
+        <h1>{{ poll }}</h1>
+
+        {% if app.session.flashbag.has('success') %}
+            <div id="success">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {{ flashMessage }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="{{ path('PrismPollBundle_backend_poll_edit', {'pollId': poll.id }) }}" method="post" novalidate="novalidate" {{ form_enctype(form) }}>
+
+            <table>
+                {{ form_row(form.name) }}
+                {{ form_row(form.published) }}
+                {{ form_row(form.closed) }}
+
+                <tr>
+                    <th>Choices:</th>
+                    <td>
+                        <table id="opinions" data-prototype="{% filter escape %}{{ _self.opinionPrototype(form.opinions.vars.prototype) }}{% endfilter %}">
+                            {% for opinion in form.opinions %}
+                                <tr>
+                                    {{ _self.opinionPrototype(opinion) }}
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <a href="#" id="add_choice">+ <span>Add Choice</span></a>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+
+        {% include 'PrismPollBundle:Backend/Poll:edit_js.html.twig' %}
+    </div>
+
+{% endblock %}
+
+{% macro opinionPrototype(opinion) %}
+    <th>{{ form_label(opinion.name) }}</th>
+    <td>
+        {{ form_widget(opinion.name) }}
+        <a href="#" class="delete_choice">Delete Choice</a>
+        {{ form_errors(opinion.name) }}
+    </td>
+{% endmacro %}

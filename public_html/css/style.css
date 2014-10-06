@@ -80,6 +80,18 @@ span.orange {
     border-style: solid;
     border-width: 14px;
 }
+.error-message {
+    border-image: url("../img/border_red.png") 14 14 14 14;
+    border-width: 14px;
+    color: red;
+    margin: 0 10px 10px 10px;
+}
+.info-message {
+    border-image: url("../img/border_red.png") 14 14 14 14;
+    border-width: 14px;
+    color: #E3BA22;
+    margin: 0 10px 10px 10px;
+}
 #header {
     height: 144px;
 }
@@ -686,8 +698,9 @@ i {
 }
 
 .Button {
-    display: table-row;
+    display: table-cell;
     height: 36px;
+    padding-right: 5px;
 }
 
 .Button .LeftEdge {
@@ -739,6 +752,10 @@ i {
     color: white;
 }
 
+.Button a img {
+    margin-right: 3px;
+}
+
 .Button.GrayButton .LeftEdge {
     background: url("../img/btn_edge_gray.png");
 }
@@ -773,4 +790,22 @@ i {
 
 .Hightlight {
     color: #F69506;
+}
+
+.Poll li {
+    list-style: none;
+}
+
+h4.subtopic {
+ color: #E3BA22;
+ font-size: 20px;
+}
+
+li.vote-item {
+ line-height: 36px;
+ font-size: 24px;
+}
+
+.num-votes {
+    font-size: 12px;
 }
