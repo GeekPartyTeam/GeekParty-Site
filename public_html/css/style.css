@@ -795,3 +795,17 @@ i {
 .Poll li {
     list-style: none;
 }
+
+h4.subtopic {
+ color: #E3BA22;
+ font-size: 20px;
+}
+
+li.vote-item {
+ line-height: 36px;
+ font-size: 24px;
+}
+
+.num-votes {
+    font-size: 12px;
+}
