@@ -34,3 +34,5 @@ Prism\PollBundle\Entity\BasePoll:
       gedmo:
         timestampable:
           on: update
+    votes:
+      type: integer

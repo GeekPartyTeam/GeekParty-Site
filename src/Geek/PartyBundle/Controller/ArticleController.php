@@ -77,6 +77,8 @@ class ArticleController extends Base\CRUDController
             $voter->setUser($this->getUser());
         }
 
+        $poll->incrVotes();
+
         $em->persist($voter);
         $em->flush();
 

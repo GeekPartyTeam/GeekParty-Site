@@ -53,8 +53,8 @@
                                                 </li>
                                             {% endfor %}
                                         </ul>
-                                        <p>Проголосовало: {{ article.poll.totalVOtes }}
-                                            {% transchoice article.poll.totalVotes %}человек|человека|человек{% endtranschoice %}</p>
+                                        <p>Проголосовало: {{ article.poll.votes }}
+                                            {% transchoice article.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
                                         {% if didntVote %}
                                             {{ macros.submit('Проголосовать') }}
                                         {% else %}

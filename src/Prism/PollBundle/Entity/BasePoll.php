@@ -294,4 +294,37 @@ abstract class BasePoll
 
         return $this->totalVotes;
     }
+    /**
+     * @var integer
+     */
+    private $votes;
+
+
+    /**
+     * Set votes
+     *
+     * @param integer $votes
+     * @return BasePoll
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Get votes
+     *
+     * @return integer 
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    public function incrVotes()
+    {
+        $this->votes++;
+    }
 }
