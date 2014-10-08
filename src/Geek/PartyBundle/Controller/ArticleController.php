@@ -1,6 +1,6 @@
 <?php
 /**
- * Коршунов Георгий <georgy.k@propellerads.com>
+ * Коршунов Георгий <kipelovets@mail.ru>
  */
 
 namespace Geek\PartyBundle\Controller;
@@ -31,6 +31,14 @@ class ArticleController extends Base\CRUDController
         return true;
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToIndex()
+    {
+        return $this->redirect($this->generateUrl('geek_index'));
+    }
+
     protected function edit($id)
     {
         $params = parent::edit($id);
@@ -47,7 +55,7 @@ class ArticleController extends Base\CRUDController
     {
         if (!$this->isRequestValid()) {
             $this->addErrorMessage("Пожалуйста, не накручивайте голосование");
-            return $this->redirect($this->generateUrl('geek_index'));
+            return $this->redirectToIndex();
         }
 
         $request = $this->getRequest();
@@ -57,9 +65,14 @@ class ArticleController extends Base\CRUDController
         $poll = $em->find('PrismPollBundle:Poll', $this->getRequest()->get('poll'));
         if (!$poll) {
             $this->addErrorMessage('Голосование не найдено');
+            return $this->redirectToIndex();
         }
 
         $opinions = $this->getRequest()->get('opinion', []);
+        if (count($opinions) == 0) {
+            $this->addErrorMessage('Выберите хотя бы один пункт, чтобы проголосовать');
+            return $this->redirectToIndex();
+        }
         foreach ($poll->getOpinions() as $opinion) {
             /** @var \Prism\PollBundle\Entity\Opinion $opinion */
             if (isset($opinions[$opinion->getId()])) {
@@ -83,7 +96,7 @@ class ArticleController extends Base\CRUDController
         $em->flush();
 
         $this->addErrorMessage("Спасибо, ваш голос учтен");
-        $response = $this->redirect($this->generateUrl('geek_index'));
+        $response = $this->redirectToIndex();
         $response->headers->setCookie(new Cookie('prism_poll_' . $poll->getId(), true, time()+3600*24*365));
         return $response;
     }
