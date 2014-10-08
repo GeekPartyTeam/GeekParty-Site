@@ -1,6 +1,6 @@
 <?php
 /**
- * Коршунов Георгий <georgy.k@propellerads.com>
+ * Коршунов Георгий <kipelovets@mail.ru>
  */
 
 namespace Geek\PartyBundle\Twig;
