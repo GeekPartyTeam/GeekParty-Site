@@ -116,10 +116,8 @@
                         <p class="timerLabel showtime">{{ current_party.name }} состоялось!</p>
                     {% elseif current_party.endTime|date('Y-m-d H:i:s') > 'now'|date('Y-m-d H:i:s') %}
                         {# Пати еще не началось или еще не закончилось #}
-                        {% if current_party.startTime|date('Y-m-d H:i:s') < 'now'|date('Y-m-d H:i:s') %}
-                            <!--<p class="timerLabel">Гикпати началось!</p>-->
-                        {% else %}
-                            <!--<p class="timerLabel">{{current_party.name}} начнется через:</p>-->
+                        {% if current_party.isCurrent %}
+                            <p>{{ current_party.name }} закончится через: </p>
                         {% endif %}
                         <script type="text/javascript">
                             window.targetDate = {% if current_party.startTime|date('Y-m-d H:i:s') > 'now'|date('Y-m-d H:i:s') %}
