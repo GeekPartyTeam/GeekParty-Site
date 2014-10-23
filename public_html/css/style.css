@@ -101,6 +101,11 @@ body {
     display: inline-block;
 }
 
+#content {
+    margin: 16px;
+    color: white;
+}
+
 .k-btn-left {
     float: left;
     width: 10px;

@@ -1,0 +1,17 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
+{% block title %} GeekParty :: {{ entity.title }} {% endblock %}
+
+{% block main %}
+    <div id="content">
+        <ul class="NewsList">
+            {% include 'GeekPartyBundle::article.html.twig' with {'entity':entity} %}
+        </ul>
+
+        <div style="clear:both;"></div>
+        {% include 'GeekPartyBundle::disqus_comments.html.twig' %}
+    </div>
+
+{% endblock %}

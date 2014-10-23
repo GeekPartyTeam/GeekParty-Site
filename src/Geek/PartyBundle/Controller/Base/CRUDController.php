@@ -106,9 +106,6 @@ abstract class CRUDController extends BaseController
 
     /**
      * Finds and displays a entity.
-     *
-     * @Route("/{id}/show", name="team_show")
-     * @Template()
      */
     public function showAction(Request $request, $id)
     {
@@ -122,10 +119,10 @@ abstract class CRUDController extends BaseController
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':show.html.twig', [
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
     /**
