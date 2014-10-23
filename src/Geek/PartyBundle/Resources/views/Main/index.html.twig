@@ -3,73 +3,71 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
 {% block main %}
-    <div id="content">
-        <div id="firstline">
-            <div id="brief">
-                <div>
-                    {% if text.body is not null %}
-                        {{ text.body|raw }}
-                    {% endif %}
-                </div>
 
-                <div class="News">
-                    <h2 class="PullLeft">Новости</h2>
-                    <div class="PullRight">
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
-                        {% else %}
-                            {{ macros.fb_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                            {{ macros.vk_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-                        {% endif %}
-                    </div>
-                    <div class="Clear"></div>
-                    <ul class="NewsList">
-                    {% for article in articles %}
-                        <li class="NewsArticle">
-                            <h2 class="PullLeft">{{ article.title }}</h2>
-                            <div class="PullRight">
-                                by <span class="Hightlight">{{ article.author.firstname }} {{ article.author.lastname }}</span>
-                                @<span class="Hightlight">{{ article.time|date("Y-m-d H:i:s") }}</span>
-                                {% if is_owner_or_admin(article.author) %}
-                                    <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}" class="Special">Edit</a>
-                                {% endif %}
-                            </div>
-                            <div class="Clear">
-                                {{ article.body|purify }}
-                            </div>
-                            {% if article.poll is not null %}
-                                {% set didntVote = app.request.cookies.get('prism_poll_' ~ article.poll.id) is null %}
-                                <div class="Clear">
-                                    <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" class="Poll">
-                                        <input type="hidden" name="poll" value="{{ article.poll.id }}"/>
-                                        <h4 class="subtopic">{{ article.poll.name }}</h4>
-                                        <ul>
-                                            {% for opinion in article.poll.opinions %}
-                                                <li class="vote-item">
-                                                    <label>
-                                                        <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
-                                                        {{ opinion.name }}
-                                                    </label>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                        <p>Проголосовало: {{ article.poll.votes }}
-                                            {% transchoice article.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
-                                        {% if didntVote %}
-                                            {{ macros.submit('Проголосовать') }}
-                                        {% else %}
-                                            Вы уже принимали участие в этом голосовании
-                                        {% endif %}
-                                        <br/>
-                                        <br/>
-                                    </form>
+    <div class="row">
+        <div class="col-md-12">
+            {% if text.body is not null %}
+                {{ text.body|raw }}
+            {% endif %}
+        </div>
+    </div>
+
+    <h3>News</h3>
+
+    <div class="PullRight">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
+        {% else %}
+            {{ macros.fb_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+            {{ macros.vk_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+        {% endif %}
+    </div>
+
+
+    {% for article in articles %}
+        <div class="row main-text k-entry-block">
+            <div class="col-md-12">
+                <h3>{{ article.title }}</h3>
+                <span class="k-sub">by {{ article.author.firstname }} {{ article.author.lastname }} @{{ article.time|date("Y-m-d H:i:s") }}</span>
+                {% if is_owner_or_admin(article.author) %}
+                    <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}" class="Special">Edit</a>
+                {% endif %}
+
+                {{ article.body|purify }}
+
+                {% if article.poll is not null %}
+                    {% set didntVote = app.request.cookies.get('prism_poll_' ~ article.poll.id) is null %}
+                    <div class="Clear">
+                        <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
+                            <input type="hidden" name="poll" value="{{ article.poll.id }}"/>
+                            <h4>{{ article.poll.name }}</h4>
+
+                            {% for opinion in article.poll.opinions %}
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
+                                        {{ opinion.name }}
+                                    </label>
                                 </div>
+                            {% endfor %}
+
+                            <div>
+                                <p>Проголосовало: {{ article.poll.votes }}
+                                    {% transchoice article.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
+                            </div>
+
+
+                            {% if didntVote %}
+                                {{ macros.submit('Проголосовать') }}
+                            {% else %}
+                                Вы уже принимали участие в этом голосовании
                             {% endif %}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div> <!-- brief -->
-        </div> <!-- firstline -->
-    </div> <!-- content -->
+                            <br/>
+                            <br/>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
