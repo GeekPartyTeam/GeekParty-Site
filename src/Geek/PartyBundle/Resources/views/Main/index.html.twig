@@ -43,13 +43,15 @@
 
 
     {% for article in articles %}
-        <div class="row main-text k-entry-block">
+        <div class="row main-text k-entry-block k-news-block">
             <div class="col-md-12">
-                <h3>{{ article.title }}</h3>
+                <h3>
+                    {{ article.title }}&nbsp;
+                    {% if is_owner_or_admin(article.author) %}
+                        <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}">[править]</a>
+                    {% endif %}
+                </h3>
                 <span class="k-sub">by {{ article.author.firstname }} {{ article.author.lastname }} @{{ article.time|date("Y-m-d H:i:s") }}</span>
-                {% if is_owner_or_admin(article.author) %}
-                    <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}" class="Special">Edit</a>
-                {% endif %}
 
                 {{ article.body|purify }}
 
