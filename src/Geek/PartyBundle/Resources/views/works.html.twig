@@ -6,10 +6,56 @@
         {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
 
 
-        {% if loop.index % 2 == 0 %}
-            <p>loop.index%2 == 0</p>
+        {% if loop.index0 % 2 == 0 %}
+            <div class="col-md-6">
+                <div class="row k-entry-block">
+                    <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
+                    <div class="col-md-4">
+                        <a href="{{ entryPage }}" class="k-img-link">
+                            <img
+                                    style="width:120px;height:110px;"
+                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="..."
+                                    class="img-rounded k-img-border">
+                            <span class="k-img-play"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        <p>{{ entry.description }}.</p>
+                        <a href="{{ entryPage }}">Подробнее</a>
+                        {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                            <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+                        {% endif %}
+
+                        <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <p>loop.index%2 != 0</p>
+            <div class="col-md-6">
+                <div class="row k-entry-block">
+                    <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
+                    <div class="col-md-4">
+                        <a href="{{ entryPage }}" class="k-img-link">
+                            <img
+                                    style="width:120px;height:110px;"
+                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="..."
+                                    class="img-rounded k-img-border">
+                            <span class="k-img-play"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        <p>{{ entry.description }}.</p>
+                        <a href="{{ entryPage }}">Подробнее</a>
+                        {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                            <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+                        {% endif %}
+
+                        <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
+                    </div>
+                </div>
+            </div>
         {% endif %}
 
     {% else %}
