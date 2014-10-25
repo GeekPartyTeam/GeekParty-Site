@@ -24,9 +24,16 @@ $(function() {
                     return;
                 }
 
-                $('#days').html((days < 10) ? '0' + days : days);
+                var timeNow = "" +
+                    ((days < 10) ? '0' + days : days) +
+                    ((hours < 10) ? '0' + hours : hours) +
+                    ((minutes < 10) ? '0' + minutes : minutes);
+
+                $("#big-timer").html(timeNow);
+
+                /*$('#days').html((days < 10) ? '0' + days : days);
                 $('#hours').html((hours < 10) ? '0' + hours : hours);
-                $('#minutes').html((minutes < 10) ? '0' + minutes : minutes);
+                $('#minutes').html((minutes < 10) ? '0' + minutes : minutes);*/
             };
 
             setTimer();
