@@ -1,11 +1,13 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% block main %}
-    <div id="content">
-        <div>
+
+    <div class="row main-text">
+        <div class="col-md-12">
             {% if text.body is not null %}
                 {{ text.body|raw }}
             {% endif %}
         </div>
-    </div> <!-- content -->
+    </div>
+    
 {% endblock %}
