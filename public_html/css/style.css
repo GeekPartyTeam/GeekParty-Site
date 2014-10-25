@@ -331,7 +331,7 @@ body {
     position: absolute;
     background: url('../img/play-img.png') center center no-repeat;
     top: 7px;
-    left: 7px;
+    left: 5px;
     width: 100px;
     height: 100px;
     display: none;
