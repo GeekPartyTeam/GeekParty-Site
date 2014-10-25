@@ -1,11 +1,12 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
 <div class="row">
-    {% for entry in works %}
-        {% set partyId = entry.party is not null ? entry.party.id : null %}
-        {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
 
-        <div class="col-md-6">
+    <div class="col-md-6">
+        {% for entry in works %}
+            {% set partyId = entry.party is not null ? entry.party.id : null %}
+            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+
             {% if loop.index0 % 2 == 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
@@ -30,8 +31,14 @@
                     </div>
                 </div>
             {% endif %}
-        </div>
-        <div class="col-md-6">
+        {% endfor %}
+    </div>
+
+    <div class="col-md-6">
+        {% for entry in works %}
+            {% set partyId = entry.party is not null ? entry.party.id : null %}
+            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+
             {% if loop.index0 % 2 != 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
@@ -39,7 +46,7 @@
                         <a href="{{ entryPage }}" class="k-img-link">
                             <img
                                     style="width:110px;height:110px;"
-                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="{{ entry.id }}"
+                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="..."
                                     class="img-rounded k-img-border">
                             <span class="k-img-play"></span>
                         </a>
@@ -49,15 +56,17 @@
                         <p>{{ entry.description }}.</p>
                         <a href="{{ entryPage }}">Подробнее</a>
                         {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                            <a href="{{ path('project_edit', {'id': entry.id}) }}">[править]</a>
+                            <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
                         {% endif %}
 
                         <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
                     </div>
                 </div>
             {% endif %}
-        </div>
+        {% endfor %}
+    </div>
 
+    {% for entry in works %}
     {% else %}
         <div class="col-md-12">
             <h4>Работ пока нет</h4>
