@@ -121,19 +121,19 @@
 
             <div class="col-md-8 col-sm-8 col-xs-8">
                 {% for route, page in menu %}
-                    <a href="{{ path(route) }}" class="k-button {% if route == current_route %}k-button-active{% endif %}">
+                    <a href="{{ path(route) }}" class="k-button mr16 {% if route == current_route %}k-button-active{% endif %}">
                         <span>{{page}}</span>
                     </a>
                 {% endfor %}
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('project') }}" class="k-button {% if '/edit' in app.request.requestUri %}k-button-active{% endif %}">
+                    <a href="{{ path('project') }}" class="k-button mr16 {% if '/edit' in app.request.requestUri %}k-button-active{% endif %}">
                         <span>Upload</span>
                     </a>
                 {% endif %}
 
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('admin') }}" class="k-button {% if '/admin' in app.request.requestUri %}k-button-active{% endif %}">
+                    <a href="{{ path('admin') }}" class="k-button mr16 {% if '/admin' in app.request.requestUri %}k-button-active{% endif %}">
                         <span>Admin</span>
                     </a>
                 {% endif %}

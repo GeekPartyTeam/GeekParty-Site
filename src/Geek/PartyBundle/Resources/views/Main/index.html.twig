@@ -15,11 +15,18 @@
     <div class="row" id="k-page-header">
         <div class="col-md-12">
             <h2>
-                Новости&nbsp; 
+                Новости&nbsp;
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     {{ macros.simple_button('добавить новость', path("_edit_article", {"action":"edit"})) }}
                 {% endif %}
             </h2>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                <div id="k-menu-social">
+                    <a href="#"><img src="{% asset('img/fb.png') %}" alt="fb" /></a>
+                    <a href="#"><img src="{% asset('img/vk.png') %}" alt="vk" /></a>
+                </div>
+            {% endif %}
         </div>
     </div>
 

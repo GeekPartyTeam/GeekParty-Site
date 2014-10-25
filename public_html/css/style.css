@@ -169,7 +169,6 @@ body {
     padding-top: 10px;
     background: #0f2d3c url('../img/2.png') repeat-x 0px 16px;
     border-top: 6px solid #0A2532;
-    position: relative;
 }
 
 
@@ -209,6 +208,7 @@ body {
         height: 65px;
         color: #000;
         display: inline-block;
+        position: relative;
     }
 
     .k-button:hover {
@@ -222,6 +222,7 @@ body {
         display: block;
         padding-top: 14px;
         font: 14px/20px "pixel_font";
+        position: absolute;
     }
 
     .k-button-active {
@@ -229,7 +230,7 @@ body {
     }
 
     .k-button-active span {
-        padding-top: 32px;
+        top: 18px;
     }
 }
 
