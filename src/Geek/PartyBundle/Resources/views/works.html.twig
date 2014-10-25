@@ -13,7 +13,7 @@
                     <div class="col-md-4">
                         <a href="{{ entryPage }}" class="k-img-link">
                             <img
-                                    style="width:120px;height:110px;"
+                                    style="width:110px;height:110px;"
                                     src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="..."
                                     class="img-rounded k-img-border">
                             <span class="k-img-play"></span>
@@ -38,8 +38,8 @@
                     <div class="col-md-4">
                         <a href="{{ entryPage }}" class="k-img-link">
                             <img
-                                    style="width:120px;height:110px;"
-                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="..."
+                                    style="width:110px;height:110px;"
+                                    src="/works/{{ partyId }}/{{ entry.id }}_icon.png" alt="{{ entry.id }}"
                                     class="img-rounded k-img-border">
                             <span class="k-img-play"></span>
                         </a>
@@ -49,7 +49,7 @@
                         <p>{{ entry.description }}.</p>
                         <a href="{{ entryPage }}">Подробнее</a>
                         {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                            <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+                            <a href="{{ path('project_edit', {'id': entry.id}) }}">[править]</a>
                         {% endif %}
 
                         <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
@@ -59,7 +59,9 @@
         {% endif %}
 
     {% else %}
-        <h4>No works yet</h4>
+        <div class="col-md-12">
+            <h4>Работ пока нет</h4>
+        </div>
     {% endfor %}
 
 </div>
