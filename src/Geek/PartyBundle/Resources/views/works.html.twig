@@ -5,9 +5,8 @@
         {% set partyId = entry.party is not null ? entry.party.id : null %}
         {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
 
-
-        {% if loop.index0 % 2 == 0 %}
-            <div class="col-md-6">
+        <div class="col-md-6">
+            {% if loop.index0 % 2 == 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
                     <div class="col-md-4">
@@ -30,9 +29,10 @@
                         <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
                     </div>
                 </div>
-            </div>
-        {% else %}
-            <div class="col-md-6">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {% if loop.index0 % 2 != 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
                     <div class="col-md-4">
@@ -55,8 +55,8 @@
                         <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
                     </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
 
     {% else %}
         <div class="col-md-12">
