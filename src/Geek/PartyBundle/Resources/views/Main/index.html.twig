@@ -23,14 +23,14 @@
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
                 <div id="k-menu-social">
-                    <a href="#"><img src="{{ asset('img/fb.png') }}" alt="fb" /></a>
-                    <a href="#"><img src="{{ asset('img/vk.png') }}" alt="vk" /></a>
+                    {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                    {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
                 </div>
             {% endif %}
         </div>
     </div>
 
-    <h3>News</h3>
+    {#<h3>News</h3>
 
     <div class="PullRight">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -39,7 +39,7 @@
             {{ macros.fb_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
             {{ macros.vk_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
         {% endif %}
-    </div>
+    </div>#}
 
 
     {% for article in articles %}
@@ -89,5 +89,6 @@
                 {% endif %}
             </div>
         </div>
+        <div class="k-separator"></div>
     {% endfor %}
 {% endblock %}

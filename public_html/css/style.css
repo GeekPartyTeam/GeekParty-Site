@@ -247,6 +247,24 @@ body {
 
 
 
+.k-works-list {
+    padding: 0;
+}
+
+.k-works-list li {
+    float: left;
+    list-style-type: none;
+    font-size: 16px;
+    margin-right: 16px;
+}
+
+.k-works-list li.active {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+
 
 
 .mr16 {

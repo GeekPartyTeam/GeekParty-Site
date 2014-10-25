@@ -5,30 +5,38 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
 {% block main %}
-    <div id="content">
-        <div id="partySwitcher">
-            <h2>Работы участников</h2>
-            <div id="partyNavigation">
-                <ul>
-                    {% for p in parties %}
-                        {% if party == p %}
-                            <li><span class="currentParty">{{ p.id | upper }}</span></li>
-                        {% else %}
-                            <li><a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="PullRight">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                Работы участников&nbsp;
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {{ macros.button('Добавить работу', path('project_new')) }}
+                    {{ macros.simple_button('[добавить работу]', path('project_new')) }}
                 {% else %}
-                    {{ macros.button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                    {{ macros.simple_button('[войти]', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                 {% endif %}
-            </div>
+            </h2>
         </div>
-        {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
-    </div> <!-- content -->
+
+        <div class="col-md-12">
+            <ul class="k-works-list">
+                {% for p in parties %}
+                    {% if party == p %}
+                        <li class="active">
+                            {{ p.id | upper }}
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
+
     <!-- DISQUS -->
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */

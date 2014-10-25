@@ -3,6 +3,19 @@
 {% endmacro %}
 
 
+{% macro fb_simple_button(text, link, class) %}
+    <a href="{{ link|default('javascript:void(0)') }}">
+        <img src="/img/fb.png" alt="fb" />
+    </a>
+{% endmacro %}
+
+{% macro vk_simple_button(text, link, class) %}
+    <a href="{{ link|default('javascript:void(0)') }}">
+        <img src="/img/vk.png" alt="vk" />
+    </a>
+{% endmacro %}
+
+
 {% macro button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}

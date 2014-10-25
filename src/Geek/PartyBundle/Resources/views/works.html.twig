@@ -1,4 +1,25 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
+<div class="row">
+    {% for entry in works %}
+        {% set partyId = entry.party is not null ? entry.party.id : null %}
+        {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+
+
+        {% if loop.index % 2 == 0 %}
+            <p>loop.index%2 == 0</p>
+        {% else %}
+            <p>loop.index%2 != 0</p>
+        {% endif %}
+
+    {% else %}
+        <h4>No works yet</h4>
+    {% endfor %}
+
+</div>
+
+
+
 <div id="entries">
     {% for entry in works %}
         {% set partyId = entry.party is not null ? entry.party.id : null %}
