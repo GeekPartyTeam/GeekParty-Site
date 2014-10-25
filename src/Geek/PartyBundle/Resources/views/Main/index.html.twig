@@ -23,8 +23,8 @@
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
                 <div id="k-menu-social">
-                    <a href="#"><img src="{% asset('img/fb.png') %}" alt="fb" /></a>
-                    <a href="#"><img src="{% asset('img/vk.png') %}" alt="vk" /></a>
+                    <a href="#"><img src="{{ asset('img/fb.png') }}" alt="fb" /></a>
+                    <a href="#"><img src="{{ asset('img/vk.png') }}" alt="vk" /></a>
                 </div>
             {% endif %}
         </div>
