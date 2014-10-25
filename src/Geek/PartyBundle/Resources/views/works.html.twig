@@ -10,7 +10,7 @@
             {% if loop.index0 % 2 == 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-xs-4">
                         <a href="{{ entryPage }}" class="k-img-link">
                             <img
                                     style="width:110px;height:110px;"
@@ -20,7 +20,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 col-xs-8">
                         <p>{{ entry.description }}.</p>
                         <a href="{{ entryPage }}">Подробнее</a>
                         {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
@@ -42,7 +42,7 @@
             {% if loop.index0 % 2 != 0 %}
                 <div class="row k-entry-block">
                     <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-xs-4">
                         <a href="{{ entryPage }}" class="k-img-link">
                             <img
                                     style="width:110px;height:110px;"
@@ -52,7 +52,7 @@
                         </a>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 col-xs-8">
                         <p>{{ entry.description }}.</p>
                         <a href="{{ entryPage }}">Подробнее</a>
                         {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
