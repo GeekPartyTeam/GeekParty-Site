@@ -25,8 +25,8 @@ $(function() {
                 }
 
                 var timeNow = "" +
-                    ((days < 10) ? '0' + days : days) +
-                    ((hours < 10) ? '0' + hours : hours) +
+                    ((days < 10) ? '0' + days : days) + ":" +
+                    ((hours < 10) ? '0' + hours : hours) + ":" +
                     ((minutes < 10) ? '0' + minutes : minutes);
 
                 $("#big-timer").html(timeNow);
@@ -41,4 +41,4 @@ $(function() {
             timer = window.setInterval(setTimer, 1000);
         }
     }
-})
+});
