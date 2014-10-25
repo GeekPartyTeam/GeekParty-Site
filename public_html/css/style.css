@@ -96,6 +96,11 @@ body {
 
 /*    Button */
 
+.k-btn {
+    height: 52px;
+    display: inline-block;
+}
+
 .k-btn-left {
     float: left;
     width: 10px;
@@ -110,6 +115,8 @@ body {
     color: #000;
     text-align: center;
     padding-top: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
     font: 14px/20px "pixel_font";
 }
 
@@ -123,6 +130,10 @@ body {
 .k-btn button {
     background: none;
     border: none;
+}
+
+.k-btn a {
+    color: #000;
 }
 
 
