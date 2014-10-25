@@ -89,10 +89,20 @@
 
 	<div class="container">
         <div class="row k-header">
+
             <div id="k-left-shadow"></div>
             <div id="k-right-shadow"></div>
-            <div id="k-logo-gp"></div>
-            <div id="k-logo-nc"></div>
+
+            <div id="k-logo-gp">
+                <a href="/">
+                    <img src="{{ asset('img/logo-gp.png') }}" alt="GeekParty" />
+                </a>
+            </div>
+            <div id="k-logo-nc">
+                <a href="http://nextcastle.ru/" target="_blank">
+                    <img src="{{ asset('img/logo-nc.png') }}" alt="NextCastle" />
+                </a>
+            </div>
 
             <div class="col-md-3"></div>
             <div class="col-md-5">
@@ -101,7 +111,7 @@
             </div>
         </div>
         <div class="row k-menu">
-            <div class="col-md-4 col-sm-3 col-xs-3"></div>
+            <div class="col-md-4 col-sm-4 col-xs-3"></div>
             {% set current_route = app.request.attributes.get('_route') %}
             {% set menu = {
                 'geek_index': 'Main',
@@ -109,29 +119,25 @@
                 'geek_browse': 'Works'
                 } %}
 
-            {% for route, page in menu %}
-                <div class="col-md-1 col-sm-2 col-xs-2 mr16">
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                {% for route, page in menu %}
                     <a href="{{ path(route) }}" class="k-button {% if route == current_route %}k-button-active{% endif %}">
                         <span>{{page}}</span>
                     </a>
-                </div>
-            {% endfor %}
+                {% endfor %}
 
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div class="col-md-1 col-sm-2 col-xs-2 mr16">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('project') }}" class="k-button {% if '/edit' in app.request.requestUri %}k-button-active{% endif %}">
                         <span>Upload</span>
                     </a>
-                </div>
-            {% endif %}
+                {% endif %}
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="col-md-1 col-sm-2 col-xs-2 mr16">
+                {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('admin') }}" class="k-button {% if '/admin' in app.request.requestUri %}k-button-active{% endif %}">
                         <span>Admin</span>
                     </a>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
 
 
@@ -149,5 +155,7 @@
         </div>
     </div>
     <div id="vk_api_transport"></div>
+
+    <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
 </body>
 </html>

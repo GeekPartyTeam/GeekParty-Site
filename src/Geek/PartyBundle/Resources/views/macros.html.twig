@@ -1,3 +1,8 @@
+{% macro simple_button(text, link, class) %}
+    <a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
+{% endmacro %}
+
+
 {% macro button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}

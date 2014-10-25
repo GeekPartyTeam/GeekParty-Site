@@ -12,11 +12,7 @@
 
 @media (min-width: 992px) {
     #k-logo-gp {
-        /*background: url('./logo-gp.png');
-        width: 227px;
-        height: 100px;*/
         display: block;
-        background: url('../img/logo-gp.png');
         width: 227px;
         height: 100px;
         position: absolute;
@@ -25,7 +21,6 @@
     }
 
     #k-logo-nc {
-        background: url('../img/logo-nc.png');
         display: block;
         width: 227px;
         height: 100px;
@@ -174,9 +169,19 @@ body {
     padding-top: 10px;
     background: #0f2d3c url('../img/2.png') repeat-x 0px 16px;
     border-top: 6px solid #0A2532;
-    /*width: 100%;*/
-    /*margin: 0;*/
+    position: relative;
+}
 
+
+#k-page-header {
+    /*height: 80px;*/
+    position: relative;
+}
+
+#k-menu-social {
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
 }
 
 

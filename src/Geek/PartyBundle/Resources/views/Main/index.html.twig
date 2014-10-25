@@ -12,6 +12,23 @@
         </div>
     </div>
 
+    <div class="row" id="k-page-header">
+        <div class="col-md-12">
+            <h2>
+                Новости&nbsp;
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {{ macros.simple_button('добавить новость', path("_edit_article", {"action":"edit"})) }}
+            </h2>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                <div id="k-menu-social">
+                    <a href="#"><img src="{{ assets('img/fb.png') }}" alt="fb" /></a>
+                    <a href="#"><img src="{{ assets('img/vk.png') }}" alt="vk" /></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     <h3>News</h3>
 
     <div class="PullRight">
