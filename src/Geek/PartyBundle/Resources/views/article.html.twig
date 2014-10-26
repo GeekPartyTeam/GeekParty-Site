@@ -1,7 +1,7 @@
 {% set entryPage = path('article', {'id':entity.id}) %}
 <div class="row main-text k-entry-block k-news-block">
     <div class="col-md-12">
-        <a class="pull-right" href="{{ entryPage }}#disqus_thread">Комментарии</a>
+        <a class="pull-right" href="{{ app.request.schemeAndHttpHost }}/{{ entryPage }}#disqus_thread">Комментарии</a>
         <h3>
             {{ entity.title }}&nbsp;
             {% if is_owner_or_admin(entity.author) %}
