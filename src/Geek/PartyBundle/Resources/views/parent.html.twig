@@ -102,32 +102,37 @@
             </div>
             <div id="k-logo-nc">
                 <a href="http://nextcastle.ru/" target="_blank">
-                    <img src="{{ asset('img/logo-nc.png') }}" alt="NextCastle" />
+                    <img src="{{ asset('img/logo-nc2.png') }}" alt="NextCastle" />
                 </a>
             </div>
 
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
-                {% if current_party %}
-                    {% set startTime = current_party.startTime|date('Y-m-d H:i:s') %}
-                    {% set endTime = current_party.endTime|date('Y-m-d H:i:s') %}
-                    {% set now = 'now'|date('Y-m-d H:i:s') %}
+            {% if current_party %}
+                {% set startTime = current_party.startTime|date('Y-m-d H:i:s') %}
+                {% set endTime = current_party.endTime|date('Y-m-d H:i:s') %}
+                {% set now = 'now'|date('Y-m-d H:i:s') %}
 
-                    {% if endTime < now %}
-                        {# Последнее пати закончилось #}
-                        <p>&nbsp;</p>
-                        <p id="big-timer">{{ current_party.name }} состоялось!</p>
-                    {% elseif endTime > now %}
-                        {# Пати еще не началось или еще не закончилось #}
-                        <p>{{ current_party.name }} {{ startTime > now ? "начнется" : "закончится" }} через: </p>
-                        <script type="text/javascript">
-                            window.serverNow = "{{ now }}";
-                            window.targetDate = "{{ startTime > now ? startTime : endTime }}";
-                        </script>
-                        <p id="big-timer">?</p>
-                    {% endif %}
+                {% if endTime < now %}
+                    {# Последнее пати закончилось #}
+
+                    <div id="k-timer-bg2"></div>
+                    {#<div id="k-above-message">тут строка обычным шрифтом</div>#}
+                    <div id="k-message">{{ current_party.name }} состоялось!</div>
+
+                {% elseif endTime > now %}
+                    {# Пати еще не началось или еще не закончилось #}
+
+                    <div id="k-timer-bg2"></div>
+                    {#<div id="k-timer-bg"></div>#}
+                    <div id="k-above-message">{{ current_party.name }} {{ startTime > now ? "начнется" : "закончится" }} через: </div>
+                    <script type="text/javascript">
+                        window.serverNow = "{{ now }}";
+                        window.targetDate = "{{ startTime > now ? startTime : endTime }}";
+                    </script>
+
+                    <div id="big-timer">00:00:00</div>
                 {% endif %}
-            </div>
+            {% endif %}
+
         </div>
         <div class="row k-menu">
             <div class="col-md-4 col-sm-4 col-xs-3"></div>

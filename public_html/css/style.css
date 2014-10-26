@@ -7,6 +7,42 @@
     #k-left-shadow, #k-right-shadow, #k-logo-gp, #k-logo-nc {
         display: none;
     }
+
+    #k-timer-bg, #k-timer-bg2 {
+        background: url('./timerBg.png');
+        display: block;
+        width: 455px;
+        height: 140px;
+        position: absolute;
+        top:0;
+    }
+
+    #k-timer-bg2 {
+        background: url('./timerBg-no-signs.png');
+    }
+
+    #big-timer {
+        color: #FFAA22;
+        font: 64px/45px "pixel_font";
+        position: absolute;
+        top: 60px;
+        left: 110px;
+    }
+
+
+    #k-above-message {
+        position: absolute;
+        top: 30px;
+        left: 102px;
+        font-size: 16px;
+    }
+    #k-message {
+        color: #FFAA22;
+        font: 34px/45px "pixel_font";
+        position: absolute;
+        top: 60px;
+        left: 110px;
+    }
 }
 
 
@@ -14,19 +50,41 @@
     #k-logo-gp {
         display: block;
         width: 227px;
-        height: 100px;
+        height: 140px;
         position: absolute;
         left: 0;
         top:0;
     }
 
+    #k-timer-bg, #k-timer-bg2 {
+        left: 227px;
+    }
+
+    #big-timer {
+        left: 340px;
+    }
+
     #k-logo-nc {
         display: block;
         width: 227px;
-        height: 100px;
+        height: 140px;
         position: absolute;
         right: 0;
         top:0;
+    }
+
+    #k-above-message {
+        position: absolute;
+        top: 30px;
+        left: 330px;
+        font-size: 16px;
+    }
+    #k-message {
+        color: #FFAA22;
+        font: 34px/45px "pixel_font";
+        position: absolute;
+        top: 60px;
+        left: 340px;
     }
 }
 @media (min-width: 1200px) {}
@@ -86,8 +144,7 @@ body {
 /* Header & Logo */
 
 .k-header {
-    /*height: 102px;*/
-    height: 102px;
+    height: 140px;
     width: 100%;
     position: relative;
 }
