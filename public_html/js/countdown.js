@@ -5,9 +5,14 @@ $(function() {
             , timer
             ;
 
-        if (targetDate - new Date >= 0) {
+        arr = window.serverNow.split(/[- :]/);
+        var serverNow = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+
+        var difference = targetDate - serverNow;
+
+        if (difference >= 0) {
             var setTimer =  function(){
-                var remaining = targetDate - new Date,
+                var remaining = difference,
                     milli = 864e5,
                     a_days = remaining / milli,
                     days = Math.floor(a_days),
