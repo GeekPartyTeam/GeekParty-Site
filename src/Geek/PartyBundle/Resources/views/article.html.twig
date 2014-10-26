@@ -1,48 +1,49 @@
 {% set entryPage = path('article', {'id':entity.id}) %}
-        <div class="row main-text k-entry-block k-news-block">
-            <div class="col-md-12">
-                <h3>
-                    {{ article.title }}&nbsp;
-                    {% if is_owner_or_admin(article.author) %}
-                        <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}">[править]</a>
-                    {% endif %}
-                </h3>
-                <span class="k-sub">by {{ article.author.firstname }} {{ article.author.lastname }} @{{ article.time|date("Y-m-d H:i:s") }}</span>
+<div class="row main-text k-entry-block k-news-block">
+    <div class="col-md-12">
+        <a class="pull-right" href="{{ entryPage }}#disqus_thread">Комментарии</a>
+        <h3>
+            {{ article.title }}&nbsp;
+            {% if is_owner_or_admin(article.author) %}
+                <a href="{{ path('_edit_article', {'action':'edit', 'id':article.id}) }}">[править]</a>
+            {% endif %}
+        </h3>
+        <span class="k-sub">by {{ article.author.firstname }} {{ article.author.lastname }} @{{ article.time|date("Y-m-d H:i:s") }}</span>
 
-                {{ article.body|purify }}
+        {{ article.body|purify }}
 
-                {% if article.poll is not null %}
-                    {% set didntVote = app.request.cookies.get('prism_poll_' ~ article.poll.id) is null %}
-                    <div class="Clear">
-                        <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
-                            <input type="hidden" name="poll" value="{{ article.poll.id }}"/>
-                            <h4>{{ article.poll.name }}</h4>
+        {% if article.poll is not null %}
+            {% set didntVote = app.request.cookies.get('prism_poll_' ~ article.poll.id) is null %}
+            <div class="Clear">
+                <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
+                    <input type="hidden" name="poll" value="{{ article.poll.id }}"/>
+                    <h4>{{ article.poll.name }}</h4>
 
-                            {% for opinion in article.poll.opinions %}
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
-                                        {{ opinion.name }}
-                                    </label>
-                                </div>
-                            {% endfor %}
+                    {% for opinion in article.poll.opinions %}
+                        <div class="checkbox">
+                            <label>
+                                <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
+                                {{ opinion.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
 
-                            <div>
-                                <p>Проголосовало: {{ article.poll.votes }}
-                                    {% transchoice article.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
-                            </div>
-
-
-                            {% if didntVote %}
-                                {{ macros.submit('Проголосовать') }}
-                            {% else %}
-                                Вы уже принимали участие в этом голосовании
-                            {% endif %}
-                            <br/>
-                            <br/>
-                        </form>
+                    <div>
+                        <p>Проголосовало: {{ article.poll.votes }}
+                            {% transchoice article.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
                     </div>
-                {% endif %}
+
+
+                    {% if didntVote %}
+                        {{ macros.submit('Проголосовать') }}
+                    {% else %}
+                        Вы уже принимали участие в этом голосовании
+                    {% endif %}
+                    <br/>
+                    <br/>
+                </form>
             </div>
-        </div>
-        <div class="k-separator"></div>
+        {% endif %}
+    </div>
+</div>
+<div class="k-separator"></div>
