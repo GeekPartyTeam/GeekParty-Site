@@ -14,7 +14,7 @@ github_hook:
 
 # News article
 article:
-    pattern: /news/{id}
+    pattern: /article/{id}
     defaults: { _controller: GeekPartyBundle:Article:action, action: show }
 
 # Browse
@@ -42,7 +42,7 @@ admin_text:
     requirements:
         action: edit|index|update|delete
 _edit_article:
-    pattern: /article/{action}/{id}
+    pattern: /article_edit/{action}/{id}
     defaults: { _controller: GeekPartyBundle:Article:action, action: index, id: -1 }
     requirements:
         action: edit|index|update|delete|vote
