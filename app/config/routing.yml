@@ -12,13 +12,9 @@ github_hook:
   pattern: /github_hook
   defaults: {_controller:GeekPartyBundle:GitHub:hook}
 
-_edit_nwq_article:
-    pattern: /article/edit
-    defaults: { _controller: GeekPartyBundle:Article:action, action: edit, id: -1 }
-
 # News article
 article:
-    pattern: /article/{id}
+    pattern: /news/{id}
     defaults: { _controller: GeekPartyBundle:Article:action, action: show }
 
 # Browse
