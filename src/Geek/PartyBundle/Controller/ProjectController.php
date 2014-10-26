@@ -63,15 +63,17 @@ class ProjectController extends Base\BaseController
 
         if ($editForm->isValid()) {
 
-            $workWithSameId = $workEntityRepository->find($entity->getId());
-            if ($workWithSameId && $workWithSameId !== $entity) {
-                $this->addErrorMessage('Работа с таким идентификатором уже существует');
+            if ($entity->getId()) {
+                $workWithSameId = $workEntityRepository->find($entity->getId());
+                if ($workWithSameId && $workWithSameId !== $entity) {
+                    $this->addErrorMessage('Работа с таким идентификатором уже существует');
 
-                $parameters = $this->arrayResponse([
-                    'entity' => $entity,
-                    'edit_form' => $editForm->createView(),
-                ]);
-                return $this->render('GeekPartyBundle:Project:new.html.twig', $parameters);
+                    $parameters = $this->arrayResponse([
+                        'entity' => $entity,
+                        'edit_form' => $editForm->createView(),
+                    ]);
+                    return $this->render('GeekPartyBundle:Project:new.html.twig', $parameters);
+                }
             }
 
             if (!$entity->getParty()) {
