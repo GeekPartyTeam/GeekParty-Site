@@ -24,6 +24,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         fb_app_id: %fb_app_id%
+        disqus_shortname: %disqus_shortname%
 
 # Doctrine Configuration
 doctrine:

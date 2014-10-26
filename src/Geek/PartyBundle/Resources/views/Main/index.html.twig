@@ -30,19 +30,9 @@
         </div>
     </div>
 
-    {#<h3>News</h3>
-
-    <div class="PullRight">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ macros.button('Добавить новость', path("_edit_article", {"action":"edit"})) }}
-        {% else %}
-            {{ macros.fb_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-            {{ macros.vk_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-        {% endif %}
-    </div>#}
-
-
     {% for article in articles %}
         {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
     {% endfor %}
+
+    {% include 'GeekPartyBundle::disqus.html.twig' %}
 {% endblock %}
