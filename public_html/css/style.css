@@ -9,7 +9,7 @@
     }
 
     #k-timer-bg, #k-timer-bg2 {
-        background: url('./timerBg.png');
+        background: url('../img/timerBg.png');
         display: block;
         width: 455px;
         height: 140px;
@@ -18,7 +18,7 @@
     }
 
     #k-timer-bg2 {
-        background: url('./timerBg-no-signs.png');
+        background: url('../img/timerBg-no-signs.png');
     }
 
     #big-timer {
@@ -134,12 +134,6 @@ body {
     background: #0B2633;
 }
 
-
-#big-timer {
-    color: #FFAA22;
-    font: 40px/40px "pixel_font";
-    padding-left: 30px;
-}
 
 /* Header & Logo */
 
