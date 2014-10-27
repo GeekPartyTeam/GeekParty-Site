@@ -88,7 +88,7 @@ class BrowseController extends Base\BaseController
             if ($a->getTime() < $tooOld) {
                 return 1;
             }
-            return $a->getTime() < $b->getTime();
+            return $a->getTime() < $b->getTime() ? -1 : 1;
         });
         return $works;
     }
