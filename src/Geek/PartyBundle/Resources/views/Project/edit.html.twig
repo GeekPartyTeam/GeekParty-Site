@@ -52,7 +52,7 @@
                             {{ form_widget(edit_form.longDescription) }}
                         </div>
 
-                        {% if current_party.isCurrent %}
+                        {% if current_party.isCurrent or is_granted('ROLE_ADMIN') %}
 
                         <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>

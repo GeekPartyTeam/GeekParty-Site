@@ -22,10 +22,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class ProjectController extends Base\BaseController
 {
+    private function isAdmin()
+    {
+        return $this->get('security.context')->isGranted('ROLE_ADMIN');
+    }
+
     public function checkRights(Work $entity)
     {
         if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&
-            !$this->get('security.context')->isGranted('ROLE_ADMIN')
+            !$this->isAdmin()
         ) {
             return $this->redirect($this->generateUrl('geek_index'));
         }
@@ -313,7 +318,7 @@ class ProjectController extends Base\BaseController
             $this->uploadIcon($iconFile, $entity->getId(), $partyDir);
         }
         if ($gameFile = $editForm['file']->getData()) {
-            if ($entity->getParty()->isCurrent()) {
+            if ($entity->getParty()->isCurrent() || $this->isAdmin()) {
                 $this->uploadGame($gameFile, $entity->getId(), $partyDir);
             } else {
                 $message = "Событие " . $entity->getParty()->getName() . " еще не началось или уже закончилось.
