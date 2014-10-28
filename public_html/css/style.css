@@ -29,7 +29,6 @@
         left: 110px;
     }
 
-
     #k-above-message {
         position: absolute;
         top: 30px;
@@ -44,7 +43,6 @@
         left: 110px;
     }
 }
-
 
 @media (min-width: 992px) {
     #k-logo-gp {
@@ -89,8 +87,6 @@
 }
 @media (min-width: 1200px) {}
 
-
-
 @media (min-width: 768px) {
     #k-left-shadow, #k-right-shadow {
         display: block;
@@ -111,13 +107,7 @@
         right: -61px;
         /*right: -31px;*/
     }
-
-
-
 }
-
-
-
 
 #k-bg-gradient {
     background: url('../img/bg-gradient.png') repeat-x;
@@ -129,11 +119,9 @@
     z-index: -999;
 }
 
-
 body {
     background: #0B2633;
 }
-
 
 /* Header & Logo */
 
@@ -142,8 +130,6 @@ body {
     width: 100%;
     position: relative;
 }
-
-
 
 /*    Button */
 
@@ -192,22 +178,16 @@ body {
     color: #000;
 }
 
-
-
-
-
 .k-page-header {
     color: #ffd02e;
     font-size: 22px;
 }
-
 
 .k-separator {
     width: 100%;
     height: 31px;
     background: url("../img/2.png") repeat scroll;
 }
-
 
 .k-sub {
     color: #e3bf50;
@@ -217,11 +197,9 @@ body {
     display: block;
 }
 
-
 .k-red {
     color: #ff1a1a;
 }
-
 
 .p-main p {
     font-size: 18px;
@@ -238,7 +216,6 @@ body {
     border-top: 6px solid #0A2532;
 }
 
-
 #k-page-header {
     /*height: 80px;*/
     position: relative;
@@ -250,12 +227,10 @@ body {
     bottom: 10px;
 }
 
-
 .k-image-margin {
     /*margin-bottom: 16px;*/
     padding-bottom: 16px;
 }
-
 
 @media (min-width: 1px) {
     .k-button {
@@ -301,7 +276,6 @@ body {
     }
 }
 
-
 .k-entry-block {
     border-image: url("../img/border.png") 14 14 14 14;
     border-style: solid;
@@ -311,8 +285,6 @@ body {
 .k-gold-color {
     color: #e3bf50;
 }
-
-
 
 .k-works-list {
     padding: 0;
@@ -329,10 +301,6 @@ body {
     color: #fff;
     font-weight: 700;
 }
-
-
-
-
 
 .mr16 {
     margin-right: 16px;
@@ -358,7 +326,6 @@ body {
     width: 100%;
 }
 
-
 .k-works-list {
 
 }
@@ -374,14 +341,6 @@ body {
     color: #fff;
     font-weight: 700;
 }
-
-
-
-
-
-
-
-
 
 .k-img-border {
     border: 2px solid #fff;
@@ -406,4 +365,12 @@ body {
 
 .k-img-link:hover span {
     display: block;
+}
+
+.record_actions {
+    list-style: none;
+}
+
+.k-inline {
+    display: inline-block;
 }
