@@ -293,6 +293,11 @@ class ProjectController extends Base\BaseController
         $file->move($dir, 'archive.zip');
         $zip = new \ZipArchive();
         if ($zip->open($path)) {
+            $li = $zip->locateName('index.html');
+            if (false === $li) {
+                unlink($path);
+                throw new InvalidUploadedFile('Архив должен содержать файл index.html');
+            }
             $zip->extractTo($dir);
         }
         unlink($path);
