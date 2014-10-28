@@ -56,11 +56,18 @@ class Work
     protected $party;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $time;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->time = new \DateTime();
     }
     
     /**
@@ -273,5 +280,28 @@ class Work
     public function getLongDescription()
     {
         return $this->longDescription;
+    }
+
+    /**
+     * Set time
+     *
+     * @param \DateTime $time
+     * @return Work
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     *
+     * @return \DateTime 
+     */
+    public function getTime()
+    {
+        return $this->time;
     }
 }

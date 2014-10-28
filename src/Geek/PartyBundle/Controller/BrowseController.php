@@ -2,7 +2,9 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Doctrine\ORM\EntityRepository;
 use Geek\PartyBundle\Entity\Party;
+use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,8 +20,10 @@ class BrowseController extends Base\BaseController
      */
     public function partyAction($party)
     {
+        /** @var Party $partyEntity */
         $partyEntity = null;
         $em = $this->getDoctrine()->getManager();
+        /** @var EntityRepository $partyRepo */
         $partyRepo = $em->getRepository('GeekPartyBundle:Party');
 
         /** @var $partyEntity Party */
@@ -29,11 +33,7 @@ class BrowseController extends Base\BaseController
             $partyEntity = $partyRepo->find($party);
         }
 
-        $works = [];
-        if ($partyEntity) {
-            $works = $em->getRepository('GeekPartyBundle:Work')
-                ->findBy(['party' => $partyEntity]);
-        }
+        $works = $this->fetchWorks($partyEntity);
 
         $parties = $partyRepo->findAll();
 
@@ -62,5 +62,36 @@ class BrowseController extends Base\BaseController
             'party' => $party,
             'work' => $workEntity
         ]);
+    }
+
+    /**
+     * @param $partyEntity
+     * @return array
+     */
+    public function fetchWorks(Party $partyEntity = null)
+    {
+        if (!$partyEntity) {
+            return [];
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        /** @var EntityRepository $workRepo */
+        $workRepo = $em->getRepository('GeekPartyBundle:Work');
+
+        $works = $workRepo->findBy(['party' => $partyEntity], ['time' => 'ASC']);
+
+        $tooOld = new \DateTime('2000-01-01');
+        usort($works, function ($a, $b) use ($tooOld) {
+            /** @var Work $a */
+            /** @var Work $b */
+            if ($b->getTime() < $tooOld) {
+                return -1;
+            }
+            if ($a->getTime() < $tooOld) {
+                return 1;
+            }
+            return $a->getTime() < $b->getTime() ? -1 : 1;
+        });
+        return $works;
     }
 }
