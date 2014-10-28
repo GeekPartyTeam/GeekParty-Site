@@ -87,7 +87,7 @@ class ProjectController extends Base\BaseController
             $em->persist($entity);
             $em->flush();
 
-            $response = new RedirectResponse($this->generateUrl('project'), 302);
+            $response = new RedirectResponse($this->generateUrl('geek_browse'), 302);
 
             try {
                 $this->uploadFiles($editForm, $entity);
