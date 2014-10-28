@@ -24,7 +24,7 @@
             <br />
 
             <form id="teamEditorMain" action="{%if new is not defined %}{{ path('project_update', { 'id': entity.id }) }}{% else %}{{ path('project_create') }}{% endif %}" method="post" {{ form_enctype(edit_form) }}>
-                <div id="">
+                <div>
                     {{ form_errors(edit_form) }}
 
                     <div id="rightBorder">

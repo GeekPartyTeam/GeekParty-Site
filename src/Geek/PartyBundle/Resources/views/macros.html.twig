@@ -43,7 +43,7 @@
 {% macro submit(text, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <button type="submit">{{ text }}</button>
+            <button type="submit" class="{{ class }}">{{ text }}</button>
         {% endblock %}
     {% endembed %}
 {% endmacro %}
