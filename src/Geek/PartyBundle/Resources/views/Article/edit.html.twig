@@ -2,7 +2,7 @@
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
-{% block title %} GeekParty :: Редактирование текстового блока {% endblock %}
+{% block title %} GeekParty :: Редактирование новости {% endblock %}
 
 {% block main %}
     <div id="content">
@@ -41,7 +41,7 @@
                 <div class="k-inline">
                     {{ form_widget(delete_form) }}
                 </div>
-                {{ macros.submit("Удалить", "k-red  ") }}
+                {{ macros.submit("Удалить", "k-red") }}
             {% endif %}
         </p>
     </form>
