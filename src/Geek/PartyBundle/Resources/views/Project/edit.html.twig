@@ -11,7 +11,7 @@
         </div>
         <div class="briefDescription">
             <p><a href="{{ path('project') }}">&larr; назад к списку</a></p>
-            <h2 class="inlineBlock">Редактировать проект</h2>
+            <h2 class="inlineBlock">Редактирование проект</h2>
 
             {% if new is not defined %}
                 <form class="inlineBlock" action="{{ path('project_delete', {'id': entity.id}) }}" method="post">
