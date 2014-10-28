@@ -26,6 +26,11 @@ class Party
     protected $endTime;
 
     /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $description = '';
+
+    /**
      * Set id
      *
      * @param string $id
@@ -103,5 +108,28 @@ class Party
     {
         $now = new \DateTime();
         return $now >= $this->getStartTime() && $now <= $this->getEndTime();
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Party
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

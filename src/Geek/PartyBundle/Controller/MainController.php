@@ -42,6 +42,7 @@ class MainController extends Base\BaseController
         return $this->render('GeekPartyBundle:Main:admin.html.twig', [
             'indexText' => $this->findTextBlock('index'),
             'aboutText' => $this->findTextBlock('about'),
+            'partyText' => $this->findTextBlock('party'),
         ]);
     }
 }

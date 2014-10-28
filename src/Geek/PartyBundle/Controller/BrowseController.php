@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Geek\PartyBundle\Entity\Party;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,6 +21,8 @@ class BrowseController extends Base\BaseController
         $partyEntity = null;
         $em = $this->getDoctrine()->getManager();
         $partyRepo = $em->getRepository('GeekPartyBundle:Party');
+
+        /** @var $partyEntity Party */
         if ($party == 'latest') {
             $partyEntity = $partyRepo->findOneBy([], ['endTime' => 'DESC']);
         } else {
@@ -35,6 +38,7 @@ class BrowseController extends Base\BaseController
         $parties = $partyRepo->findAll();
 
         return $this->arrayResponse([
+            'text' => $this->findTextBlock('party'),
             'works' => $works,
             'parties' => $parties,
             'party' => $partyEntity

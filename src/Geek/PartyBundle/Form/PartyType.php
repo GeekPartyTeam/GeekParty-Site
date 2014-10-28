@@ -14,6 +14,12 @@ class PartyType extends AbstractType
             ->add('id')
             ->add('startTime')
             ->add('endTime')
+            ->add('description', 'textarea', [
+                 'attr' => [
+                     'class' => 'tinymce',
+                     'data-theme' => 'advanced'
+                 ]
+             ])
         ;
     }
 

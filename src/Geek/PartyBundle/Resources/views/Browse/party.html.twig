@@ -7,6 +7,18 @@
 {% block main %}
     <div class="row">
         <div class="col-md-12">
+            {{ text.body|raw }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ party.description|raw }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <h2>
                 Работы участников&nbsp;
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
