@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cf5168b12e1a429030a90d3036cfa525",
+    "hash": "9006c0cb95e612e0e0b32c54102104ba",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1376,6 +1376,59 @@
                 "http client"
             ],
             "time": "2014-09-15 12:42:36"
+        },
+        {
+            "name": "lexik/maintenance-bundle",
+            "version": "1.0.3",
+            "target-dir": "Lexik/Bundle/MaintenanceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikMaintenanceBundle.git",
+                "reference": "020d980839d58e15f8fa211af8b55bdf5633b07a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikMaintenanceBundle/zipball/020d980839d58e15f8fa211af8b55bdf5633b07a",
+                "reference": "020d980839d58e15f8fa211af8b55bdf5633b07a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/dependency-injection": "~2.1",
+                "symfony/framework-bundle": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Lexik\\Bundle\\MaintenanceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                },
+                {
+                    "name": "Gilles Gauthier",
+                    "email": "g.gauthier@lexik.fr"
+                },
+                {
+                    "name": "Djuri Baars",
+                    "email": "info@djurict.nl"
+                }
+            ],
+            "description": "This bundle allows you to place your website in maintenance mode by calling two commands from your console.",
+            "homepage": "https://github.com/lexik/LexikMaintenanceBundle",
+            "keywords": [
+                "Symfony2",
+                "bundle",
+                "maintenance"
+            ],
+            "time": "2014-03-12 09:40:02"
         },
         {
             "name": "monolog/monolog",

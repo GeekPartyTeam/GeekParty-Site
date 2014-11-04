@@ -25,7 +25,8 @@
         "sensio/distribution-bundle": "*",
         "sensio/generator-bundle": "*",
         "symfony/assetic-bundle": "*",
-	    "symfony/console": "2.4.*"
+	    "symfony/console": "2.4.*",
+        "lexik/maintenance-bundle": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [
