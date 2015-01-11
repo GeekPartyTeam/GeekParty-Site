@@ -47,6 +47,11 @@ _edit_article:
     requirements:
         action: edit|index|update|delete|vote
 
+# Themes adding & voting
+party_themes:
+    resource: "@GeekPartyBundle/Controller/PartyThemeController.php"
+    type:     annotation
+    prefix:   /party
 
 # Upload & edit project
 _edit_prject:

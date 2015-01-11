@@ -35,6 +35,14 @@
         left: 102px;
         font-size: 16px;
     }
+
+    #k-below-message {
+        position: absolute;
+        top: 105px;
+        left: 312px;
+        font-size: 16px;
+    }
+
     #k-message {
         color: #FFAA22;
         font: 34px/45px "pixel_font";
@@ -77,6 +85,14 @@
         left: 330px;
         font-size: 16px;
     }
+
+    #k-below-message {
+        position: absolute;
+        top: 105px;
+        left: 540px;
+        font-size: 16px;
+    }
+
     #k-message {
         color: #FFAA22;
         font: 34px/45px "pixel_font";
@@ -377,4 +393,16 @@ body {
 
 .PartiesTable td {
     padding: 5px;
+}
+
+#teamEditorMain .PartyThemeText {
+    padding-top: 5px;
+    position: relative;
+    top: -14px;
+    width: 400px;
+}
+
+.PartyThemeForm .k-btn {
+    padding-top: 6px;
+    padding-left: 22px;
 }

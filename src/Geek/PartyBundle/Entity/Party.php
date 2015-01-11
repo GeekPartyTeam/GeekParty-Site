@@ -244,4 +244,9 @@ class Party
     {
         return $this->themeVotingEndTime;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

@@ -16,6 +16,7 @@
     {% elseif submissionEndTime > now %}
         {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " закончится через:" %}
         {% set targetDate = submissionEndTime %}
+        {% set belowMessage = "<a href='" ~ path("themes_index") ~ "'>Добавить тему</a>" %}
 
     {% elseif votingStartTime > now %}
         {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " начнется через:" %}
@@ -24,10 +25,12 @@
     {% elseif votingEndTime > now %}
         {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " закончится через:" %}
         {% set targetDate = votingEndTime %}
+        {% set belowMessage = "<a href='" ~ path("themes_index") ~ "'>Голосовать</a>" %}
 
     {% elseif startTime > now %}
         {% set aboveMessage = current_party.name ~ " начнется через:" %}
         {% set targetDate = startTime %}
+        {% set belowMessage = "<a href='" ~ path("project") ~ "'>Добавить работу</a>" %}
 
     {% elseif endTime > now %}
         {% set aboveMessage = current_party.name ~ " закончится через:" %}
@@ -49,5 +52,8 @@
             window.targetDate = "{{ targetDate }}";
         </script>
         <div id="big-timer">00:00:00</div>
+        {% if belowMessage is defined %}
+            <div id="k-below-message">{{ belowMessage|raw }}</div>
+        {%  endif %}
     {% endif %}
 {% endif %}
