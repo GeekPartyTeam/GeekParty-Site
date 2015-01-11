@@ -33,6 +33,11 @@ class PartyTheme
     protected $text;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    protected $user;
+
+    /**
      * @ORM\OneToMany(targetEntity="PartyThemeVote",mappedBy="theme")
      */
     protected $votes;
@@ -121,5 +126,38 @@ class PartyTheme
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Geek\PartyBundle\Entity\User $user
+     * @return PartyTheme
+     */
+    public function setUser(\Geek\PartyBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Geek\PartyBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
