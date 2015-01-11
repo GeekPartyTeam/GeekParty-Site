@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,7 +67,7 @@ class Work
      */
     public function __construct()
     {
-        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->authors = new ArrayCollection();
         $this->time = new \DateTime();
     }
     
@@ -170,10 +171,10 @@ class Work
     /**
      * Set party
      *
-     * @param \Geek\PartyBundle\Entity\Party $party
+     * @param Party $party
      * @return Work
      */
-    public function setParty(\Geek\PartyBundle\Entity\Party $party = null)
+    public function setParty(Party $party = null)
     {
         $this->party = $party;
     
@@ -183,7 +184,7 @@ class Work
     /**
      * Get party
      *
-     * @return \Geek\PartyBundle\Entity\Party 
+     * @return Party
      */
     public function getParty()
     {
@@ -203,10 +204,10 @@ class Work
     /**
      * Set author
      *
-     * @param \Geek\PartyBundle\Entity\User $author
+     * @param User $author
      * @return Work
      */
-    public function setAuthor(\Geek\PartyBundle\Entity\User $author = null)
+    public function setAuthor(User $author = null)
     {
         $this->author = $author;
     

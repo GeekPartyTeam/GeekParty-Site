@@ -12,6 +12,10 @@ class PartyType extends AbstractType
     {
         $builder
             ->add('id')
+            ->add('themeSubmissionStartTime')
+            ->add('themeSubmissionEndTime')
+            ->add('themeVotingStartTime')
+            ->add('themeVotingEndTime')
             ->add('startTime')
             ->add('endTime')
             ->add('description', 'textarea', [

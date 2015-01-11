@@ -50,7 +50,7 @@ class Text
      * Set name
      *
      * @param string $name
-     * @return Page
+     * @return string
      */
     public function setName($name)
     {
@@ -73,7 +73,7 @@ class Text
      * Set body
      *
      * @param string $body
-     * @return Page
+     * @return string
      */
     public function setBody($body)
     {

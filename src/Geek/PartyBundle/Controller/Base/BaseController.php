@@ -36,6 +36,7 @@ class BaseController extends Controller
     {
         $parameters['current_party'] = $this->getCurrentParty();
         $parameters['current_user'] = $this->getUser();
+        $parameters['now'] = $this->getRequest()->get('now', date('Y-m-d H:i:s'));
         return $parameters;
     }
 

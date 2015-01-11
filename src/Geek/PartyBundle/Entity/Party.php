@@ -16,6 +16,11 @@ class Party
     protected $id;
 
     /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $description = '';
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $startTime;
@@ -26,9 +31,24 @@ class Party
     protected $endTime;
 
     /**
-     * @ORM\Column(type="text",nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    protected $description = '';
+    protected $themeSubmissionStartTime;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $themeSubmissionEndTime;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $themeVotingStartTime;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $themeVotingEndTime;
 
     /**
      * Set id
@@ -131,5 +151,97 @@ class Party
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set themeSubmissionStartTime
+     *
+     * @param \DateTime $themeSubmissionStartTime
+     * @return Party
+     */
+    public function setThemeSubmissionStartTime($themeSubmissionStartTime)
+    {
+        $this->themeSubmissionStartTime = $themeSubmissionStartTime;
+
+        return $this;
+    }
+
+    /**
+     * Get themeSubmissionStartTime
+     *
+     * @return \DateTime 
+     */
+    public function getThemeSubmissionStartTime()
+    {
+        return $this->themeSubmissionStartTime;
+    }
+
+    /**
+     * Set themeSubmissionEndTime
+     *
+     * @param \DateTime $themeSubmissionEndTime
+     * @return Party
+     */
+    public function setThemeSubmissionEndTime($themeSubmissionEndTime)
+    {
+        $this->themeSubmissionEndTime = $themeSubmissionEndTime;
+
+        return $this;
+    }
+
+    /**
+     * Get themeSubmissionEndTime
+     *
+     * @return \DateTime 
+     */
+    public function getThemeSubmissionEndTime()
+    {
+        return $this->themeSubmissionEndTime;
+    }
+
+    /**
+     * Set themeVotingStartTime
+     *
+     * @param \DateTime $themeVotingStartTime
+     * @return Party
+     */
+    public function setThemeVotingStartTime($themeVotingStartTime)
+    {
+        $this->themeVotingStartTime = $themeVotingStartTime;
+
+        return $this;
+    }
+
+    /**
+     * Get themeVotingStartTime
+     *
+     * @return \DateTime 
+     */
+    public function getThemeVotingStartTime()
+    {
+        return $this->themeVotingStartTime;
+    }
+
+    /**
+     * Set themeVotingEndTime
+     *
+     * @param \DateTime $themeVotingEndTime
+     * @return Party
+     */
+    public function setThemeVotingEndTime($themeVotingEndTime)
+    {
+        $this->themeVotingEndTime = $themeVotingEndTime;
+
+        return $this;
+    }
+
+    /**
+     * Get themeVotingEndTime
+     *
+     * @return \DateTime 
+     */
+    public function getThemeVotingEndTime()
+    {
+        return $this->themeVotingEndTime;
     }
 }

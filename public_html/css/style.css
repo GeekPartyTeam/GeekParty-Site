@@ -374,3 +374,7 @@ body {
 .k-inline {
     display: inline-block;
 }
+
+.PartiesTable td {
+    padding: 5px;
+}
