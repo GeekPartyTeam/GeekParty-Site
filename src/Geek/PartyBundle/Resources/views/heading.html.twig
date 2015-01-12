@@ -25,7 +25,7 @@
     {% elseif votingEndTime > now %}
         {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " закончится через:" %}
         {% set targetDate = votingEndTime %}
-        {% set belowMessage = "<a href='" ~ path("themes_index") ~ "'>Голосовать</a>" %}
+        {% set belowMessage = "<a href='" ~ path("themes_votes") ~ "'>Голосовать</a>" %}
 
     {% elseif startTime > now %}
         {% set aboveMessage = current_party.name ~ " начнется через:" %}

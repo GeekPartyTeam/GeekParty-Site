@@ -36,11 +36,16 @@ class PartyThemeVote
     /**
      * @ORM\Column
      */
-    protected $ip;
+    protected $ip = '';
     /**
      * @ORM\Column
      */
-    protected $userAgent;
+    protected $userAgent = '';
+
+    public function __construct()
+    {
+        $this->setDate(new \DateTime());
+    }
 
     /**
      * Set date
