@@ -3,6 +3,10 @@
     src: url("../css/uni05_53.ttf");
 }
 
+#k-below-message a {
+    font: 16px/30px "pixel_font";
+}
+
 @media (min-width: 1px) {
     #k-left-shadow, #k-right-shadow, #k-logo-gp, #k-logo-nc {
         display: none;
@@ -33,14 +37,14 @@
         position: absolute;
         top: 30px;
         left: 102px;
-        font-size: 16px;
+        /*font-size: 16px;*/
+        font: 16px/30px "pixel_font";
     }
 
     #k-below-message {
         position: absolute;
         top: 105px;
         left: 312px;
-        font-size: 16px;
     }
 
     #k-message {
@@ -83,14 +87,14 @@
         position: absolute;
         top: 30px;
         left: 330px;
-        font-size: 16px;
+        /*font-size: 16px;*/
+        font: 16px/30px "pixel_font";
     }
 
     #k-below-message {
         position: absolute;
         top: 105px;
         left: 540px;
-        font-size: 16px;
     }
 
     #k-message {

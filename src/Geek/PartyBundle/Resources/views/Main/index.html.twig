@@ -20,13 +20,6 @@
                     {{ macros.simple_button('[добавить новость]', path("_edit_article", {"action":"edit"})) }}
                 {% endif %}
             </h2>
-
-            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-                <div id="k-menu-social">
-                    {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                    {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-                </div>
-            {% endif %}
         </div>
     </div>
 
