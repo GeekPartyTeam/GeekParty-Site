@@ -410,3 +410,9 @@ body {
 .PartyEdit input, .PartyEdit select {
     color: black;
 }
+
+.HeaderLogo {
+    position: relative;
+    left: 50px;
+    top: 10px;
+}
