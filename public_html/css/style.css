@@ -406,3 +406,7 @@ body {
     padding-top: 6px;
     padding-left: 22px;
 }
+
+.PartyEdit input, .PartyEdit select {
+    color: black;
+}
