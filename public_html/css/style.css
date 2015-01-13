@@ -406,3 +406,8 @@ body {
     padding-top: 6px;
     padding-left: 22px;
 }
+
+.k-news-block td {
+	padding: 5px;
+	border: 1px #1c6c94 solid;
+}
