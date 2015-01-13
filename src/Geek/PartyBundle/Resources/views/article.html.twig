@@ -8,7 +8,7 @@
                 <a href="{{ path('_edit_article', {'action':'edit', 'id':entity.id}) }}">[править]</a>
             {% endif %}
         </h3>
-        <span class="k-sub">by {{ entity.author.firstname }} {{ entity.author.lastname }} @{{ entity.time|date("Y-m-d H:i:s") }}</span>
+        <span class="k-sub">by {{ entity.author.fullname }} @{{ entity.time|date("Y-m-d H:i:s") }}</span>
 
         {{ entity.body|purify }}
 

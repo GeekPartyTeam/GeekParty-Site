@@ -2,21 +2,9 @@
 
 namespace Geek\PartyBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
 use Geek\PartyBundle\Entity\PartyTheme;
 use Geek\PartyBundle\Entity\PartyThemeVote;
-use Geek\PartyBundle\Exception\InvalidUploadedFile;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Geek\PartyBundle\Entity\Work;
-use Geek\PartyBundle\Form\ProjectType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Party themes adding & voting
@@ -142,6 +130,34 @@ class PartyThemeController extends Base\BaseController
             );
             return $response;
         }
+
+        return $response;
+    }
+
+    /**
+     * @Route("/remove", name="themes_remove")
+     * @Method("POST")
+     * @param Request $request
+     * @throws \Exception
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction(Request $request)
+    {
+        $response = $this->redirect($request->headers->get('referer'));
+        if (!$this->isAdmin()) {
+            return $response;
+        }
+
+        $themeId = $request->get('theme_id');
+        if (!$themeId) {
+            throw new \Exception('Не выйдет!');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        /** @var PartyTheme $theme */
+        $theme = $em->getRepository('GeekPartyBundle:PartyTheme')->find($themeId);
+        $em->remove($theme);
+        $em->flush();
 
         return $response;
     }

@@ -22,11 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class ProjectController extends Base\BaseController
 {
-    private function isAdmin()
-    {
-        return $this->get('security.context')->isGranted('ROLE_ADMIN');
-    }
-
     public function checkRights(Work $entity)
     {
         if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&

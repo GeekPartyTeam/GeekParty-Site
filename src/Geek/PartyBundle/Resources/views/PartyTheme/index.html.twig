@@ -1,6 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+{% import 'GeekPartyBundle::PartyTheme/macros.html.twig' as theme_macros %}
 
 {% block title %} GeekParty :: Темы для геймджема {% endblock %}
 
@@ -27,7 +28,7 @@
            <ul>
                {% for t in themes %}
                    <li>
-                       {{ t.text }}
+                       {{ theme_macros.theme(t) }}
                    </li>
                {% endfor %}
            </ul>

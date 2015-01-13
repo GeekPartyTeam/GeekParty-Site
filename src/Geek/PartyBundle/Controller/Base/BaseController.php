@@ -57,4 +57,9 @@ class BaseController extends Controller
         $session = $this->get('session');
         $session->getFlashBag()->add('notice', $message);
     }
+
+    protected function isAdmin()
+    {
+        return $this->get('security.context')->isGranted('ROLE_ADMIN');
+    }
 }

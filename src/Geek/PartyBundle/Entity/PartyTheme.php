@@ -38,7 +38,7 @@ class PartyTheme
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="PartyThemeVote",mappedBy="theme")
+     * @ORM\OneToMany(targetEntity="PartyThemeVote",mappedBy="theme",cascade="remove")
      */
     protected $votes;
     /**

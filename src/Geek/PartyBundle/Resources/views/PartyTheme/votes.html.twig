@@ -1,6 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+{% import 'GeekPartyBundle::PartyTheme/macros.html.twig' as theme_macros %}
 
 {% block title %} GeekParty :: Голосование за тему для следующего геймджема {% endblock %}
 
@@ -22,7 +23,7 @@
     {% for t in themes %}
         <div class="row k-entry-block">
            <div class="col-md-6">
-               {{ t.text }}
+               {{ theme_macros.theme(t) }}
            </div>
             <div class="col-md-6">
                 <form action="{{ path('themes_vote') }}" method="POST">
