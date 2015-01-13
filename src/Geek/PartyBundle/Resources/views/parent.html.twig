@@ -97,14 +97,22 @@
 
             <div id="k-logo-gp">
                 <a href="/">
-                    <img src="{{ asset('img/logo-gp.png') }}" alt="GeekParty" />
+                    <img class="HeaderLogo" src="{{ asset('img/logo_site01.png') }}" alt="GeekParty" />
                 </a>
             </div>
+            {#
             <div id="k-logo-nc">
                 <a href="http://nextcastle.ru/" target="_blank">
                     <img src="{{ asset('img/logo-nc2.png') }}" alt="NextCastle" />
                 </a>
             </div>
+            #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                <div id="k-menu-social">
+                    {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                    {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+                </div>
+            {% endif %}
 
             {% include "GeekPartyBundle::heading.html.twig" %}
 
