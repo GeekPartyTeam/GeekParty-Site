@@ -5,6 +5,9 @@ namespace Geek\PartyBundle\Controller;
 use Geek\PartyBundle\Entity\PartyTheme;
 use Geek\PartyBundle\Entity\PartyThemeVote;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Party themes adding & voting
