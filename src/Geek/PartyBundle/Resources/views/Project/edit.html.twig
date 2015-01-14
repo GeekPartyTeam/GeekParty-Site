@@ -2,12 +2,12 @@
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
-{% block title %} GeekParty :: Редактирование проекта {% endblock %}
+{% block title %} {{ parent() }} :: Редактирование проекта {% endblock %}
 
 {% block main %}
     <div class="briefLine">
         <div class="briefImage">
-            <img src="http://geekparty.ru/img/team/edit_team.png" alt="edit" />
+            <img src="/img/team/edit_team.png" alt="edit" />
         </div>
         <div class="briefDescription">
             <p><a href="{{ path('project') }}">&larr; назад к списку</a></p>
@@ -66,7 +66,7 @@
                             <div class="info-message">
                                 Событие {{ current_party.name }} уже закончилось.
                                 Чтобы обновить проект, обратитесь к администрации сайта:
-                                <a href="mailto:geekparty.ru@gmail.com">geekparty.ru@gmail.com</a>
+                                <a href="mailto:{{ admin_email }}">{{ admin_email }}</a>
                             </div>
 
                         {% endif %}

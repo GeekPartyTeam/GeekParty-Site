@@ -1,6 +1,6 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
-{% block title %} GeekParty :: Редактирование текстового блока {% endblock %}
+{% block title %} {{ parent() }} :: Редактирование текстового блока {% endblock %}
 
 {% block main %}
 <form action="{{ path('admin_text', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype

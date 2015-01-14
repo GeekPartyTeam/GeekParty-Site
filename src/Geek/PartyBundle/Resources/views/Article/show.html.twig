@@ -2,7 +2,7 @@
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 
-{% block title %} GeekParty :: {{ entity.title }} {% endblock %}
+{% block title %} {{ parent() }} :: {{ entity.title }} {% endblock %}
 
 {% block main %}
     <div id="content">

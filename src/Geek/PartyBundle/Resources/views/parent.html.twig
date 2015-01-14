@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>{% block title %} GeekParty {% endblock %}</title>
-    <meta name="keywords" content="geekparty" />
-    <meta name="description" content="Гик-пати — это цифровое творчество в режиме реального времени" />
+    <title>{% block title %} GameDevParty {% endblock %}</title>
+    <meta name="keywords" content="geekparty gamedevparty gamejam" />
+    <meta name="description" content="GameDevParty — это цифровое творчество в режиме реального времени" />
     <meta name="vk:app_id" content="3561840" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="{{ asset("js/countdown.js") }}"></script>
@@ -97,7 +97,7 @@
 
             <div id="k-logo-gp">
                 <a href="/">
-                    <img class="HeaderLogo" src="{{ asset('img/logo_site01.png') }}" alt="GeekParty" />
+                    <img class="HeaderLogo" src="{{ asset('img/logo_site01.png') }}" alt="GameDevParty" />
                 </a>
             </div>
             {#
@@ -156,7 +156,7 @@
         {% block main %} {% endblock %}
 
         <div class="row" id="k-footer">
-            <p class="text-right">GEEK PARTY (c) 2014 | geekparty.ru@gmail.com</p>
+            <p class="text-right">GameDevParty (c) {{ now|date("Y") }} | {{ admin_email }}</p>
             <div></div>
         </div>
     </div>

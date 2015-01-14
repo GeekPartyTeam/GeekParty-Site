@@ -25,6 +25,7 @@ twig:
     globals:
         fb_app_id: %fb_app_id%
         disqus_shortname: %disqus_shortname%
+        admin_email: %admin_email%
 
 # Doctrine Configuration
 doctrine:

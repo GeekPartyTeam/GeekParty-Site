@@ -3,7 +3,7 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 {% import 'GeekPartyBundle::PartyTheme/macros.html.twig' as theme_macros %}
 
-{% block title %} GeekParty :: Голосование за тему для следующего геймджема {% endblock %}
+{% block title %} {{ parent() }} :: Голосование за тему для следующего геймджема {% endblock %}
 
 {% block main %}
     <div class="row">
