@@ -25,6 +25,9 @@ class ArticleController extends Base\CRUDController
 
     public function updateEntity($entity, Request $request, Form $form)
     {
+        if (!$this->getUser()) {
+            return false;
+        }
         /** @var \Geek\PartyBundle\Entity\Article $entity */
         $entity->setAuthor($this->getUser());
         $entity->setTime(new \DateTime());
