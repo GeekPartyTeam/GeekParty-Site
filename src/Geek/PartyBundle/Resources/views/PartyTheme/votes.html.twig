@@ -16,20 +16,28 @@
                Чтобы голосовать, вам нужно авторизоваться:
                {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-           {% endif %}
+            {% else %}
+                {% if alreadyVoted %}
+                    Вы уже проголосовали
+                {% else %}
+                    Вы можете проголосовать только за одну тему!
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 
     {% for t in themes %}
-        <div class="row k-entry-block">
-           <div class="col-md-6">
+        <div class="row k-entry-block PartyThemeVote">
+           <div class="col-md-6 PartyTheme">
                {{ theme_macros.theme(t) }}
            </div>
             <div class="col-md-6">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') and not alreadyVoted %}
                 <form action="{{ path('themes_vote') }}" method="POST">
                     <input type="hidden" name="theme_id" value="{{ t.id }}"/>
-                    {{ macros.submit('Голосовать') }}
+                    {{ macros.submit('Выбрать') }}
                 </form>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

@@ -249,4 +249,12 @@ class Party
     {
         return $this->getName();
     }
+
+    public function isVotingTime(\DateTime $time = null)
+    {
+        if (!$time) {
+            $time = new \DateTime;
+        }
+        return $time >= $this->getThemeVotingStartTime() && $time < $this->getThemeVotingEndTime();
+    }
 }

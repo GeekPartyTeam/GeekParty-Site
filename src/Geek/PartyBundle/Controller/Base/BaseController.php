@@ -32,6 +32,10 @@ class BaseController extends Controller
         return parent::render($view, $this->arrayResponse($parameters), $response);
     }
 
+    /**
+     * @param array $parameters
+     * @return array
+     */
     public function arrayResponse(array $parameters)
     {
         $parameters['current_party'] = $this->getCurrentParty();

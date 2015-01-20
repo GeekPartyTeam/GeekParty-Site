@@ -62,13 +62,18 @@ class PartyThemeController extends Base\BaseController
         return $response;
     }
 
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     private function themesList($startDate, $endDate)
     {
         $currentParty = $this->getCurrentParty();
         $now = new \DateTime();
 
         if ($now < $startDate || $now > $endDate) {
-            return $this->redirect($this->generateUrl('geek_index'));
+            return $this->redirectToIndex();
         }
 
         $themes = $this->getDoctrine()
@@ -79,7 +84,7 @@ class PartyThemeController extends Base\BaseController
     }
 
     /**
-     * Displays a form to create a new Work entity.
+     * Страница со списком тем для голосования
      *
      * @Route("/vote", name="themes_votes")
      * @Template()
@@ -88,11 +93,18 @@ class PartyThemeController extends Base\BaseController
     public function votesAction()
     {
         $currentParty = $this->getCurrentParty();
-        return $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
+        if (!$currentParty || !$currentParty->isVotingTime()) {
+            return $this->redirectToIndex();
+        }
+        $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
+        if (is_array($response)) {
+            $response['alreadyVoted'] = $this->getAlreadyVoted($currentParty);
+        }
+        return $response;
     }
 
     /**
-     * Displays a form to create a new Work entity.
+     * Обработка отданного голоса
      *
      * @Route("/vote", name="themes_vote")
      * @Template()
@@ -103,7 +115,14 @@ class PartyThemeController extends Base\BaseController
      */
     public function voteAction(Request $request)
     {
-        $response = $this->redirect($this->generateUrl('themes_index'));
+        $response = $this->redirect($this->generateUrl('themes_votes'));
+        $currentParty = $this->getCurrentParty();
+        if (!$currentParty || !$currentParty->isVotingTime()) {
+            return $this->redirectToIndex();
+        }
+        if ($this->getAlreadyVoted($currentParty)) {
+            return $this->redirectToIndex();
+        }
 
         try {
 
@@ -115,12 +134,15 @@ class PartyThemeController extends Base\BaseController
             $em = $this->getDoctrine()->getManager();
             /** @var PartyTheme $theme */
             $theme = $em->getRepository('GeekPartyBundle:PartyTheme')->find($themeId);
-
-            // TODO: защита от повторного голосования
+            if ($theme->getParty() != $currentParty) {
+                return $this->redirectToIndex();
+            }
 
             $vote = new PartyThemeVote();
             $vote->setUser($this->getUser());
             $vote->setTheme($theme);
+            $vote->setIp($this->getRequest()->getClientIp());
+            $vote->setUserAgent($this->getRequest()->headers->get('User-Agent'));
             $em->persist($vote);
             $em->flush();
 
@@ -163,5 +185,30 @@ class PartyThemeController extends Base\BaseController
         $em->flush();
 
         return $response;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function redirectToIndex()
+    {
+        return $this->redirect($this->generateUrl('geek_index'));
+    }
+
+    /**
+     * @param $currentParty
+     * @return bool
+     */
+    private function getAlreadyVoted($currentParty)
+    {
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery("SELECT COUNT(v) FROM GeekPartyBundle:PartyThemeVote v
+                JOIN v.theme t
+                JOIN t.party p
+                WHERE p = :party");
+        $query->setParameter('party', $currentParty);
+        $result = $query->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_SCALAR)[0];
+        return is_array($result) && isset($result[1]) ? $result[1] != 0 : false;
     }
 } 

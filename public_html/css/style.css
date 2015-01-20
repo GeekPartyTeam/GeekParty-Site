@@ -406,6 +406,12 @@ body {
     width: 400px;
 }
 
+.PartyThemeVote .PartyTheme {
+    /*font: 16px/30px "pixel_font";*/
+    /*padding-top: 12px;*/
+    font: 17px/56px "pixel_font";
+}
+
 .PartyThemeForm .k-btn {
     padding-top: 6px;
     padding-left: 22px;
