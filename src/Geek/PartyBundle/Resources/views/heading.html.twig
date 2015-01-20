@@ -30,11 +30,11 @@
     {% elseif startTime > now %}
         {% set aboveMessage = current_party.name ~ " начнется через:" %}
         {% set targetDate = startTime %}
-        {% set belowMessage = "<a href='" ~ path("project") ~ "'>Добавить работу</a>" %}
 
     {% elseif endTime > now %}
         {% set aboveMessage = current_party.name ~ " закончится через:" %}
         {% set targetDate = endTime %}
+        {% set belowMessage = "<a href='" ~ path("project") ~ "'>Добавить работу</a>" %}
 
     {% endif %}
 
