@@ -72,7 +72,7 @@ class PartyThemeController extends Base\BaseController
         $currentParty = $this->getCurrentParty();
         $now = new \DateTime();
 
-        if ($now < $startDate || $now > $endDate) {
+        if (!$this->isAdmin() && ( $now < $startDate || $now > $endDate )) {
             return $this->redirectToIndex();
         }
 
@@ -93,7 +93,10 @@ class PartyThemeController extends Base\BaseController
     public function votesAction()
     {
         $currentParty = $this->getCurrentParty();
-        if (!$currentParty || !$currentParty->isVotingTime()) {
+        if ($id = $this->getRequest()->get('id') && $this->isAdmin()) {
+            $currentParty = $this->getDoctrine()->getManager()->find('GeekPartyBudnle:Party', $id);
+        }
+        if (!$this->isAdmin() && ( !$currentParty || !$currentParty->isVotingTime() )) {
             return $this->redirectToIndex();
         }
         $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
