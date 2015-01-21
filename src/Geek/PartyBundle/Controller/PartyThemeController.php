@@ -93,7 +93,7 @@ class PartyThemeController extends Base\BaseController
     public function votesAction()
     {
         $currentParty = $this->getCurrentParty();
-        if ($id = $this->getRequest()->get('id') && $this->isAdmin()) {
+        if (($id = $this->getRequest()->get('id')) && $this->isAdmin()) {
             $currentParty = $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
         }
         if (!$this->isAdmin() && ( !$currentParty || !$currentParty->isVotingTime() )) {

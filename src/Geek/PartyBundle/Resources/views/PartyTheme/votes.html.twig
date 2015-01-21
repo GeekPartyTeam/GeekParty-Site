@@ -27,17 +27,21 @@
     </div>
 
     {% for t in themes %}
-        <div class="row k-entry-block PartyThemeVote">
-           <div class="col-md-6 PartyTheme">
-               {{ theme_macros.theme(t) }}
-           </div>
-            <div class="col-md-6">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') and not alreadyVoted %}
-                <form action="{{ path('themes_vote') }}" method="POST">
-                    <input type="hidden" name="theme_id" value="{{ t.id }}"/>
-                    {{ macros.submit('Выбрать') }}
-                </form>
-                {% endif %}
+        <div class="row PartyThemeVote">
+            <div class="col-md-6 col-md-offset-3 k-entry-block">
+                <div class="row">
+                    <div class="col-md-8 PartyTheme">
+                        {{ theme_macros.theme(t) }}
+                    </div>
+                    <div class="col-md-4">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and not alreadyVoted %}
+                            <form action="{{ path('themes_vote') }}" method="POST" class="pull-right">
+                                <input type="hidden" name="theme_id" value="{{ t.id }}"/>
+                                {{ macros.submit('Выбрать') }}
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}
