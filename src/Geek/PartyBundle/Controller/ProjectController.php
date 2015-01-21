@@ -154,6 +154,9 @@ class ProjectController extends Base\BaseController
      */
     public function newAction()
     {
+        if (!$this->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
+            return $this->forwardToUploadClosedPage();
+        }
         $entity = new Work();
         $form   = $this->createForm(new ProjectType(), $entity);
 
@@ -172,6 +175,9 @@ class ProjectController extends Base\BaseController
      */
     public function createAction(Request $request)
     {
+        if (!$this->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
+            return $this->forwardToUploadClosedPage();
+        }
         return $this->update($request);
     }
 
@@ -326,5 +332,10 @@ class ProjectController extends Base\BaseController
                 $this->addErrorMessage($message);
             }
         }
+    }
+
+    private function forwardToUploadClosedPage()
+    {
+        return $this->render('GeekPartyBundle:Project:closed.html.twig');
     }
 }
