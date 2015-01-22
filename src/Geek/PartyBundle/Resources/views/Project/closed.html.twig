@@ -1,0 +1,15 @@
+{# Страница загрузки нового проекта, когда геймджем уже закончен #}
+
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
+{% block title %} {{ parent() }} :: Редактирование проекта {% endblock %}
+
+{% block main %}
+    <div class="info-message">
+        <p>Событие {{ current_party.name }} уже закончилось.</p>
+        <p>Вы можете редактировать название и описание уже существующих проектов, но не можете создавать новые или загружать обновленные билды</p>
+        <p>За помощью обратитесь к администрации сайта: <a href="mailto:{{ admin_email }}">{{ admin_email }}</a></p>
+    </div>
+{% endblock %}
