@@ -1,10 +1,11 @@
 {% macro theme(t) %}
     {{ t.text }}
-   {% if is_admin() %}
-       <span class="k-gold-color">by {{ t.user.fullname }}</span>
-       <form class="form-inline" action="{{ path("themes_remove") }}" method="post">
-           <input type="hidden" name="theme_id" value="{{ t.id }}"/>
-           <button class="btn btn-link btn-danger" type="submit">Удалить</button>
-       </form>
-   {% endif %}
+    {% if is_admin() %}
+        (Голоса: {{ t.votes|length }})
+        <span class="k-gold-color">by {{ t.user.fullname }}</span>
+        <form class="form-inline" action="{{ path("themes_remove") }}" method="post">
+            <input type="hidden" name="theme_id" value="{{ t.id }}"/>
+            <button class="btn btn-link btn-danger" type="submit">Удалить</button>
+        </form>
+    {% endif %}
 {% endmacro %}
