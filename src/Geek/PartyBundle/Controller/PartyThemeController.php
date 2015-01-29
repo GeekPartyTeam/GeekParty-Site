@@ -78,7 +78,7 @@ class PartyThemeController extends Base\BaseController
 
         $themes = $this->getDoctrine()
             ->getRepository('GeekPartyBundle:PartyTheme')
-            ->findBy(['party' => $currentParty]);
+            ->findBy(['party' => $currentParty], ['text' => 'ASC']);
 
         return $this->arrayResponse(['themes' => $themes]);
     }
@@ -102,6 +102,11 @@ class PartyThemeController extends Base\BaseController
         $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
         if (is_array($response)) {
             $response['alreadyVoted'] = $this->getAlreadyVoted($currentParty);
+            if ($this->isAdmin()) {
+                usort($response['themes'], function (PartyTheme $a, PartyTheme $b) {
+                    return $a->getVotes()->count() < $b->getVotes()->count();
+                });
+            }
         }
         return $response;
     }
