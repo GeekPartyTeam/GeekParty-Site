@@ -40,6 +40,7 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
+            , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
         ];
     }
 
@@ -65,5 +66,21 @@ class GeekExtension extends \Twig_Extension
     public function isWorkUploaded(Work $work)
     {
         return $this->fileExists('/works/' . $work->getParty()->getId() . '/' . $work->getId() . '/index.html');
+    }
+
+    public function getCurrentParty()
+    {
+        $doctrine = $this->kernel->getContainer()->get('doctrine');
+        $em = $doctrine->getManager();
+        $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p WHERE p.endTime > :time ORDER BY p.endTime ASC")
+            ->setParameter('time', new \DateTime())
+            ->getResult();
+
+        if (count($parties) == 0) {
+            $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p ORDER BY p.endTime DESC")
+                ->getResult();
+        }
+
+        return count($parties) > 0 ? $parties[0] : null;
     }
 }
