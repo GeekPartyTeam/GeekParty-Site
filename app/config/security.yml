@@ -29,7 +29,10 @@ security:
                 use_forward:       false
                 failure_path:      /login
                 oauth_user_provider:
-                    service: my_user_provider #hwi_oauth.user.provider.fosub_bridge
+                    service: my_user_provider
+            form_login:
+                use_referer: true
+                failure_path: geek_login_failure
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -38,9 +41,3 @@ security:
         - { path: ^/edit, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/poll, role: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #
-        # You must uncomment the two following rules to restrict access to paths
-        # starting with the /_internal prefix to only localhost
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        #- { path: ^/_internal/secure, roles: ROLE_NO_ACCESS }
