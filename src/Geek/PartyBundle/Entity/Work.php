@@ -311,4 +311,27 @@ class Work
     {
         return $this->time;
     }
+
+    /**
+     * Set shortname
+     *
+     * @param string $shortname
+     * @return Work
+     */
+    public function setShortname($shortname)
+    {
+        $this->shortname = $shortname;
+
+        return $this;
+    }
+
+    /**
+     * Get shortname
+     *
+     * @return string 
+     */
+    public function getShortname()
+    {
+        return $this->shortname;
+    }
 }
