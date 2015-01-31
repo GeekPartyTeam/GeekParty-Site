@@ -1,59 +1,64 @@
-{% if current_party %}
-    {% set submissionStartTime = current_party.themeSubmissionStartTime|date('Y-m-d H:i:s') %}
-    {% set submissionEndTime = current_party.themeSubmissionEndTime|date('Y-m-d H:i:s') %}
-    {% set votingStartTime = current_party.themeVotingStartTime|date('Y-m-d H:i:s') %}
-    {% set votingEndTime = current_party.themeVotingEndTime|date('Y-m-d H:i:s') %}
-    {% set startTime = current_party.startTime|date('Y-m-d H:i:s') %}
-    {% set endTime = current_party.endTime|date('Y-m-d H:i:s') %}
+{% if current_party is not defined %}
+    {% set current_party = get_current_party() %}
+{% endif %}
+{% if now is not defined %}
+    {% set now = "now"|date('Y-m-d H:i:s') %}
+{% endif %}
 
-    {% if endTime < now %}
-        {% set message = current_party.name ~ " состоялось!" %}
+{% set submissionStartTime = current_party.themeSubmissionStartTime|date('Y-m-d H:i:s') %}
+{% set submissionEndTime = current_party.themeSubmissionEndTime|date('Y-m-d H:i:s') %}
+{% set votingStartTime = current_party.themeVotingStartTime|date('Y-m-d H:i:s') %}
+{% set votingEndTime = current_party.themeVotingEndTime|date('Y-m-d H:i:s') %}
+{% set startTime = current_party.startTime|date('Y-m-d H:i:s') %}
+{% set endTime = current_party.endTime|date('Y-m-d H:i:s') %}
 
-    {% elseif submissionStartTime > now %}
-        {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " начнется через:" %}
-        {% set targetDate = submissionStartTime %}
+{% if endTime < now %}
+    {% set message = current_party.name ~ " состоялось!" %}
 
-    {% elseif submissionEndTime > now %}
-        {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " закончится через:" %}
-        {% set targetDate = submissionEndTime %}
-        {% set belowMessage = "<a href='" ~ path("themes_index") ~ "'>Добавить тему</a>" %}
+{% elseif submissionStartTime > now %}
+    {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " начнется через:" %}
+    {% set targetDate = submissionStartTime %}
 
-    {% elseif votingStartTime > now %}
-        {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " начнется через:" %}
-        {% set targetDate = votingStartTime %}
+{% elseif submissionEndTime > now %}
+    {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " закончится через:" %}
+    {% set targetDate = submissionEndTime %}
+    {% set belowMessage = "<a href='" ~ path("themes_index") ~ "'>Добавить тему</a>" %}
 
-    {% elseif votingEndTime > now %}
-        {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " закончится через:" %}
-        {% set targetDate = votingEndTime %}
-        {% set belowMessage = "<a href='" ~ path("themes_votes") ~ "'>Голосовать</a>" %}
+{% elseif votingStartTime > now %}
+    {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " начнется через:" %}
+    {% set targetDate = votingStartTime %}
 
-    {% elseif startTime > now %}
-        {% set aboveMessage = current_party.name ~ " начнется через:" %}
-        {% set targetDate = startTime %}
+{% elseif votingEndTime > now %}
+    {% set aboveMessage = "Голосование за тему для " ~ current_party.name ~ " закончится через:" %}
+    {% set targetDate = votingEndTime %}
+    {% set belowMessage = "<a href='" ~ path("themes_votes") ~ "'>Голосовать</a>" %}
 
-    {% elseif endTime > now %}
-        {% set aboveMessage = current_party.name ~ " закончится через:" %}
-        {% set targetDate = endTime %}
-        {% set belowMessage = "<a href='" ~ path("project") ~ "'>Добавить работу</a>" %}
+{% elseif startTime > now %}
+    {% set aboveMessage = current_party.name ~ " начнется через:" %}
+    {% set targetDate = startTime %}
 
-    {% endif %}
+{% elseif endTime > now %}
+    {% set aboveMessage = current_party.name ~ " закончится через:" %}
+    {% set targetDate = endTime %}
+    {% set belowMessage = "<a href='" ~ path("project") ~ "'>Добавить работу</a>" %}
 
+{% endif %}
+
+<script type="text/javascript">
+    window.serverNow = "{{ now }}";
+</script>
+
+<div id="k-timer-bg2"></div>
+
+{% if message is defined %}
+    <div id="k-message">{{ message }}</div>
+{% else %}
+    <div id="k-above-message">{{ aboveMessage }}</div>
     <script type="text/javascript">
-        window.serverNow = "{{ now }}";
+        window.targetDate = "{{ targetDate }}";
     </script>
-
-    <div id="k-timer-bg2"></div>
-
-    {% if message is defined %}
-        <div id="k-message">{{ message }}</div>
-    {% else %}
-        <div id="k-above-message">{{ aboveMessage }}</div>
-        <script type="text/javascript">
-            window.targetDate = "{{ targetDate }}";
-        </script>
-        <div id="big-timer">00:00:00</div>
-        {% if belowMessage is defined %}
-            <div id="k-below-message">{{ belowMessage|raw }}</div>
-        {%  endif %}
-    {% endif %}
+    <div id="big-timer">00:00:00</div>
+    {% if belowMessage is defined %}
+        <div id="k-below-message">{{ belowMessage|raw }}</div>
+    {%  endif %}
 {% endif %}
