@@ -12,9 +12,15 @@ class Work
 {
     /**
      * @ORM\Id
-     * @ORM\Column
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column
+     */
+    protected $shortname;
 
     /**
      * @ORM\Column

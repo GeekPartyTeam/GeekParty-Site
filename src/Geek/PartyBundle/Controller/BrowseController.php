@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\Work;
@@ -9,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BrowseController extends Base\BaseController
 {
@@ -48,15 +50,22 @@ class BrowseController extends Base\BaseController
     /**
      * Страница работы
      * @param $party string Идентификатор пати — gp1, gp2 или gp3
-     * @param $work string Строковый идентификатор работы
+     * @param $work string Идентификатор работы (или короткое имя, бывший строковый идентификатор)
      * @return array
      * @Template()
      */
     public function workAction($party, $work)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $workRepo = $em->getRepository('GeekPartyBundle:Work');
         $workEntity = $workRepo->find($work);
+        if (!$workEntity) {
+            $workEntity = $workRepo->findOneBy(['shortname' => $work]);
+            if (!$work) {
+                throw new NotFoundHttpException();
+            }
+        }
 
         return $this->arrayResponse([
             'party' => $party,
