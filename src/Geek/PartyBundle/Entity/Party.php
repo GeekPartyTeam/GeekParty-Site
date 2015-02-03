@@ -51,6 +51,16 @@ class Party
     protected $themeVotingEndTime;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $projectVotingStartTime;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $projectVotingEndTime;
+
+    /**
      * Set id
      *
      * @param string $id
@@ -256,5 +266,59 @@ class Party
             $time = new \DateTime;
         }
         return $time >= $this->getThemeVotingStartTime() && $time < $this->getThemeVotingEndTime();
+    }
+
+    /**
+     * Set projectVotingStartTime
+     *
+     * @param \DateTime $projectVotingStartTime
+     * @return Party
+     */
+    public function setProjectVotingStartTime($projectVotingStartTime)
+    {
+        $this->projectVotingStartTime = $projectVotingStartTime;
+
+        return $this;
+    }
+
+    /**
+     * Get projectVotingStartTime
+     *
+     * @return \DateTime 
+     */
+    public function getProjectVotingStartTime()
+    {
+        return $this->projectVotingStartTime;
+    }
+
+    /**
+     * Set projectVotingEndTime
+     *
+     * @param \DateTime $projectVotingEndTime
+     * @return Party
+     */
+    public function setProjectVotingEndTime($projectVotingEndTime)
+    {
+        $this->projectVotingEndTime = $projectVotingEndTime;
+
+        return $this;
+    }
+
+    /**
+     * Get projectVotingEndTime
+     *
+     * @return \DateTime 
+     */
+    public function getProjectVotingEndTime()
+    {
+        return $this->projectVotingEndTime;
+    }
+
+    public function isProjectVotingTime(\DateTime $time = null)
+    {
+        if (!$time) {
+            $time = new \DateTime;
+        }
+        return $time >= $this->getProjectVotingStartTime() && $time < $this->getProjectVotingEndTime();
     }
 }

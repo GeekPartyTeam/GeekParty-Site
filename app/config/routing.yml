@@ -24,6 +24,9 @@ geek_browse:
 geek_browse_work:
     pattern:  /browse/{party}/{work}
     defaults: { _controller: GeekPartyBundle:Browse:work, party: latest }
+geek_vote:
+    pattern:  /vote
+    defaults: { _controller: GeekPartyBundle:Browse:vote }
 
 # Admin
 admin_parties:
