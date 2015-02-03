@@ -14,7 +14,7 @@
 {% set projectVotingStartTime = current_party.projectVotingStartTime|date('Y-m-d H:i:s') %}
 {% set projectVotingEndTime = current_party.projectVotingEndTime|date('Y-m-d H:i:s') %}
 
-{% if endTime < now %}
+{% if projectVotingEndTime < now %}
     {% set message = current_party.name ~ " состоялось!" %}
 
 {% elseif submissionStartTime > now %}
