@@ -5,7 +5,7 @@
     <div class="col-md-6">
         {% for entry in works %}
             {% set partyId = entry.party is not null ? entry.party.id : null %}
-            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.shortname|default(entry.id) }) %}
 
             {% if loop.index0 % 2 == 0 %}
                 <div class="row k-entry-block">
@@ -37,7 +37,7 @@
     <div class="col-md-6">
         {% for entry in works %}
             {% set partyId = entry.party is not null ? entry.party.id : null %}
-            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+            {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.shortname|default(entry.id) }) %}
 
             {% if loop.index0 % 2 != 0 %}
                 <div class="row k-entry-block">
