@@ -150,7 +150,7 @@ class BrowseController extends Base\BaseController
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("SELECT COUNT(v) FROM GeekPartyBundle:ProjectVote v
-                JOIN v.project p
+                JOIN v.work p
                 JOIN v.user u
                 WHERE p = :project AND u = :user");
         $query->setParameter('project', $project);
