@@ -196,6 +196,7 @@ body {
 
 .k-btn a {
     color: #000;
+    font: 14px/20px "pixel_font";
 }
 
 .k-page-header {
