@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BrowseController extends Base\BaseController
@@ -85,6 +86,18 @@ class BrowseController extends Base\BaseController
         /** @var Work $project */
         $project = $projectRepo->find($id);
 
+        $redirect = $this->redirect($this->generateUrl('geek_browse_work', [
+            'party' => $project->getParty()->getId(),
+            'work' => $project->getId(),
+        ]));
+
+        if ($project->getAuthor() === $this->getUser()) {
+            /** @var Session $session */
+            $session = $this->get('session');
+            $session->getFlashBag()->add('notice', "Нельзя голосовать за свою игру");
+            return $redirect;
+        }
+
         $vote = $this->getRequest()->get('vote');
 
         $entity = $this->getVote($project);
@@ -102,10 +115,7 @@ class BrowseController extends Base\BaseController
         $em->persist($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('geek_browse_work', [
-            'party' => $project->getParty()->getId(),
-            'work' => $project->getId(),
-        ]));
+        return $redirect;
     }
 
     /**

@@ -28,6 +28,8 @@
                         Чтобы голосовать, вам нужно авторизоваться:
                         {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                         {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+                    {% elseif work.author == current_user %}
+                        <p class="k-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
                     {% else %}
                         <form action="{{ path('geek_vote') }}" method="POST">
                             <div>
@@ -40,7 +42,9 @@
                                     <div class="ProjectStarInner">&nbsp;</div>
                                 </div>
                             </div>
-                            {{ macros.submit(vote is defined ? 'Переголосовать' : 'Проголосовать') }}
+                            <p class="k-red">Голосуйте за игру только если вы поиграли в нее!</p>
+                            <p class="k-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
+                            {{ macros.submit('Проголосовать') }}
                         </form>
                     {% endif %}
                 </div>
