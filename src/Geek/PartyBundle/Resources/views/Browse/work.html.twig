@@ -19,34 +19,29 @@
 
         {% if (work.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
             <p><a href="{{ path('project_edit', {'id': work.id}) }}" class="Special">Редактировать</a></p>
-        {% elseif currentParty.projectVotingTime %}
+        {% endif %}
+        {% if work.party == current_party and current_party.projectVotingTime %}
             <div class="row">
-                <div class="col-md-12 k-entry-block">
+                <div class="col-md-offset-1 col-md-10 k-entry-block">
+                    <h3>Голосование за работу</h3>
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                         Чтобы голосовать, вам нужно авторизоваться:
                         {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                         {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
                     {% else %}
-                        {% if voted %}
-                            Вы уже проголосовали
-                        {% else %}
-                            <form target="{{ path('project_vote') }}" method="POST">
-                                <input type="hidden" name="id" value="{{ work.id }}"/>
-                                <select name="vote">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select>
-                                <button type="submit">Проголосовать</button>
-                            </form>
-                        {% endif %}
+                        <form action="{{ path('geek_vote') }}" method="POST">
+                            <div>
+                            <input type="hidden" name="id" value="{{ work.id }}"/>
+                            <input type="hidden" name="vote" value="{{ vote is defined and vote ? vote.vote : 0 }}"/>
+                            </div>
+
+                            <div class="ProjectVote">
+                                <div class="ProjectStar">
+                                    <div class="ProjectStarInner">&nbsp;</div>
+                                </div>
+                            </div>
+                            {{ macros.submit(vote is defined ? 'Переголосовать' : 'Проголосовать') }}
+                        </form>
                     {% endif %}
                 </div>
             </div>

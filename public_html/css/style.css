@@ -429,3 +429,21 @@ body {
     left: 50px;
     top: 10px;
 }
+
+.ProjectVote {
+    display: inline-block;
+    line-height: 62px;
+    padding-right: 14px;
+}
+
+.ProjectStar {
+    width: 160px;
+    height: 28px;
+    background: url('/img/5t.png');
+}
+
+.ProjectStarInner {
+    width: 0px;
+    height: 28px;
+    background: url('/img/5f.png');
+}

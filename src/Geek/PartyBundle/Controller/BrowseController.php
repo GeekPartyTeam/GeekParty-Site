@@ -72,7 +72,7 @@ class BrowseController extends Base\BaseController
         return $this->arrayResponse([
             'party' => $party,
             'work' => $workEntity,
-            'voted' => $this->getAlreadyVoted($workEntity),
+            'vote' => $this->getVote($workEntity),
         ]);
     }
 
@@ -87,20 +87,25 @@ class BrowseController extends Base\BaseController
 
         $vote = $this->getRequest()->get('vote');
 
-        if ($this->getAlreadyVoted($project)) {
-            return $this->redirect('geek_index');
+        $entity = $this->getVote($project);
+        if (!$entity) {
+            $entity = new ProjectVote();
+            $entity->setWork($project);
+            $entity->setUser($this->getUser());
+        } else {
+            $entity->setDate(new \DateTime());
         }
 
-        $entity = new ProjectVote();
-        $entity->setWork($project);
         $entity->setVote($vote);
-        $entity->setUser($this->getUser());
         $entity->setIp($this->getRequest()->getClientIp());
         $entity->setUserAgent($this->getRequest()->headers->get('User-Agent'));
         $em->persist($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('geek_browse', ['party' => $project->getParty()]));
+        return $this->redirect($this->generateUrl('geek_browse_work', [
+            'party' => $project->getParty()->getId(),
+            'work' => $project->getId(),
+        ]));
     }
 
     /**
@@ -136,26 +141,34 @@ class BrowseController extends Base\BaseController
 
     /**
      * @param Work $project
-     * @return bool
+     * @return ProjectVote|null
      */
-    private function getAlreadyVoted(Work $project)
+    private function getVote(Work $project)
     {
         if (!$this->getUser()) {
-            return false;
+            return null;
         }
         $currentParty = $this->getCurrentParty();
-        if ($project->getParty() != $currentParty->getId() || !$currentParty->isProjectVotingTime()) {
-            return false;
+        if ($project->getParty() != $currentParty) {
+            return null;
+        }
+        if (!$currentParty->isProjectVotingTime()) {
+            return null;
         }
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery("SELECT COUNT(v) FROM GeekPartyBundle:ProjectVote v
+        $query = $em->createQuery("SELECT v FROM GeekPartyBundle:ProjectVote v
                 JOIN v.work p
                 JOIN v.user u
                 WHERE p = :project AND u = :user");
+        $query->setMaxResults(1);
         $query->setParameter('project', $project);
         $query->setParameter('user', $this->getUser());
-        $result = $query->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_SCALAR)[0];
-        return is_array($result) && isset($result[1]) ? $result[1] != 0 : false;
+        $answer = $query->getResult();
+        if (count($answer) < 1) {
+            return null;
+        }
+        $result = $answer[0];
+        return $result;
     }
 }

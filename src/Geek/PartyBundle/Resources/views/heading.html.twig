@@ -46,11 +46,11 @@
 
 {% elseif projectVotingStartTime > now %}
     {% set aboveMessage = "Голосование за работы " ~ current_party.name ~ " начнется через:" %}
-    {% set targetDate = startTime %}
+    {% set targetDate = projectVotingStartTime %}
 
 {% elseif projectVotingEndTime > now %}
     {% set aboveMessage = "Голосование за работы " ~ current_party.name ~ " закончится через:" %}
-    {% set targetDate = endTime %}
+    {% set targetDate = projectVotingEndTime %}
     {% set belowMessage = "<a href='" ~ path("geek_browse") ~ "'>Голосовать</a>" %}
 
 {% endif %}

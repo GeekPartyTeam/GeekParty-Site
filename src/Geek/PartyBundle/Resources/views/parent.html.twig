@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset("bootstrap/css/bootstrap-theme.css") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("bootstrap/css/magic-bootstrap.css") }}" media="screen"/>
 
-    <link rel="stylesheet" type="text/css" href="{{ asset("css/style.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("css/style.css?1") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/disqusFix.css") }}" media="screen"/>
 
 
@@ -163,5 +163,8 @@
     <div id="vk_api_transport"></div>
 
     <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
+    {% if current_party is defined and current_party.projectVotingTime %}
+        <script type="text/javascript" src="{{ asset("js/voting.js") }}"></script>
+    {% endif %}
 </body>
 </html>
