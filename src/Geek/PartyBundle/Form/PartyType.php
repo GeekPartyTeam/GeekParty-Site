@@ -18,6 +18,8 @@ class PartyType extends AbstractType
             ->add('themeVotingEndTime')
             ->add('startTime')
             ->add('endTime')
+            ->add('projectVotingStartTime')
+            ->add('projectVotingEndTime')
             ->add('description', 'textarea', [
                  'attr' => [
                      'class' => 'tinymce',

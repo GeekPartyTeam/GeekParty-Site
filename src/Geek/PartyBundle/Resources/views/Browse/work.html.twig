@@ -6,7 +6,7 @@
 
 {% block main %}
 
-    <h2><a href="{{ path('geek_browse', { party: party|url_encode }) }}">{{ party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
+    <h2><a href="{{ path('geek_browse', { party: work.party.id }) }}">{{ work.party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
 
     <div class="borderBlock">
         {{ work.longDescription|purify }}
@@ -19,6 +19,32 @@
 
         {% if (work.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
             <p><a href="{{ path('project_edit', {'id': work.id}) }}" class="Special">Редактировать</a></p>
+        {% endif %}
+        {% if work.party == current_party and current_party.projectVotingTime %}
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10 k-entry-block">
+                    <h3>Голосование за работу</h3>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        Чтобы голосовать, вам нужно авторизоваться:
+                        {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                        {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+                    {% else %}
+                        <form action="{{ path('geek_vote') }}" method="POST">
+                            <div>
+                            <input type="hidden" name="id" value="{{ work.id }}"/>
+                            <input type="hidden" name="vote" value="{{ vote is defined and vote ? vote.vote : 0 }}"/>
+                            </div>
+
+                            <div class="ProjectVote">
+                                <div class="ProjectStar">
+                                    <div class="ProjectStarInner">&nbsp;</div>
+                                </div>
+                            </div>
+                            {{ macros.submit(vote is defined ? 'Переголосовать' : 'Проголосовать') }}
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
 
         <div class="socialContainerGame">
