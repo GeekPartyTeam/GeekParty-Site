@@ -52,7 +52,7 @@
     {% set class = '' %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <a target="_blank" href="{{ '/works/' ~ work.party.id ~ '/' ~ work.id ~ '/index.html' }}">Play</a>
+            <a target="_blank" href="{{ '/works/' ~ (work.party.id|url_encode) ~ '/' ~ work.id ~ '/index.html' }}">Play</a>
         {% endblock %}
     {% endembed %}
 {% endmacro %}
