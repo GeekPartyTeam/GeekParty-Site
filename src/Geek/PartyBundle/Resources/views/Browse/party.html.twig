@@ -38,7 +38,7 @@
                         </li>
                     {% else %}
                         <li>
-                            <a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a>
+                            <a href="{{ path('geek_browse', { party: p.id|url_encode }) }}">{{ p.id | upper }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
