@@ -43,7 +43,7 @@
                         <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>
                             {% if new is not defined %}
-                                <img src="{{ asset('works/' ~ entity.party.id ~ '/' ~ entity.id ~ '_icon.png') }}"/>
+                                <img src="/works/{{ partyId|url_encode }}/{{ entry.id }}_icon.png" alt="{{ entry.name }}"/>
                             {% endif %}
                             <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
                             {{ form_widget(edit_form.icon) }}
