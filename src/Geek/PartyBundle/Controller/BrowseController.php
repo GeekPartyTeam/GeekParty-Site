@@ -91,14 +91,18 @@ class BrowseController extends Base\BaseController
             'work' => $project->getId(),
         ]));
 
+        /** @var Session $session */
+        $session = $this->get('session');
         if ($project->getAuthor() === $this->getUser()) {
-            /** @var Session $session */
-            $session = $this->get('session');
             $session->getFlashBag()->add('notice', "Нельзя голосовать за свою игру");
             return $redirect;
         }
 
-        $vote = $this->getRequest()->get('vote');
+        $vote = (int)$this->getRequest()->get('vote');
+        if ($vote < 1 || $vote > 5) {
+            $session->getFlashBag()->add('notice', "Голос должен быть от 1 до 5 кирок");
+            return $redirect;
+        }
 
         $entity = $this->getVote($project);
         if (!$entity) {
