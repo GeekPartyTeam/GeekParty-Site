@@ -39,5 +39,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/edit, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/vote, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/poll, role: ROLE_ADMIN }
