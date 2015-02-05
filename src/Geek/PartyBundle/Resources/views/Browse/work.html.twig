@@ -31,7 +31,7 @@
                     {% elseif work.author == current_user %}
                         <p class="k-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
                     {% else %}
-                        <form action="{{ path('geek_vote') }}" method="POST">
+                        <form action="{{ path('geek_vote') }}" method="POST" id="ProjectVoteForm">
                             <div>
                             <input type="hidden" name="id" value="{{ work.id }}"/>
                             <input type="hidden" name="vote" value="{{ vote is defined and vote ? vote.vote : 0 }}"/>
@@ -44,7 +44,8 @@
                             </div>
                             <p class="k-red">Голосуйте за игру только если вы поиграли в нее!</p>
                             <p class="k-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
-                            {{ macros.submit('Проголосовать') }}
+                            {{ macros.submit('Проголосовать', 'SubmitVoteButton') }}
+                            <p class="k-red" id="ChooseVote" style="display:none">Выберите оценку от 1 до 5 кирок, чтобы проголосовать</p>
                         </form>
                     {% endif %}
                 </div>
