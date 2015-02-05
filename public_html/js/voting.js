@@ -5,7 +5,7 @@
         voteValue = 0 + $voteInput.val(),
         changing = true;
 
-    var $projectVoteForm = $('.ProjectVoteForm'),
+    var $projectVoteForm = $('#ProjectVoteForm'),
         $warning = $('#ChooseVote')
         ;
 
