@@ -50,10 +50,8 @@ class PartyRepository extends EntityRepository
         }
 
         if (!isset($cache[$a->getId()])) {
-            $query = $this->getEntityManager()->getConnection()
-                ->prepare("SELECT COUNT(*) FROM ProjectVote WHERE work_id = ?");
-            $query->bindValue(1, $a->getId());
-            $count = $query->fetchColumn(0);
+            $count = $this->getEntityManager()->getConnection()
+                ->fetchColumn("SELECT COUNT(*) FROM ProjectVote WHERE work_id = ?", [$a->getId()], 0);
             $cache[$a->getId()] = $count;
         }
 
