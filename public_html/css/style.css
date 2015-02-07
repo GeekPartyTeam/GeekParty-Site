@@ -301,6 +301,7 @@ body {
     border-image: url("../img/border.png") 14 14 14 14;
     border-style: solid;
     border-width: 14px;
+    padding-left: 10px;
 }
 
 .k-gold-color {
@@ -449,10 +450,18 @@ body {
 
 .VoteResult.ProjectVote {
     margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+
+.VoteTextResult {
+    margin-top: 12px;
+    font: 30px/24px "pixel_font";
+    color: #FFAA22;
 }
 
 .ProjectStarInner {
-    width: 0px;
+    width: 0;
     height: 28px;
     background: url('/img/5f.png');
 }

@@ -1,17 +1,31 @@
 {% macro project_block(entry, current_user) %}
     {% set partyId = entry.party is not null ? entry.party.id : null %}
     {% set entryPage = path('geek_browse_work', { party: partyId|url_encode, work: entry.id }) %}
-    <div class="row k-entry-block">
-        <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
-        <div class="col-md-4 col-xs-4">
-            <a href="{{ entryPage }}" class="k-img-link">
-                <img
-                        style="width:110px;height:110px;"
-                        src="/works/{{ partyId|url_encode }}/{{ entry.id }}_icon.png" alt="{{ entry.name }}"
-                        class="img-rounded k-img-border">
-                <span class="k-img-play"></span>
-            </a>
+    <div class="k-entry-block">
+        <div class="row">
+            <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
+            <div class="col-md-4 col-xs-4">
+                <a href="{{ entryPage }}" class="k-img-link">
+                    <img
+                            style="width:110px;height:110px;"
+                            src="/works/{{ partyId|url_encode }}/{{ entry.id }}_icon.png" alt="{{ entry.name }}"
+                            class="img-rounded k-img-border">
+                    <span class="k-img-play"></span>
+                </a>
+            </div>
 
+            <div class="col-md-8 col-xs-8">
+                <p>{{ entry.description }}.</p>
+                <a href="{{ entryPage }}">Подробнее</a>
+                {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                    <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+                {% endif %}
+
+                <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
             {% if entry.party.ended %}
                 <div class="ProjectVote VoteResult">
                     <div class="ProjectStar">
@@ -20,17 +34,10 @@
                              style="width: {{ 32.0 * rating }}px" title="{{ rating }}">&nbsp;</div>
                     </div>
                 </div>
+                <div class="VoteTextResult">{{ rating|round(1) }}</div>
             {% endif %}
+            </div>
         </div>
 
-        <div class="col-md-8 col-xs-8">
-            <p>{{ entry.description }}.</p>
-            <a href="{{ entryPage }}">Подробнее</a>
-            {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
-            {% endif %}
-
-            <a class="pull-right" href="{{ entryPage }}#disqus_thread"></a>
-        </div>
     </div>
 {% endmacro %}
