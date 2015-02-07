@@ -12,6 +12,14 @@ github_hook:
   pattern: /github_hook
   defaults: {_controller:GeekPartyBundle:GitHub:hook}
 
+escaped_percent_redirect:
+    path: /browse/GDP%231/{work}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: geek_browse_work
+        party: 'GDP#1'
+        work: work
+
 # News article
 article:
     pattern: /article/{id}
@@ -73,3 +81,4 @@ PrismPollBundle_backend:
 PrismPollBundle_frontend:
     prefix: /poll
     resource: "@PrismPollBundle/Resources/config/routing/frontend.yml"
+
