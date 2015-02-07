@@ -153,6 +153,12 @@
             </div>
         {% endfor %}
 
+        {% for flashMessage in app.session.flashbag.get('info') %}
+            <div class="info-message">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
         {% block main %} {% endblock %}
 
         <div class="row" id="k-footer">

@@ -120,6 +120,8 @@ class BrowseController extends Base\BaseController
         $em->persist($entity);
         $em->flush();
 
+        $session->getFlashBag()->add('info', "Ваш голос сохранен");
+
         return $redirect;
     }
 
