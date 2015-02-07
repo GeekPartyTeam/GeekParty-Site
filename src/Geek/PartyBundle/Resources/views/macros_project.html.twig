@@ -1,6 +1,6 @@
 {% macro project_block(entry, current_user) %}
     {% set partyId = entry.party is not null ? entry.party.id : null %}
-    {% set entryPage = path('geek_browse_work', { party: partyId|url_encode, work: entry.id }) %}
+    {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
     <div class="k-entry-block">
         <div class="row">
             <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
