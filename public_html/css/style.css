@@ -441,7 +441,7 @@ body {
 .ProjectStar {
     width: 160px;
     height: 28px;
-    background: url('/img/5t.png');
+    background: url('/img/5ts.png');
 }
 
 .ActiveVoting .ProjectStar {
@@ -464,4 +464,8 @@ body {
     width: 0;
     height: 28px;
     background: url('/img/5f.png');
+}
+
+.UnuploadedListHeader {
+    padding-top: 40px;
 }

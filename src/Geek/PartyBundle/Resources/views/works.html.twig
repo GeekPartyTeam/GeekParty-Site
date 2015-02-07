@@ -1,9 +1,19 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 {% import 'GeekPartyBundle::macros_project.html.twig' as macros_project %}
 
+{% set unuploaded = {} %}
+{% set uploaded = {} %}
+{% for entry in works %}
+    {% if not is_work_uploaded(entry) %}
+        {% set unuploaded = unuploaded|merge([entry]) %}
+    {% else %}
+        {% set uploaded = uploaded|merge([entry]) %}
+    {% endif %}
+{% endfor %}
+
 <div class="row">
     <div class="col-md-6">
-        {% for entry in works %}
+        {% for entry in uploaded %}
             {% if loop.index0 % 2 == 0 %}
                 {{ macros_project.project_block(entry, current_user) }}
             {% endif %}
@@ -11,7 +21,7 @@
     </div>
 
     <div class="col-md-6">
-        {% for entry in works %}
+        {% for entry in uploaded %}
             {% if loop.index0 % 2 != 0 %}
                 {{ macros_project.project_block(entry, current_user) }}
             {% endif %}
@@ -24,3 +34,24 @@
         </div>
     {% endif %}
 </div>
+
+{% if unuploaded|length > 0 %}
+    <h4 class="UnuploadedListHeader">Незагруженные работы</h4>
+    <div class="row">
+        <div class="col-md-6">
+            {% for entry in unuploaded %}
+                {% if loop.index0 % 2 == 0 %}
+                    {{ macros_project.project_block(entry, current_user) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="col-md-6">
+            {% for entry in unuploaded %}
+                {% if loop.index0 % 2 != 0 %}
+                    {{ macros_project.project_block(entry, current_user) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
