@@ -1,4 +1,8 @@
 !function () {
+    if ($('.ActiveVoting').length == 0) {
+        return;
+    }
+
     var $vote = $('.ProjectStar'),
         $voteInner = $('.ProjectStarInner'),
         $voteInput = $('input[name=vote]'),

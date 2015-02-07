@@ -441,7 +441,14 @@ body {
     width: 160px;
     height: 28px;
     background: url('/img/5t.png');
+}
+
+.ActiveVoting .ProjectStar {
     cursor: pointer;
+}
+
+.VoteResult.ProjectVote {
+    margin-top: 10px;
 }
 
 .ProjectStarInner {

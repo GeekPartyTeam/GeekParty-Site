@@ -6,6 +6,9 @@
 namespace Geek\PartyBundle\Twig;
 
 use AppKernel;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
+use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\User;
 use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -41,6 +44,7 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
             , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
+            , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
         ];
     }
 
@@ -82,5 +86,28 @@ class GeekExtension extends \Twig_Extension
         }
 
         return count($parties) > 0 ? $parties[0] : null;
+    }
+
+    public function calculateProjectRating(Work $project)
+    {
+        // TODO: ratings by party
+        static $ratings;
+
+        if (!$ratings) {
+            $ratings = [];
+
+            $doctrine = $this->kernel->getContainer()->get('doctrine');
+            /** @var EntityManager $em */
+            $em = $doctrine->getManager();
+            /** @var PartyRepository $repo */
+            $repo = $em->getRepository('GeekPartyBundle:Party');
+            $ratings = $repo->getRatings($project->getParty());
+        }
+
+        if (!isset($ratings[$project->getId()])) {
+            return 0.0;
+        }
+
+        return $ratings[$project->getId()];
     }
 }

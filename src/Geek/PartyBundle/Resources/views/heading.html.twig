@@ -16,6 +16,7 @@
 
 {% if projectVotingEndTime < now %}
     {% set message = current_party.name ~ " состоялось!" %}
+    {% set belowMessage = "<a href='" ~ path("geek_browse", {party: current_party.id}) ~ "'>Результаты голосования</a>" %}
 
 {% elseif submissionStartTime > now %}
     {% set aboveMessage = "Сбор тем для " ~ current_party.name ~ " начнется через:" %}
@@ -69,7 +70,7 @@
         window.targetDate = "{{ targetDate }}";
     </script>
     <div id="big-timer">00:00:00</div>
-    {% if belowMessage is defined %}
-        <div id="k-below-message">{{ belowMessage|raw }}</div>
-    {%  endif %}
 {% endif %}
+{% if belowMessage is defined %}
+    <div id="k-below-message">{{ belowMessage|raw }}</div>
+{%  endif %}

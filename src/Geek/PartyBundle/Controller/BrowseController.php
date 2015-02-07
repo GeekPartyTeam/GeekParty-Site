@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\ProjectVote;
+use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Work;
 use JMS\SecurityExtraBundle\Tests\Security\Authorization\Expression\Fixture\Issue22\Project;
 use Symfony\Component\HttpFoundation\Response;
@@ -135,11 +136,13 @@ class BrowseController extends Base\BaseController
         $em = $this->getDoctrine()->getManager();
         /** @var EntityRepository $workRepo */
         $workRepo = $em->getRepository('GeekPartyBundle:Work');
+        /** @var PartyRepository $partyRepo */
+        $partyRepo = $em->getRepository('GeekPartyBundle:Party');
 
         $works = $workRepo->findBy(['party' => $partyEntity], ['time' => 'ASC']);
 
-        $tooOld = new \DateTime('2000-01-01');
-        usort($works, function ($a, $b) use ($tooOld) {
+        $sortByUploadDate = function ($a, $b) {
+            $tooOld = new \DateTime('2000-01-01');
             /** @var Work $a */
             /** @var Work $b */
             if ($b->getTime() < $tooOld) {
@@ -149,7 +152,25 @@ class BrowseController extends Base\BaseController
                 return 1;
             }
             return $a->getTime() < $b->getTime() ? -1 : 1;
-        });
+        };
+        $sort = $sortByUploadDate;
+
+        if ($partyEntity->isEnded()) {
+            $ratings = $partyRepo->getRatings($partyEntity);
+                $sortByRating = function (Work $a, Work $b) use ($ratings) {
+                if (!isset($ratings[$a->getId()])) {
+                    $ratings[$a->getId()] = 0;
+                }
+                if (!isset($ratings[$b->getId()])) {
+                    $ratings[$b->getId()] = 0;
+                }
+
+                return $ratings[$a->getId()] > $ratings[$b->getId()] ? -1 : 1;
+            };
+            $sort = $sortByRating;
+        }
+
+        usort($works, $sort);
         return $works;
     }
 

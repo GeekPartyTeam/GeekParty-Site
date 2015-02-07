@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Geek\PartyBundle\Entity\Repository\PartyRepository")
  */
 class Party 
 {
@@ -320,5 +321,13 @@ class Party
             $time = new \DateTime;
         }
         return $time >= $this->getProjectVotingStartTime() && $time < $this->getProjectVotingEndTime();
+    }
+
+    public function isEnded(\DateTime $time = null)
+    {
+        if (!$time) {
+            $time = new \DateTime;
+        }
+        return $time > $this->getProjectVotingEndTime();
     }
 }

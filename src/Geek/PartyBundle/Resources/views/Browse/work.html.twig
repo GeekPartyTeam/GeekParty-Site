@@ -37,7 +37,7 @@
                             <input type="hidden" name="vote" value="{{ vote is defined and vote ? vote.vote : 0 }}"/>
                             </div>
 
-                            <div class="ProjectVote">
+                            <div class="ProjectVote ActiveVoting">
                                 <div class="ProjectStar">
                                     <div class="ProjectStarInner">&nbsp;</div>
                                 </div>
@@ -45,6 +45,9 @@
                             <p class="k-red">Голосуйте за игру только если вы поиграли в нее!</p>
                             <p class="k-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
                             {{ macros.submit('Проголосовать', 'SubmitVoteButton') }}
+                            {% if vote is defined and vote %}
+                                <p class="">Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
+                            {% endif %}
                             <p class="k-red" id="ChooseVote" style="display:none">Выберите оценку от 1 до 5 кирок, чтобы проголосовать</p>
                         </form>
                     {% endif %}
