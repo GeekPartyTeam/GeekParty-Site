@@ -155,6 +155,13 @@ class BrowseController extends Base\BaseController
         };
         $sort = $sortByUploadDate;
 
+        if ($partyEntity->isProjectVotingTime()) {
+            $sortByVoteCount = function (Work $a, Work $b) use ($partyRepo) {
+                return $partyRepo->getVoteCount($a) < $partyRepo->getVoteCount($b) ? -1 : 1;
+            };
+            $sort = $sortByVoteCount;
+        }
+
         if ($partyEntity->isEnded()) {
             $ratings = $partyRepo->getRatings($partyEntity);
                 $sortByRating = function (Work $a, Work $b) use ($ratings) {

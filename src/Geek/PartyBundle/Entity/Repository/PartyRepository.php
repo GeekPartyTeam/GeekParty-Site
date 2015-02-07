@@ -8,6 +8,7 @@ namespace Geek\PartyBundle\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Geek\PartyBundle\Entity\Party;
+use Geek\PartyBundle\Entity\Work;
 
 class PartyRepository extends EntityRepository
 {
@@ -39,5 +40,23 @@ class PartyRepository extends EntityRepository
         }
 
         return $ratings;
+    }
+
+    public function getVoteCount(Work $a)
+    {
+        static $cache;
+        if (!$cache) {
+            $cache = [];
+        }
+
+        if (!isset($cache[$a->getId()])) {
+            $query = $this->getEntityManager()->getConnection()
+                ->query("SELECT COUNT(*) FROM ProjectVote WHERE work_id = ?");
+            $query->bindValue(0, $a->getId());
+            $count = $query->fetchColumn(0);
+            $cache[$a->getId()] = $count;
+        }
+
+        return $cache[$a->getId()];
     }
 }
