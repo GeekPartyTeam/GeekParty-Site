@@ -1,0 +1,9 @@
+{% macro articleLink(entry) %}
+    {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
+    <a class="pull-right" href="{{ url }}#disqus_thread">Комментарии</a>
+{% endmacro %}
+
+{% macro projectLink(entry) %}
+    {% set url = path('geek_browse_work', { party: entry.party.id, work: entry.id })  %}
+    <a class="pull-right" href="{{ url }}#disqus_thread"></a>
+{% endmacro %}

@@ -1,9 +1,9 @@
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
-{% import 'GeekPartyBundle::macros_project.html.twig' as macros_project %}
+{% import 'GeekPartyBundle::_projects/macros.html.twig' as macros_project %}
 
 {% set unuploaded = {} %}
 {% set uploaded = {} %}
-{% for entry in works %}
+{% for entry in projects %}
     {% if not is_work_uploaded(entry) %}
         {% set unuploaded = unuploaded|merge([entry]) %}
     {% else %}

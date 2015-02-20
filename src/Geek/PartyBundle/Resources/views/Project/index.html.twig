@@ -11,7 +11,7 @@
             {{ macros.button('Добавить работу', path('project_new')) }}
         </div>
         <div class="Clear"></div>
-        {% include 'GeekPartyBundle::works.html.twig' with {'works': works} %}
+        {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
         {{ macros.button('Выйти', path('fos_user_security_logout')) }}
     </div>
 {% endblock %}

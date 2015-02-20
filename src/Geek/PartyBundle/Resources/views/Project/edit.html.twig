@@ -1,6 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+{% import 'GeekPartyBundle::_projects/macros.html.twig' as projects %}
 
 {% block title %} {{ parent() }} :: Редактирование проекта {% endblock %}
 
@@ -43,7 +44,7 @@
                         <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>
                             {% if new is not defined %}
-                                <img src="/works/{{ partyId|url_encode }}/{{ entry.id }}_icon.png" alt="{{ entry.name }}"/>
+                                {{ projects.icon(entry) }}
                             {% endif %}
                             <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
                             {{ form_widget(edit_form.icon) }}
