@@ -5,5 +5,5 @@
 
 {% macro projectLink(entry) %}
     {% set url = path('geek_browse_work', { party: entry.party.id, work: entry.id })  %}
-    <a class="pull-right" href="{{ url }}#disqus_thread"></a>
+    <a class="pull-right" href="{{ url }}#disqus_thread">Комментарии</a>
 {% endmacro %}
