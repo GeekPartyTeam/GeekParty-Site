@@ -56,3 +56,8 @@
         {% endblock %}
     {% endembed %}
 {% endmacro %}
+
+{% macro auth_buttons() %}
+    {{ _self.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+    {{ _self.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+{% endmacro %}

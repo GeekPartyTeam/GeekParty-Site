@@ -1,1 +1,24 @@
-{#{% include 'GeekPartyBundle::_comments/disqus_comments.html.twig' %}#}
+{% for comment in comments %}
+    {% set userPage = path('geek_party_user_show', { id: comment.author.id }) %}
+    {% set userAvatarPath = '/img/avatar.png' %}
+    {% set userName = comment.author.fullname %}
+    <div class="k-entry-block">
+        <div class="row Comment">
+            <span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>
+            <h4><a href="{{ userPage }}">{{ userName }}</a></h4>
+            <div class="CommentAuthor">
+                <a href="{{ userPage }}" class="k-img-link">
+                    <img src="{{ userAvatarPath }}" alt="{{ userName }}"
+                            class="UserAvatar img-rounded k-img-border">
+                </a>
+            </div>
+
+            <div class="CommentText">
+                <p>{{ comment.text }}</p>
+                {#{% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}#}
+                    {#<a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Удалить</a>#}
+                {#{% endif %}#}
+            </div>
+        </div>
+    </div>
+{% endfor %}

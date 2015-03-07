@@ -1,0 +1,12 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} {{ parent() }} :: Разработчик {% endblock %}
+
+{% block main %}
+    <h1>{{ user.fullname }}</h1>
+    <h3>Projects</h3>
+    {% include 'GeekPartyBundle::_projects/list.html.twig' with {projects: projects} %}
+
+    <h3>Latest comments</h3>
+    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with {comments: comments} %}
+{% endblock %}

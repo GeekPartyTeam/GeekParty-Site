@@ -14,8 +14,7 @@
         <div class="col-md-12 k-entry-block">
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                Чтобы голосовать, вам нужно авторизоваться:
-               {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-               {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+               {{ macros.auth_buttons() }}
             {% else %}
                 {% if alreadyVoted %}
                     Вы уже проголосовали

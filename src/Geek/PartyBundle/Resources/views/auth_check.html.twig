@@ -1,0 +1,10 @@
+{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+   Чтобы голосовать, вам нужно авторизоваться:
+
+{% else %}
+    {% if alreadyVoted %}
+        Вы уже проголосовали
+    {% else %}
+        Вы можете проголосовать только за одну тему!
+    {% endif %}
+{% endif %}

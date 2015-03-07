@@ -3,21 +3,20 @@
 {% block title %} {{ parent() }} :: Редактирование команды {% endblock %}
 
 {% macro teamMember(member) %}
+	<div class="memberRow borderBlock teamEditorEntry">
+		<input class="deleteEntryButton" type="button" value="Удалить"/>
+		<div class="teamEditorControlBlock">
+			<h3>Имя</h3>
+			<p class="inputLabel">Максимум 30 символов</p>
+			<input class="participant" type="text" name="member[name][]" {%if member %}value="{{member.name}}"{%endif%}  maxlength="30"/>
+		</div>
 
-									<div class="memberRow borderBlock teamEditorEntry">
-										<input class="deleteEntryButton" type="button" value="Удалить"/>
-										<div class="teamEditorControlBlock">
-											<h3>Имя</h3>
-											<p class="inputLabel">Максимум 30 символов</p>
-											<input class="participant" type="text" name="member[name][]" {%if member %}value="{{member.name}}"{%endif%}  maxlength="30"/>
-										</div>
-										
-										<div class="teamEditorControlBlock">
-											<h3>Skills</h3>
-											<p class="inputLabel">Максимум 40 символов</p>
-											<textarea class="participant" name="member[description][]" cols="30" rows="2"  maxlength="40">{% if member %}{{member.description}}{%endif%}</textarea>
-										</div>
-									</div>
+		<div class="teamEditorControlBlock">
+			<h3>Skills</h3>
+			<p class="inputLabel">Максимум 40 символов</p>
+			<textarea class="participant" name="member[description][]" cols="30" rows="2"  maxlength="40">{% if member %}{{member.description}}{%endif%}</textarea>
+		</div>
+	</div>
 {% endmacro %}
 
 {% block main %}

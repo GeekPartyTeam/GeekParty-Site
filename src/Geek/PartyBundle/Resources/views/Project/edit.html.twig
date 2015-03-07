@@ -14,7 +14,10 @@
             <p><a href="{{ path('project') }}">&larr; назад к списку</a></p>
             <h2 class="inlineBlock">Редактирование проекта</h2>
 
-            <form id="teamEditorMain" action="{%if new is not defined %}{{ path('project_update', { 'id': entity.id }) }}{% else %}{{ path('project_create') }}{% endif %}" method="post" {{ form_enctype(edit_form) }}>
+            <form id="teamEditorMain"
+                  class="Form"
+                  action="{%if new is not defined %}{{ path('project_update', { 'id': entity.id }) }}{% else %}{{ path('project_create') }}{% endif %}"
+                  method="post" {{ form_enctype(edit_form) }}>
                 <div>
                     {{ current_party }}
                     {{ form_errors(edit_form) }}

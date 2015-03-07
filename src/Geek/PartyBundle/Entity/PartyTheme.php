@@ -141,10 +141,10 @@ class PartyTheme
     /**
      * Set user
      *
-     * @param \Geek\PartyBundle\Entity\User $user
+     * @param User $user
      * @return PartyTheme
      */
-    public function setUser(\Geek\PartyBundle\Entity\User $user = null)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -154,7 +154,7 @@ class PartyTheme
     /**
      * Get user
      *
-     * @return \Geek\PartyBundle\Entity\User 
+     * @return User
      */
     public function getUser()
     {

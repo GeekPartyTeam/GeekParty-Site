@@ -531,7 +531,7 @@ ul.briefList {
 #teamEditorMain .teamEditorControlBlock {
     margin-bottom: 16px;
 }
-#teamEditorMain input {
+.Form input {
     background: none repeat scroll 0 0 #0A212E;
     border: 1px solid #185C80;
     color: white;
@@ -539,14 +539,13 @@ ul.briefList {
     padding: 5px;
     width: 200px;
 }
-#teamEditorMain textarea {
+.Form textarea {
     background: none repeat scroll 0 0 #0A212E;
     border: 1px solid #185C80;
     color: white;
-    max-width: 340px;
+    /*max-width: 340px;*/
     outline: 0 none;
     padding: 5px;
-    resize: none;
 }
 p.inputLabel {
     color: #B9BFC4;

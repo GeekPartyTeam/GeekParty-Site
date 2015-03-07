@@ -15,7 +15,7 @@
     {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
     <div class="k-entry-block">
         <div class="row">
-            <h4>&nbsp;&nbsp;&nbsp;<a href="{{ entryPage }}">{{ entry.name }}</a></h4>
+            <h4><a href="{{ entryPage }}">{{ entry.name }}</a></h4>
             <div class="col-md-4 col-xs-4">
                 <a href="{{ entryPage }}" class="k-img-link">
                     <img
@@ -50,6 +50,5 @@
             {% endif %}
             </div>
         </div>
-
     </div>
 {% endmacro %}

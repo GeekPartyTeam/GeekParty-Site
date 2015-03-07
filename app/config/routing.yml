@@ -70,6 +70,18 @@ _edit_prject:
     type:     annotation
     prefix:   /edit
 
+# User
+_user:
+    resource: "@GeekPartyBundle/Controller/UserController.php"
+    type:     annotation
+    prefix:   /user
+
+# Comments
+_comment:
+    resource: "@GeekPartyBundle/Controller/CommentController.php"
+    type:     annotation
+    prefix:   /comment
+
 # Auth & security
 _auth:
     resource: routing_security.yml

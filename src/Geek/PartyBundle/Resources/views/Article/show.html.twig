@@ -1,6 +1,7 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+{% import 'GeekPartyBundle::_comments/macros.html.twig' as comments_macros %}
 
 {% block title %} {{ parent() }} :: {{ entity.title }} {% endblock %}
 
@@ -11,7 +12,8 @@
         </ul>
 
         <div style="clear:both;"></div>
-        {% include 'GeekPartyBundle::_comments/include_comments.html.twig' %}
+        {{ comments_macros.addComment('article', entity.id) }}
+        {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with {comments:entity.comments} %}
     </div>
 
 {% endblock %}

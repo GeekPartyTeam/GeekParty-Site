@@ -304,6 +304,10 @@ body {
     padding-left: 10px;
 }
 
+.k-entry-block h4 {
+    padding-left: 17px;
+}
+
 .k-gold-color {
     color: #e3bf50;
 }
@@ -401,7 +405,7 @@ body {
     padding: 5px;
 }
 
-#teamEditorMain .PartyThemeText {
+.Form .PartyThemeText {
     padding-top: 5px;
     position: relative;
     top: -14px;
@@ -468,4 +472,37 @@ body {
 
 .UnuploadedListHeader {
     padding-top: 40px;
+}
+
+.UserAvatar {
+    width: 100px;
+    height: 100px;
+}
+
+.CommentAuthor {
+    width: 14%;
+    float: left;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: inline-block;
+    min-width: 130px;
+}
+
+.CommentText {
+    float: left;
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.CommentText textarea {
+    width: 100%;
+}
+
+.Comment {
+    padding-right: 20px;
+}
+
+.Comment .k-sub {
+    float: right;
 }

@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prism\PollBundle\Entity\Poll;
 
@@ -54,9 +55,20 @@ class Article
     protected $poll;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="ArticleComment", mappedBy="article")
+     */
+    protected $comments;
+
+    function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,14 +84,14 @@ class Article
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -95,14 +107,14 @@ class Article
     public function setBody($body)
     {
         $this->body = $body;
-    
+
         return $this;
     }
 
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -118,14 +130,14 @@ class Article
     public function setAuthor(\Geek\PartyBundle\Entity\User $author = null)
     {
         $this->author = $author;
-    
+
         return $this;
     }
 
     /**
      * Get author
      *
-     * @return \Geek\PartyBundle\Entity\User 
+     * @return \Geek\PartyBundle\Entity\User
      */
     public function getAuthor()
     {
@@ -141,14 +153,14 @@ class Article
     public function setTime($time)
     {
         $this->time = $time;
-    
+
         return $this;
     }
 
     /**
      * Get time
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTime()
     {
@@ -176,5 +188,13 @@ class Article
     public function getPoll()
     {
         return $this->poll;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

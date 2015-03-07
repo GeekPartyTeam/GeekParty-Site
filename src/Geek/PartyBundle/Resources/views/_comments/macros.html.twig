@@ -1,9 +1,42 @@
+{% macro comments_link_text(comments) %}
+    {% if comments|length > 0 %}
+        Комментариев: {{ comments|length }}
+    {% else %}
+        Добавить комментарий
+    {% endif %}
+{% endmacro %}
+
 {% macro articleLink(entry) %}
     {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
-    <a class="pull-right" href="{{ url }}#disqus_thread">Комментарии</a>
+    <a class="pull-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
 {% endmacro %}
 
 {% macro projectLink(entry) %}
     {% set url = path('geek_browse_work', { party: entry.party.id, work: entry.id })  %}
-    <a class="pull-right" href="{{ url }}#disqus_thread">Комментарии</a>
+    <a class="pull-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
+{% endmacro %}
+
+{% macro addComment(type, id) %}
+    {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+    {% set userAvatarPath = '/img/avatar.png' %}
+    <div class="k-entry-block">
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+           Чтобы оставить комментарий, вам нужно авторизоваться:
+           {{ macros.auth_buttons() }}
+        {% else %}
+            <div class="row">
+                <h4>Добавить комментарий</h4>
+                <div class="CommentAuthor">
+                    <img src="{{ userAvatarPath }}" class="UserAvatar img-rounded k-img-border" alt="{{ app.user.fullname }}">
+                </div>
+                <div class="CommentText">
+                    <form class="Form" method="post" action="{{ path('geek_party_comment_' ~ type) }}">
+                        <input type="hidden" name="{{ type }}_id" value="{{ id }}"/>
+                        <textarea name="text"></textarea>
+                        {{ macros.submit('Добавить') }}
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endmacro %}
