@@ -19,5 +19,8 @@ $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?:
 $debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
 
 $kernel = new AppKernel($env, $debug);
+$kernel->boot();
 $application = new Application($kernel);
+$em = $kernel->getContainer()->get('doctrine')->getManager();
+$application->add(new \Geek\PartyBundle\Command\ImportDisqusComments($em));
 $application->run($input);

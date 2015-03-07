@@ -45,7 +45,10 @@ class AbstractComment
      * @ORM\ManyToOne(targetEntity="User")
      */
     protected $author;
-
+    /**
+     * @ORM\Column
+     */
+    protected $foreignAuthor;
     /**
      * @return int
      */
@@ -137,5 +140,21 @@ class AbstractComment
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getForeignAuthor()
+    {
+        return $this->foreignAuthor;
+    }
+
+    /**
+     * @param mixed $foreignAuthor
+     */
+    public function setForeignAuthor($foreignAuthor)
+    {
+        $this->foreignAuthor = $foreignAuthor;
     }
 }

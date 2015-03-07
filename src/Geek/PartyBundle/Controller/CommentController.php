@@ -20,7 +20,6 @@ class CommentController extends BaseController
     /**
      * @Route("/article")
      * @Method("POST")
-     * @Template
      *
      * @param Request $request
      * @return array
@@ -38,7 +37,6 @@ class CommentController extends BaseController
     /**
      * @Route("/project")
      * @Method("POST")
-     * @Template
      *
      * @param Request $request
      * @return array
