@@ -8,7 +8,7 @@ namespace Geek\PartyBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Geek\PartyBundle\Entity\Repository\AbstractCommentRepository")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discriminator", type="integer")
  * @ORM\DiscriminatorMap({0 = "ProjectComment", 1 = "ArticleComment"})
@@ -48,7 +48,7 @@ class AbstractComment
     /**
      * @ORM\Column
      */
-    protected $foreignAuthor;
+    protected $foreignAuthor = '';
     /**
      * @return int
      */

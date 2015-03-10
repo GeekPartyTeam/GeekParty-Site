@@ -6,6 +6,8 @@
 namespace Geek\PartyBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Geek\PartyBundle\Entity\Article;
+use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Geek\PartyBundle\Entity\Voter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -118,5 +120,18 @@ class ArticleController extends Base\CRUDController
         } else {
             return false;
         }
+    }
+
+    protected function renderPage($page, array $parameters = [])
+    {
+        if ($page == 'show') {
+            /** @var Article $entity */
+            $entity = $parameters['entity'];
+            $from = $this->getRequest()->get('from', 0);
+            $parameters = array_merge($parameters,
+                ['comments' => AbstractCommentRepository::extractCommentsPage($entity->getComments(), $from)]
+            );
+        }
+        return parent::renderPage($page,$parameters);
     }
 }

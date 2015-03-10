@@ -13,7 +13,7 @@
 
         <div style="clear:both;"></div>
         {{ comments_macros.addComment('article', entity.id) }}
-        {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with {comments:entity.comments} %}
+        {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
     </div>
 
 {% endblock %}

@@ -1,24 +1,46 @@
 {% for comment in comments %}
-    {% set userPage = path('geek_party_user_show', { id: comment.author.id }) %}
+    {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
     {% set userAvatarPath = '/img/avatar.png' %}
-    {% set userName = comment.author.fullname %}
+    {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
     <div class="k-entry-block">
         <div class="row Comment">
             <span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>
-            <h4><a href="{{ userPage }}">{{ userName }}</a></h4>
-            <div class="CommentAuthor">
-                <a href="{{ userPage }}" class="k-img-link">
-                    <img src="{{ userAvatarPath }}" alt="{{ userName }}"
-                            class="UserAvatar img-rounded k-img-border">
-                </a>
-            </div>
+            <h4><a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a></h4>
+            {#<div class="CommentAuthor">#}
+                {#<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">#}
+                    {#<img src="{{ userAvatarPath }}" alt="{{ userName }}"#}
+                            {#class="UserAvatar img-rounded k-img-border">#}
+                {#</a>#}
+            {#</div>#}
 
             <div class="CommentText">
                 <p>{{ comment.text }}</p>
-                {#{% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}#}
-                    {#<a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Удалить</a>#}
-                {#{% endif %}#}
             </div>
         </div>
     </div>
 {% endfor %}
+{% if total_count is defined and total_count > comments|length %}
+    {% set page_count = (total_count / comments_per_page)|round(0, 'ceil') %}
+    {% set current_page = 1 + (from / comments_per_page)|round(0, 'floor')%}
+    {% macro page_link(from) %}
+        {{ path(app.request.attributes.get('_route'),
+            app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'from': from }))) }}
+    {% endmacro %}
+<nav>
+  <ul class="pagination">
+    <li{% if from == 0 %} class="disabled"{% endif %}>
+      <a{% if from > 0 %} href="{{ _self.page_link(from - comments_per_page) }}"{% endif %}>
+        <span>&laquo;</span>
+      </a>
+    </li>
+    {% for i in 0..(total_count/comments_per_page)|round(0, 'floor') %}
+        <li{% if i*comments_per_page == from %} class="active"{% endif %}><a href="{{ _self.page_link(i * comments_per_page) }}">{{ 1 + i }}</a></li>
+    {% endfor %}
+    <li{% if from + comments_per_page >= total_count %} class="disabled"{% endif %}>
+      <a{% if from + comments_per_page < total_count %} href="{{ _self.page_link(from + comments_per_page) }}"{% endif %}>
+        <span>&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+{% endif %}

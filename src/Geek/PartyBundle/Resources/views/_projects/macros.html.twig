@@ -32,8 +32,6 @@
                 {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
                     <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
                 {% endif %}
-
-                {{ comments.projectLink(entry) }}
             </div>
         </div>
         <div class="row">
@@ -48,6 +46,7 @@
                 </div>
                 <div class="VoteTextResult">{{ rating|round(1)|number_format(1) }}</div>
             {% endif %}
+            {{ comments.projectLink(entry) }}
             </div>
         </div>
     </div>

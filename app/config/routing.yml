@@ -22,16 +22,16 @@ escaped_percent_redirect:
 
 # News article
 article:
-    pattern: /article/{id}
-    defaults: { _controller: GeekPartyBundle:Article:action, action: show }
+    pattern: /article/{id}/{from}
+    defaults: { _controller: GeekPartyBundle:Article:action, action: show, from: 0 }
 
 # Browse
 geek_browse:
     pattern:  /browse/{party}
     defaults: { _controller: GeekPartyBundle:Browse:party, party: latest }
 geek_browse_work:
-    pattern:  /browse/{party}/{work}
-    defaults: { _controller: GeekPartyBundle:Browse:work, party: latest }
+    pattern:  /browse/{party}/{work}/{from}
+    defaults: { _controller: GeekPartyBundle:Browse:work, party: latest, from: 0 }
 geek_vote:
     pattern:  /vote
     defaults: { _controller: GeekPartyBundle:Browse:vote }

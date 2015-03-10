@@ -71,5 +71,5 @@
         <div style="clear:both;"></div>
     </div>
     {{ comments_macros.addComment('project', work.id) }}
-    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with {comments:work.comments} %}
+    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
 {% endblock %}

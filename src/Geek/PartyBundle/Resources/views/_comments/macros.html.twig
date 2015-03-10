@@ -13,7 +13,7 @@
 
 {% macro projectLink(entry) %}
     {% set url = path('geek_browse_work', { party: entry.party.id, work: entry.id })  %}
-    <a class="pull-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
+    <a class="CommentsLink" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
 {% endmacro %}
 
 {% macro addComment(type, id) %}
@@ -26,9 +26,9 @@
         {% else %}
             <div class="row">
                 <h4>Добавить комментарий</h4>
-                <div class="CommentAuthor">
-                    <img src="{{ userAvatarPath }}" class="UserAvatar img-rounded k-img-border" alt="{{ app.user.fullname }}">
-                </div>
+                {#<div class="CommentAuthor">#}
+                    {#<img src="{{ userAvatarPath }}" class="UserAvatar img-rounded k-img-border" alt="{{ app.user.fullname }}">#}
+                {#</div>#}
                 <div class="CommentText">
                     <form class="Form" method="post" action="{{ path('geek_party_comment_' ~ type) }}">
                         <input type="hidden" name="{{ type }}_id" value="{{ id }}"/>

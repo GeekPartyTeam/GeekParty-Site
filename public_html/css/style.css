@@ -462,6 +462,7 @@ body {
     margin-top: 12px;
     font: 30px/24px "pixel_font";
     color: #FFAA22;
+    float: left;
 }
 
 .ProjectStarInner {
@@ -493,6 +494,8 @@ body {
     float: left;
     width: 80%;
     box-sizing: border-box;
+    /* no avatar offset */
+    padding-left: 17px;
 }
 
 .CommentText textarea {
@@ -505,4 +508,10 @@ body {
 
 .Comment .k-sub {
     float: right;
+}
+
+.CommentsLink {
+    float: right;
+    margin-top: 12px;
+    line-height: 24px;
 }

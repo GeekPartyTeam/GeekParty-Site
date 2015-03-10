@@ -119,10 +119,15 @@ abstract class CRUDController extends BaseController
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':show.html.twig', [
+        return $this->renderPage('show', [
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ]);
+    }
+
+    protected function renderPage($page, array $parameters = [])
+    {
+        return $this->render("GeekPartyBundle:{$this->getEntity()}:{$page}.html.twig", $parameters);
     }
 
     /**

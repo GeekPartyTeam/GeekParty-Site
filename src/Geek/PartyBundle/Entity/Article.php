@@ -57,6 +57,7 @@ class Article
     /**
      * @var \Doctrine\Common\Collections\Collection
      * @ORM\OneToMany(targetEntity="ArticleComment", mappedBy="article")
+     * @ORM\OrderBy({"date" = "DESC"})
      */
     protected $comments;
 

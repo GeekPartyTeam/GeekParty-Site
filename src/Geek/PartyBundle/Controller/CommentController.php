@@ -9,6 +9,7 @@ use Geek\PartyBundle\Controller\Base\BaseController;
 use Geek\PartyBundle\Entity\AbstractComment;
 use Geek\PartyBundle\Entity\ArticleComment;
 use Geek\PartyBundle\Entity\ProjectComment;
+use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -49,6 +50,28 @@ class CommentController extends BaseController
         $comment->setProject($article);
         $this->addComment($request->get('text'), $comment);
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @Route("/list/{from}", defaults={"from"=0})
+     * @Method("GET")
+     * @Template()
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function listAction(Request $request)
+    {
+        $from = $request->get('from', 0);
+
+        /** @var AbstractCommentRepository $commentsRepo */
+        $commentsRepo = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('GeekPartyBundle:AbstractComment');
+
+        return $this->arrayResponse(
+            $commentsRepo->fetchPage($from)
+        );
     }
 
     /**

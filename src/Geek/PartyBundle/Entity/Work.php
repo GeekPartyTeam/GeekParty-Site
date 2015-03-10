@@ -72,6 +72,7 @@ class Work
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="ProjectComment", mappedBy="project")
+     * @ORM\OrderBy({"date" = "DESC"})
      */
     protected $comments;
 

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\ProjectVote;
+use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Work;
 use JMS\SecurityExtraBundle\Tests\Security\Authorization\Expression\Fixture\Issue22\Project;
@@ -58,7 +59,7 @@ class BrowseController extends Base\BaseController
      * @return array
      * @Template()
      */
-    public function workAction($party, $work)
+    public function workAction($party, $work, $from)
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
@@ -75,6 +76,7 @@ class BrowseController extends Base\BaseController
             'party' => $party,
             'work' => $workEntity,
             'vote' => $this->getVote($workEntity),
+            'comments' => AbstractCommentRepository::extractCommentsPage($workEntity->getComments(), $from),
         ]);
     }
 
