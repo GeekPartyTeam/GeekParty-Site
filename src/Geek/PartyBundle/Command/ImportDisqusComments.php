@@ -85,12 +85,12 @@ class ImportDisqusComments extends Command
                 $entity = $this->em->find('GeekPartyBundle:Article', $matches[1]);
                 $comment = new ArticleComment();
                 $comment->setArticle($entity);
-            } elseif (preg_match('/.*\/browse\/.*\/(\d+)/', $threadUrl, $mathces)) {
+            } elseif (preg_match('/.*\/browse\/.*\/(\d+)/', $threadUrl, $matches)) {
                 $entity = $this->em->find('GeekPartyBundle:Work', $matches[1]);
                 $comment = new ProjectComment();
                 $comment->setProject($entity);
-            } elseif (preg_match('/.*\/browse\/.*\/(.+)/', $threadUrl, $mathces)) {
-                $entity = $this->em->getRepository('GeekPartyBundle:Work')->findOneBy($matches[1]);
+            } elseif (preg_match('/.*\/browse\/.*\/(.+)/', $threadUrl, $matches)) {
+                $entity = $this->em->getRepository('GeekPartyBundle:Work')->findOneBy(['shortname' => $matches[1]]);
                 $comment = new ProjectComment();
                 $comment->setProject($entity);
             }
