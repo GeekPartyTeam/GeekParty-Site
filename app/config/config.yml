@@ -59,7 +59,6 @@ fos_user:
     user_class: Geek\PartyBundle\Entity\User
 
 stfalcon_tinymce:
-        include_jquery: true
         tinymce_jquery: true
         selector: ".tinymce"
         #base_url: "http://yourdomain.com/" # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
@@ -89,7 +88,6 @@ stfalcon_tinymce:
                  toolbar2: "print preview media | forecolor backcolor emoticons | "
                  image_advtab: true
                  relative_urls: false
-                 uploadimage_form_url: /image_upload/upload
                  file_browser_callback: tinymce_picker_callback
 
 exercise_html_purifier:

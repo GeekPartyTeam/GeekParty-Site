@@ -68,8 +68,36 @@
             VK.Widgets.Poll(pollId, {width: "300"}, pollId);
         })
     })
+
+    $(function () {
+        var $modal = $('#upload_image_form');
+
+        $modal.find('form').submit(function () {
+
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                url: '/image_upload/upload',
+                type: 'POST',
+                data: formData,
+                async: false,
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    $('#' + $modal.data('input-id')).val(result.image.url);
+                    $modal.modal('hide');
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+
+            return false;
+        });
+    });
 }();
 
 function tinymce_picker_callback(inputId, url, type, window) {
-
+    $('#upload_image_form')
+        .modal()
+        .data('input-id', inputId)
+    ;
 }

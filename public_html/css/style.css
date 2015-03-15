@@ -515,3 +515,12 @@ body {
     margin-top: 12px;
     line-height: 24px;
 }
+
+#upload_image_form {
+    color: black;
+    z-index: 70000;
+}
+
+#upload_image_form .modal-dialog {
+    z-index: 70001;
+}
