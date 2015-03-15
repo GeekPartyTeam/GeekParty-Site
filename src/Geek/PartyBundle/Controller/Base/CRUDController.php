@@ -206,7 +206,10 @@ abstract class CRUDController extends BaseController
         }
 
         $formClass = $this->getFormClass();
-        $editForm = $this->createForm(new $formClass(), $entity);
+        $formOptions = [
+            'is_admin' => $this->isAdmin(),
+        ];
+        $editForm = $this->createForm(new $formClass(), $entity, $formOptions);
 
         $params = [
             'entity' => $entity,

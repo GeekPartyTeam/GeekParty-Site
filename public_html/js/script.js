@@ -54,7 +54,10 @@
         el.type = "text/javascript";
         el.src = "//vk.com/js/api/openapi.js";
         el.async = true;
-        document.getElementById("vk_api_transport").appendChild(el);
+        var vkApiTransport = document.getElementById("vk_api_transport");
+        if (vkApiTransport) {
+            vkApiTransport.appendChild(el);
+        }
     }, 0);
 
     // VK polls
@@ -66,3 +69,7 @@
         })
     })
 }();
+
+function tinymce_picker_callback(inputId, url, type, window) {
+
+}

@@ -35,11 +35,6 @@ security:
                 failure_path: geek_login_failure
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/edit, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/vote, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/comment, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/poll, role: ROLE_ADMIN }
+        - { path: ^/(login|register|resetting), role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(edit|vote|comment|article_edit), role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(admin/|poll|image_upload), role: ROLE_ADMIN }

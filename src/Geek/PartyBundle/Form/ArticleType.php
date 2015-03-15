@@ -15,7 +15,7 @@ class ArticleType extends AbstractType
             ->add('body', 'textarea', [
                 'attr' => [
                     'class' => 'tinymce',
-                    'data-theme' => 'advanced'
+                    'data-theme' => $options['is_admin'] ? 'admin' : 'advanced',
                 ]
             ])
             ->add('poll', 'entity', [
@@ -29,7 +29,8 @@ class ArticleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Geek\PartyBundle\Entity\Article'
+            'data_class' => 'Geek\PartyBundle\Entity\Article',
+            'is_admin' => false,
         ));
     }
 

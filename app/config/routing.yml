@@ -94,3 +94,8 @@ PrismPollBundle_frontend:
     prefix: /poll
     resource: "@PrismPollBundle/Resources/config/routing/frontend.yml"
 
+# TinyMCE image upload
+image_uploader:
+    resource: "@GeekPartyBundle/Controller/ImageUploadController.php"
+    type: annotation
+    prefix: /image_upload
