@@ -5,12 +5,6 @@ geek_index:
 geek_about:
     pattern:  /about
     defaults: { _controller: GeekPartyBundle:Main:about }
-admin_file_manager:
-    pattern: /admin/file_manager
-    defaults: {_controller:GeekPartyBundle:Admin:fileManager}
-admin:
-    pattern: /admin
-    defaults: {_controller:GeekPartyBundle:Main:admin}
 github_hook:
   pattern: /github_hook
   defaults: {_controller:GeekPartyBundle:GitHub:hook}
@@ -102,3 +96,8 @@ image_uploader:
     resource: "@GeekPartyBundle/Controller/ImageUploadController.php"
     type: annotation
     prefix: /image_upload
+
+admin:
+    prefix: /admin
+    type: annotation
+    resource: "@GeekPartyBundle/Controller/AdminController.php"

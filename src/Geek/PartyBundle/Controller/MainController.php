@@ -33,16 +33,4 @@ class MainController extends Base\BaseController
         ]);
     }
 
-    /**
-     * Страница "Admin"
-     * @return Response
-     */
-    public function adminAction()
-    {
-        return $this->render('GeekPartyBundle:Main:admin.html.twig', [
-            'indexText' => $this->findTextBlock('index'),
-            'aboutText' => $this->findTextBlock('about'),
-            'partyText' => $this->findTextBlock('party'),
-        ]);
-    }
 }

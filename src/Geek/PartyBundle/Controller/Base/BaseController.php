@@ -44,6 +44,10 @@ class BaseController extends Controller
         return $parameters;
     }
 
+    /**
+     * @param $name
+     * @return \Geek\PartyBundle\Entity\Text|null|object
+     */
     protected function findTextBlock($name)
     {
         /** @var $repo \Geek\PartyBundle\Entity\Repository\Text */

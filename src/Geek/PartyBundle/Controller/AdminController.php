@@ -12,6 +12,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends BaseController
 {
     /**
+     * @Route("/")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        #   /$$$$$$                 /$$
+        #  |_  $$_/                | $$
+        #    | $$   /$$$$$$$   /$$$$$$$  /$$$$$$  /$$   /$$
+        #    | $$  | $$__  $$ /$$__  $$ /$$__  $$|  $$ /$$/
+        #    | $$  | $$  \ $$| $$  | $$| $$$$$$$$ \  $$$$/
+        #    | $$  | $$  | $$| $$  | $$| $$_____/  >$$  $$
+        #   /$$$$$$| $$  | $$|  $$$$$$$|  $$$$$$$ /$$/\  $$
+        #  |______/|__/  |__/ \_______/ \_______/|__/  \__/
+        #
+        #
+        #
+        return [
+            'indexText' => $this->findTextBlock('index'),
+            'aboutText' => $this->findTextBlock('about'),
+            'partyText' => $this->findTextBlock('party'),
+        ];
+    }
+
+    /**
      * @Route("/file_manager")
      * @Template()
      */
