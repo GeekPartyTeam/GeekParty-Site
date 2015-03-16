@@ -1,0 +1,12 @@
+{% extends 'GeekPartyBundle::parent.html.twig' %}
+
+{% block title %} {{ parent() }} :: Файловый менеджер {% endblock %}
+
+{% block main %}
+    <div id="content">
+        <p>
+            <a href="{{ path('admin') }}">&larr; Назад</a>
+        </p>
+        <iframe src="/filemanager/dialog.php?type=0&fldr=" id="ResponsiveFileManager"></iframe>
+    </div>
+{% endblock %}

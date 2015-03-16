@@ -524,3 +524,8 @@ body {
 #upload_image_form .modal-dialog {
     z-index: 70001;
 }
+
+#ResponsiveFileManager {
+    width: 910px;
+    height: 420px;
+}
