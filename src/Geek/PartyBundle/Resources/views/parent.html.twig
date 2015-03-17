@@ -109,12 +109,16 @@
                 </a>
             </div>
             #}
+            <div id="k-menu-social">
             {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-                <div id="k-menu-social">
-                    {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                    {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-                </div>
+                {{ macros.auth_buttons() }}
+            {% else %}
+                <a class="FlatButton" href="{{ path('fos_user_security_logout') }}">
+                    <i class="glyphicon glyphicon-keys-{% if is_admin() %}red{% else %}white{% endif %}">&nbsp;</i>
+                    &nbsp;Выйти
+                </a>
             {% endif %}
+            </div>
 
             {% include "GeekPartyBundle::heading.html.twig" %}
 
@@ -136,7 +140,7 @@
                 {% endfor %}
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('project') }}" class="k-button mr16 {% if '/edit' in app.request.requestUri %}k-button-active{% endif %}">
+                    <a href="{{ path('project') }}" class="k-button mr16 {% if '/edit/project' in app.request.requestUri %}k-button-active{% endif %}">
                         <span>Upload</span>
                     </a>
                 {% endif %}
