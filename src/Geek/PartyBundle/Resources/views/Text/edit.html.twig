@@ -1,25 +1,30 @@
 {% extends 'GeekPartyBundle::parent.html.twig' %}
 
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+
 {% block title %} {{ parent() }} :: Редактирование текстового блока {% endblock %}
 
 {% block main %}
+    <h3>Текстовый блок ::
+        {% if entity.name == "index" %}
+            Главная страница
+        {% elseif entity.name == "about" %}
+            Страница "About"
+        {% elseif entity.name == "party" %}
+            Страница "Works"
+        {% else  %}
+            #{{  entity.id }} {{ entity.name }}
+        {% endif %}
+    </h3>
 <form action="{{ path('admin_text', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype
 (edit_form) }}>
     {{ form_errors(edit_form) }}
-    <div style="display:none">{{ form_row(edit_form.name) }}</div>
-    {{ form_row(edit_form.body) }}
+    {{ form_widget(edit_form.body) }}
     <p>
-        <button type="submit">Edit</button>
+        <a href="{{ path('geek_party_admin_index') }}">&larr; Назад</a>
+        {{ macros.submit("Сохранить") }}
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
 
 {{ tinymce_init() }}
 {% endblock %}

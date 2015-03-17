@@ -297,11 +297,16 @@ body {
     }
 }
 
-.k-entry-block {
+.k-entry-block, .FlatButton {
     border-image: url("../img/border.png") 14 14 14 14;
     border-style: solid;
     border-width: 14px;
     padding-left: 10px;
+    padding-right: 10px;
+}
+
+.FlatButton i {
+    color: white;
 }
 
 .k-entry-block h4 {
@@ -528,4 +533,14 @@ body {
 #ResponsiveFileManager {
     width: 910px;
     height: 420px;
+}
+
+.glyphicon-keys-white {
+    background: url("/img/glyphicons-45-keys-white.png");
+    line-height: 16px;
+}
+
+.glyphicon-keys-red {
+    background: url("/img/glyphicons-45-keys-red.png");
+    line-height: 16px;
 }
