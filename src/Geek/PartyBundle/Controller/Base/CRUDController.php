@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Controller\Base;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -206,10 +207,12 @@ abstract class CRUDController extends BaseController
         }
 
         $formClass = $this->getFormClass();
+        /** @var AbstractType $form */
+        $form = new $formClass();
         $formOptions = [
             'is_admin' => $this->isAdmin(),
         ];
-        $editForm = $this->createForm(new $formClass(), $entity, $formOptions);
+        $editForm = $this->createForm($form, $entity, $formOptions);
 
         $params = [
             'entity' => $entity,
