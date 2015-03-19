@@ -1,5 +1,7 @@
 <?php
 
+global $lang_vars;
+
 if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
 {
 	die('forbiden');
