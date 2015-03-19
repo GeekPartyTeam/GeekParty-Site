@@ -32,5 +32,4 @@ class MainController extends Base\BaseController
             'text' => $this->findTextBlock('about')
         ]);
     }
-
 }

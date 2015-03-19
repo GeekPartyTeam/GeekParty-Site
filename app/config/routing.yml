@@ -5,6 +5,9 @@ geek_index:
 geek_about:
     pattern:  /about
     defaults: { _controller: GeekPartyBundle:Main:about }
+admin_file_manager:
+    pattern: /admin/file_manager
+    defaults: {_controller:GeekPartyBundle:Admin:fileManager}
 github_hook:
   pattern: /github_hook
   defaults: {_controller:GeekPartyBundle:GitHub:hook}
