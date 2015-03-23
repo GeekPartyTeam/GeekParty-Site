@@ -81,7 +81,7 @@ $config = array(
 	| with final /
 	|
 	*/
-	'current_path' => '../images/',
+	'current_path' => 'images/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../images/thumbs/',
+	'thumbs_base_path' => '../../thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
