@@ -15,7 +15,10 @@ if (USE_ACCESS_KEYS == TRUE){
 	}
 }
 
-$_SESSION['RF']["verify"] = "RESPONSIVEfilemanager";
+global $session;
+$sessionData = $session->get('RF');
+$sessionData["verify"] = "RESPONSIVEfilemanager";
+$session->set('RF', $sessionData);
 
 if(isset($_POST['submit'])){
 
@@ -31,7 +34,7 @@ if (isset($_GET['fldr'])
     && strpos($_GET['fldr'],'./') === FALSE)
 {
     $subdir = urldecode(trim(strip_tags($_GET['fldr']),"/") ."/");
-    $_SESSION['RF']["filter"]='';
+    $sessionData["filter"]='';
 }
 else { $subdir = ''; }
 
@@ -63,17 +66,17 @@ if(count($hidden_folders)){
  *SUB-DIR CODE
  ***/
 
-if (!isset($_SESSION['RF']["subfolder"]))
+if (!isset($sessionData["subfolder"]))
 {
-	$_SESSION['RF']["subfolder"] = '';
+	$sessionData["subfolder"] = '';
 }
 $rfm_subfolder = '';
 
-if (!empty($_SESSION['RF']["subfolder"]) && strpos($_SESSION['RF']["subfolder"],'../') === FALSE
-   && strpos($_SESSION['RF']["subfolder"],'./') === FALSE && strpos($_SESSION['RF']["subfolder"],"/") !== 0
-   && strpos($_SESSION['RF']["subfolder"],'.') === FALSE)
+if (!empty($sessionData["subfolder"]) && strpos($sessionData["subfolder"],'../') === FALSE
+   && strpos($sessionData["subfolder"],'./') === FALSE && strpos($sessionData["subfolder"],"/") !== 0
+   && strpos($sessionData["subfolder"],'.') === FALSE)
 {
-	$rfm_subfolder = $_SESSION['RF']['subfolder'];
+	$rfm_subfolder = $sessionData['subfolder'];
 }
 
 if ($rfm_subfolder != "" && $rfm_subfolder[strlen($rfm_subfolder)-1] != "/") { $rfm_subfolder .= "/"; }
@@ -142,25 +145,25 @@ else $crossdomain=0;
 $crossdomain=!!$crossdomain;
 
 //view type
-if(!isset($_SESSION['RF']["view_type"]))
+if(!isset($sessionData["view_type"]))
 {
 	$view = $default_view;
-	$_SESSION['RF']["view_type"] = $view;
+	$sessionData["view_type"] = $view;
 }
 
 if (isset($_GET['view']))
 {
 	$view = fix_get_params($_GET['view']);
-	$_SESSION['RF']["view_type"] = $view;
+	$sessionData["view_type"] = $view;
 }
 
-$view = $_SESSION['RF']["view_type"];
+$view = $sessionData["view_type"];
 
 //filter
 $filter = "";
-if(isset($_SESSION['RF']["filter"]))
+if(isset($sessionData["filter"]))
 {
-	$filter = $_SESSION['RF']["filter"];
+	$filter = $sessionData["filter"];
 }
 
 if(isset($_GET["filter"]))
@@ -168,30 +171,31 @@ if(isset($_GET["filter"]))
 	$filter = fix_get_params($_GET["filter"]);
 }
 
-if (!isset($_SESSION['RF']['sort_by']))
+if (!isset($sessionData['sort_by']))
 {
-	$_SESSION['RF']['sort_by'] = 'name';
+	$sessionData['sort_by'] = 'name';
 }
 
 if (isset($_GET["sort_by"]))
 {
-	$sort_by = $_SESSION['RF']['sort_by'] = fix_get_params($_GET["sort_by"]);
+	$sort_by = $sessionData['sort_by'] = fix_get_params($_GET["sort_by"]);
 }
-else $sort_by = $_SESSION['RF']['sort_by'];
+else $sort_by = $sessionData['sort_by'];
 
 
-if (!isset($_SESSION['RF']['descending']))
+if (!isset($sessionData['descending']))
 {
-	$_SESSION['RF']['descending'] = TRUE;
+	$sessionData['descending'] = TRUE;
 }
 
 if (isset($_GET["descending"]))
 {
-	$descending = $_SESSION['RF']['descending'] = fix_get_params($_GET["descending"])==1;
+	$descending = $sessionData['descending'] = fix_get_params($_GET["descending"])==1;
 }
 else{
-	$descending = $_SESSION['RF']['descending'];	
-} 
+	$descending = $sessionData['descending'];	
+}
+$session->set('RF', $sessionData);
 
 $boolarray = Array(false => 'false', true => 'true');
 
@@ -396,7 +400,7 @@ $get_params = http_build_query(array(
 	<input type="hidden" id="lang_paste_here" value="<?php echo trans('Paste_Here'); ?>" />
 	<input type="hidden" id="lang_paste_confirm" value="<?php echo trans('Paste_Confirm'); ?>" />
 	<input type="hidden" id="lang_files_on_clipboard" value="<?php echo trans('Files_ON_Clipboard'); ?>" />
-	<input type="hidden" id="clipboard" value="<?php echo ((isset($_SESSION['RF']['clipboard']['path']) && trim($_SESSION['RF']['clipboard']['path']) != null) ? 1 : 0); ?>" />
+	<input type="hidden" id="clipboard" value="<?php echo ((isset($sessionData['clipboard']['path']) && trim($sessionData['clipboard']['path']) != null) ? 1 : 0); ?>" />
 	<input type="hidden" id="lang_clear_clipboard_confirm" value="<?php echo trans('Clear_Clipboard_Confirm'); ?>" />
 	<input type="hidden" id="lang_file_permission" value="<?php echo trans('File_Permission'); ?>" />
 	<input type="hidden" id="chmod_files_allowed" value="<?php if($chmod_files) echo 1; else echo 0; ?>" />
@@ -943,11 +947,7 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
     </div>
 </div>
 <script>
-    var files_prevent_duplicate = new Array();
-    <?php
-    foreach ($files_prevent_duplicate as $key => $value): ?>
-        files_prevent_duplicate[<?php echo $key;?>] = '<?php echo $value; ?>';
-    <?php endforeach; ?>
+    var files_prevent_duplicate = <?= json_encode($files_prevent_duplicate) ?>;
 </script>
 
     <!-- lightbox div start -->

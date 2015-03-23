@@ -2,7 +2,9 @@
 $config = include 'config/config.php';
 //TODO switch to array
 extract($config, EXTR_OVERWRITE);
-if($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") die('forbiden');
+
+global $session;
+if($session->get('RF')["verify"] != "RESPONSIVEfilemanager") die('forbiden');
 include 'include/utils.php';
 
 
@@ -29,21 +31,21 @@ if ($path_pos!==0
 		die('wrong path');
 
 
-$path = $storeFolder;
-$cycle = TRUE;
-$max_cycles = 50;
-$i = 0;
-while ($cycle && $i < $max_cycles)
-{
-	$i++;
-	if ($path == $current_path) $cycle = FALSE;
-	if (file_exists($path."config.php"))
-	{
-		require_once $path."config.php";
-		$cycle = FALSE;
-	}
-	$path = fix_dirname($path).'/';
-}
+//$path = $storeFolder;
+//$cycle = TRUE;
+//$max_cycles = 50;
+//$i = 0;
+//while ($cycle && $i < $max_cycles)
+//{
+//	$i++;
+//	if ($path == $current_path) $cycle = FALSE;
+//	if (file_exists($path."config.php"))
+//	{
+//		require_once $path."config.php";
+//		$cycle = FALSE;
+//	}
+//	$path = fix_dirname($path).'/';
+//}
 
 
 if ( ! empty($_FILES))

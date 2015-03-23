@@ -7,6 +7,7 @@ namespace Geek\PartyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -62,6 +63,8 @@ class ImageUploadController extends Controller
     {
         $path = $request->attributes->get('path');
         $fullPath = $this->get('kernel')->getRootDir() . "/../public_html/filemanager/{$path}";
-        return new BinaryFileResponse($fullPath);
+        $response = new BinaryFileResponse($fullPath);
+        $response->headers->set('Content-Type', 'text/css');
+        return $response;
     }
 }

@@ -3,6 +3,11 @@
 //mb_internal_encoding('UTF-8');
 //date_default_timezone_set('Europe/Moscow');
 
+global $kernel;
+global $session;
+/** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+$session = $kernel->getContainer()->get('session');
+
 /*
 |--------------------------------------------------------------------------
 | Optional security

@@ -6,7 +6,7 @@ framework:
     profiler: { only_exceptions: false }
 
 web_profiler:
-    toolbar: true
+    toolbar: false
     intercept_redirects: false
 
 monolog:
@@ -24,3 +24,9 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+
+stfalcon_tinymce:
+        theme:
+            admin:
+                 external_filemanager_path: "/app_dev.php/image_upload/filemanager/"

@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="discriminator", type="integer")
  * @ORM\DiscriminatorMap({0 = "ProjectComment", 1 = "ArticleComment"})
  */
-class AbstractComment
+abstract class AbstractComment
 {
     /**
      * @var integer

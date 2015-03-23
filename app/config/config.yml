@@ -83,12 +83,12 @@ stfalcon_tinymce:
                      - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
                      - "searchreplace wordcount visualblocks visualchars code fullscreen"
                      - "insertdatetime media nonbreaking save table contextmenu directionality"
-                     - "emoticons paste textcolor responsivefilemanager"
+                     - "emoticons paste textcolor filemanager"
                  toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
                  toolbar2: "print preview media | forecolor backcolor emoticons | "
                  image_advtab: true
                  relative_urls: false
-                 external_filemanager_path: "/filemanager/"
+                 external_filemanager_path: "/image_upload/filemanager/"
                  filemanager_title: "Файловый менеджер"
                  external_plugins: { "filemanager" : "/filemanager/plugin.min.js"}
 

@@ -2,7 +2,9 @@
 
 global $lang_vars;
 
-if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
+global $session;
+$sessionData = $session->get('RF');
+if ($sessionData["verify"] != "RESPONSIVEfilemanager")
 {
 	die('forbiden');
 }
@@ -10,9 +12,9 @@ if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
 if ( ! function_exists('trans'))
 {
 	// language
-	if ( ! isset($_SESSION['RF']['language'])
-		|| file_exists($_SESSION['RF']['language_file']) === false
-		|| ! is_readable($_SESSION['RF']['language_file'])
+	if ( ! isset($sessionData['language'])
+		|| file_exists($sessionData['language_file']) === false
+		|| ! is_readable($sessionData['language_file'])
 	)
 	{
 		$lang = $default_language;
@@ -39,13 +41,14 @@ if ( ! function_exists('trans'))
 		}
 
 		// add lang file to session for easy include
-		$_SESSION['RF']['language'] = $lang;
-		$_SESSION['RF']['language_file'] = $language_file;
+		$sessionData['language'] = $lang;
+		$sessionData['language_file'] = $language_file;
+		$session->set('RF', $sessionData);
 	}
 	else
 	{
-		$lang = $_SESSION['RF']['language'];
-		$language_file = $_SESSION['RF']['language_file'];
+		$lang = $sessionData['language'];
+		$language_file = $sessionData['language_file'];
 	}
 
 	$lang_vars = include $language_file;

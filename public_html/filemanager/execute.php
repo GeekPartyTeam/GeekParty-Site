@@ -2,7 +2,7 @@
 $config = include 'config/config.php';
 //TODO switch to array
 extract($config, EXTR_OVERWRITE);
-if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") die('forbiden');
+if ($sessionData["verify"] != "RESPONSIVEfilemanager") die('forbiden');
 include 'include/utils.php';
 
 $thumb_pos  = strpos($_POST['path_thumb'], $thumbs_base_path);
@@ -16,8 +16,10 @@ if ($thumb_pos !=0
     die('wrong path');
 }
 
-if (isset($_SESSION['RF']['language_file']) && file_exists($_SESSION['RF']['language_file'])){
-    require_once $_SESSION['RF']['language_file'];
+global $session;
+$sessionData = $session->get('RF');
+if (isset($sessionData['language_file']) && file_exists($sessionData['language_file'])){
+    require_once $sessionData['language_file'];
 }
 else {
     die('Language file is missing!');
@@ -257,16 +259,16 @@ if (isset($_GET['action']))
             }
             break;
         case 'paste_clipboard':
-            if ( ! isset($_SESSION['RF']['clipboard_action'], $_SESSION['RF']['clipboard']['path'], $_SESSION['RF']['clipboard']['path_thumb'])
-                || $_SESSION['RF']['clipboard_action'] == ''
-                || $_SESSION['RF']['clipboard']['path'] == ''
-                || $_SESSION['RF']['clipboard']['path_thumb'] == '')
+            if ( ! isset($sessionData['clipboard_action'], $sessionData['clipboard']['path'], $sessionData['clipboard']['path_thumb'])
+                || $sessionData['clipboard_action'] == ''
+                || $sessionData['clipboard']['path'] == ''
+                || $sessionData['clipboard']['path_thumb'] == '')
             {
                 die();
             }
 
-            $action = $_SESSION['RF']['clipboard_action'];
-            $data = $_SESSION['RF']['clipboard'];
+            $action = $sessionData['clipboard_action'];
+            $data = $sessionData['clipboard'];
             $data['path'] = $current_path.$data['path'];
             $pinfo = pathinfo($data['path']);
 
@@ -313,9 +315,9 @@ if (isset($_GET['action']))
             }
 
             // cleanup
-            $_SESSION['RF']['clipboard']['path'] = NULL;
-            $_SESSION['RF']['clipboard']['path_thumb'] = NULL;
-            $_SESSION['RF']['clipboard_action'] = NULL;
+            $sessionData['clipboard']['path'] = NULL;
+            $sessionData['clipboard']['path_thumb'] = NULL;
+            $sessionData['clipboard_action'] = NULL;
 
             break;
         case 'chmod':
@@ -376,4 +378,5 @@ if (isset($_GET['action']))
         default:
             die('wrong action');
     }
+    $session->set('RF', $sessionData);
 }

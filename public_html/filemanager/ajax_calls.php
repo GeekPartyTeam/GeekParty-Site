@@ -4,11 +4,13 @@ $config = include 'config/config.php';
 //TODO switch to array
 extract($config, EXTR_OVERWRITE);
 
-if($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager") die('Access Denied!');
+global $session;
+$sessionData = $session->get('RF');
+if($sessionData["verify"] != "RESPONSIVEfilemanager") die('Access Denied!');
 include 'include/utils.php';
 
-if (isset($_SESSION['RF']['language_file']) && file_exists($_SESSION['RF']['language_file'])){
-	include $_SESSION['RF']['language_file'];
+if (isset($sessionData['language_file']) && file_exists($sessionData['language_file'])){
+	include $sessionData['language_file'];
 }
 else {
 	die('Language file is missing!');
@@ -20,7 +22,7 @@ if(isset($_GET['action']))
     {
 		case 'view':
 		    if(isset($_GET['type'])) {
-				$_SESSION['RF']["view_type"] = $_GET['type'];
+				$sessionData["view_type"] = $_GET['type'];
 			}
 			else {
 				die('view type number missing');
@@ -29,7 +31,7 @@ if(isset($_GET['action']))
 		case 'filter':
 		  if(isset($_GET['type'])) {
 		  	if(isset($remember_text_filter) && $remember_text_filter)
-					$_SESSION['RF']["filter"] = $_GET['type'];
+					$sessionData["filter"] = $_GET['type'];
 			}
 			else {
 				die('view type number missing');
@@ -37,11 +39,11 @@ if(isset($_GET['action']))
 			break;
 		case 'sort':
 			if(isset($_GET['sort_by'])) {
-				$_SESSION['RF']["sort_by"] = $_GET['sort_by'];
+				$sessionData["sort_by"] = $_GET['sort_by'];
 			}
 
 			if(isset($_GET['descending'])) {
-				$_SESSION['RF']["descending"] = $_GET['descending'] === "TRUE";
+				$sessionData["descending"] = $_GET['descending'] === "TRUE";
 			}
 			break;
 		case 'image_size': // not used
@@ -288,13 +290,13 @@ if(isset($_GET['action']))
 				}
 			}
 
-			$_SESSION['RF']['clipboard']['path'] = $_POST['path'];
-			$_SESSION['RF']['clipboard']['path_thumb'] = $_POST['path_thumb'];
-			$_SESSION['RF']['clipboard_action'] = $_POST['sub_action'];
+			$sessionData['clipboard']['path'] = $_POST['path'];
+			$sessionData['clipboard']['path_thumb'] = $_POST['path_thumb'];
+			$sessionData['clipboard_action'] = $_POST['sub_action'];
 			break;
 		case 'clear_clipboard':
-			$_SESSION['RF']['clipboard'] = NULL;
-			$_SESSION['RF']['clipboard_action'] = NULL;
+			$sessionData['clipboard'] = NULL;
+			$sessionData['clipboard_action'] = NULL;
 			break;
 		case 'chmod':
 			$path = $current_path.$_POST['path'];
@@ -374,7 +376,7 @@ if(isset($_GET['action']))
 				die('Lang_Not_Found');
 			}
 
-			$curr = $_SESSION['RF']['language'];
+			$curr = $sessionData['language'];
 
 			$ret = '<select id="new_lang_select">';
 			foreach ($languages as $code => $name) {
@@ -392,8 +394,8 @@ if(isset($_GET['action']))
 				die(trans('Lang_Not_Found'));
 			}
 
-			$_SESSION['RF']['language'] = $choosen_lang;
-			$_SESSION['RF']['language_file'] = 'lang/'.$choosen_lang.'.php';
+			$sessionData['language'] = $choosen_lang;
+			$sessionData['language_file'] = 'lang/'.$choosen_lang.'.php';
 
 			break;
 		case 'get_file': // preview or edit
@@ -468,6 +470,7 @@ if(isset($_GET['action']))
 			break;
 	    default: die('no action passed');
     }
+	$session->set('RF', $sessionData);
 }
 else
 {
