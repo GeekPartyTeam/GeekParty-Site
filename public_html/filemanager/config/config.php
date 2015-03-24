@@ -5,6 +5,11 @@
 
 global $kernel;
 global $session;
+
+if (!$kernel) {
+	die("FoRbIdDeN");
+}
+
 /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
 $session = $kernel->getContainer()->get('session');
 
@@ -92,7 +97,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../../thumbs/',
+	'thumbs_base_path' => '/thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
