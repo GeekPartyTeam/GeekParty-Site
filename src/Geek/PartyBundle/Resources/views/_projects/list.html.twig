@@ -37,21 +37,21 @@
 
 {% if unuploaded|length > 0 %}
     <h4 class="UnuploadedListHeader">Незагруженные работы</h4>
+<div class="container-fluid">
+    {% for entry in unuploaded %}
+	{% if loop.index % 2 == 0 %}
     <div class="row">
-        <div class="col-md-6">
-            {% for entry in unuploaded %}
-                {% if loop.index0 % 2 == 0 %}
-                    {{ macros_project.project_block(entry, current_user) }}
-                {% endif %}
-            {% endfor %}
+        <div class="col-md-6 col-sm-12">
+			{{ macros_project.project_block(entry, current_user) }}
         </div>
-
-        <div class="col-md-6">
-            {% for entry in unuploaded %}
-                {% if loop.index0 % 2 != 0 %}
-                    {{ macros_project.project_block(entry, current_user) }}
-                {% endif %}
-            {% endfor %}
+		{% if unuploaded[loop.index + 1] is defined %}
+        <div class="col-md-6 col-sm-12">
+			{{ macros_project.project_block(entry, current_user) }}
         </div>
+		{% endif %}
     </div>
+	{% endif %}
+	{% endfor %}
+</div>
+{% endif %}
 {% endif %}
