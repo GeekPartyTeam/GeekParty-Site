@@ -21,7 +21,7 @@ class Work
     /**
      * @ORM\Column
      */
-    protected $shortname;
+    protected $shortname = '';
 
     /**
      * @ORM\Column
@@ -81,7 +81,6 @@ class Work
      */
     public function __construct()
     {
-        $this->authors = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->time = new \DateTime();
     }
