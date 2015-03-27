@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Controller\Base;
 
+use Geek\PartyBundle\Form\AdminAwareFormInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
@@ -209,9 +210,10 @@ abstract class CRUDController extends BaseController
         $formClass = $this->getFormClass();
         /** @var AbstractType $form */
         $form = new $formClass();
-        $formOptions = [
-            'is_admin' => $this->isAdmin(),
-        ];
+        $formOptions = [];
+        if ($form instanceof AdminAwareFormInterface) {
+            $formOptions['is_admin'] = $this->isAdmin();
+        }
         $editForm = $this->createForm($form, $entity, $formOptions);
 
         $params = [
