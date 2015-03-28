@@ -15,48 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Base\CRUDController
 {
-    public function getEntity()
-    {
-        return 'Article';
-    }
-
-    public function getRedirectPath()
-    {
-        return 'geek_index';
-    }
-
-    public function updateEntity($entity, Request $request, Form $form)
-    {
-        if (!$this->getUser()) {
-            return false;
-        }
-        /** @var \Geek\PartyBundle\Entity\Article $entity */
-        $entity->setAuthor($this->getUser());
-        $entity->setTime(new \DateTime());
-        return true;
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function redirectToIndex()
-    {
-        return $this->redirect($this->generateUrl('geek_index'));
-    }
-
-    protected function edit($id)
-    {
-        $params = parent::edit($id);
-
-        $polls = $this->getDoctrine()
-            ->getRepository('PrismPollBundle:Poll')
-            ->findAll();
-        $params['polls'] = $polls;
-
-        return $params;
-    }
-
-    public function voteAction($action, $id)
+    public function voteAction()
     {
         if (!$this->isRequestValid()) {
             $this->addErrorMessage("Пожалуйста, не накручивайте голосование");
@@ -106,6 +65,47 @@ class ArticleController extends Base\CRUDController
         return $response;
     }
 
+    public function getEntity()
+    {
+        return 'Article';
+    }
+
+    public function getRedirectPath()
+    {
+        return 'geek_index';
+    }
+
+    public function updateEntity($entity, Request $request, Form $form)
+    {
+        if (!$this->getUser()) {
+            return false;
+        }
+        /** @var \Geek\PartyBundle\Entity\Article $entity */
+        $entity->setAuthor($this->getUser());
+        $entity->setTime(new \DateTime());
+        return true;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToIndex()
+    {
+        return $this->redirect($this->generateUrl('geek_index'));
+    }
+    protected function edit($id)
+    {
+        $params = parent::edit($id);
+
+        $polls = $this->getDoctrine()
+            ->getRepository('PrismPollBundle:Poll')
+            ->findAll();
+        $params['polls'] = $polls;
+
+        return $params;
+    }
+
+
     private function isRequestValid()
     {
         if ($this->getRequest()->getMethod() != 'POST') {
@@ -132,6 +132,6 @@ class ArticleController extends Base\CRUDController
                 ['comments' => AbstractCommentRepository::extractCommentsPage($entity->getComments(), $from)]
             );
         }
-        return parent::renderPage($page,$parameters);
+        return parent::renderPage($page, $parameters);
     }
 }

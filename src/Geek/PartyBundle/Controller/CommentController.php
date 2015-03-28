@@ -70,7 +70,7 @@ class CommentController extends BaseController
             ->getRepository('GeekPartyBundle:AbstractComment');
 
         return $this->arrayResponse(
-            $commentsRepo->fetchPage($from)
+            $commentsRepo->fetchPage([], $from)
         );
     }
 

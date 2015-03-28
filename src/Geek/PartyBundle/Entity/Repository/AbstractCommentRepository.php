@@ -13,13 +13,14 @@ class AbstractCommentRepository extends EntityRepository
     const COMMENTS_PER_PAGE = 10;
 
     /**
+     * @param $criteria
      * @param $from
      * @param int $commentsPerPage
      * @return array
      */
-    public function fetchPage($from, $commentsPerPage = self::COMMENTS_PER_PAGE)
+    public function fetchPage($criteria, $from, $commentsPerPage = self::COMMENTS_PER_PAGE)
     {
-        $comments = $this->findBy([], ['date' => 'DESC'], $commentsPerPage, $from);
+        $comments = $this->findBy($criteria, ['date' => 'DESC'], $commentsPerPage, $from);
         $totalCount = count($this->findAll());
         return [
             'from' => $from,

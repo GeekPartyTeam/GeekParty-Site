@@ -5,26 +5,33 @@ namespace Geek\PartyBundle\Controller\Base;
 use Geek\PartyBundle\Form\AdminAwareFormInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Abstract CRUD controller.
  */
 abstract class CRUDController extends BaseController
 {
-    public function actionAction($action, $id)
+    /**
+     * @param Request $request
+     * @param $action
+     * @param $id
+     * @return mixed
+     */
+    public function actionAction(Request $request, $action, $id)
     {
-        return call_user_func([$this, "{$action}Action"], $this->getRequest(), $id);
+        return call_user_func([$this, "{$action}Action"], $request, $id);
     }
 
     /**
      * Lists all entities.
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request, $id)
+    public function indexAction(/** @noinspection PhpUnusedParameterInspection */
+        Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -37,8 +44,12 @@ abstract class CRUDController extends BaseController
 
     /**
      * Finds and displays a entity.
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Request $request, $id)
+    public function showAction(/** @noinspection PhpUnusedParameterInspection */
+        Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -60,9 +71,12 @@ abstract class CRUDController extends BaseController
      * Displays a form to edit an existing entity.
      *
      * @Route("/{id}/edit", name="team_edit")
-     * @Template()
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $id)
+    public function editAction(/** @noinspection PhpUnusedParameterInspection */
+        Request $request, $id)
     {
         $params = $this->edit($id);
 
@@ -71,6 +85,9 @@ abstract class CRUDController extends BaseController
 
     /**
      * Edits an existing entity.
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
     {
@@ -79,11 +96,14 @@ abstract class CRUDController extends BaseController
 
     /**
      * Deletes a entity.
+     * @param Request $request
+     * @param $id
+     * @return null|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -119,7 +139,8 @@ abstract class CRUDController extends BaseController
         return 'Geek\\PartyBundle\\Form\\' . $this->getEntity() . 'Type';
     }
 
-    protected function checkRights($entity)
+    protected function checkRights(/** @noinspection PhpUnusedParameterInspection */
+        $entity)
     {
         return null;
     }
@@ -130,7 +151,8 @@ abstract class CRUDController extends BaseController
      * @param \Symfony\Component\Form\Form $form
      * @return bool
      */
-    protected function updateEntity($entity, Request $request, Form $form)
+    protected function updateEntity(/** @noinspection PhpUnusedParameterInspection */
+        $entity, Request $request, Form $form)
     {
         return true;
     }
@@ -178,6 +200,7 @@ abstract class CRUDController extends BaseController
 
     protected function renderPage($page, array $parameters = [])
     {
+        /** @noinspection Annotator */
         return $this->render("GeekPartyBundle:{$this->getEntity()}:{$page}.html.twig", $parameters);
     }
 
