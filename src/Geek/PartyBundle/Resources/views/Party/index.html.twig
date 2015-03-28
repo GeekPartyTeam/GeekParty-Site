@@ -4,41 +4,34 @@
 
 {% block main %}
 
-<h1>Party list</h1>
-
-<table class="PartiesTable">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Starttime</th>
-            <th>Endtime</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
+<h1>Геймджемы</h1>
+<div class="k-entry-block k-party-list">
     {% for entity in entities %}
-        <tr>
-            <td>{{ entity.id }}</td>
-            <td>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_parties', { 'action': 'edit', 'id': entity.id }) }}">Edit</a>
-                        <a href="{{ path('themes_votes', { 'id': entity.id }) }}">Themes</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    <div class="row">
+        <div class="col-md-2"><p>{{ entity.id }}</p></div>
+        <div class="col-md-3"><p><strong>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i') }}{% endif %}</strong></p></div>
+        <div class="col-md-3"><p>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i') }}{% endif %}</p></div>
+        <div class="col-md-4">
+            <div class="k-button k-button-small">
+                <div class="k-button-left"></div>
+                <div class="k-button-body">
+                    <a href="{{ path('admin_parties', { 'action': 'edit', 'id': entity.id }) }}">Править</a>
+                </div>
+                <div class="k-button-right"></div>
+            </div>
+            <div class="k-button k-button-small">
+                <div class="k-button-left"></div>
+                <div class="k-button-body">
+                    <a href="{{ path('themes_votes', { 'id': entity.id }) }}">Темы</a>
+                </div>
+                <div class="k-button-right"></div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-    </tbody>
-</table>
+</div>
 
-<ul>
-    <li>
-        <a href="{{ path('admin_parties', { 'action': 'edit' }) }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+{% import 'GeekPartyBundle::macros.html.twig' as macros %}
+{{ macros.button("Создать", path('admin_parties', { 'action': 'edit' })) }}
+
 {% endblock %}

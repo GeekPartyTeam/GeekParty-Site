@@ -297,6 +297,60 @@ body {
     }
 }
 
+.k-button-left {
+    background: url("../img/btn-left-part.png");
+    float: left;
+    width: 10px;
+    height: 52px;
+}
+
+.k-button-body {
+    background: url('../img/btn-body.png');
+    float: left;
+    height: 52px;
+}
+
+.k-button-body a {
+    display: block;
+    height: 52px;
+    color: #000;
+    text-align: center;
+    padding: 0 8px;
+    font: 14px/52px "pixel_font";
+}
+
+.k-button-body a:visited { color: #000; }
+
+.k-button-right {
+    background: url("../img/btn-right-part.png");
+    float: left;
+    width: 10px;
+    height: 52px;
+}
+
+.k-button-small {
+    top: -3px;
+    height: 36px;
+    background: none;
+    width: auto;
+}
+.k-button-small .k-button-left {
+    background: url("../img/buttons/sm-y-left.png");
+    height: 36px;
+}
+.k-button-small .k-button-body {
+    background: url("../img/buttons/sm-y-body.png");
+    height: 36px;
+}
+.k-button-small .k-button-right {
+    background: url("../img/buttons/sm-y-right.png");
+    height: 36px;
+}
+.k-button-small .k-button-body a {
+    font: 14px/31px "pixel_font" !important;
+    height: 36px;
+}
+
 .k-entry-block, .FlatButton {
     border-image: url("../img/border.png") 14 14 14 14;
     border-style: solid;
@@ -570,4 +624,9 @@ body {
     border-width: 14px;
     color: #FFAA22;
     margin: 0 10px 10px 10px;
+}
+
+.k-party-list .row {
+    border-bottom: solid 2px #092f40;
+    margin-top: 15px;
 }
