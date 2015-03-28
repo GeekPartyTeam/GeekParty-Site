@@ -19,7 +19,7 @@
 {% macro button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <a href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
+            <a href="{{ link|default('javascript:void(0)') }}" class="{{ class }}">{{ text }}</a>
         {% endblock %}
     {% endembed %}
 {% endmacro %}

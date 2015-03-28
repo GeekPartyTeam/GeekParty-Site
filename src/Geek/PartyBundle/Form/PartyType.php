@@ -10,17 +10,28 @@ class PartyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('id')
-            ->add('themeSubmissionStartTime')
-            ->add('themeSubmissionEndTime')
-            ->add('themeVotingStartTime')
-            ->add('themeVotingEndTime')
-            ->add('startTime')
-            ->add('endTime')
-            ->add('projectVotingStartTime')
-            ->add('projectVotingEndTime')
-            ->add('description', 'textarea', [
+        $addDateTimeWidget = function ($name) use ($builder) {
+            $builder->add($name, 'datetime', [
+                'widget'=> 'single_text',
+                'format'=>'yyyy-MM-dd HH:mm:SS',
+                'attr' => [
+                    'class' => 'datetime'
+                ]
+            ]);
+        };
+
+        $builder->add('id');
+
+        $addDateTimeWidget('themeSubmissionStartTime');
+        $addDateTimeWidget('themeSubmissionEndTime');
+        $addDateTimeWidget('themeVotingStartTime');
+        $addDateTimeWidget('themeVotingEndTime');
+        $addDateTimeWidget('startTime');
+        $addDateTimeWidget('endTime');
+        $addDateTimeWidget('projectVotingStartTime');
+        $addDateTimeWidget('projectVotingEndTime');
+
+        $builder->add('description', 'textarea', [
                  'attr' => [
                      'class' => 'tinymce',
                      'data-theme' => 'advanced'

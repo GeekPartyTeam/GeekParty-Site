@@ -432,7 +432,7 @@ body {
 }
 
 .PartyEdit input, .PartyEdit select {
-    color: black;
+    /*color: black;*/
 }
 
 .HeaderLogo {
@@ -543,4 +543,24 @@ body {
 .glyphicon-keys-red {
     background: url("/img/glyphicons-45-keys-red.png");
     line-height: 16px;
+}
+
+.rd-container {
+    font-family: Georgia, Helvetica, serif;
+    color: black;
+}
+
+.rd-day-body {
+    color: rgb(44, 62, 80);
+    cursor: pointer;
+    display: table-cell;
+    font-family: Georgia, Helvetica;
+    font-size: 17px;
+    height: 20px;
+    text-align: center;
+    width: 29px;
+}
+
+.rd-time-list {
+    z-index: 1000;
 }
