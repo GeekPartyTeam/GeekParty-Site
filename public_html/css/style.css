@@ -626,7 +626,10 @@ body {
     margin: 0 10px 10px 10px;
 }
 
-.k-party-list .row {
+.k-party-list .row:not(:last-child) {
     border-bottom: solid 2px #092f40;
+}
+
+.k-party-list .row {
     margin-top: 15px;
 }
