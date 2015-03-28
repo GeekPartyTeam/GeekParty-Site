@@ -16,80 +16,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 abstract class CRUDController extends BaseController
 {
-    public function getEntity()
-    {
-        return 'Team';       
-    }
-
-    public function getRedirectPath()
-    {
-        return 'geek_index';
-    }
-
-    public function getFormClass()
-    {
-        return 'Geek\\PartyBundle\\Form\\' . $this->getEntity() . 'Type';
-    }
-
-    public function checkRights($entity)
-    {
-        return null;
-    }
-
-    /**
-     * @param $entity
-     * @param Request $request
-     * @param \Symfony\Component\Form\Form $form
-     * @return bool
-     */
-    public function updateEntity($entity, Request $request, Form $form)
-    {
-        return true;
-    }
-
     public function actionAction($action, $id)
     {
         return call_user_func([$this, "{$action}Action"], $this->getRequest(), $id);
-    }
-
-    public function update(Request $request, $id = null)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $response = [];
-
-        if ($id != -1) {
-            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find entity.');
-            }
-
-            if (null !== ($redirect = $this->checkRights($entity))) {
-                return $redirect;
-            }
-
-            $response['delete_form'] = $this->createDeleteForm($id);
-        } else {
-            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
-            $entity = new $class();
-        }
-
-        $formClass = $this->getFormClass();
-        $editForm = $this->createForm(new $formClass(), $entity);
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            if ($this->updateEntity($entity, $request, $editForm)) {
-                $em->persist($entity);
-                $em->flush();
-                return $this->redirect($this->generateUrl($this->getRedirectPath()));
-            }
-        }
-
-        $response['entity']      = $entity;
-        $response['edit_form']   = $editForm->createView();
-        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':edit.html.twig', $response);
     }
 
     /**
@@ -125,11 +54,6 @@ abstract class CRUDController extends BaseController
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ]);
-    }
-
-    protected function renderPage($page, array $parameters = [])
-    {
-        return $this->render("GeekPartyBundle:{$this->getEntity()}:{$page}.html.twig", $parameters);
     }
 
     /**
@@ -178,6 +102,83 @@ abstract class CRUDController extends BaseController
         }
 
         return $this->redirect($this->generateUrl($this->getRedirectPath()));
+    }
+
+    protected function getEntity()
+    {
+        return 'Team';
+    }
+
+    protected function getRedirectPath()
+    {
+        return 'geek_index';
+    }
+
+    protected function getFormClass()
+    {
+        return 'Geek\\PartyBundle\\Form\\' . $this->getEntity() . 'Type';
+    }
+
+    protected function checkRights($entity)
+    {
+        return null;
+    }
+
+    /**
+     * @param $entity
+     * @param Request $request
+     * @param \Symfony\Component\Form\Form $form
+     * @return bool
+     */
+    protected function updateEntity($entity, Request $request, Form $form)
+    {
+        return true;
+    }
+
+    protected function update(Request $request, $id = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $response = [];
+
+        if ($id != -1) {
+            $entity = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find entity.');
+            }
+
+            if (null !== ($redirect = $this->checkRights($entity))) {
+                return $redirect;
+            }
+
+            $response['delete_form'] = $this->createDeleteForm($id);
+        } else {
+            $class = $em->getRepository('GeekPartyBundle:' . $this->getEntity())->getClassName();
+            $entity = new $class();
+        }
+
+        $formClass = $this->getFormClass();
+        $editForm = $this->createForm(new $formClass(), $entity);
+        $editForm->submit($request);
+
+        if ($editForm->isValid()) {
+            if ($this->updateEntity($entity, $request, $editForm)) {
+                $em->persist($entity);
+                $em->flush();
+                $this->getFlashBag()->add(BaseController::FLASH_SUCCESS, 'Сохранено');
+                return $this->redirect($this->generateUrl($this->getRedirectPath()));
+            }
+        }
+
+        $response['entity']      = $entity;
+        $response['edit_form']   = $editForm->createView();
+        return $this->render('GeekPartyBundle:' . $this->getEntity() . ':edit.html.twig', $response);
+    }
+
+    protected function renderPage($page, array $parameters = [])
+    {
+        return $this->render("GeekPartyBundle:{$this->getEntity()}:{$page}.html.twig", $parameters);
     }
 
     private function createDeleteForm($id)

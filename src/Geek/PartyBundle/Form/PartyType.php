@@ -13,7 +13,7 @@ class PartyType extends AbstractType
         $addDateTimeWidget = function ($name) use ($builder) {
             $builder->add($name, 'datetime', [
                 'widget'=> 'single_text',
-                'format'=>'yyyy-MM-dd HH:mm:SS',
+                'format'=>'yyyy-MM-dd hh:mm',
                 'attr' => [
                     'class' => 'datetime'
                 ]

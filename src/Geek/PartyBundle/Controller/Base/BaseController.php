@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class BaseController extends Controller
 {
+    const FLASH_NOTICE = 'notice';
+    const FLASH_INFO = 'info';
+    const FLASH_SUCCESS = 'success';
+
     /**
      * @return \Geek\PartyBundle\Entity\Party
      */
@@ -57,13 +61,21 @@ class BaseController extends Controller
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface
+     */
+    protected function getFlashBag()
+    {
+        /** @var Session $session */
+        $session = $this->get('session');
+        return $session->getFlashBag();
+    }
+
+    /**
      * @param $message
      */
     protected function addErrorMessage($message)
     {
-        /** @var Session $session */
-        $session = $this->get('session');
-        $session->getFlashBag()->add('notice', $message);
+        $this->getFlashBag()->add(self::FLASH_NOTICE, $message);
     }
 
     protected function isAdmin()

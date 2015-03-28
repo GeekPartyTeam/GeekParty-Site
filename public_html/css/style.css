@@ -564,3 +564,10 @@ body {
 .rd-time-list {
     z-index: 1000;
 }
+
+.success-message {
+    border-image: url("../img/border.png") 14 14 14 14;
+    border-width: 14px;
+    color: #FFAA22;
+    margin: 0 10px 10px 10px;
+}
