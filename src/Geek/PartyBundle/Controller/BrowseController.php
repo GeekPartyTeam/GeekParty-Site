@@ -86,9 +86,13 @@ class BrowseController extends Base\BaseController
         $id = $this->getRequest()->get('id');
         $em = $this->getDoctrine()->getManager();
         /** @var EntityRepository $workRepo */
-        $projectRepo = $em->getRepository('GeekPartyBundle:Work');
+        $projectRepo = $this->get('work.repo');
         /** @var Work $project */
         $project = $projectRepo->find($id);
+
+        if (!$projectRepo->isWorkUploaded($project)) {
+            return new JsonResponse(['error' => "Нельзя голосовать за незагруженную игру"]);
+        }
 
         if ($project->getAuthor() === $this->getUser()) {
             return new JsonResponse(['error' => "Нельзя голосовать за свою игру"]);

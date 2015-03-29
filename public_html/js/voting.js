@@ -63,11 +63,17 @@ function StarVote(voteValue, $stars, $vote)
             id: projectId,
             vote: voteValue
         })
-            .done(function () {
+            .done(function (response) {
                 clearInterval(blinkInterval);
-                $errorMessage.hide();
                 $floppy.hide();
-                $saved.show();
+
+                if (response.error) {
+                    $errorMessage.text(response.error)
+                        .show();
+                } else {
+                    $errorMessage.hide();
+                    $saved.show();
+                }
             })
             .fail(function () {
                 clearInterval(blinkInterval);

@@ -132,6 +132,13 @@ services:
         arguments: [ @security.context, @kernel ]
         tags:
             - { name: twig.extension }
+    work.repo:
+        class: Geek\PartyBundle\Entity\Repository\WorkRepository
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ 'GeekPartyBundle:Work' ]
+        calls:
+            - ['setRootDir', [ %kernel.root_dir% ]]
 
 lexik_maintenance:
     driver:

@@ -62,14 +62,12 @@ class GeekExtension extends \Twig_Extension
         return $this->context->isGranted('ROLE_ADMIN');
     }
 
-    public function fileExists($path)
-    {
-        return file_exists($this->kernel->getRootDir() . '/../public_html' . $path);
-    }
-
     public function isWorkUploaded(Work $work)
     {
-        return $this->fileExists('/works/' . $work->getParty()->getId() . '/' . $work->getId() . '/index.html');
+        $workRepo = $this->kernel->getContainer()
+            ->get('work.repo')
+            ;
+        return $workRepo->isWorkUploaded($work);
     }
 
     public function getCurrentParty()

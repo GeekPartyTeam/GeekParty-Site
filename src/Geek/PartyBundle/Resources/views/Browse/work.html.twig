@@ -31,6 +31,8 @@
                         {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
                     {% elseif work.author == current_user %}
                         <p class="k-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
+                    {% elseif not is_work_uploaded(work) %}
+                        <p class="k-red">Работа не была загружена на сайт и не участвует в голосовании</p>
                     {% else %}
                         <div id="ProjectVoteForm" data-id="{{ work.id }}"
                              data-vote="{{ vote is defined and vote ? vote.vote : 0 }}"
