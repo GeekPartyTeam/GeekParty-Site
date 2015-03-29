@@ -30,6 +30,7 @@ function StarVote(voteValue, $stars, $vote)
         voteValue = Math.floor(1 + x / 32);
         onchange && onchange(voteValue);
         changing = false;
+        setStars(voteValue);
     })
 
     .mouseleave(function () {
@@ -51,8 +52,11 @@ function StarVote(voteValue, $stars, $vote)
     var voterWidget = new StarVote(voteValue, $('.ProjectStarInner'), $('.ProjectStar'));
     voterWidget.change(function (v) {
         voteValue = v;
-        var blinkInterval;
-        var $floppy = $('.Loading').show();
+        var blinkInterval,
+            $floppy = $('.Loading').show(),
+            $errorMessage = $('#ErrorMessage').hide(),
+            $saved = $('#Saved').hide()
+        ;
 
         //noinspection JSUnresolvedVariable
         $.post(saveVoteUrl, {
@@ -61,13 +65,13 @@ function StarVote(voteValue, $stars, $vote)
         })
             .done(function () {
                 clearInterval(blinkInterval);
-                $('#ErrorMessage').hide();
+                $errorMessage.hide();
                 $floppy.hide();
-                $('#Saved').show();
+                $saved.show();
             })
             .fail(function () {
                 clearInterval(blinkInterval);
-                $('#ErrorMessage').show();
+                $errorMessage.show();
                 $floppy.hide();
             });
 
