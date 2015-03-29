@@ -9,4 +9,24 @@
 
     <h3>Latest comments</h3>
     {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+
+    {% if is_admin() %}
+        <h3>Голоса за темы</h3>
+        <ul>
+            {% for v in theme_votes %}
+                <li>{{ v.theme.text }}
+                    for <a href="{{ path('geek_browse', { party: v.theme.party.id }) }}">{{ v.theme.party.id | upper }}</a>
+                    ({{ v.date.format('Y:m:d H:i:s') }})</li>
+            {% endfor %}
+        </ul>
+        <h3>Голоса за работы</h3>
+        <ul>
+            {% for v in project_votes %}
+                {% set entryPage = path('geek_browse_work', { party: v.work.party, work: v.work.id }) %}
+                <li><span class="VoteTextResult">{{ v.vote }}</span>
+                    for <a href="{{ entryPage }}">{{ v.work.name }}</a>
+                    ({{ v.date.format('Y:m:d H:i:s') }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}

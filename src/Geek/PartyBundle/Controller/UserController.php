@@ -5,6 +5,7 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Model\User;
 use Geek\PartyBundle\Controller\Base\BaseController;
 use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
@@ -23,7 +24,7 @@ class UserController extends BaseController
      */
     public function showAction(Request $request, $id)
     {
-
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()
             ->getManager();
 
@@ -38,10 +39,21 @@ class UserController extends BaseController
         $projects = $em->getRepository('GeekPartyBundle:Work')
             ->findBy(['author' => $user]);
 
+        $themeVotes = [];
+        $projectVotes = [];
+        if ($this->isAdmin()) {
+            $themeVotes = $em->getRepository('GeekPartyBundle:PartyThemeVote')
+                ->findBy(['user' => $user]);
+            $projectVotes = $em->getRepository('GeekPartyBundle:ProjectVote')
+                ->findBy(['user' => $user]);
+        }
+
         return $this->arrayResponse([
             'user' => $user,
             'comments' => $comments,
             'projects' => $projects,
+            'theme_votes' => $themeVotes,
+            'project_votes' => $projectVotes,
         ]);
     }
 }

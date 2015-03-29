@@ -521,7 +521,6 @@ body {
     margin-top: 12px;
     font: 30px/24px "pixel_font";
     color: #FFAA22;
-    float: left;
 }
 
 .ProjectStarInner {
@@ -634,7 +633,7 @@ body {
     margin-top: 15px;
 }
 
-.Loading, .ProjectVote, #Saved {
+.Loading, .ProjectVote, #Saved, .PullLeft {
     float: left;
 }
 
