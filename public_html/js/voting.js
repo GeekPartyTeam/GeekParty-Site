@@ -1,55 +1,79 @@
-!function () {
-    if ($('.ActiveVoting').length == 0) {
-        return;
-    }
-
-    var $vote = $('.ProjectStar'),
-        $voteInner = $('.ProjectStarInner'),
-        $voteInput = $('input[name=vote]'),
-        voteValue = 0 + $voteInput.val(),
-        changing = true;
-
-    var $projectVoteForm = $('#ProjectVoteForm'),
-        $warning = $('#ChooseVote')
-        ;
+function StarVote(voteValue, $stars, $vote)
+{
+    var onchange = null;
+    this.change = function (callback) {
+        onchange = callback;
+    };
 
     function setStars(stars) {
-        $voteInner.css('width', '' + 32 * Math.floor(stars) + 'px');
+        $stars.css('width', '' + 32 * Math.floor(stars) + 'px');
     }
 
     setStars(voteValue);
 
+    var changing = true;
+
     $vote.mouseenter(function () {
         changing = true;
-    });
+    })
 
-    $vote.mousemove(function (e) {
+    .mousemove(function (e) {
         if (!changing) {
             return;
         }
         var x = e.pageX - $(this).offset().left;
         setStars(1 + x / 32);
-    });
+    })
 
-    $vote.click(function (e) {
+    .click(function (e) {
         var x = e.pageX - $(this).offset().left;
         voteValue = Math.floor(1 + x / 32);
-        $voteInput.val(voteValue);
+        onchange && onchange(voteValue);
         changing = false;
-        $warning.hide();
-    });
+    })
 
-    $vote.mouseleave(function () {
+    .mouseleave(function () {
         setStars(voteValue);
     });
+}
 
-    $projectVoteForm.submit(function (e) {
-        if (0 + voteValue == 0) {
-            $warning.show();
-            e.preventDefault();
-            return false;
-        }
+!function () {
+    //noinspection JSUnresolvedVariable
+    if ($('.ActiveVoting').length == 0 || typeof(saveVoteUrl) == 'undefined') {
+        return;
+    }
 
+    var $form = $('#ProjectVoteForm'),
+        voteValue = $form.data('vote'),
+        projectId = $form.data('id')
+    ;
+
+    var voterWidget = new StarVote(voteValue, $('.ProjectStarInner'), $('.ProjectStar'));
+    voterWidget.change(function (v) {
+        voteValue = v;
+        var blinkInterval;
+        var $floppy = $('.Loading').show();
+
+        //noinspection JSUnresolvedVariable
+        $.post(saveVoteUrl, {
+            id: projectId,
+            vote: voteValue
+        })
+            .done(function () {
+                clearInterval(blinkInterval);
+                $('#ErrorMessage').hide();
+                $floppy.hide();
+                $('#Saved').show();
+            })
+            .fail(function () {
+                clearInterval(blinkInterval);
+                $('#ErrorMessage').show();
+                $floppy.hide();
+            });
+
+        blinkInterval = setInterval(function () {
+                $floppy.toggle();
+            }, 100);
     });
 }();
 

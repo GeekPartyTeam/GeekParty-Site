@@ -32,25 +32,24 @@
                     {% elseif work.author == current_user %}
                         <p class="k-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
                     {% else %}
-                        <form action="{{ path('geek_vote') }}" method="POST" id="ProjectVoteForm">
-                            <div>
-                            <input type="hidden" name="id" value="{{ work.id }}"/>
-                            <input type="hidden" name="vote" value="{{ vote is defined and vote ? vote.vote : 0 }}"/>
-                            </div>
-
+                        <div id="ProjectVoteForm" data-id="{{ work.id }}"
+                             data-vote="{{ vote is defined and vote ? vote.vote : 0 }}"
+                            >
                             <div class="ProjectVote ActiveVoting">
                                 <div class="ProjectStar">
                                     <div class="ProjectStarInner">&nbsp;</div>
                                 </div>
                             </div>
+                            <div class="Loading"><img src="{{ asset('img/floppy32.png') }}"/></div>
+                            <div id="Saved">Сохранено!</div>
+                            <div class="Clear"></div>
+                            <p class="k-red" id="ErrorMessage" style="display:none">Ошибка!</p>
                             <p class="k-red">Голосуйте за игру только если вы поиграли в нее!</p>
                             <p class="k-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
-                            {{ macros.submit('Проголосовать', 'SubmitVoteButton') }}
                             {% if vote is defined and vote %}
                                 <p class="">Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
                             {% endif %}
-                            <p class="k-red" id="ChooseVote" style="display:none">Выберите оценку от 1 до 5 кирок, чтобы проголосовать</p>
-                        </form>
+                        </div>
                     {% endif %}
                 </div>
             </div>

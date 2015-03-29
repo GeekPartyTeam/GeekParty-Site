@@ -10,6 +10,7 @@ use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Work;
 use JMS\SecurityExtraBundle\Tests\Security\Authorization\Expression\Fixture\Issue22\Project;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -89,22 +90,13 @@ class BrowseController extends Base\BaseController
         /** @var Work $project */
         $project = $projectRepo->find($id);
 
-        $redirect = $this->redirect($this->generateUrl('geek_browse_work', [
-            'party' => $project->getParty()->getId(),
-            'work' => $project->getId(),
-        ]));
-
-        /** @var Session $session */
-        $session = $this->get('session');
         if ($project->getAuthor() === $this->getUser()) {
-            $session->getFlashBag()->add('notice', "Нельзя голосовать за свою игру");
-            return $redirect;
+            return new JsonResponse(['error' => "Нельзя голосовать за свою игру"]);
         }
 
         $vote = (int)$this->getRequest()->get('vote');
         if ($vote < 1 || $vote > 5) {
-            $session->getFlashBag()->add('notice', "Голос должен быть от 1 до 5 кирок");
-            return $redirect;
+            return new JsonResponse(['error' => "Голос должен быть от 1 до 5 кирок"]);
         }
 
         $entity = $this->getVote($project);
@@ -122,9 +114,10 @@ class BrowseController extends Base\BaseController
         $em->persist($entity);
         $em->flush();
 
-        $session->getFlashBag()->add('info', "Ваш голос сохранен");
-
-        return $redirect;
+        return new JsonResponse([
+            'id' => $project->getId(),
+            'vode' => $vote,
+        ]);
     }
 
     /**

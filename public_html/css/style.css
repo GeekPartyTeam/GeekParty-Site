@@ -503,8 +503,8 @@ body {
 
 .ProjectStar {
     width: 160px;
-    height: 28px;
-    background: url('/img/5ts.png');
+    height: 32px;
+    background: url('/img/5ts.png') no-repeat;
 }
 
 .ActiveVoting .ProjectStar {
@@ -632,4 +632,21 @@ body {
 
 .k-party-list .row {
     margin-top: 15px;
+}
+
+.Loading, .ProjectVote, #Saved {
+    float: left;
+}
+
+.Loading, #Saved {
+    display: none;
+}
+
+#Saved {
+    line-height: 30px;
+    color: #31ed20;
+}
+
+.Clear {
+    clear: both;
 }

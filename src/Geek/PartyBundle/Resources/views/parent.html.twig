@@ -172,6 +172,9 @@
 
     <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
     {% if current_party is defined and current_party.projectVotingTime %}
+        <script type="application/javascript">
+            var saveVoteUrl = '{{ path("geek_vote") }}';
+        </script>
         <script type="text/javascript" src="{{ asset("js/voting.js?2") }}"></script>
     {% endif %}
 </body>
