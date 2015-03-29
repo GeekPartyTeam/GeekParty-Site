@@ -5,7 +5,19 @@
     <div class="k-entry-block">
         <div class="row Comment">
             <span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>
-            <h4><a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a></h4>
+            <h4>
+                <a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
+                <form method="POST" action="{{ path("geek_party_comment_remove") }}" class="form-inline">
+                    <input type="hidden" name="id" value="{{ comment.id }}"/>
+                    {% if is_owner_or_admin(comment.author) and not comment.removed %}
+                        <a class="k-red"
+                           href="#"
+                           onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
+                        [ удалить ]
+                        </a>
+                    {% endif %}
+                </form>
+            </h4>
             {#<div class="CommentAuthor">#}
                 {#<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">#}
                     {#<img src="{{ userAvatarPath }}" alt="{{ userName }}"#}
@@ -14,7 +26,11 @@
             {#</div>#}
 
             <div class="CommentText">
-                <p>{{ comment.text|purify }}</p>
+                {% if comment.removed %}
+                    <p class="RemovedComment">Комментарий удален</p>
+                {% else %}
+                    <p>{{ comment.text|purify }}</p>
+                {% endif %}
             </div>
         </div>
     </div>

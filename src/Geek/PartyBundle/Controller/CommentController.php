@@ -64,14 +64,36 @@ class CommentController extends BaseController
     {
         $from = $request->get('from', 0);
 
-        /** @var AbstractCommentRepository $commentsRepo */
-        $commentsRepo = $this->getDoctrine()
+        return $this->arrayResponse(
+            $this->getRepository()->fetchPage([], $from)
+        );
+    }
+
+    /**
+     * @Method("POST")
+     * @Route()
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction(Request $request)
+    {
+        $id = $request->request->get('id');
+        /** @var AbstractComment $comment */
+        $comment = $this->getRepository()->find($id);
+        $comment->setRemoved(true);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * @return AbstractCommentRepository
+     */
+    private function getRepository()
+    {
+        return $this->getDoctrine()
             ->getManager()
             ->getRepository('GeekPartyBundle:AbstractComment');
-
-        return $this->arrayResponse(
-            $commentsRepo->fetchPage([], $from)
-        );
     }
 
     /**

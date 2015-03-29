@@ -50,13 +50,17 @@ abstract class AbstractComment
      */
     protected $foreignAuthor = '';
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $removed = false;
+
+    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
     }
-
     function __construct()
     {
         $this->date = new \DateTime();
@@ -156,5 +160,21 @@ abstract class AbstractComment
     public function setForeignAuthor($foreignAuthor)
     {
         $this->foreignAuthor = $foreignAuthor;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRemoved()
+    {
+        return $this->removed;
+    }
+
+    /**
+     * @param boolean $removed
+     */
+    public function setRemoved($removed)
+    {
+        $this->removed = $removed;
     }
 }
