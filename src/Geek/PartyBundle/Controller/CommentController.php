@@ -82,7 +82,7 @@ class CommentController extends BaseController
     private function addComment($text, AbstractComment $comment)
     {
         $em = $this->getDoctrine()->getManager();
-        $comment->setText(htmlentities($text));
+        $comment->setText($text);
         $comment->setAuthor($this->getUser());
         $em->persist($comment);
         $em->flush();

@@ -32,11 +32,13 @@
                 <div class="CommentText">
                     <form class="Form" method="post" action="{{ path('geek_party_comment_' ~ type) }}">
                         <input type="hidden" name="{{ type }}_id" value="{{ id }}"/>
-                        <textarea name="text"></textarea>
+                        <textarea name="text" class="tinymce" data-theme="comment"></textarea>
                         {{ macros.submit('Добавить') }}
                     </form>
                 </div>
             </div>
         {% endif %}
     </div>
+
+    {{ tinymce_init() }}
 {% endmacro %}

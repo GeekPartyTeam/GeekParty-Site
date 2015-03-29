@@ -67,6 +67,15 @@ stfalcon_tinymce:
         theme:
             # Simple theme: same as default theme
             simple: ~
+            comment:
+                plugins:
+                 - "advlist autolink lists link image charmap anchor pagebreak"
+                 - "wordcount visualblocks visualchars code"
+                 - "insertdatetime media nonbreaking save table contextmenu directionality"
+                 - "paste textcolor"
+                toolbar1: "undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | bullist numlist outdent indent | code"
+                menubar: false
+                statusbar: false
             # Advanced theme with almost all enabled plugins
             advanced:
                  plugins:
