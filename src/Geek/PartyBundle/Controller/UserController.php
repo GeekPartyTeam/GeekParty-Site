@@ -11,6 +11,7 @@ use Geek\PartyBundle\Controller\Base\BaseController;
 use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends BaseController
@@ -55,5 +56,19 @@ class UserController extends BaseController
             'theme_votes' => $themeVotes,
             'project_votes' => $projectVotes,
         ]);
+    }
+
+    /**
+     * @Route("/after_login")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function afterLoginAction(Request $request)
+    {
+        $url = parse_url($request->headers->get('referer'), PHP_URL_PATH);
+        if (!$url) {
+            $url = '/';
+        }
+        return new RedirectResponse($url);
     }
 }

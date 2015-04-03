@@ -28,6 +28,7 @@ security:
                 login_path:        /login
                 use_forward:       false
                 failure_path:      /login
+                default_target_path: /user/after_login
                 oauth_user_provider:
                     service: my_user_provider
             form_login:
