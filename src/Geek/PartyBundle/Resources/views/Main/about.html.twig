@@ -2,11 +2,15 @@
 
 {% block main %}
 
-    <div class="row main-text">
-        <div class="col-md-12">
-            {% if text.body is not null %}
-                {{ text.body|raw }}
-            {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="gdp-news-row">
+                    {% if text.body is not null %}
+                        {{ text.body|raw }}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 

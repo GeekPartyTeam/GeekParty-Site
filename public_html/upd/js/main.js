@@ -75,18 +75,8 @@ var GDPAnimations = (function() {
 
 
 $(document).ready(function() {
-    var Pages = {
-        "main": "main.html",
-        "works": "works.html",
-        "works-single": "works-single.html",
-        "news-single": "news-single.html"
-    };
-
-    window.onkeyup = OnKey;
-    window.ShowPage = ShowPage;
     ResizeButtons();
     GDPAnimations.Start();
-
     $(window).resize(function() {
         ResizeButtons();
     });
@@ -99,40 +89,6 @@ $(document).ready(function() {
         var offset = w < 940 ? len * (80 + 10) : len * (121 + 21);
         container.css("left", w / 2 - offset / 2);
     }
-
-
-    function OnKey(e) {
-        console.log(e.keyCode);
-        switch (e.keyCode) {
-            // z = 90
-            // x = 88
-            // c = 67
-            // v = 86
-            // b = 66
-            // n = 78
-            //case 90: ShowPage("main"); break;
-            //case 88: ShowPage("works"); break;
-            //case 67: ShowPage("news-single"); break;
-            //case 86: ShowPage("works-single"); break;
-
-        }
-    }
-
-
-    /*function ShowPage(name, a) {
-        var fileName = Pages[name];
-        if (fileName === undefined) { return; }
-
-        fileName += "?" + Date.now();
-        $("#dynamic-content").load(fileName, function() {});
-
-        if (a) {
-            $("#gdp-menu-buttons").children().removeClass("gdp-menu-button-active");
-            $(a).addClass("gdp-menu-button-active");
-        }
-    }*/
-
-    //ShowPage("works-single");
 });
 
 

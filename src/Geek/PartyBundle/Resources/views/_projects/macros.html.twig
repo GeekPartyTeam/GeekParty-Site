@@ -13,41 +13,42 @@
 
     {% set partyId = entry.party is not null ? entry.party.id : null %}
     {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
-    <div class="k-entry-block">
-        <div class="row">
-            <h4><a href="{{ entryPage }}">{{ entry.name }}</a></h4>
-            <div class="col-md-4 col-xs-4">
-                <a href="{{ entryPage }}" class="k-img-link">
-                    <img
-                            style="width:110px;height:110px;"
-                            src="{{ self.project_icon_url(entry) }}" alt="{{ entry.name }}"
-                            class="img-rounded k-img-border">
-                    <span class="k-img-play"></span>
-                </a>
-            </div>
 
-            <div class="col-md-8 col-xs-8">
-                <p>{{ entry.description }}.</p>
-                <a href="{{ entryPage }}">Подробнее</a>
-                {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                    <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
-                {% endif %}
-            </div>
+
+    <div class="gdp-work gdp-border">
+        <div class="gdp-work-header">
+            <p class="gdp-work-name">{{ entry.name }}</p>
+            <p class="grp-work-author">by Игорёк Рагнарёк @2015-02-06 21:03:20</p>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
+        <div class="gdp-work-sidebar">
+            <div class="gdp-work-image-holder">
+                <img
+                        src="{{ self.project_icon_url(entry) }}" alt="{{ entry.name }}"
+                        class="gdp-work-image">
+            </div>
+            <span class="gdp-work-rating">4.7</span>
+        </div>
+        <p>{{ entry.description }}.</p>
+
+        <div class="gdp-news-raw-footer">
+            <a href="{{ entryPage }}">Подробнее</a>
+
+            <a class="link-more text-right" href="{{ entryPage }}">Подробнее</a>
+            <a class="link-comments text-right" href="#">Комментарии (10)</a>
+            {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
+            {% endif %}
+
             {% if entry.party.ended %}
                 <div class="ProjectVote VoteResult">
                     <div class="ProjectStar">
                         {% set rating = calculate_project_rating(entry) %}
                         <div class="ProjectStarInner"
-                             style="width: {{ 32.0 * rating }}px" title="{{ rating }}">&nbsp;</div>
+                                style="width: {{ 32.0 * rating }}px" title="{{ rating }}">&nbsp;</div>
                     </div>
                 </div>
                 <div class="PullLeft VoteTextResult">{{ rating|round(1)|number_format(1) }}</div>
             {% endif %}
-            {{ comments.projectLink(entry) }}
-            </div>
         </div>
     </div>
 {% endmacro %}

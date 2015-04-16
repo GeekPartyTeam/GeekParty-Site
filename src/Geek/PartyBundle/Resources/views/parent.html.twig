@@ -25,7 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/disqusFix.css") }}" media="screen"/>
 
     {# NEW STYLES #}
-    <link rel="stylesheet" type="text/css" href="{{ asset("upd/style.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/style.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/header.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/forms.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/menu.css") }}" media="screen"/>
@@ -160,10 +160,6 @@
                                     &nbsp;Выйти
                                 </a>
                             {% endif %}
-
-
-                            <a href="#"><img src="./img/icon-vk.png" /></a>
-                            <a href="#"><img src="./img/icon-fb.png" /></a>
                         </div>
                     </form>
                 </div>
@@ -204,6 +200,14 @@
         </div> <!-- MENU -->
     </div>
 
+    {% for tag, lines in app.session.flashbag.all %}
+        {% for flashMessage in lines %}
+            <div class="{{ tag }}-message">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
 
     {% block main %} {% endblock %}
 
@@ -219,88 +223,7 @@
     </div>
 
 
-
-
-
-    <div class="container">
-        <div class="row k-header">
-
-            <div id="k-left-shadow"></div>
-            <div id="k-right-shadow"></div>
-
-            <div id="k-logo-gp">
-                <a href="/">
-                    <img class="HeaderLogo" src="{{ asset('img/logo_site01.png') }}" alt="GameDevParty" />
-                </a>
-            </div>
-            {#
-            <div id="k-logo-nc">
-                <a href="http://nextcastle.ru/" target="_blank">
-                    <img src="{{ asset('img/logo-nc2.png') }}" alt="NextCastle" />
-                </a>
-            </div>
-            #}
-            <div id="k-menu-social">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-                {{ macros.auth_buttons() }}
-            {% else %}
-                <a class="FlatButton" href="{{ path('fos_user_security_logout') }}">
-                    <i class="glyphicon glyphicon-keys-{% if is_admin() %}red{% else %}white{% endif %}">&nbsp;</i>
-                    &nbsp;Выйти
-                </a>
-            {% endif %}
-            </div>
-
-            {% include "GeekPartyBundle::heading.html.twig" %}
-
-        </div>
-        <div class="row k-menu">
-            <div class="col-md-4 col-sm-4 col-xs-3"></div>
-            {% set current_route = app.request.attributes.get('_route') %}
-            {% set menu = {
-                'geek_index': 'Main',
-                'geek_about': 'About',
-                'geek_browse': 'Works'
-                } %}
-
-            <div class="col-md-8 col-sm-8 col-xs-8">
-                {% for route, page in menu %}
-                    <a href="{{ path(route) }}" class="k-button mr16 {% if route == current_route %}k-button-active{% endif %}">
-                        <span>{{page}}</span>
-                    </a>
-                {% endfor %}
-
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('project') }}" class="k-button mr16 {% if '/edit/project' in app.request.requestUri %}k-button-active{% endif %}">
-                        <span>Upload</span>
-                    </a>
-                {% endif %}
-
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('geek_party_admin_index') }}" class="k-button mr16 {% if '/admin' in app.request.requestUri %}k-button-active{% endif %}">
-                        <span>Admin</span>
-                    </a>
-                {% endif %}
-            </div>
-        </div>
-
-        {% for tag, lines in app.session.flashbag.all %}
-            {% for flashMessage in lines %}
-                <div class="{{ tag }}-message">
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-
-        {% block main %} {% endblock %}
-
-        <div class="row" id="k-footer">
-            <p class="text-right">GameDevParty (c) {{ "now"|date("Y") }} | {{ admin_email }}</p>
-            <div></div>
-        </div>
-    </div>
     <div id="vk_api_transport"></div>
-
     <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
     <script type="text/javascript" src="{{ asset("upd/js/main.js") }}"></script>
     {% if current_party is defined and current_party.projectVotingTime %}

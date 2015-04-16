@@ -41,15 +41,18 @@
     </div> <!-- INFO COLUMNS -->
 
 
-
-
-    <div class="row">
-        <div class="col-md-12 main-text">
-            {% if text.body is not null %}
-                {{ text.body|raw }}
-            {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="main-text">
+                    {% if text.body is not null %}
+                        {{ text.body|raw }}
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
+
 
     <div class="row" id="k-page-header">
         <div class="col-md-12">

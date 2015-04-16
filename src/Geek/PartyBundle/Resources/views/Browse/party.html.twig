@@ -17,35 +17,55 @@
         </div>
     </div>
 
+<div class="container">
+    <!-- NEWS -->
     <div class="row">
         <div class="col-md-12">
-            <h2>
-                Работы участников&nbsp;
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {{ macros.simple_button('[добавить работу]', path('project_new')) }}
-                {% else %}
-                    {{ macros.simple_button('[войти]', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                {% endif %}
-            </h2>
-        </div>
+            <div id="gdp-news">
+                <div id="gdp-news-header">
+                    <span>Работы участников</span>
+                </div>
 
-        <div class="col-md-12">
-            <ul class="k-works-list">
-                {% for p in parties %}
-                    {% if party == p %}
-                        <li class="active">
-                            {{ p.id | upper }}
-                        </li>
+                <div>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {{ macros.simple_button('[добавить работу]', path('project_new')) }}
                     {% else %}
-                        <li>
-                            <a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a>
-                        </li>
+                        {{ macros.simple_button('[войти]', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
                     {% endif %}
-                {% endfor %}
-            </ul>
+                </div>
+
+                <div>
+                    <ul class="k-works-list">
+                        {% for p in parties %}
+                            {% if party == p %}
+                                <li class="active">
+                                    {{ p.id | upper }}
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div id="gdp-party-info">
+                    <div class="gdp-party-info-sep"></div>
+                    <p id="gdp-party-name">Бесполезные суперспособности</p>
+                    <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
+                    <p id="gdp-party-amount">Работ: <span>26</span></p>
+                    <div class="gdp-party-info-sep"></div>
+                </div>
+
+                {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
+                {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
+
+            </div>
         </div>
     </div>
+</div>
 
-    {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
-    {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
+
+
 {% endblock %}
