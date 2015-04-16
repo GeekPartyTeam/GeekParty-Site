@@ -1,0 +1,104 @@
+#gdp-news {
+    margin-top: 16px;
+}
+    #gdp-news-header {
+        border: 2px solid #2f8094;
+
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+
+        background: #14445e url('../img/news-header-bg.png') 0 2px repeat-x;
+        height: 39px;
+    }
+        #gdp-news-header span {
+            text-align: center;
+            display: block;
+            width: 100%;
+            font: 18px/32px "Roboto";
+            font-weight: 600;
+            color: #ffd02e;
+        }
+
+
+.gdp-news-row {
+    padding: 26px 0 14px 0;
+    border-bottom: 1px solid #6cdeff;
+}
+    .gdp-news-row-header {
+        background: url("../img/icon-news.png") 0 4px no-repeat;
+        padding: 0 0 0 26px;
+    }
+        .gdp-news-row h3 {
+            font: 23px/23px "Roboto";
+            margin: 0 0 6px 0;
+            font-weight: 600;
+            color: #ff9b1a;
+        }
+        .gdp-news-row h6 {
+            font: 14px/14px "Open Sans";
+            color: #0aa432;
+            margin: 0 0 6px 0;
+        }
+    .gdp-news-raw-footer { height: 50px;}
+    .gdp-news-raw-footer a {
+        display: block;
+        width: 100%;
+    }
+        .link-more {
+            font: 18px/20px "Roboto";
+            font-weight: 600;
+        }
+        .link-comments {
+            font: 18px/20px "Roboto";
+            font-weight: 600;
+            color: #ff9b1a !important;
+        }
+    .gdp-news-row-image {
+        float: left;
+        padding: 10px 24px 10px 0;
+        /*padding: 24px 24px 24px 0;*/
+    }
+    .gdp-news-row p {
+        margin-bottom: 12px;
+        font: 16px/20px "Open Sans";
+        color: #fff;
+        text-align: justify;
+    }
+
+
+.gdp-comments {
+    margin-top: 26px;
+}
+    .gdp-comment-row {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    .gdp-comment-body p {
+        margin-bottom: 12px;
+        font: 14px/14px "Open Sans";
+        color: #fff;
+        text-align: justify;
+    }
+
+    .gdp-comment-body.disabled-comment p{
+        color: #888;
+    }
+        .gdp-comment-header {
+            float: left;
+            padding: 0 16px 0 0;
+        }
+        .gdp-comment-row .gdp-comment-author {
+            font: 16px/18px "Roboto";
+            margin: 0 0 6px 0;
+            font-weight: 600;
+            color: #ff9b1a;
+        }
+        .gdp-comment-row .gdp-comment-date {
+            font: 14px/18px "Roboto";
+            color: #0aa432;
+            margin: 0 0 6px 0;
+        }
+
+
+

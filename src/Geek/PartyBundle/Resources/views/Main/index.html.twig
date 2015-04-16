@@ -4,6 +4,45 @@
 
 {% block main %}
 
+    <!-- INFO COLUMNS -->
+    <div id="gdp-columns-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div id="gdp-columns">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="gdp-column-header" id="gdp-column-q">
+                                <span>Куда я попал?</span>
+                            </div>
+                            <div class="gdp-column-body">
+                                <p>Здесь делают игры для удовольствия. Джем длится неделю, потом голосованием выбирается победитель. <a href="#">Подробнее...</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="gdp-column-header" id="gdp-column-p">
+                                <span>Где это происходит?</span>
+                            </div>
+                            <div class="gdp-column-body">
+                                <p>В интернете, на русском языке. Можно участвовать из любой точки планеты. <a href="#">Подробнее...</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="gdp-column-header" id="gdp-column-r">
+                                <span>Хочу участвовать?</span>
+                            </div>
+                            <div class="gdp-column-body">
+                                <p>Во время джема залей свою игру на сайт, и ты участник. Также играй в игры других, оценивай и комментируй. <a href="#">Подробнее...</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- INFO COLUMNS -->
+
+
+
+
     <div class="row">
         <div class="col-md-12 main-text">
             {% if text.body is not null %}
@@ -23,9 +62,23 @@
         </div>
     </div>
 
-    {% for article in articles %}
-        {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
-    {% endfor %}
+    <div class="container">
+        <!-- NEWS -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div id="gdp-news">
+                    <div id="gdp-news-header">
+                        <span>Лента новостей</span>
+                    </div>
+                </div>
+
+                {% for article in articles %}
+                    {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
+                {% endfor %}
+
+            </div>
+        </div> <!-- NEWS -->
+    </div>
 
     {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
 {% endblock %}

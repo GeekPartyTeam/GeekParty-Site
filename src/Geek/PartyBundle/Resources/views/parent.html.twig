@@ -7,18 +7,37 @@
     <meta name="keywords" content="geekparty gamedevparty gamejam" />
     <meta name="description" content="GameDevParty — это цифровое творчество в режиме реального времени" />
     <meta name="vk:app_id" content="3561840" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {#<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>#}
+    {#<script type="text/javascript" src="{{ asset("bootstrap/js/bootstrap.min.js") }}"></script>#}
     <script type="text/javascript" src="{{ asset("js/countdown.js") }}"></script>
-    <script type="text/javascript" src="{{ asset("bootstrap/js/bootstrap.min.js") }}"></script>
 
+    {# NEW LIB STYLES #}
+    <link rel="stylesheet" type="text/css" href="{{  asset("upd/bower_components/bootstrap/dist/css/bootstrap.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{  asset("upd/bower_components/bootstrap/dist/css/bootstrap-theme.css") }}" media="screen"/>
+
+    {# OLD STYLES, MUST BE DELETED !!! #}
     <link rel="stylesheet" type="text/css" href="{{ asset("css/__style.css") }}" media="screen"/>
-
 	<link rel="stylesheet" type="text/css" href="{{ asset("bootstrap/css/bootstrap.css") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("bootstrap/css/bootstrap-theme.css") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("bootstrap/css/magic-bootstrap.css") }}" media="screen"/>
 
     <link rel="stylesheet" type="text/css" href="{{ asset("css/style.css?3") }}" media="screen"/>
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/disqusFix.css") }}" media="screen"/>
+
+    {# NEW STYLES #}
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/style.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/header.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/forms.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/menu.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/main-info.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/news.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/footer.css") }}" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/works.css") }}" media="screen"/>
+
+
+    <script type="text/javascript" src="{{ asset("upd/bower_components/jquery/dist/jquery.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("upd/bower_components/bootstrap/dist/js/bootstrap.js") }}"></script>
+
 
     <link rel="shortcut icon" href="{{ asset("favicon.ico") }}" />
 
@@ -89,9 +108,121 @@
     </script>
     <script type="text/javascript" src="{{ asset("js/script.js") }}"></script>
 
-	<div id="k-bg-gradient"></div>
 
-	<div class="container">
+    <div class="container">
+        <!-- HEADER -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div id="gdp-header">
+                    <div id="gdp-header-logo">
+                        <a href="#">
+                            <img src="{{ asset("upd/img/site-logo.png") }}" alt="GameDevPart.ru"/>
+                        </a>
+                    </div>
+
+
+                    <div id="gdp-header-timer">
+                        <div id="gdp-header-timer-body">
+                            <p id="gdp-timer-up"><span>GDP#2</span> начнется через</p>
+                            <p id="gdp-timer-timer">10:22:54</p>
+                            <div id="gdp-timer-labels">
+                                <span id="gdp-day">дней</span>
+                                <span id="gdp-hour">часов</span>
+                                <span id="gdp-minute">минут</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="gdp-header-message">
+                        <p id="gdp-animated-text"></p>
+                    </div>
+
+
+
+                    <form id="gdp-login">
+                        <div>
+                            <input type="text" placeholder="Geekname" />
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Password" />
+                        </div>
+
+                        <div id="gdp-login-options">
+                            <a href="#">Login</a><a href="#">Register</a>
+                        </div>
+
+                        <div id="gdp-social-options">
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                                {{ macros.auth_buttons() }}
+                            {% else %}
+                                <a class="FlatButton" href="{{ path('fos_user_security_logout') }}">
+                                    <i class="glyphicon glyphicon-keys-{% if is_admin() %}red{% else %}white{% endif %}">&nbsp;</i>
+                                    &nbsp;Выйти
+                                </a>
+                            {% endif %}
+
+
+                            <a href="#"><img src="./img/icon-vk.png" /></a>
+                            <a href="#"><img src="./img/icon-fb.png" /></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- HEADER -->
+
+        <!-- MENU -->
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gdp-menu">
+                    {% set current_route = app.request.attributes.get('_route') %}
+                    {% set menu = {
+                        'geek_index': 'Main',
+                        'geek_about': 'About',
+                        'geek_browse': 'Works'
+                    } %}
+                    <div id="gdp-menu-buttons">
+                        {% for route, page in menu %}
+                            <a href="{{ path(route) }}" class="gdp-menu-button {% if route == current_route %}gdp-menu-button-active{% endif %}">
+                                <span>{{page}}</span>
+                            </a>
+                        {% endfor %}
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('project') }}" class="gdp-menu-button {% if '/edit/project' in app.request.requestUri %}gdp-menu-button-active{% endif %}">
+                                <span>Upload</span>
+                            </a>
+                        {% endif %}
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('geek_party_admin_index') }}" class="gdp-menu-button {% if '/admin' in app.request.requestUri %}gdp-menu-button-active{% endif %}">
+                                <span>Admin</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div> <!-- MENU -->
+    </div>
+
+
+    {% block main %} {% endblock %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gdp-footer">
+                    <span>GameDevParty (c) 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container">
         <div class="row k-header">
 
             <div id="k-left-shadow"></div>
@@ -171,6 +302,7 @@
     <div id="vk_api_transport"></div>
 
     <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("upd/js/main.js") }}"></script>
     {% if current_party is defined and current_party.projectVotingTime %}
         <script type="application/javascript">
             var saveVoteUrl = '{{ path("geek_vote") }}';

@@ -2,53 +2,67 @@
 
 {% set entryPage = path('article', {'id':entity.id}) %}
 
-<div class="row main-text k-entry-block k-news-block">
-    <div class="col-md-12">
 
-        {{ comments.articleLink(entity) }}
+<div class="gdp-news-row">
+    <div class="gdp-news-row-header">
+        <h3>Сказка о маленьком роботе (Little Bot)</h3>
+        <h6>by Игорёк Рагнарёк @2015-02-06 21:03:20</h6>
+    </div>
+    <p>Расскажу, как всё было, прям всю цепочку действий и размышлений про свою игру LittleBot<p>
+    <p>Начну, пожалуй, с выбора темы. Тем было много, одни лучше, другие — хуже. Мне лично нравилась «чувство такта», жаль, что не прошла. Ну ладно, выбрали «Бесполезные суперспособности». Тема, по-моему, не очень. Больше подходит для комиксов или смешных картинок, чем для игр. Наводит на мысли сделать некую абсурдную способность, но чтобы она всё равно работала. Умеешь превращать кирпичи в сковородки? Открывай бизнес. Кстати, некоторые <a href="#">разработчики</a> пошли по такому пути, но мне хотелось отойти от подобного концепта и сделать так, чтобы способность была всё-таки выдающейся и полезной на первый взгляд, но чтобы одновременно с этим она мешала. Да, и ещё сразу определился, что не хотелось делать квест со статичными кадрами, платформер или раннер.</p>
+    <p><img src="./img/test/news-image.png" class="gdp-news-row-image">Начну, пожалуй, с выбора темы. Тем было много, одни лучше, другие — хуже. Мне лично нравилась «чувство такта», жаль, что не прошла. Ну ладно, выбрали «Бесполезные суперспособности». Тема, по-моему, не очень. Больше подходит для комиксов или смешных картинок, чем для игр. Наводит на мысли сделать некую абсурдную способность, но чтобы она всё равно работала. Умеешь превращать кирпичи в сковородки? Открывай бизнес. Кстати, некоторые <a href="#">разработчики</a> пошли по такому пути, но мне хотелось отойти от подобного концепта и сделать так, чтобы способность была всё-таки выдающейся и полезной на первый взгляд, но чтобы одновременно с этим она мешала. Да, и ещё сразу определился, что не хотелось делать квест со статичными кадрами, платформер или раннер.</p>
+    <p>Начну, пожалуй, с выбора темы. Тем было много, одни лучше, другие — хуже. Мне лично нравилась «чувство такта», жаль, что не прошла. Ну ладно, выбрали «Бесполезные суперспособности». Тема, по-моему, не очень. Больше подходит для комиксов или смешных картинок, чем для игр. Наводит на мысли сделать некую абсурдную способность, но чтобы она всё равно работала. Умеешь превращать кирпичи в сковородки? Открывай бизнес. Кстати, некоторые <a href="#">разработчики</a> пошли по такому пути, но мне хотелось отойти от подобного концепта и сделать так, чтобы способность была всё-таки выдающейся и полезной на первый взгляд, но чтобы одновременно с этим она мешала. Да, и ещё сразу определился, что не хотелось делать квест со статичными кадрами, платформер или раннер.</p>
 
-        <h3>
-            {{ entity.title }}&nbsp;
-            {% if is_owner_or_admin(entity.author) %}
-                <a href="{{ path('_edit_article', {'action':'edit', 'id':entity.id}) }}">[править]</a>
-            {% endif %}
-        </h3>
-        <span class="k-sub">by {{ entity.author.fullname }} @{{ entity.time|date("Y-m-d H:i:s") }}</span>
-
-        {{ entity.body|purify }}
-
-        {% if entity.poll is not null %}
-            {% set didntVote = app.request.cookies.get('prism_poll_' ~ entity.poll.id) is null %}
-            <div class="Clear">
-                <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
-                    <input type="hidden" name="poll" value="{{ entity.poll.id }}"/>
-                    <h4>{{ entity.poll.name }}</h4>
-
-                    {% for opinion in entity.poll.opinions %}
-                        <div class="checkbox">
-                            <label>
-                                <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
-                                {{ opinion.name }}
-                            </label>
-                        </div>
-                    {% endfor %}
-
-                    <div>
-                        <p>Проголосовало: {{ entity.poll.votes }}
-                            {% transchoice entity.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
-                    </div>
-
-
-                    {% if didntVote %}
-                        {{ macros.submit('Проголосовать') }}
-                    {% else %}
-                        Вы уже принимали участие в этом голосовании
-                    {% endif %}
-                    <br/>
-                    <br/>
-                </form>
-            </div>
-        {% endif %}
+    <div class="gdp-news-raw-footer">
+        <a class="link-more text-right" href="#">Читать дальше</a>
+        <a class="link-comments text-right" href="#">Комментарии (10)</a>
     </div>
 </div>
-<div class="k-separator"></div>
+
+
+<div class="gdp-news-row">
+    <div class="gdp-news-row-header">
+        <h3>{{ entity.title }}</h3>
+        <h6>by {{ entity.author.fullname }} @{{ entity.time|date("Y-m-d H:i:s") }}</h6>
+    </div>
+
+    {{ entity.body|purify }}
+
+{% if entity.poll is not null %}
+    {% set didntVote = app.request.cookies.get('prism_poll_' ~ entity.poll.id) is null %}
+    <div class="Clear">
+        <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
+            <input type="hidden" name="poll" value="{{ entity.poll.id }}"/>
+            <h4>{{ entity.poll.name }}</h4>
+
+            {% for opinion in entity.poll.opinions %}
+                <div class="checkbox">
+                    <label>
+                        <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
+                        {{ opinion.name }}
+                    </label>
+                </div>
+            {% endfor %}
+
+            <div>
+                <p>Проголосовало: {{ entity.poll.votes }}
+                    {% transchoice entity.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
+            </div>
+
+
+            {% if didntVote %}
+                {{ macros.submit('Проголосовать') }}
+            {% else %}
+                Вы уже принимали участие в этом голосовании
+            {% endif %}
+            <br/>
+            <br/>
+        </form>
+    </div>
+{% endif %}
+
+    <div class="gdp-news-raw-footer">
+        <a class="link-more text-right" href="#">Читать дальше</a>
+        <a class="link-comments text-right" href="#">Комментарии (10)</a>
+    </div>
+</div>

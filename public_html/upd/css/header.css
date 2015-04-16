@@ -1,0 +1,127 @@
+#gdp-header {
+  border-top: 2px solid #236783;
+  height: 186px;
+  background: #14445e;
+  position: relative;
+}
+  #gdp-header-logo {
+    position: absolute;
+    top: 25px;
+    left: 67px;
+  }
+
+  @media (min-width: 1px) {
+    #gdp-header-timer { display: none; }
+  }
+
+  @media (min-width: 992px) {
+    #gdp-header-timer {
+      display: block;
+      left: 220px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    #gdp-header-timer {
+      display: block;
+      left: 309px;
+    }
+  }
+
+
+  #gdp-header-timer {
+    position: absolute;
+    /*left: 309px;*/
+    top: 26px;
+    width: 113px;
+    height: 112px;
+    background: url("./../img/icon-timer.png") no-repeat;
+  }
+    #gdp-header-timer-body {
+      position: absolute;
+      left: 86px;
+    }
+      #gdp-header-timer-body p { margin: 0; padding: 0;}
+      #gdp-header-timer #gdp-timer-up {
+        font: 17px/20px "Arial";
+        color: #fff;
+      }
+        #gdp-header-timer #gdp-timer-up span {
+          font: 18px/18px "pixel_font";
+        }
+      #gdp-header-timer #gdp-timer-timer {
+        font: 68px/44px "pixel_font";
+        color: #ff9b1a;
+      }
+      #gdp-header-timer #gdp-timer-labels {
+        position: relative;
+      }
+        #gdp-header-timer #gdp-timer-labels #gdp-day,
+        #gdp-header-timer #gdp-timer-labels #gdp-hour,
+        #gdp-header-timer #gdp-timer-labels #gdp-minute{
+          position: absolute;
+          font: 17px/17px "pixel_font";
+          color: #fff038;
+          top: 8px;
+        }
+        #gdp-header-timer #gdp-timer-labels #gdp-day { left: 26px; }
+        #gdp-header-timer #gdp-timer-labels #gdp-hour { left: 154px; }
+        #gdp-header-timer #gdp-timer-labels #gdp-minute { left: 286px;}
+    #gdp-header-message {
+      position: absolute;
+      width: 100%;
+      top: 156px;
+      font: 18px/18px "Roboto";
+      font-weight: bold;
+      color: #ffd02e;
+      text-align: center;
+    }
+
+
+
+  #gdp-login {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
+    #gdp-login input {
+      background: #11384c;
+      border: 2px solid #2f8094;
+      outline: none;
+      margin-bottom: 5px;
+
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+
+      padding: 0 10px;
+      font: 17px/32px "Roboto";
+      color: #fff038;
+      font-weight: bold;
+    }
+
+    #gdp-login input::-webkit-input-placeholder       { color:#fff038; opacity:0.3; transition: opacity 0.3s ease; }
+    #gdp-login input::-moz-placeholder                { color:#fff038; opacity:0.3; transition: opacity 0.3s ease; }/* Firefox 19+ */
+    #gdp-login input:-moz-placeholder                 { color:#fff038; opacity:0.3; transition: opacity 0.3s ease; }/* Firefox 18- */
+    #gdp-login input:-ms-input-placeholder            { color:#fff038; opacity:0.3; transition: opacity 0.3s ease; }
+
+    #gdp-login input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+    #gdp-login input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+    #gdp-login input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+    #gdp-login input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
+    /* 10 top 11 left */
+    #gdp-login-options { margin-left: 11px; }
+      #gdp-login-options a {
+        color: #fff;
+        font: 14px/20px "Open Sans";
+        font-weight: 600;
+        text-decoration: underline;
+        margin-right: 7px;
+      }
+    #gdp-social-options { margin-top: 12px; }
+      #gdp-social-options a { margin-right: 7px; }
+
+
+
+#gdp-animated-text {}
