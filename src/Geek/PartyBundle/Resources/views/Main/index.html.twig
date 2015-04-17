@@ -71,7 +71,12 @@
             <div class="col-md-12 col-xs-12">
                 <div id="gdp-news">
                     <div id="gdp-news-header">
-                        <span>Лента новостей</span>
+                        <span>
+                            Лента новостей&nbsp;
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {{ macros.simple_button('[добавить новость]', path("_edit_article", {"action":"edit"})) }}
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
 

@@ -7,6 +7,10 @@
 
 {% block main %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
     <h2><a href="{{ path('geek_browse', { party: work.party.id }) }}">{{ work.party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
 
     <div class="borderBlock">
@@ -73,4 +77,9 @@
     </div>
     {{ comments_macros.addComment('project', work.id) }}
     {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}

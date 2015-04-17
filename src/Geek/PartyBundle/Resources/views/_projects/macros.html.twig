@@ -18,7 +18,8 @@
     <div class="gdp-work gdp-border">
         <div class="gdp-work-header">
             <p class="gdp-work-name">{{ entry.name }}</p>
-            <p class="grp-work-author">by Игорёк Рагнарёк @2015-02-06 21:03:20</p>
+            {# keereal тут нужно имя пользователя #}
+            {#<p class="grp-work-author">by Игорёк Рагнарёк @2015-02-06 21:03:20</p>#}
         </div>
         <div class="gdp-work-sidebar">
             <div class="gdp-work-image-holder">
@@ -26,7 +27,16 @@
                         src="{{ self.project_icon_url(entry) }}" alt="{{ entry.name }}"
                         class="gdp-work-image">
             </div>
-            <span class="gdp-work-rating">4.7</span>
+
+            {% if entry.party.ended %}
+                {% set rating = calculate_project_rating(entry) %}
+                <div class="gdp-rating">
+                    <div class="gdp-rating-back"></div>
+                    <div class="gdp-rating-front"
+                            style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
+                    <span>{{ rating|round(1)|number_format(1) }}</span>
+                </div>
+            {% endif %}
         </div>
         <p>{{ entry.description }}.</p>
 
@@ -34,20 +44,10 @@
             <a href="{{ entryPage }}">Подробнее</a>
 
             <a class="link-more text-right" href="{{ entryPage }}">Подробнее</a>
-            <a class="link-comments text-right" href="#">Комментарии (10)</a>
-            {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="Special">Редактировать</a>
-            {% endif %}
+            <a class="link-comments text-right" href="#">Комментарии</a>
 
-            {% if entry.party.ended %}
-                <div class="ProjectVote VoteResult">
-                    <div class="ProjectStar">
-                        {% set rating = calculate_project_rating(entry) %}
-                        <div class="ProjectStarInner"
-                                style="width: {{ 32.0 * rating }}px" title="{{ rating }}">&nbsp;</div>
-                    </div>
-                </div>
-                <div class="PullLeft VoteTextResult">{{ rating|round(1)|number_format(1) }}</div>
+            {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="link-comments text-right">Редактировать</a>
             {% endif %}
         </div>
     </div>
