@@ -36,15 +36,15 @@
         </div>
         <p>
             {{ macros.submit("Сохранить") }}
-
-            {% if delete_form is defined %}
-                <div class="k-inline">
-                    {{ form_widget(delete_form) }}
-                </div>
-                {{ macros.submit("Удалить", "k-red") }}
-            {% endif %}
         </p>
     </form>
+        {% if delete_form is defined %}
+            {{ form_start(delete_form, {'action': path('_edit_article', { 'action': 'delete', 'id': entity.id })}) }}
+                {{ form_errors(delete_form) }}
+                {{ form_row(delete_form.id) }}
+                {{ macros.submit("Удалить", "k-red") }}
+            {{ form_end(delete_form) }}
+        {% endif %}
 </div>
 
     {{ tinymce_init() }}
