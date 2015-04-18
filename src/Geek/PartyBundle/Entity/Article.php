@@ -10,7 +10,7 @@ use Prism\PollBundle\Entity\Poll;
  * Article
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Geek\PartyBundle\Entity\Repository\ArticleRepository")
  */
 class Article
 {

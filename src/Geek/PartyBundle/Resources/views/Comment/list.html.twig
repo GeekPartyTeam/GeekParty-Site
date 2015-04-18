@@ -3,5 +3,5 @@
 {% block title %} {{ parent() }} :: Список комментариев {% endblock %}
 
 {% block main %}
-    {% include 'GeekPartyBundle:_comments:include_comments.html.twig' with {comments: comments, total_count: total_count} %}
+    {% include 'GeekPartyBundle:_comments:include_comments.html.twig' with {entities: entities, total_count: total_count} %}
 {% endblock %}

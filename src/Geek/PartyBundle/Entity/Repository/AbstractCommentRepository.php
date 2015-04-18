@@ -24,9 +24,9 @@ class AbstractCommentRepository extends EntityRepository
         $totalCount = count($this->findAll());
         return [
             'from' => $from,
-            'comments' => $comments,
+            'entities' => $comments,
             'total_count' => $totalCount,
-            'comments_per_page' => $commentsPerPage,
+            'entities_per_page' => $commentsPerPage,
         ];
     }
 
@@ -34,9 +34,9 @@ class AbstractCommentRepository extends EntityRepository
     {
         return [
             'from' => $from,
-            'comments' => $comments->slice($from, AbstractCommentRepository::COMMENTS_PER_PAGE),
+            'entities' => $comments->slice($from, AbstractCommentRepository::COMMENTS_PER_PAGE),
             'total_count' => $comments->count(),
-            'comments_per_page' => self::COMMENTS_PER_PAGE,
+            'entities_per_page' => self::COMMENTS_PER_PAGE,
         ];
     }
 }

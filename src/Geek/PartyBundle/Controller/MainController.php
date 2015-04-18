@@ -2,8 +2,8 @@
 
 namespace Geek\PartyBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response
-    ;
+use Geek\PartyBundle\Entity\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Base\BaseController
 {
@@ -11,14 +11,17 @@ class MainController extends Base\BaseController
      * Главная страница
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $articles = $this->getDoctrine()->
-            getRepository('GeekPartyBundle:Article')
-            ->findBy([], ['time' => 'DESC']);
+        /** @var ArticleRepository $articlesRepo */
+        $articlesRepo = $this->getDoctrine()->
+            getRepository('GeekPartyBundle:Article');
+
+        $from = $request->get('from', 0);
+
         return $this->render('GeekPartyBundle:Main:index.html.twig', [
             'text' => $this->findTextBlock('index'),
-            'articles' => $articles,
+            'articles' => $articlesRepo->fetchPage([], $from),
         ]);
     }
 

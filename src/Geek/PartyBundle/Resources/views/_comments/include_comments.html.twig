@@ -1,11 +1,8 @@
 <div class="gdp-comments">
-
-
-    {% for comment in comments %}
+    {% for comment in entities %}
         {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
         {% set userAvatarPath = '/img/avatar.png' %}
         {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
-
 
         <div class="gdp-comment-row gdp-border {% if comment.removed %} disabled-comment {% endif %}">
             <div class="gdp-comment-header">
@@ -23,8 +20,6 @@
                         </a>
                     {% endif %}
                 </form>
-
-
             </div>
             <div class="gdp-comment-body">
                 {% if comment.removed %}
@@ -36,8 +31,6 @@
 
             <div class="clearfix"></div>
         </div>
-
-
 
         {#<div class="k-entry-block">#}
             {#<div class="row Comment">#}
@@ -73,30 +66,5 @@
             {#</div>#}
         {#</div>#}
     {% endfor %}
-    {% if total_count is defined and total_count > comments|length %}
-        {% set page_count = (total_count / comments_per_page)|round(0, 'ceil') %}
-        {% set current_page = 1 + (from / comments_per_page)|round(0, 'floor')%}
-        {% macro page_link(from) %}
-            {{ path(app.request.attributes.get('_route'),
-                app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'from': from }))) }}
-        {% endmacro %}
-    <nav>
-      <ul class="pagination">
-        <li{% if from == 0 %} class="disabled"{% endif %}>
-          <a{% if from > 0 %} href="{{ _self.page_link(from - comments_per_page) }}"{% endif %}>
-            <span>&laquo;</span>
-          </a>
-        </li>
-        {% for i in 0..(total_count/comments_per_page)|round(0, 'floor') %}
-            <li{% if i*comments_per_page == from %} class="active"{% endif %}><a href="{{ _self.page_link(i * comments_per_page) }}">{{ 1 + i }}</a></li>
-        {% endfor %}
-        <li{% if from + comments_per_page >= total_count %} class="disabled"{% endif %}>
-          <a{% if from + comments_per_page < total_count %} href="{{ _self.page_link(from + comments_per_page) }}"{% endif %}>
-            <span>&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    {% endif %}
-
+    {% include '@GeekParty/_comments/pagination.html.twig' %}
 </div>

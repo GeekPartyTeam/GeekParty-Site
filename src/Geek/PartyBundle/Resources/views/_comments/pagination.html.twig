@@ -1,0 +1,25 @@
+{% if total_count is defined and total_count > entities|length %}
+    {% set page_count = (total_count / entities_per_page)|round(0, 'ceil') %}
+    {% set current_page = 1 + (from / entities_per_page)|round(0, 'floor')%}
+    {% macro page_link(from) %}
+        {{ path(app.request.attributes.get('_route'),
+            app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'from': from }))) }}
+    {% endmacro %}
+<nav>
+  <ul class="pagination">
+    <li{% if from == 0 %} class="disabled"{% endif %}>
+      <a{% if from > 0 %} href="{{ _self.page_link(from - entities_per_page) }}"{% endif %}>
+        <span>&laquo;</span>
+      </a>
+    </li>
+    {% for i in 0..(total_count/entities_per_page)|round(0, 'floor') %}
+        <li{% if i*entities_per_page == from %} class="active"{% endif %}><a href="{{ _self.page_link(i * entities_per_page) }}">{{ 1 + i }}</a></li>
+    {% endfor %}
+    <li{% if from + entities_per_page >= total_count %} class="disabled"{% endif %}>
+      <a{% if from + entities_per_page < total_count %} href="{{ _self.page_link(from + entities_per_page) }}"{% endif %}>
+        <span>&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+{% endif %}
