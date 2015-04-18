@@ -1,8 +1,79 @@
-    #gdp-party-info {
-    width: 100%;
-    text-align: center;
-    padding: 12px 0;
+/* RATING */
+.k-rating {
+    position: relative;
+    height: 25px;
+    width: 140px;
+    margin-top: 16px;
+    margin-bottom: 10px;
 }
+.k-rating-back {
+    position: absolute;
+    background: url("../img/rating/rating-opacity.png");
+    width: 140px;
+    height: 25px;
+    top: 0;
+}
+
+.k-rating-front {
+    position: absolute;
+    background: url("../img/rating/rating-visible.png");
+    top: 0;
+    width: 140px;
+    height: 25px;
+}
+.k-rating-label {
+    top: 26px;
+    position: absolute;
+    width: 160px;
+    text-align: center;
+    font: 20px/20px "pixel_font";
+    color: #ffd02e;
+    display: block;
+}
+
+.gdp-rating {
+    position: relative;
+    width: 120px;
+    margin: 0 auto;
+}
+    .gdp-rating-back {
+        width: 118px;
+        height: 24px;
+        background: url("../img/rating-empty.png");
+    }
+    .gdp-rating-front {
+        position: absolute;
+        top: 0;
+        background: url("../img/rating-full.png");
+        width: 118px;
+        height: 24px;
+    }
+    .gdp-rating span {
+        font: 45px/45px "pixel_font";
+        color: #ff9b1a;
+        text-align: center;
+        display: block;
+    }
+
+
+.gdp-work-rating {
+    display: block;
+    font: 45px/45px "pixel_font";
+    color: #ff9b1a;
+    width: 120px;
+    text-align: center;
+}
+
+
+
+
+
+
+    #gdp-party-info {
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+    }
 
     .gdp-party-info-sep {
         margin: 10px auto;

@@ -49,8 +49,10 @@
 {% endif %}
 
     <div class="gdp-news-raw-footer">
-        <a class="link-more text-right" href="#">Читать дальше</a>
-        <a class="link-comments text-right" href="{{ app.request.schemeAndHttpHost }}{{ entryPage }}#disqus_thread">Комментарии</a>
+
+        {#<a class="link-more text-right" href="#">Читать дальше</a>#}
+        {#<a class="link-comments text-right" href="{{ app.request.schemeAndHttpHost }}{{ entryPage }}#disqus_thread">Комментарии</a>#}
+        {{ comments.articleMoreLink(entity) }}
         {{ comments.articleLink(entity) }}
     </div>
 </div>

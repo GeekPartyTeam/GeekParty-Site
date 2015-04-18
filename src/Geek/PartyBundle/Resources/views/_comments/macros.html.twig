@@ -6,10 +6,20 @@
     {% endif %}
 {% endmacro %}
 
+{% macro articleMoreLink(entry) %}
+    {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
+    <a class="link-more text-right" href="{{ url }}">Читать дальше</a>
+{% endmacro %}
+
+
 {% macro articleLink(entry) %}
     {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
-    <a class="pull-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
+    <a class="link-comments text-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
 {% endmacro %}
+
+
+
+
 
 {% macro projectLink(entry) %}
     {% set url = path('geek_browse_work', { party: entry.party.id, work: entry.id })  %}

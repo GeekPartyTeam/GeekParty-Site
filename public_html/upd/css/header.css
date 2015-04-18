@@ -81,8 +81,8 @@
 
   #gdp-login {
     position: absolute;
-    right: 16px;
-    top: 10px;
+    right: 100px;
+    top: 26px;
   }
     #gdp-login input {
       background: #11384c;
@@ -109,6 +109,12 @@
     #gdp-login input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
     #gdp-login input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
     #gdp-login input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
+    #gdp-login-hidden {
+      font: 16px/16px "Open Sans";
+      color: #fff;
+      font-weight: 600;
+    }
 
     /* 10 top 11 left */
     #gdp-login-options { margin-left: 11px; }
