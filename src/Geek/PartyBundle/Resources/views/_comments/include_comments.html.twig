@@ -1,62 +1,100 @@
-{% for comment in comments %}
-    {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
-    {% set userAvatarPath = '/img/avatar.png' %}
-    {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
-    <div class="k-entry-block">
-        <div class="row Comment">
-            <span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>
-            <h4>
-                <a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
-                <form method="POST" action="{{ path("geek_party_comment_remove") }}" class="form-inline">
+<div class="gdp-comments">
+
+
+    {% for comment in comments %}
+        {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
+        {% set userAvatarPath = '/img/avatar.png' %}
+        {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
+
+
+        <div class="gdp-comment-row gdp-border {% if comment.removed %} disabled-comment {% endif %}">
+            <div class="gdp-comment-header">
+                {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
+                <p class="gdp-comment-author">{{ userName }}</p>
+                <p class="gdp-comment-date">{{ comment.date|date("Y-m-d H:i:s") }}</p>
+                <p><a href="#" class="admin">[delete]</a></p>
+
+                <form method="POST" action="{{ path("geek_party_comment_remove") }}">
                     <input type="hidden" name="id" value="{{ comment.id }}"/>
                     {% if is_owner_or_admin(comment.author) and not comment.removed %}
-                        <a class="k-red"
-                           href="#"
-                           onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
-                        [ удалить ]
+                        <a class="admin" href="#"
+                                onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
+                            [ удалить ]
                         </a>
                     {% endif %}
                 </form>
-            </h4>
-            {#<div class="CommentAuthor">#}
-                {#<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">#}
-                    {#<img src="{{ userAvatarPath }}" alt="{{ userName }}"#}
-                            {#class="UserAvatar img-rounded k-img-border">#}
-                {#</a>#}
-            {#</div>#}
 
-            <div class="CommentText">
+
+            </div>
+            <div class="gdp-comment-body">
                 {% if comment.removed %}
-                    <p class="RemovedComment">Комментарий удален</p>
+                    <p>Комментарий удален</p>
                 {% else %}
                     <p>{{ comment.text|purify }}</p>
                 {% endif %}
             </div>
         </div>
-    </div>
-{% endfor %}
-{% if total_count is defined and total_count > comments|length %}
-    {% set page_count = (total_count / comments_per_page)|round(0, 'ceil') %}
-    {% set current_page = 1 + (from / comments_per_page)|round(0, 'floor')%}
-    {% macro page_link(from) %}
-        {{ path(app.request.attributes.get('_route'),
-            app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'from': from }))) }}
-    {% endmacro %}
-<nav>
-  <ul class="pagination">
-    <li{% if from == 0 %} class="disabled"{% endif %}>
-      <a{% if from > 0 %} href="{{ _self.page_link(from - comments_per_page) }}"{% endif %}>
-        <span>&laquo;</span>
-      </a>
-    </li>
-    {% for i in 0..(total_count/comments_per_page)|round(0, 'floor') %}
-        <li{% if i*comments_per_page == from %} class="active"{% endif %}><a href="{{ _self.page_link(i * comments_per_page) }}">{{ 1 + i }}</a></li>
+
+
+
+        {#<div class="k-entry-block">#}
+            {#<div class="row Comment">#}
+                {#<span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>#}
+                {#<h4>#}
+                    {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
+                    {#<form method="POST" action="{{ path("geek_party_comment_remove") }}" class="form-inline">#}
+                        {#<input type="hidden" name="id" value="{{ comment.id }}"/>#}
+                        {#{% if is_owner_or_admin(comment.author) and not comment.removed %}#}
+                            {#<a class="k-red"#}
+                               {#href="#"#}
+                               {#onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">#}
+                            {#[ удалить ]#}
+                            {#</a>#}
+                        {#{% endif %}#}
+                    {#</form>#}
+                {#</h4>#}
+
+                {#&#123;&#35;<div class="CommentAuthor">&#35;&#125;#}
+                    {#&#123;&#35;<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">&#35;&#125;#}
+                        {#&#123;&#35;<img src="{{ userAvatarPath }}" alt="{{ userName }}"&#35;&#125;#}
+                                {#&#123;&#35;class="UserAvatar img-rounded k-img-border">&#35;&#125;#}
+                    {#&#123;&#35;</a>&#35;&#125;#}
+                {#&#123;&#35;</div>&#35;&#125;#}
+
+                {#&#123;&#35;<div class="CommentText">&#35;&#125;#}
+                    {#&#123;&#35;{% if comment.removed %}&#35;&#125;#}
+                        {#&#123;&#35;<p class="RemovedComment">Комментарий удален</p>&#35;&#125;#}
+                    {#&#123;&#35;{% else %}&#35;&#125;#}
+                        {#&#123;&#35;<p>{{ comment.text|purify }}</p>&#35;&#125;#}
+                    {#&#123;&#35;{% endif %}&#35;&#125;#}
+                {#&#123;&#35;</div>&#35;&#125;#}
+            {#</div>#}
+        {#</div>#}
     {% endfor %}
-    <li{% if from + comments_per_page >= total_count %} class="disabled"{% endif %}>
-      <a{% if from + comments_per_page < total_count %} href="{{ _self.page_link(from + comments_per_page) }}"{% endif %}>
-        <span>&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-{% endif %}
+    {% if total_count is defined and total_count > comments|length %}
+        {% set page_count = (total_count / comments_per_page)|round(0, 'ceil') %}
+        {% set current_page = 1 + (from / comments_per_page)|round(0, 'floor')%}
+        {% macro page_link(from) %}
+            {{ path(app.request.attributes.get('_route'),
+                app.request.attributes.get('_route_params')|merge(app.request.query.all|merge({'from': from }))) }}
+        {% endmacro %}
+    <nav>
+      <ul class="pagination">
+        <li{% if from == 0 %} class="disabled"{% endif %}>
+          <a{% if from > 0 %} href="{{ _self.page_link(from - comments_per_page) }}"{% endif %}>
+            <span>&laquo;</span>
+          </a>
+        </li>
+        {% for i in 0..(total_count/comments_per_page)|round(0, 'floor') %}
+            <li{% if i*comments_per_page == from %} class="active"{% endif %}><a href="{{ _self.page_link(i * comments_per_page) }}">{{ 1 + i }}</a></li>
+        {% endfor %}
+        <li{% if from + comments_per_page >= total_count %} class="disabled"{% endif %}>
+          <a{% if from + comments_per_page < total_count %} href="{{ _self.page_link(from + comments_per_page) }}"{% endif %}>
+            <span>&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+
+</div>

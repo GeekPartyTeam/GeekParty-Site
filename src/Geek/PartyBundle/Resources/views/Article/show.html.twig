@@ -6,13 +6,21 @@
 {% block title %} {{ parent() }} :: {{ entity.title }} {% endblock %}
 
 {% block main %}
-    <div id="content">
-        <ul class="NewsList">
-            {% include 'GeekPartyBundle::article.html.twig' with {'entity':entity} %}
-        </ul>
 
-        <div style="clear:both;"></div>
-        {{ comments_macros.addComment('article', entity.id) }}
-        {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                {% include 'GeekPartyBundle::article.html.twig' with {'entity':entity} %}
+
+                {{ comments_macros.addComment('article', entity.id) }}
+                {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+            </div>
+        </div>
     </div>
+
+    <div id="content">
+
+
+    </div>
+
 {% endblock %}
