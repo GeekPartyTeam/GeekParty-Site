@@ -3,20 +3,38 @@
 {% block title %} {{ parent() }} :: Админка {% endblock %}
 
 {% block main %}
-    <div id="content">
-        <h3>Текстовые блоки</h3>
-        <ul>
-            <li><a href="{{ path('admin_text', {'action': 'edit', 'id': indexText.id}) }}">Главная страница</a></li>
-            <li><a href="{{ path('admin_text', {'action': 'edit', 'id': aboutText.id}) }}">Страница "About"</a></li>
-            <li><a href="{{ path('admin_text', {'action': 'edit', 'id': partyText.id}) }}">Страница "Works"</a></li>
-        </ul>
-        <h3>Управление сущностями</h3>
-        <ul>
-            <li><a href="{{ path('admin_parties') }}">Геймджемы</a></li>
-            <li><a href="{{ path('geek_party_comment_list') }}">Комментарии</a></li>
-            <li><a href="{{ path('PrismPollBundle_backend_poll_list') }}">Редактирование голосований</a></li>
-            <li><a href="{{ path('PrismPollBundle_frontend_poll_list') }}">Результаты голосований</a></li>
-            <li><a href="{{ path('admin_file_manager') }}">Файловый менеджер</a></li>
-        </ul>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+
+                <div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body">
+                        <img src="./img/icon-w.png" />
+                        <span>Админка</span>
+                    </div>
+                </div>
+
+                <div class="gdp-entry-content">
+                    <h3>Текстовые блоки</h3>
+                    <ul>
+                        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': indexText.id}) }}">Главная страница</a></li>
+                        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': aboutText.id}) }}">Страница "About"</a></li>
+                        <li><a href="{{ path('admin_text', {'action': 'edit', 'id': partyText.id}) }}">Страница "Works"</a></li>
+                    </ul>
+
+                    <h3>Управление сущностями</h3>
+                    <ul>
+                        <li><a href="{{ path('admin_parties') }}">Геймджемы</a></li>
+                        <li><a href="{{ path('geek_party_comment_list') }}">Комментарии</a></li>
+                        <li><a href="{{ path('PrismPollBundle_backend_poll_list') }}">Редактирование голосований</a></li>
+                        <li><a href="{{ path('PrismPollBundle_frontend_poll_list') }}">Результаты голосований</a></li>
+                        <li><a href="{{ path('admin_file_manager') }}">Файловый менеджер</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
     </div>
+    
 {% endblock %}

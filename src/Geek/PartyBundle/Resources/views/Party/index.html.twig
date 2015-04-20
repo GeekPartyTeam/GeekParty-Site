@@ -3,36 +3,49 @@
 {% block title %} {{ parent() }} :: Список геймджемов {% endblock %}
 
 {% block main %}
-<p><a href="{{ path('geek_party_admin_index') }}">&larr; назад в админку</a></p>
 
-<h1>Геймджемы</h1>
-<div class="k-entry-block k-party-list">
-    {% for entity in entities %}
+<div class="container">
     <div class="row">
-        <div class="col-md-2"><p>{{ entity.id }}</p></div>
-        <div class="col-md-3"><p><strong>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i') }}{% endif %}</strong></p></div>
-        <div class="col-md-3"><p>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i') }}{% endif %}</p></div>
-        <div class="col-md-4">
-            <div class="k-button k-button-small">
-                <div class="k-button-left"></div>
-                <div class="k-button-body">
-                    <a href="{{ path('admin_parties', { 'action': 'edit', 'id': entity.id }) }}">Править</a>
+        <div class="col-md-12 col-xs-12">
+
+            <div class="gdp-header-row gdp-border">
+                <div class="gdp-header-row-body">
+                    <img src="./img/icon-w.png" />
+                    <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | Геймджемы</span>
                 </div>
-                <div class="k-button-right"></div>
             </div>
-            <div class="k-button k-button-small">
-                <div class="k-button-left"></div>
-                <div class="k-button-body">
-                    <a href="{{ path('themes_index', { 'id': entity.id }) }}">Темы</a>
+
+            <!-- List -->
+            <div class="gdp-entry-content">
+
+                <div class="row">
+                    <div class="col-md-3"><p>Party</p></div>
+                    <div class="col-md-3"><p>Start</p></div>
+                    <div class="col-md-3"><p>End</p></div>
+                    <div class="col-md-3"></div>
                 </div>
-                <div class="k-button-right"></div>
+
+                {% for entity in entities %}
+                    <div class="row">
+                        <div class="col-md-3"><p>{{ entity.id }}</p></div>
+                        <div class="col-md-3"><p>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i') }}{% endif %}</p></div>
+                        <div class="col-md-3"><p>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i') }}{% endif %}</div>
+                        <div class="col-md-3">
+                            <a class="gdp-admin" href="{{ path('admin_parties', { 'action': 'edit', 'id': entity.id }) }}">[Править]</a>
+                            <a class="gdp-admin" href="{{ path('themes_index', { 'id': entity.id }) }}">[Темы]</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div> <!-- List -->
+
+            <div class="gdp-entry-content">
+                {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+                <p>{{ macros.button("Создать", path('admin_parties', { 'action': 'edit' })) }}</p>
             </div>
+
         </div>
     </div>
-    {% endfor %}
 </div>
-
-{% import 'GeekPartyBundle::macros.html.twig' as macros %}
-{{ macros.button("Создать", path('admin_parties', { 'action': 'edit' })) }}
 
 {% endblock %}

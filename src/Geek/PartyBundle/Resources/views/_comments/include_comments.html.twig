@@ -1,71 +1,69 @@
-<div class="gdp-comments">
-    {% for comment in entities %}
-        {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
-        {% set userAvatarPath = '/img/avatar.png' %}
-        {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
+{% for comment in entities %}
+    {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
+    {% set userAvatarPath = '/img/avatar.png' %}
+    {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
 
-        <div class="gdp-comment-entry gdp-border">
-            <div class="gdp-comment-header">
-                {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
-                <p class="gdp-comment-author">{{ userName }}</p>
-                <p class="gdp-comment-date">{{ comment.date|date("Y-m-d H:i:s") }}</p>
-                <form method="POST" action="{{ path("geek_party_comment_remove") }}">
-                    <input type="hidden" name="id" value="{{ comment.id }}"/>
-                    {% if is_owner_or_admin(comment.author) and not comment.removed %}
-                        <a
-                                class="admin"
-                                href="#"
-                                onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
-                            [ удалить ]
-                        </a>
-                    {% endif %}
-                </form>
-            </div>
-            {% if comment.removed %}
-                <div class="gdp-entry-content gdp-disabled">
-                    <p>Комментарий удален</p>
-                </div>
-            {% else %}
-                <div class="gdp-entry-content">
-                    <p>{{ comment.text|purify }}</p>
-                </div>
-            {% endif %}
-            <div class="clearfix"></div>
+    <div class="gdp-comment-entry gdp-border">
+        <div class="gdp-comment-header">
+            {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
+            <p class="gdp-comment-author">{{ userName }}</p>
+            <p class="gdp-comment-date">{{ comment.date|date("Y-m-d H:i:s") }}</p>
+            <form method="POST" action="{{ path("geek_party_comment_remove") }}">
+                <input type="hidden" name="id" value="{{ comment.id }}"/>
+                {% if is_owner_or_admin(comment.author) and not comment.removed %}
+                    <a
+                            class="admin"
+                            href="#"
+                            onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
+                        [ удалить ]
+                    </a>
+                {% endif %}
+            </form>
         </div>
+        {% if comment.removed %}
+            <div class="gdp-entry-content gdp-disabled">
+                <p>Комментарий удален</p>
+            </div>
+        {% else %}
+            <div class="gdp-entry-content">
+                <p>{{ comment.text|purify }}</p>
+            </div>
+        {% endif %}
+        <div class="clearfix"></div>
+    </div>
 
-        {#<div class="k-entry-block">#}
-            {#<div class="row Comment">#}
-                {#<span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>#}
-                {#<h4>#}
-                    {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
-                    {#<form method="POST" action="{{ path("geek_party_comment_remove") }}" class="form-inline">#}
-                        {#<input type="hidden" name="id" value="{{ comment.id }}"/>#}
-                        {#{% if is_owner_or_admin(comment.author) and not comment.removed %}#}
-                            {#<a class="k-red"#}
-                               {#href="#"#}
-                               {#onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">#}
-                            {#[ удалить ]#}
-                            {#</a>#}
-                        {#{% endif %}#}
-                    {#</form>#}
-                {#</h4>#}
+    {#<div class="k-entry-block">#}
+        {#<div class="row Comment">#}
+            {#<span class="k-sub">{{ comment.date|date("Y-m-d H:i:s") }}</span>#}
+            {#<h4>#}
+                {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
+                {#<form method="POST" action="{{ path("geek_party_comment_remove") }}" class="form-inline">#}
+                    {#<input type="hidden" name="id" value="{{ comment.id }}"/>#}
+                    {#{% if is_owner_or_admin(comment.author) and not comment.removed %}#}
+                        {#<a class="k-red"#}
+                           {#href="#"#}
+                           {#onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">#}
+                        {#[ удалить ]#}
+                        {#</a>#}
+                    {#{% endif %}#}
+                {#</form>#}
+            {#</h4>#}
 
-                {#&#123;&#35;<div class="CommentAuthor">&#35;&#125;#}
-                    {#&#123;&#35;<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">&#35;&#125;#}
-                        {#&#123;&#35;<img src="{{ userAvatarPath }}" alt="{{ userName }}"&#35;&#125;#}
-                                {#&#123;&#35;class="UserAvatar img-rounded k-img-border">&#35;&#125;#}
-                    {#&#123;&#35;</a>&#35;&#125;#}
-                {#&#123;&#35;</div>&#35;&#125;#}
+            {#&#123;&#35;<div class="CommentAuthor">&#35;&#125;#}
+                {#&#123;&#35;<a {% if comment.author %}href="{{ userPage }}"{% endif %} class="k-img-link">&#35;&#125;#}
+                    {#&#123;&#35;<img src="{{ userAvatarPath }}" alt="{{ userName }}"&#35;&#125;#}
+                            {#&#123;&#35;class="UserAvatar img-rounded k-img-border">&#35;&#125;#}
+                {#&#123;&#35;</a>&#35;&#125;#}
+            {#&#123;&#35;</div>&#35;&#125;#}
 
-                {#&#123;&#35;<div class="CommentText">&#35;&#125;#}
-                    {#&#123;&#35;{% if comment.removed %}&#35;&#125;#}
-                        {#&#123;&#35;<p class="RemovedComment">Комментарий удален</p>&#35;&#125;#}
-                    {#&#123;&#35;{% else %}&#35;&#125;#}
-                        {#&#123;&#35;<p>{{ comment.text|purify }}</p>&#35;&#125;#}
-                    {#&#123;&#35;{% endif %}&#35;&#125;#}
-                {#&#123;&#35;</div>&#35;&#125;#}
-            {#</div>#}
+            {#&#123;&#35;<div class="CommentText">&#35;&#125;#}
+                {#&#123;&#35;{% if comment.removed %}&#35;&#125;#}
+                    {#&#123;&#35;<p class="RemovedComment">Комментарий удален</p>&#35;&#125;#}
+                {#&#123;&#35;{% else %}&#35;&#125;#}
+                    {#&#123;&#35;<p>{{ comment.text|purify }}</p>&#35;&#125;#}
+                {#&#123;&#35;{% endif %}&#35;&#125;#}
+            {#&#123;&#35;</div>&#35;&#125;#}
         {#</div>#}
-    {% endfor %}
-    {% include '@GeekParty/_comments/pagination.html.twig' %}
-</div>
+    {#</div>#}
+{% endfor %}
+{% include '@GeekParty/_comments/pagination.html.twig' %}

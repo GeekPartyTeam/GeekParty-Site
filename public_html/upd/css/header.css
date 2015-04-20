@@ -82,15 +82,7 @@
         #gdp-header-timer #gdp-timer-labels #gdp-day { left: 26px; }
         #gdp-header-timer #gdp-timer-labels #gdp-hour { left: 154px; }
         #gdp-header-timer #gdp-timer-labels #gdp-minute { left: 286px;}*/
-    #gdp-header-message {
-      position: absolute;
-      width: 100%;
-      top: 156px;
-      font: 18px/18px "Roboto";
-      font-weight: bold;
-      color: #ffd02e;
-      text-align: center;
-    }
+
 
 
 
@@ -145,4 +137,4 @@
 
 
 
-#gdp-animated-text {}
+

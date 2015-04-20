@@ -12,18 +12,25 @@
     <div class="row">
         <div class="col-md-12">
 
+            {% if text.body is not null %}
+                <div class="gdp-raw">
+                    {{ text.body|raw }}
+                    {{ party.description|raw }}
+                </div>
+            {% endif %}
+
+
             <div class="gdp-header-row gdp-border">
                 <div class="gdp-header-row-body gdp-js-center">
                     <img src="./img/icon-w.png" />
                     <span>Работы участников</span>
 
-                    {#keereal - DEBUG MODE ON #}
+                    {#keereal - test mode #}
                     <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
                         {% for p in parties %}
                         <option value="{{ path('geek_browse', { party: p.id }) }}">p.id | upper</option>
                         {% endif %}
                     </select>
-
                 </div>
             </div>
 
@@ -37,18 +44,9 @@
                 <div class="gdp-party-info-sep"></div>
             </div>#}
 
-
-            {% if text.body is not null %}
-                <div class="gdp-raw">
-                    {{ text.body|raw }}
-                    {{ party.description|raw }}
-                </div>
-            {% endif %}
-
-
             {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
-            {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
 
+            {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
 
         </div>
     </div>

@@ -28,26 +28,25 @@
 </div>
 
 {% if uploaded|length == 0 %}
-    <div class="col-md-12">
-        <h4>Ни одна работа не загружена</h4>
-    </div>
+    <h4>Ни одна работа не загружена</h4>
 {% endif %}
 
 
 {% if unuploaded|length > 0 %}
-    <h4 class="UnuploadedListHeader">Незагруженные работы</h4>
-<div class="container-fluid">
+    <div class="gdp-entry-separator"></div>
+
+    <h4>Незагруженные работы</h4>
+
     {% for entry in unuploaded %}
-	{% if loop.index % 2 == 0 %}
-        <div class="col-md-6 col-xs-12">
-			{{ macros_project.project_block(entry, current_user) }}
-        </div>
-		{% if unuploaded[loop.index + 1] is defined %}
-        <div class="col-md-6 col-sm-12">
-			{{ macros_project.project_block(entry, current_user) }}
-        </div>
-		{% endif %}
-	{% endif %}
+        {% if loop.index % 2 == 0 %}
+            <div class="col-md-6 col-xs-12">
+                {{ macros_project.project_block(entry, current_user) }}
+            </div>
+            {% if unuploaded[loop.index + 1] is defined %}
+                <div class="col-md-6 col-sm-12">
+                    {{ macros_project.project_block(entry, current_user) }}
+                </div>
+            {% endif %}
+        {% endif %}
 	{% endfor %}
-</div>
 {% endif %}

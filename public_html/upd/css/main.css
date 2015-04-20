@@ -217,5 +217,7 @@ button.gdp-pixel-link {
       font: 18px/36px "Roboto";
       font-weight: 600;
       color: #ffd02e; }
+    .gdp-header-row .gdp-header-row-body a {
+      text-decoration: underline; }
 
 /*# sourceMappingURL=main.css.map */

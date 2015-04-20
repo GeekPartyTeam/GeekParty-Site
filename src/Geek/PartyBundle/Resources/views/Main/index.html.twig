@@ -67,6 +67,7 @@
                 {% for article in articles.entities %}
                     {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
                 {% endfor %}
+
                 {% include "@GeekParty/_comments/pagination.html.twig" with articles %}
 
             </div>

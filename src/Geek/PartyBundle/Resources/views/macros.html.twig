@@ -17,11 +17,7 @@
 
 
 {% macro button(text, link, class) %}
-    {% embed 'GeekPartyBundle::button.html.twig' %}
-        {% block content %}
-            <a href="{{ link|default('javascript:void(0)') }}" class="{{ class }}">{{ text }}</a>
-        {% endblock %}
-    {% endembed %}
+    <a href="{{ link|default('javascript:void(0)') }}" class="gdp-pixel-link {{ class }}">{{ text }}</a>
 {% endmacro %}
 
 {% macro fb_button(text, link, class) %}
@@ -41,11 +37,7 @@
 {% endmacro %}
 
 {% macro submit(text, class) %}
-    {% embed 'GeekPartyBundle::button.html.twig' %}
-        {% block content %}
-            <button class="gdp-pixel-link">{{ text }}</button>
-        {% endblock %}
-    {% endembed %}
+    <button class="gdp-pixel-link {{ class }}">{{ text }}</button>
 {% endmacro %}
 
 {% macro play_button(work) %}

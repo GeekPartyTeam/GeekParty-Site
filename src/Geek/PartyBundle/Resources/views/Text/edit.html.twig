@@ -5,26 +5,39 @@
 {% block title %} {{ parent() }} :: Редактирование текстового блока {% endblock %}
 
 {% block main %}
-    <h3>Текстовый блок ::
-        {% if entity.name == "index" %}
-            Главная страница
-        {% elseif entity.name == "about" %}
-            Страница "About"
-        {% elseif entity.name == "party" %}
-            Страница "Works"
-        {% else  %}
-            #{{  entity.id }} {{ entity.name }}
-        {% endif %}
-    </h3>
-<form action="{{ path('admin_text', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype
-(edit_form) }}>
-    {{ form_errors(edit_form) }}
-    {{ form_widget(edit_form.body) }}
-    <p>
-        <a href="{{ path('geek_party_admin_index') }}">&larr; Назад</a>
-        {{ macros.submit("Сохранить") }}
-    </p>
-</form>
 
-{{ tinymce_init() }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+
+                <div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body">
+                        <img src="./img/icon-w.png" />
+                        <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | Текстовый блок ::
+                            {% if entity.name == "index" %}
+                                Главная страница
+                            {% elseif entity.name == "about" %}
+                                Страница "About"
+                            {% elseif entity.name == "party" %}
+                                Страница "Works"
+                            {% else  %}
+                                #{{  entity.id }} {{ entity.name }}
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="gdp-entry-content">
+                    <form action="{{ path('admin_text', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype (edit_form) }}>
+                        {{ form_errors(edit_form) }}
+                        {{ form_widget(edit_form.body) }}
+                        {{ macros.submit("Сохранить") }}
+                    </form>
+
+                    {{ tinymce_init() }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
