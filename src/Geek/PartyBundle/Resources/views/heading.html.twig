@@ -60,17 +60,32 @@
     window.serverNow = "{{ now }}";
 </script>
 
-<div id="k-timer-bg2"></div>
-
 {% if message is defined %}
-    <div id="k-message">{{ message }}</div>
+    <div id="gdp-header-state-ended">
+        <div id="gdp-header-state-body">
+            <p>{{  message }}</p>
+            {% if if belowMessage is defined %}
+                <a href="#">{{ belowMessage }}</a>
+            {% endif %}
+        </div>
+    </div>
 {% else %}
-    <div id="k-above-message">{{ aboveMessage }}</div>
-    <script type="text/javascript">
-        window.targetDate = "{{ targetDate }}";
-    </script>
-    <div id="big-timer">00:00:00</div>
-{% endif %}
-{% if belowMessage is defined %}
-    <div id="k-below-message">{{ belowMessage|raw }}</div>
-{%  endif %}
+    <div id="gdp-header-state-timer">
+        <div id="gdp-header-state-body">
+            <p><span>{{ aboveMessage }}</span></p>
+            <div id="gdp-header-timer">
+
+                <script type="text/javascript">
+                    window.targetDate = "{{ targetDate }}";
+                </script>
+
+                <p id="big-timer">00:00:00</p>
+                <span id="gdp-day">дней</span>
+                <span id="gdp-hour">часов</span>
+                <span id="gdp-minute">минут</span>
+            </div>
+            {% if belowMessage is defined %}
+                <a href="#">{{ belowMessage }}</a>
+            {%  endif %}
+        </div>
+    </div>

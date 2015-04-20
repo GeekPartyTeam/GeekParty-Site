@@ -25,6 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/disqusFix.css") }}" media="screen"/>
 
     {# NEW STYLES #}
+    <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/main.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/style.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/header.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{ asset("upd/css/forms.css") }}" media="screen"/>
@@ -121,17 +122,7 @@
                     </div>
 
 
-                    <div id="gdp-header-timer">
-                        <div id="gdp-header-timer-body">
-                            <p id="gdp-timer-up"><span>GDP#2</span> начнется через</p>
-                            <p id="gdp-timer-timer">10:22:54</p>
-                            <div id="gdp-timer-labels">
-                                <span id="gdp-day">дней</span>
-                                <span id="gdp-hour">часов</span>
-                                <span id="gdp-minute">минут</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% include "GeekPartyBundle::heading.html.twig" %}
 
                     <div id="gdp-header-message">
                         <p id="gdp-animated-text"></p>
@@ -140,27 +131,16 @@
 
 
                     <form id="gdp-login">
-                        <div>
-                            <input type="text" placeholder="Geekname" />
-                        </div>
-                        <div>
-                            <input type="text" placeholder="Password" />
-                        </div>
-
-                        <div id="gdp-login-options">
-                            <a href="#">Login</a><a href="#">Register</a>
-                        </div>
-
-                        <div id="gdp-social-options">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-                                {{ macros.auth_buttons() }}
-                            {% else %}
-                                <a class="FlatButton" href="{{ path('fos_user_security_logout') }}">
-                                    <i class="glyphicon glyphicon-keys-{% if is_admin() %}red{% else %}white{% endif %}">&nbsp;</i>
-                                    &nbsp;Выйти
-                                </a>
-                            {% endif %}
-                        </div>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                            <div id="gdp-options">
+                                    {{ macros.auth_buttons() }}
+                            </div>
+                        {% else %}
+                            <a class="gdp-exit" href="{{ path('fos_user_security_logout') }}">
+                                <span class="glyphicon glyphicon-keys-{% if is_admin() %}red{% else %}white{% endif %}">&nbsp;</span>
+                                &nbsp;[выйти]
+                            </a>
+                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -221,15 +201,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <div class="container">
-        <div class="row k-header">
-            {% include "GeekPartyBundle::heading.html.twig" %}
-        </div>
-    </div>
-
 
 
 

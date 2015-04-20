@@ -25,13 +25,13 @@
         background: url('../img/timerBg-no-signs.png');
     }
 
-    #big-timer {
-        color: #FFAA22;
-        font: 64px/45px "pixel_font";
-        position: absolute;
-        top: 60px;
-        left: 110px;
-    }
+    /*#big-timer {*/
+        /*color: #FFAA22;*/
+        /*font: 64px/45px "pixel_font";*/
+        /*position: absolute;*/
+        /*top: 60px;*/
+        /*left: 110px;*/
+    /*}*/
 
     #k-above-message {
         position: absolute;
@@ -71,7 +71,7 @@
     }
 
     #big-timer {
-        left: 340px;
+        /*left: 340px;*/
     }
 
     #k-logo-nc {
