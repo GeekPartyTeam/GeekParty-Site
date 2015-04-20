@@ -40,15 +40,18 @@
         </div>
         <p>{{ entry.description }}.</p>
 
-        <div class="gdp-news-raw-footer">
-            <a href="{{ entryPage }}">Подробнее</a>
+        <div class="clearfix"></div>
+        <div class="gdp-entry-footer pull-right">
+            <a href="{{ entryPage }}" class="gdp-link-more">Читать дальше</a>
 
-            <a class="link-more text-right" href="{{ entryPage }}">Подробнее</a>
-            <a class="link-comments text-right" href="#">Комментарии</a>
+            {# keereal - todo #}
+            <a href="#" class="gdp-link-comments">Комментарии</a>
 
             {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="link-comments text-right">Редактировать</a>
+                <a href="{{ path('project_edit', {'id': entry.id}) }}" class="gdp-admin">Редактировать</a>
             {% endif %}
+
         </div>
+        <div class="clearfix"></div>
     </div>
 {% endmacro %}

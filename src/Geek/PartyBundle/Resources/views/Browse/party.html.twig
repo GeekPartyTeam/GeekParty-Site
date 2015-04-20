@@ -11,51 +11,45 @@
     <!-- NEWS -->
     <div class="row">
         <div class="col-md-12">
-            <div id="gdp-news">
-                <div id="gdp-news-header">
-                    <span>
-                        Работы участников&nbsp;
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            {{ macros.simple_button('[добавить работу]', path('project_new')) }}
-                        {% else %}
-                            {{ macros.simple_button('[войти]', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                        {% endif %}
-                    </span>
-                </div>
 
-                {{ text.body|raw }}
-                {{ party.description|raw }}
+            <div class="gdp-header-row gdp-border">
+                <div class="gdp-header-row-body gdp-js-center">
+                    <img src="./img/icon-w.png" />
+                    <span>Работы участников</span>
 
-                <div>
-                    <ul class="k-works-list">
+                    {#keereal - DEBUG MODE ON #}
+                    <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
                         {% for p in parties %}
-                            {% if party == p %}
-                                <li class="active">
-                                    {{ p.id | upper }}
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a href="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
+                        <option value="{{ path('geek_browse', { party: p.id }) }}">p.id | upper</option>
+                        {% endif %}
+                    </select>
+
                 </div>
-
-                {# kereel тут нужно название пати, дата, колво работ !!!#}
-
-                {#<div id="gdp-party-info">
-                    <div class="gdp-party-info-sep"></div>
-                    <p id="gdp-party-name">Бесполезные суперспособности</p>
-                    <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
-                    <p id="gdp-party-amount">Работ: <span>26</span></p>
-                    <div class="gdp-party-info-sep"></div>
-                </div>#}
-
-                {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
-                {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
-
             </div>
+
+            {# kereel тут нужно название пати, дата, колво работ !!!#}
+
+            {#<div id="gdp-party-info">
+                <div class="gdp-party-info-sep"></div>
+                <p id="gdp-party-name">Бесполезные суперспособности</p>
+                <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
+                <p id="gdp-party-amount">Работ: <span>26</span></p>
+                <div class="gdp-party-info-sep"></div>
+            </div>#}
+
+
+            {% if text.body is not null %}
+                <div class="gdp-raw">
+                    {{ text.body|raw }}
+                    {{ party.description|raw }}
+                </div>
+            {% endif %}
+
+
+            {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
+            {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
+
+
         </div>
     </div>
 </div>

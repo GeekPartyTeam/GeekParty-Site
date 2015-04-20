@@ -80,7 +80,8 @@ button.gdp-pixel-link {
   color: #cccccc !important; }
 
 .gdp-entry-footer {
-  color: #fff; }
+  color: #fff;
+  display: block; }
   .gdp-entry-footer a {
     display: block;
     font: 18px/22px "Roboto";
