@@ -79,7 +79,23 @@ $(document).ready(function() {
     GDPAnimations.Start();
     $(window).resize(function() {
         ResizeButtons();
+        ResizeTags();
     });
+
+    var timeoutId = setTimeout(function() {
+        clearTimeout(timeoutId);
+        ResizeTags();
+    }, 150);
+
+
+    function ResizeTags() {
+        var container = $(".gdp-js-center");
+        var parentWidth = container.parent().width();
+        var selfWidth = container.width();
+        var offset = (parentWidth - selfWidth) / 2;
+        console.log(offset);
+        container.css("left", offset);
+    }
 
 
     function ResizeButtons() {
