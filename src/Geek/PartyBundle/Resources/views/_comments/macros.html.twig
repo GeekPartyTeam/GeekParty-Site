@@ -8,13 +8,13 @@
 
 {% macro articleMoreLink(entry) %}
     {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
-    <a class="link-more text-right" href="{{ url }}">Читать дальше</a>
+    <a class="gdp-link-more" href="{{ url }}">Читать дальше</a>
 {% endmacro %}
 
 
 {% macro articleLink(entry) %}
     {% set url = app.request.schemeAndHttpHost ~ path('article', {'id': entry.id})  %}
-    <a class="link-comments text-right" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
+    <a class="gdp-link-comments" href="{{ url }}">{{ _self.comments_link_text(entry.comments) }}</a>
 {% endmacro %}
 
 
@@ -29,16 +29,19 @@
 {% macro addComment(type, id) %}
     {% import 'GeekPartyBundle::macros.html.twig' as macros %}
     {% set userAvatarPath = '/img/avatar.png' %}
-    <div class="k-entry-block">
+
+    <div class="gdp-comment-entry gdp-border">
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-           Чтобы оставить комментарий, вам нужно авторизоваться:
-           {{ macros.auth_buttons() }}
+            <div class="gdp-entry-content">
+                <p class="gdp-login-warning">Чтобы оставить комментарий, вам нужно авторизоваться:
+                    &nbsp;
+                    {{ macros.auth_buttons() }}
+                </p>
+            </div>
         {% else %}
-            <div class="row">
-                <h4>Добавить комментарий</h4>
-                {#<div class="CommentAuthor">#}
-                    {#<img src="{{ userAvatarPath }}" class="UserAvatar img-rounded k-img-border" alt="{{ app.user.fullname }}">#}
-                {#</div>#}
+            <div class="gdp-entry-content">
+                <p><span>Добавить комментарий</span></p>
+
                 <div class="CommentText">
                     <form class="Form" method="post" action="{{ path('geek_party_comment_' ~ type) }}">
                         <input type="hidden" name="{{ type }}_id" value="{{ id }}"/>
@@ -46,7 +49,10 @@
                         {{ macros.submit('Добавить') }}
                     </form>
                 </div>
+
+                {{ macros.submit('Добавить') }}
             </div>
+            <div class="clearfix"></div>
         {% endif %}
     </div>
 

@@ -1,5 +1,5 @@
 {% macro simple_button(text, link, class) %}
-    <a class="" href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
+    <a class="gdp-admin" href="{{ link|default('javascript:void(0)') }}">{{ text }}</a>
 {% endmacro %}
 
 
@@ -43,7 +43,7 @@
 {% macro submit(text, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <button type="submit" class="{{ class }}">{{ text }}</button>
+            <button class="gdp-pixel-link">{{ text }}</button>
         {% endblock %}
     {% endembed %}
 {% endmacro %}

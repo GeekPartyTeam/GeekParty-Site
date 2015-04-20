@@ -15,7 +15,7 @@
                                 <span>Куда я попал?</span>
                             </div>
                             <div class="gdp-column-body">
-                                <p>Здесь делают игры для удовольствия. Джем длится неделю, потом голосованием выбирается победитель. <a href="#">Подробнее...</a></p>
+                                <p>Здесь делают игры для удовольствия. Джем длится неделю, потом голосованием выбирается победитель. <a href="#">Подробнее...{# keereal - link!!#}</a></p>
                             </div>
                         </div>
                         <div class="col-md-4 col-xs-12">
@@ -23,7 +23,7 @@
                                 <span>Где это происходит?</span>
                             </div>
                             <div class="gdp-column-body">
-                                <p>В интернете, на русском языке. Можно участвовать из любой точки планеты. <a href="#">Подробнее...</a></p>
+                                <p>В интернете, на русском языке. Можно участвовать из любой точки планеты. <a href="#">Подробнее...{# keereal - link!!#}</a></p>
                             </div>
                         </div>
                         <div class="col-md-4 col-xs-12">
@@ -31,7 +31,7 @@
                                 <span>Хочу участвовать?</span>
                             </div>
                             <div class="gdp-column-body">
-                                <p>Во время джема залей свою игру на сайт, и ты участник. Также играй в игры других, оценивай и комментируй. <a href="#">Подробнее...</a></p>
+                                <p>Во время джема залей свою игру на сайт, и ты участник. Также играй в игры других, оценивай и комментируй. <a href="#">Подробнее...{# keereal - link!!#}</a></p>
                             </div>
                         </div>
                     </div>
@@ -42,32 +42,27 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div class="main-text">
-                    {% if text.body is not null %}
-                        {{ text.body|raw }}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
         <!-- NEWS -->
         <div class="row">
             <div class="col-md-12 col-xs-12">
-                <div id="gdp-news">
-                    <div id="gdp-news-header">
-                        <span>
-                            Лента новостей&nbsp;
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                {{ macros.simple_button('[добавить новость]', path("_edit_article", {"action":"edit"})) }}
-                            {% endif %}
-                        </span>
+
+                {% if text.body is not null %}
+                    <div class="gdp-raw">
+                        {{ text.body|raw }}
+                    </div>
+                {% endif %}
+
+                <div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body gdp-js-center">
+                    <span>
+                        Лента новостей&nbsp;
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[править]</a>
+                        {% endif %}
+                    </span>
                     </div>
                 </div>
+
 
                 {% for article in articles.entities %}
                     {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}

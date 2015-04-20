@@ -4,31 +4,32 @@
         {% set userAvatarPath = '/img/avatar.png' %}
         {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
 
-        <div class="gdp-comment-row gdp-border {% if comment.removed %} disabled-comment {% endif %}">
+        <div class="gdp-comment-entry gdp-border">
             <div class="gdp-comment-header">
                 {#<a {% if comment.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>#}
                 <p class="gdp-comment-author">{{ userName }}</p>
                 <p class="gdp-comment-date">{{ comment.date|date("Y-m-d H:i:s") }}</p>
-                <p><a href="#" class="admin">[delete]</a></p>
-
                 <form method="POST" action="{{ path("geek_party_comment_remove") }}">
                     <input type="hidden" name="id" value="{{ comment.id }}"/>
                     {% if is_owner_or_admin(comment.author) and not comment.removed %}
-                        <a class="admin" href="#"
+                        <a
+                                class="admin"
+                                href="#"
                                 onclick="if (confirm('Are you sure?')) { $(event.target).parents('form').submit() }">
                             [ удалить ]
                         </a>
                     {% endif %}
                 </form>
             </div>
-            <div class="gdp-comment-body">
-                {% if comment.removed %}
+            {% if comment.removed %}
+                <div class="gdp-entry-content gdp-disabled">
                     <p>Комментарий удален</p>
-                {% else %}
+                </div>
+            {% else %}
+                <div class="gdp-entry-content">
                     <p>{{ comment.text|purify }}</p>
-                {% endif %}
-            </div>
-
+                </div>
+            {% endif %}
             <div class="clearfix"></div>
         </div>
 

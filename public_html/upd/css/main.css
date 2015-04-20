@@ -76,6 +76,9 @@ button.gdp-pixel-link {
   color: #ff9b1a;
   text-align: justify; }
 
+.gdp-disabled p, .gdp-disabled li, .gdp-disabled label {
+  color: #cccccc !important; }
+
 .gdp-entry-footer {
   color: #fff; }
   .gdp-entry-footer a {

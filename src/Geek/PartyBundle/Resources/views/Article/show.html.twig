@@ -10,10 +10,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12">
+
+                {# keereal - TODO #}
+                {#<div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body">
+                        <img src="./img/icon-w.png" />
+                        <span><a href="#">Работы участников</a> | <a href="#">GDP#4</a></span>
+                    </div>
+                </div>#}
+
                 {% include 'GeekPartyBundle::article.html.twig' with {'entity':entity} %}
 
-                {{ comments_macros.addComment('article', entity.id) }}
-                {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+                <div class="mt26">
+                    {{ comments_macros.addComment('article', entity.id) }}
+                    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+                </div>
             </div>
         </div>
     </div>
