@@ -29,7 +29,7 @@
                     <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
                         {% for p in parties %}
                         <option value="{{ path('geek_browse', { party: p.id }) }}">p.id | upper</option>
-                        {% endif %}
+                        {% endfor %}
                     </select>
                 </div>
             </div>
