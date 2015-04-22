@@ -7,6 +7,8 @@
 {% block main %}
 
 
+
+
 <div class="container">
     <!-- NEWS -->
     <div class="row">
@@ -25,10 +27,10 @@
                     <img src="./img/icon-w.png" />
                     <span>Работы участников</span>
 
-                    {#keereal - test mode #}
+                    {#keereal - надо узнать какое пати выбрано! #}
                     <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
                         {% for p in parties %}
-                        <option value="{{ path('geek_browse', { party: p.id }) }}">p.id | upper</option>
+                        <option value="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -52,6 +54,6 @@
     </div>
 </div>
 
-
+{{ dump() }}
 
 {% endblock %}

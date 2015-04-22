@@ -85,7 +85,7 @@
                 <span id="gdp-minute">минут</span>
             </div>
             {% if belowMessage is defined %}
-                {{ belowMessage }}
+                {{ belowMessage | raw }}
             {%  endif %}
         </div>
     </div>

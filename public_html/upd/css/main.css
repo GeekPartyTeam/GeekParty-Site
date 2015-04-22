@@ -21,11 +21,16 @@ a.gdp-admin:visited {
 
 a.gdp-pixel-link,
 button.gdp-pixel-link {
+  margin: 10px 0 0 0;
+  display: inline-block;
   font: 36px/36px "pixel_font" !important;
   color: #ffd02e !important;
   text-align: center;
   border: none;
   background: none; }
+
+button.gdp-pixel-link:hover {
+  text-decoration: underline; }
 
 .gdp-news-header {
   background: url("../img/icon-news.png") 0 4px no-repeat;

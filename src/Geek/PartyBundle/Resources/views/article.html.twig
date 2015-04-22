@@ -51,6 +51,9 @@
 {% endif %}
     <div class="clearfix"></div>
     <div class="gdp-entry-footer pull-right">
+
+        {# articleLink #}
+
         <a href="#" class="gdp-link-more">Читать дальше</a>
         <a href="#" class="gdp-link-comments">Комментарии (10)</a>
     </div>
@@ -58,3 +61,7 @@
 </div>
 
 <div class="gdp-entry-separator"></div>
+
+{{ entryPage | raw }}
+{{ dump() }}
+

@@ -5,47 +5,48 @@
 {% block title %} {{ parent() }} :: Редактирование новости {% endblock %}
 
 {% block main %}
-<div id="content">
-    <p><a href="{{ path('geek_index') }}">&larr; назад к списку</a></p>
-    <h2 class="inlineBlock">Редактирование новости</h2>
 
-    <form id="teamEditorMain"
-            action="{{ path('_edit_article', { 'action': 'update', 'id': entity.id }) }}"
-            method="post" {{ form_enctype(edit_form) }}>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
 
-        <div id="rightBorder">
-            <div class="teamEditorControlBlock">
-                <h3>Заголовок</h3>
-                <p class="inputLabel"></p>
-                {{ form_widget(edit_form.title) }}
-            </div>
-
-            <div class="teamEditorControlBlock">
-                <h3>Новость</h3>
-                <p class="inputLabel"></p>
-                {{ form_widget(edit_form.body) }}
-            </div>
-
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="teamEditorControlBlock">
-                    <h3>Голосование</h3>
-                    <p class="inputLabel"></p>
-                    {{ form_widget(edit_form.poll) }}
+                <div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body">
+                        <img src="{{ asset("upd/img/icon-w.png") }}" />
+                        <span><a href="{{ path('geek_index') }}">Назад</a> | Редактирование новости</span>
+                    </div>
                 </div>
-            {% endif %}
+
+
+                <div class="gdp-entry-content">
+                    <form id="teamEditorMain"
+                          action="{{ path('_edit_article', { 'action': 'update', 'id': entity.id }) }}"
+                          method="post" {{ form_enctype(edit_form) }}>
+
+                        {# keereal - todo: <input type="text" style="width: 400px"/>#}
+
+                        <h3>Заголовок</h3>
+                        {{ form_widget(edit_form.title) }}
+
+                        <h3>Новость</h3>
+                        {{ form_widget(edit_form.body) }}
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <h3>Голосование</h3>
+                            {{ form_widget(edit_form.poll) }}
+                        {% endif %}
+
+
+                        {{ macros.submit("Сохранить") }}
+
+                        {% if delete_form is defined %}
+                            {{ form_widget(delete_form) }}
+                            {{ macros.submit("Удалить", "k-red") }}
+                    </form>
+                </div>
+            </div>
         </div>
-        <p>
-            {{ macros.submit("Сохранить") }}
-
-            {% if delete_form is defined %}
-                <div class="k-inline">
-                    {{ form_widget(delete_form) }}
-                </div>
-                {{ macros.submit("Удалить", "k-red") }}
-            {% endif %}
-        </p>
-    </form>
-</div>
+    </div>
 
     {{ include('GeekPartyBundle::tinymce.html.twig') }}
 {% endblock %}
