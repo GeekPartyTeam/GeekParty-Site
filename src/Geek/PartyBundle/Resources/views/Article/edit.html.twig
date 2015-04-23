@@ -23,8 +23,7 @@
                           action="{{ path('_edit_article', { 'action': 'update', 'id': entity.id }) }}"
                           method="post" {{ form_enctype(edit_form) }}>
 
-                        {# keereal - todo: <input type="text" style="width: 400px"/>#}
-
+                        {# keereal - стили для элементов форм #}
                         <h3>Заголовок</h3>
                         {{ form_widget(edit_form.title) }}
 
@@ -42,6 +41,7 @@
                         {% if delete_form is defined %}
                             {{ form_widget(delete_form) }}
                             {{ macros.submit("Удалить", "k-red") }}
+                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -49,4 +49,5 @@
     </div>
 
     {{ include('GeekPartyBundle::tinymce.html.twig') }}
+
 {% endblock %}

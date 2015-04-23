@@ -18,8 +18,11 @@
     <div class="gdp-work gdp-border">
         <div class="gdp-work-header">
             <p class="gdp-work-name">{{ entry.name }}</p>
-            {# keereal тут нужно имя пользователя #}
-            {#<p class="grp-work-author">by Игорёк Рагнарёк @2015-02-06 21:03:20</p>#}
+
+            {# keereal тут нужно имя пользователя в таком формате #}
+            <p class="grp-work-author">by Имя автора @2015-02-06 21:03:20</p>
+            {# keereal #}
+
         </div>
         <div class="gdp-work-sidebar">
             <div class="gdp-work-image-holder">
@@ -44,7 +47,7 @@
         <div class="gdp-entry-footer pull-right">
             <a href="{{ entryPage }}" class="gdp-link-more">Читать дальше</a>
 
-            {# keereal - todo #}
+            {# keereal - ссылка на комменты #}
             <a href="#" class="gdp-link-comments">Комментарии</a>
 
             {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}

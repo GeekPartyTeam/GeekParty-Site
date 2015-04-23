@@ -8,78 +8,111 @@
 {% block main %}
 
 <div class="container">
+    <!-- NEWS -->
     <div class="row">
-        <div class="col-md-12">
-
-    <h2><a href="{{ path('geek_browse', { party: work.party.id }) }}">{{ work.party }}</a>&nbsp;&nbsp;/&nbsp;&nbsp;{{ work.name }}</h2>
-
-    <div class="borderBlock">
-        {{ work.longDescription|purify }}
-
-        {% if is_work_uploaded(work) %}
-            {{ macros.play_button(work) }}
-        {% else %}
-            {{ macros.button('Not uploaded', '', 'GrayButton') }}
-        {% endif %}
-
-        {% if (work.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
-            <p><a href="{{ path('project_edit', {'id': work.id}) }}" class="Special">Редактировать</a></p>
-        {% endif %}
-        {% if work.party == current_party and current_party.projectVotingTime %}
-            <div class="row">
-                <div class="col-md-offset-1 col-md-10 k-entry-block">
-                    <h3>Голосование за работу</h3>
-                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                        Чтобы голосовать, вам нужно авторизоваться:
-                        {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                        {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-                    {% elseif work.author == current_user %}
-                        <p class="k-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
-                    {% elseif not is_work_uploaded(work) %}
-                        <p class="k-red">Работа не была загружена на сайт и не участвует в голосовании</p>
-                    {% else %}
-                        <div id="ProjectVoteForm" data-id="{{ work.id }}"
-                             data-vote="{{ vote is defined and vote ? vote.vote : 0 }}"
-                            >
-                            <div class="ProjectVote ActiveVoting">
-                                <div class="ProjectStar">
-                                    <div class="ProjectStarInner">&nbsp;</div>
-                                </div>
-                            </div>
-                            <div class="Loading"><img src="{{ asset('img/floppy32.png') }}"/></div>
-                            <div id="Saved">Сохранено!</div>
-                            <div class="Clear"></div>
-                            <p class="k-red" id="ErrorMessage" style="display:none">Ошибка!</p>
-                            <p class="k-red">Голосуйте за игру только если вы поиграли в нее!</p>
-                            <p class="k-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
-                            {% if vote is defined and vote %}
-                                <p class="">Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
+        <div class="col-md-12 col-xs-12">
+            <div class="gdp-header-row gdp-border">
+                <div class="gdp-header-row-body">
+                    <img src="{{ asset("upd/img/icon-w.png") }}" />
+                    <span><a href="{{ path('geek_browse', { party: work.party.id }) }}">Работы участников | {{ work.party }}</a></span>
                 </div>
             </div>
-        {% endif %}
 
-        <div class="socialContainerGame">
-            <div id="vk_like_game"></div>
-            <script type="text/javascript">
-                VK.Widgets.Like("vk_like_game", {type:"button",pageImage:"http://gamedevparty.ru/img/logo.png",text:"Игра на GameDevParty — {{ work.name }}"});
-            </script>
-            <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
-            <div class="socialTwitterButton">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru" data-hashtags="gamedevparty" data-text="Игра на GameDevParty — {{ work.name }}">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+            <div id="gdp-party-info">
+                <div class="gdp-party-info-sep"></div>
+                <p id="gdp-party-name">{{ work.name }}</p>
+
+                {# keereal - тут рейтинг как на странице с играми (works) #}
+                <div class="gdp-rating">
+                    <div class="gdp-rating-back"></div>
+                    <div class="gdp-rating-front" style="width: 80px;"></div>
+                    <span>4.7</span>
+                </div>
+
+                {# keereal - ссыль на игру #}
+                <p><a href="#" class="gdp-pixel-link">Play!</a></p>
+
+                {% if is_work_uploaded(work) %}
+                    {{ macros.play_button(work) }}
+                {% else %}
+                    {{ macros.button('Not uploaded', '', 'GrayButton') }}
+                {% endif %}
+
             </div>
-        </div>
 
-        <div style="clear:both;"></div>
-    </div>
-    {{ comments_macros.addComment('project', work.id) }}
-    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+
+            <div class="gdp-entry-content">
+                {{ work.longDescription|purify }}
+
+                <div class="socialContainerGame">
+                    <div id="vk_like_game"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Like("vk_like_game", {type:"button",pageImage:"http://gamedevparty.ru/img/logo.png",text:"Игра на GameDevParty — {{ work.name }}"});
+                    </script>
+                    <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+                    <div class="socialTwitterButton">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru" data-hashtags="gamedevparty" data-text="Игра на GameDevParty — {{ work.name }}">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </div>
+                </div>
+
+
+                <div class="gdp-entry-footer pull-right">
+                    {% if (work.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+                        <p><a href="{{ path('project_edit', {'id': work.id}) }}" class="gdp-admin">[редактировать]</a></p>
+                    {% endif %}
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            {% if work.party == current_party and current_party.projectVotingTime %}
+                <div class="mt26">
+                    <div class="gdp-comment-entry gdp-border">
+                        <div class="gdp-entry-content">
+                            <h4>Голосование за работу</h4>
+
+                            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <p class="gdp-login-warning"> Чтобы голосовать, вам нужно авторизоваться:
+                                    &nbsp;
+                                    <a href="#"><img src="./img/icon-vk.png" /></a>
+                                    <a href="#"><img src="./img/icon-fb.png" /></a>
+                                </p>
+                            {% elseif work.author == current_user %}
+                                <p class="gdp-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>
+                            {% elseif not is_work_uploaded(work) %}
+                                <p class="gdp-red">Работа не была загружена на сайт и не участвует в голосовании</p>
+                            {% else %}
+                                {# keereal - todo: стили для этого блока #}
+                                <div id="ProjectVoteForm" data-id="{{ work.id }}"
+                                        data-vote="{{ vote is defined and vote ? vote.vote : 0 }}"
+                                        >
+                                    <div class="ProjectVote ActiveVoting">
+                                        <div class="ProjectStar">
+                                            <div class="ProjectStarInner">&nbsp;</div>
+                                        </div>
+                                    </div>
+                                    <div class="Loading"><img src="{{ asset('img/floppy32.png') }}"/></div>
+                                    <div id="Saved">Сохранено!</div>
+                                    <div class="Clear"></div>
+                                    <p class="gdp-red" id="ErrorMessage" style="display:none">Ошибка!</p>
+                                    <p class="gdp-red">Голосуйте за игру только если вы поиграли в нее!</p>
+                                    <p class="gdp-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
+                                    {% if vote is defined and vote %}
+                                        <p class="">Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
+                                    {% endif %}
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
 
         </div>
     </div>
 </div>
+
+    {{ comments_macros.addComment('project', work.id) }}
+    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
 
 {% endblock %}

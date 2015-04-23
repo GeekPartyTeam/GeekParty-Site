@@ -16,13 +16,12 @@ h1, h2, h3, h4, h5, h6 {
 
 a.gdp-admin,
 a.gdp-admin:hover,
-a.gdp-admin:visited {
-  color: #d1443b; }
+a.gdp-admin:visited,
+.gdp-red {
+  color: #d1443b !important; }
 
 a.gdp-pixel-link,
 button.gdp-pixel-link {
-  margin: 10px 0 0 0;
-  display: inline-block;
   font: 36px/36px "pixel_font" !important;
   color: #ffd02e !important;
   text-align: center;
@@ -30,7 +29,7 @@ button.gdp-pixel-link {
   background: none; }
 
 button.gdp-pixel-link:hover {
-  text-decoration: underline; }
+  border-bottom: 2px solid #ffd02e; }
 
 .gdp-news-header {
   background: url("../img/icon-news.png") 0 4px no-repeat;

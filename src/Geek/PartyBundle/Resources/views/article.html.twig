@@ -19,7 +19,7 @@
 
 {% if entity.poll is not null %}
     {% set didntVote = app.request.cookies.get('prism_poll_' ~ entity.poll.id) is null %}
-    <div class="Clear">
+    <div class="">
         <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
             <input type="hidden" name="poll" value="{{ entity.poll.id }}"/>
             <h4>{{ entity.poll.name }}</h4>
@@ -33,31 +33,32 @@
                 </div>
             {% endfor %}
 
-            <div>
-                <p>Проголосовало: {{ entity.poll.votes }}
-                    {% transchoice entity.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
-            </div>
-
+            <p>Проголосовало: {{ entity.poll.votes }} {% transchoice entity.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
 
             {% if didntVote %}
                 {{ macros.submit('Проголосовать') }}
             {% else %}
-                Вы уже принимали участие в этом голосовании
+                <p>Вы уже принимали участие в этом голосовании</p>
             {% endif %}
-            <br/>
-            <br/>
+
         </form>
     </div>
 {% endif %}
     <div class="clearfix"></div>
     <div class="gdp-entry-footer pull-right">
 
-        {# articleLink #}
-
-        {{ entryPage | raw }}
+        {# keereal #}
+        {# когда это страница одной новости (не главная)  #}
+        {# надо спрятать ссылки "читать дальше" и "комментарии" #}
+        {# а когда на главной, добавить счетчик комментариев #}
 
         <a href="#" class="gdp-link-more">Читать дальше</a>
         <a href="#" class="gdp-link-comments">Комментарии (10)</a>
+
+        {# и еще, если это страница новости - то #}
+        {# спрятать  <div class="gdp-entry-separator"></div> внизу который#}
+        {# keereal #}
+
     </div>
     <div class="clearfix"></div>
 </div>

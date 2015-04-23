@@ -5,75 +5,87 @@
 {% block main %}
     <link rel="stylesheet" type="text/css" href="/css/rome.min.css"/>
 
-    <p><a href="{{ path('admin_parties') }}">&larr; назад к списку</a></p>
-    <div class="PartyEdit">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
 
-        {% if entity.id %}
-            {% set action = path('admin_parties', { 'action': 'update', 'id': entity.id }) %}
-        {% else %}
-            {% set action = path('admin_parties', { 'action': 'update' }) %}
-        {% endif %}
-        <form class="Form" action="{{ action }}" method="post" {{ form_enctype(edit_form) }}>
-            {{ form_errors(edit_form) }}
-            <div class="teamEditorControlBlock">
-                <h3>Идентификатор</h3>
-                <p class="inputLabel">Будет использоваться в URL, так что избегайте странных символов</p>
-                {{ form_widget(edit_form.id) }}
-            </div>
-            {{ form_row(edit_form.description) }}
-            <br/>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.themeSubmissionStartTime) }}
-                </div>
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.themeSubmissionEndTime) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.themeVotingStartTime) }}
-                </div>
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.themeVotingEndTime) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.startTime) }}
-                </div>
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.endTime) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.projectVotingStartTime) }}
-                </div>
-                <div class="col-md-6 text-center">
-                    {{ form_row(edit_form.projectVotingEndTime) }}
+            <div class="gdp-header-row gdp-border">
+                <div class="gdp-header-row-body">
+                    <img src="{{ asset("upd/img/icon-w.png") }}" />
+                        <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | <a href="{{ path('admin_parties') }}">Геймджемы</a> | [НАЗВАНИЕ ПАТИ ТУТ] </span>
                 </div>
             </div>
 
-            <p>
-                {{ macros.submit("Сохранить") }}
-                {% if delete_form is defined %}
-                    <span class="k-inline">
-                        {{ macros.button("Удалить", "", "k-red RemoveButton") }}
-                    </span>
+            <div class="gdp-entry-content">
+
+                {% if entity.id %}
+                    {% set action = path('admin_parties', { 'action': 'update', 'id': entity.id }) %}
+                {% else %}
+                    {% set action = path('admin_parties', { 'action': 'update' }) %}
                 {% endif %}
-            </p>
-            {{ form_rest(edit_form) }}
-        </form>
+                <form class="Form" action="{{ action }}" method="post" {{ form_enctype(edit_form) }}>
+                    {{ form_errors(edit_form) }}
+                    <div class="teamEditorControlBlock">
+                        <h3>Идентификатор</h3>
+                        <p class="inputLabel">Будет использоваться в URL, так что избегайте странных символов</p>
+                        {{ form_widget(edit_form.id) }}
+                    </div>
+                    {{ form_row(edit_form.description) }}
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.themeSubmissionStartTime) }}
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.themeSubmissionEndTime) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.themeVotingStartTime) }}
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.themeVotingEndTime) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.startTime) }}
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.endTime) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.projectVotingStartTime) }}
+                        </div>
+                        <div class="col-md-6 text-center">
+                            {{ form_row(edit_form.projectVotingEndTime) }}
+                        </div>
+                    </div>
+
+                    <p>
+                        {{ macros.submit("Сохранить") }}
+                        {% if delete_form is defined %}
+                            <span class="k-inline">
+                                {{ macros.button("Удалить", "", "k-red RemoveButton") }}
+                            </span>
+                        {% endif %}
+                    </p>
+                    {{ form_rest(edit_form) }}
+                </form>
+
+                {% if delete_form is defined %}
+                    <form class="RemoveForm"
+                          action="{{ path('admin_parties', { 'action': 'delete', 'id': entity.id }) }}"
+                          method="post">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
     </div>
-    <div>
-        {% if delete_form is defined %}
-            <form class="RemoveForm"
-                  action="{{ path('admin_parties', { 'action': 'delete', 'id': entity.id }) }}"
-                  method="post">
-            </form>
-        {% endif %}
-    </div>
+
     <script type="application/javascript" src="/js/moment-with-locales.min.js"></script>
     <script type="application/javascript" src="/js/rome.min.js"></script>
 
@@ -93,6 +105,7 @@
             $('.RemoveForm').submit();
         });
     </script>
+</div>
 
 {{ tinymce_init() }}
 {% endblock %}

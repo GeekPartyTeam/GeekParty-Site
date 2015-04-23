@@ -14,6 +14,30 @@
     <div class="row">
         <div class="col-md-12">
 
+            <div class="gdp-header-row gdp-border">
+                <div class="gdp-header-row-body gdp-js-center">
+                    <img src="{{ asset("upd/img/icon-w.png") }}" />
+                    <span>Работы участников</span>
+
+                    <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
+                        {% for p in parties %}
+                        {#keereal - надо узнать какое пати выбрано и добавить соотв элементу option метку selected ! #}
+                        <option value="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            {# kereel тут нужно название пати, дата, колво работ !!!#}
+            <div id="gdp-party-info">
+                <div class="gdp-party-info-sep"></div>
+                <p id="gdp-party-name">Бесполезные суперспособности</p>
+                <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
+                <p id="gdp-party-amount">Работ: <span>26</span></p>
+                <div class="gdp-party-info-sep"></div>
+            </div>
+
+
             {% if text.body is not null %}
                 <div class="gdp-raw">
                     {{ text.body|raw }}
@@ -22,34 +46,8 @@
             {% endif %}
 
 
-            <div class="gdp-header-row gdp-border">
-                <div class="gdp-header-row-body gdp-js-center">
-                    <img src="./img/icon-w.png" />
-                    <span>Работы участников</span>
-
-                    {#keereal - надо узнать какое пати выбрано! #}
-                    <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
-                        {% for p in parties %}
-                        <option value="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-
-            {# kereel тут нужно название пати, дата, колво работ !!!#}
-
-            {#<div id="gdp-party-info">
-                <div class="gdp-party-info-sep"></div>
-                <p id="gdp-party-name">Бесполезные суперспособности</p>
-                <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
-                <p id="gdp-party-amount">Работ: <span>26</span></p>
-                <div class="gdp-party-info-sep"></div>
-            </div>#}
-
             {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
-
             {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}
-
         </div>
     </div>
 </div>
