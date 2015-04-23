@@ -108,11 +108,14 @@
                 </div>
             {% endif %}
 
+
+            <div class="mt26">
+                {{ comments_macros.addComment('project', work.id) }}
+                {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
+            </div>
+
         </div>
     </div>
 </div>
-
-    {{ comments_macros.addComment('project', work.id) }}
-    {% include 'GeekPartyBundle::_comments/include_comments.html.twig' with comments %}
 
 {% endblock %}
