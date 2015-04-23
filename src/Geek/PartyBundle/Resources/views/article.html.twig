@@ -5,7 +5,7 @@
 <div class="">
     <div class="gdp-news-header">
         <p class="gdp-entry-title">
-            {{ entity.title }}&nbsp;
+            <a href="{{ entryPage }}">{{ entity.title }}</a>&nbsp;
             {% if is_owner_or_admin(entity.author) %}
                 <a class="gdp-admin" href="{{ path('_edit_article', {'action':'edit', 'id':entity.id}) }}">[править]</a>
             {% endif %}
@@ -45,25 +45,14 @@
     </div>
 {% endif %}
     <div class="clearfix"></div>
-    <div class="gdp-entry-footer pull-right">
-
-        {# keereal #}
-        {# когда это страница одной новости (не главная)  #}
-        {# надо спрятать ссылки "читать дальше" и "комментарии" #}
-        {# а когда на главной, добавить счетчик комментариев #}
-
-        <a href="#" class="gdp-link-more">Читать дальше</a>
-        <a href="#" class="gdp-link-comments">Комментарии (10)</a>
-
-        {# и еще, если это страница новости - то #}
-        {# спрятать  <div class="gdp-entry-separator"></div> внизу который#}
-        {# keereal #}
-
-    </div>
+    {% if article_links is defined %}
+        <div class="gdp-entry-footer pull-right">
+            <a href="{{ entryPage }}" class="gdp-link-more">Читать дальше</a>
+            <a href="{{ entryPage }}#comments" class="gdp-link-comments">Комментарии ({{ entity.comments|length }})</a>
+        </div>
+    {% endif %}
     <div class="clearfix"></div>
 </div>
-
-<div class="gdp-entry-separator"></div>
 
 
 

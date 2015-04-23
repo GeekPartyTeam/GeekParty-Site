@@ -14,14 +14,17 @@
     {% set partyId = entry.party is not null ? entry.party.id : null %}
     {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
 
-
     <div class="gdp-work gdp-border">
         <div class="gdp-work-header">
-            <p class="gdp-work-name">{{ entry.name }}</p>
+            <p class="gdp-work-name"><a href="{{ entryPage }}">{{ entry.name }}</a></p>
 
-            {# keereal тут нужно имя пользователя в таком формате #}
-            <p class="grp-work-author">by Имя автора @2015-02-06 21:03:20</p>
-            {# keereal #}
+            {% set userPage = entry.author ? path('geek_party_user_show', { id: entry.author.id }) : '' %}
+            {% set userName = entry.author ? entry.author.fullname : 'UFO' %}
+
+            <p class="grp-work-author">
+                by <a {% if entry.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
+                @{{ entry.time|date("Y-m-d H:i:s") }}
+            </p>
 
         </div>
         <div class="gdp-work-sidebar">
@@ -31,30 +34,30 @@
                         class="gdp-work-image">
             </div>
 
-            {% if entry.party.ended %}
-                {% set rating = calculate_project_rating(entry) %}
-                <div class="gdp-rating">
-                    <div class="gdp-rating-back"></div>
-                    <div class="gdp-rating-front"
-                            style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
-                    <span>{{ rating|round(1)|number_format(1) }}</span>
-                </div>
-            {% endif %}
+            {{ _self.rating(entry) }}
         </div>
-        <p>{{ entry.description }}.</p>
+        <p>{{ entry.description }}</p>
 
         <div class="clearfix"></div>
         <div class="gdp-entry-footer pull-right">
             <a href="{{ entryPage }}" class="gdp-link-more">Читать дальше</a>
-
-            {# keereal - ссылка на комменты #}
-            <a href="#" class="gdp-link-comments">Комментарии</a>
-
+            <a href="{{ entryPage }}#comments" class="gdp-link-comments">Комментарии</a>
             {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
                 <a href="{{ path('project_edit', {'id': entry.id}) }}" class="gdp-admin">Редактировать</a>
             {% endif %}
-
         </div>
         <div class="clearfix"></div>
     </div>
+{% endmacro %}
+
+{% macro rating(entry) %}
+    {% if entry.party.ended %}
+        {% set rating = calculate_project_rating(entry) %}
+        <div class="gdp-rating">
+            <div class="gdp-rating-back"></div>
+            <div class="gdp-rating-front"
+                    style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
+            <span>{{ rating|round(1)|number_format(1) }}</span>
+        </div>
+    {% endif %}
 {% endmacro %}

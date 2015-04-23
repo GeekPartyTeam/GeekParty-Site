@@ -45,6 +45,7 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
             , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
             , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
+            , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
         ];
     }
 
@@ -107,5 +108,10 @@ class GeekExtension extends \Twig_Extension
         }
 
         return $ratings[$project->getId()];
+    }
+
+    public function formatDate(\DateTime $date)
+    {
+        return $date->format('Y-m-d H:i');
     }
 }

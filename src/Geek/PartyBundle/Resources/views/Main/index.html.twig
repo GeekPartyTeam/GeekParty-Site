@@ -65,7 +65,10 @@
 
 
                 {% for article in articles.entities %}
-                    {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
+                    {% include 'GeekPartyBundle::article.html.twig' with {'entity':article, 'article_links': true} %}
+                    {% if not loop.last %}
+                        <div class="gdp-entry-separator"></div>
+                    {% endif %}
                 {% endfor %}
 
                 {% include "@GeekParty/_comments/pagination.html.twig" with articles %}

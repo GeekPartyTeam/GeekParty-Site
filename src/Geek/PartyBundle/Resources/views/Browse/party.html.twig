@@ -21,29 +21,29 @@
 
                     <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">
                         {% for p in parties %}
-                        {#keereal - надо узнать какое пати выбрано и добавить соотв элементу option метку selected ! #}
-                        <option value="{{ path('geek_browse', { party: p.id }) }}">{{ p.id | upper }}</option>
+                        <option value="{{ path('geek_browse', { party: p.id }) }}" {% if party.id == p.id %}selected="selected"{% endif %}>
+                            {{ p.id | upper }}
+                        </option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
 
-            {# kereel тут нужно название пати, дата, колво работ !!!#}
             <div id="gdp-party-info">
                 <div class="gdp-party-info-sep"></div>
-                <p id="gdp-party-name">Бесполезные суперспособности</p>
-                <p id="gdp-party-time">Начало: <span>12/03/2015</span> / Конец: <span>12/03/2015</span></p>
-                <p id="gdp-party-amount">Работ: <span>26</span></p>
+                <p id="gdp-party-name">{{ party.name }}</p>
+                <p id="gdp-party-time">Начало: <span>{{ format_date(party.startTime) }}</span> / Конец: <span>{{ format_date(party.endTime) }}</span></p>
+                <p id="gdp-party-amount">Работ: <span>{{ works|length }}</span></p>
                 <div class="gdp-party-info-sep"></div>
             </div>
 
 
-            {% if text.body is not null %}
-                <div class="gdp-raw">
+            <div class="gdp-raw">
+                {% if text.body is not null %}
                     {{ text.body|raw }}
-                    {{ party.description|raw }}
-                </div>
-            {% endif %}
+                {% endif %}
+                {{ party.description|raw }}
+            </div>
 
 
             {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works} %}
