@@ -116,8 +116,11 @@ class GeekExtension extends \Twig_Extension
         return $ratings[$project->getId()];
     }
 
-    public function formatDate(\DateTime $date)
+    public function formatDate($date)
     {
+        if (!is_object($date)) {
+            $date = new \DateTime($date);
+        }
         return $date->format('Y-m-d H:i');
     }
 }

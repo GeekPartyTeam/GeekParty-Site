@@ -95,7 +95,9 @@ button.gdp-pixel-link:hover {
 
 .gdp-entry-separator {
   border-bottom: 1px solid #6cdeff;
-  margin: 26px 0 14px 0; }
+  margin: 26px 0 14px 0;
+  clear:both;
+}
 
 .gdp-comment-entry {
   padding: 16px;

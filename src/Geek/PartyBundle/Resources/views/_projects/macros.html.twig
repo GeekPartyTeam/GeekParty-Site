@@ -23,7 +23,7 @@
 
             <p class="grp-work-author">
                 by <a {% if entry.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
-                @{{ entry.time|date("Y-m-d H:i:s") }}
+                @{{ format_date(entry.time) }}
             </p>
 
         </div>
@@ -51,7 +51,7 @@
 {% endmacro %}
 
 {% macro rating(entry) %}
-    {% if entry.party.ended %}
+    {% if entry.party.projectVotingTime %}
         {% set rating = calculate_project_rating(entry) %}
         <div class="gdp-rating">
             <div class="gdp-rating-back"></div>
