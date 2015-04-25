@@ -119,6 +119,8 @@ hwi_oauth:
             client_id:           %fb_app_id%
             client_secret:       %fb_secret%
             scope:               email
+            options:
+                display: page
         vkontakte:
             type:                vkontakte
             client_id:           %vk_app_id%

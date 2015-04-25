@@ -86,6 +86,12 @@ class User extends BaseUser
      */
     public $vkontakteId = '';
 
+    /**
+     * @var array
+     * @ORM\Column(name="roles", type="array")
+     */
+    protected $roles;
+
     public function serialize()
     {
         $parent = parent::serialize();
