@@ -40,6 +40,7 @@ class GeekExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('is_owner_or_admin', [$this, 'isOwnerOrAdmin'])
+            , new \Twig_SimpleFunction('is_authorised', [$this, 'isAuthorised'])
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
@@ -61,6 +62,11 @@ class GeekExtension extends \Twig_Extension
     public function isAdmin()
     {
         return $this->context->isGranted('ROLE_ADMIN');
+    }
+
+    public function isAuthorised()
+    {
+        return $this->context->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
     public function isWorkUploaded(Work $work)

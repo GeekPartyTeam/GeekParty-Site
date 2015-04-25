@@ -56,8 +56,8 @@
                     <div class="gdp-header-row-body gdp-js-center">
                     <span>
                         Лента новостей&nbsp;
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[править]</a>
+                        {% if is_authorised() %}
+                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[добавить новость]</a>
                         {% endif %}
                     </span>
                     </div>

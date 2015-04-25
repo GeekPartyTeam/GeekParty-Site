@@ -6,9 +6,6 @@
 
 {% block main %}
 
-
-
-
 <div class="container">
     <!-- NEWS -->
     <div class="row">
@@ -26,6 +23,12 @@
                         </option>
                         {% endfor %}
                     </select>
+
+                    {% if is_admin() %}
+                        <a class="gdp-admin" href="{{ path('admin_parties', { 'action': 'edit', 'id': party.id }) }}">[править]</a>
+                    {% else %}
+                        Not admin
+                    {% endif %}
                 </div>
             </div>
 
