@@ -107,7 +107,7 @@ exercise_html_purifier:
           p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src],
           h1,h2,h3,h4,h5,br
         HTML.SafeIframe: true
-        URI.SafeIframeRegexp: $youtube.com/embed/$
+        URI.SafeIframeRegexp: $(youtube.com/embed|w.soundcloud.com)$
 
 hwi_oauth:
     connect:
