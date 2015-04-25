@@ -10,7 +10,12 @@
                 <a class="gdp-admin" href="{{ path('_edit_article', {'action':'edit', 'id':entity.id}) }}">[править]</a>
             {% endif %}
         </p>
-        <p class="gdp-entry-subtitle">by {{ entity.author.fullname }} @{{ entity.time|date("Y-m-d H:i:s") }}</p>
+        <p class="gdp-entry-subtitle">
+            {% set userPage = entity.author ? path('geek_party_user_show', { id: entity.author.id }) : '' %}
+            {% set userName = entity.author ? entity.author.fullname : 'UFO' %}
+            by <a {% if entity.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
+            @{{ entity.time|date("Y-m-d H:i:s") }}
+        </p>
     </div>
 
     <div class="gdp-entry-content">
