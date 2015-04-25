@@ -83,7 +83,7 @@ stfalcon_tinymce:
 exercise_html_purifier:
     default:
         HTML.Allowed: >
-          p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src],
+          p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src|width|height|scrolling|frameborder],
           h1,h2,h3,h4,h5,br
         HTML.SafeIframe: true
         URI.SafeIframeRegexp: $(youtube.com/embed|w.soundcloud.com)$
