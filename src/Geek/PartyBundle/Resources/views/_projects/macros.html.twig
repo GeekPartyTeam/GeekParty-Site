@@ -7,7 +7,7 @@
     <img src="{{ self.project_icon_url(entry) }}" alt="{{ entry.name }}"/>
 {% endmacro %}
 
-{% macro project_block(entry, current_user) %}
+{% macro project_block(entry, current_user, show_rating) %}
     {% import 'GeekPartyBundle::_comments/macros.html.twig' as comments %}
     {% import _self as self %}
 
@@ -34,7 +34,9 @@
                         class="gdp-work-image">
             </div>
 
-            {{ _self.rating(entry) }}
+            {% if show_rating %}
+                {{ _self.rating(entry) }}
+            {% endif %}
         </div>
         <p>{{ entry.description }}</p>
 
