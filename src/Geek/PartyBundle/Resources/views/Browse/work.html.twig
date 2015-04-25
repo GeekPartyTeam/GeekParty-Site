@@ -58,7 +58,13 @@
         <div class="socialContainerGame">
             <div id="vk_like_game"></div>
             <script type="text/javascript">
-                VK.Widgets.Like("vk_like_game", {type:"button",pageImage:"http://gamedevparty.ru/img/logo.png",text:"Игра на GameDevParty — {{ work.name }}"});
+                VK.Widgets.Like("vk_like_game", {
+			type: "button",
+			pageTitle: "{{ work.name }}",
+			pageDescription: "Игра {{ work.name }} на {{ work.party.name }}",
+			pageImage: "http://gamedevparty.ru/works/{{ work.party.id|url_encode }}/{{ work.id }}_icon.png",
+			text: "Игра {{ work.name }} на {{ work.party.name }}"
+		}, {{ work.id }}00 );
             </script>
             <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
             <div class="socialTwitterButton">
