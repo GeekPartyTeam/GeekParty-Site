@@ -44,7 +44,7 @@
                         <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>
                             {% if new is not defined %}
-                                {{ projects.icon(entry) }}
+                                {{ projects.project_icon(entity) }}
                             {% endif %}
                             <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
                             {{ form_widget(edit_form.icon) }}
