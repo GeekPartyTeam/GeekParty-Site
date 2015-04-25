@@ -15,6 +15,9 @@
     <div class="col-md-6 col-xs-12">
         {{ macros_project.project_block(entry, current_user, show_rating is defined) }}
     </div>
+    {% if loop.index % 2 == 0 %}
+        <div style="clear:both"></div>
+    {% endif %}
 {% endfor %}
 
 {% if uploaded|length == 0 %}
@@ -30,5 +33,8 @@
         <div class="col-md-6 col-xs-12">
             {{ macros_project.project_block(entry, current_user, show_rating is defined) }}
         </div>
+        {% if loop.index % 2 == 0 %}
+            <div style="clear:both"></div>
+        {% endif %}
 	{% endfor %}
 {% endif %}
