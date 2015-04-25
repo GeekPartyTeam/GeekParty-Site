@@ -64,7 +64,6 @@ button.gdp-pixel-link:hover {
   padding: 0; }
 .gdp-raw img,
 .gdp-entry-content img {
-  float: left;
   padding: 10px 24px 10px 0;
   max-width: 600px; }
 .gdp-raw .gdp-login-warning,
