@@ -40,11 +40,13 @@ class GeekExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('is_owner_or_admin', [$this, 'isOwnerOrAdmin'])
+            , new \Twig_SimpleFunction('is_authorised', [$this, 'isAuthorised'])
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
             , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
             , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
+            , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
         ];
     }
 
@@ -60,6 +62,11 @@ class GeekExtension extends \Twig_Extension
     public function isAdmin()
     {
         return $this->context->isGranted('ROLE_ADMIN');
+    }
+
+    public function isAuthorised()
+    {
+        return $this->context->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
     public function isWorkUploaded(Work $work)
@@ -107,5 +114,13 @@ class GeekExtension extends \Twig_Extension
         }
 
         return $ratings[$project->getId()];
+    }
+
+    public function formatDate($date)
+    {
+        if (!is_object($date)) {
+            $date = new \DateTime($date);
+        }
+        return $date->format('Y-m-d H:i');
     }
 }

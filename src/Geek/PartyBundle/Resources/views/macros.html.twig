@@ -40,11 +40,15 @@
     <button class="gdp-pixel-link {{ class }}">{{ text }}</button>
 {% endmacro %}
 
+{% macro play_link(work) %}
+    {{ '/works/' ~ (work.party.id|url_encode) ~ '/' ~ work.id ~ '/index.html'}}
+{% endmacro %}
+
 {% macro play_button(work) %}
     {% set class = '' %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <a target="_blank" href="{{ '/works/' ~ (work.party.id|url_encode) ~ '/' ~ work.id ~ '/index.html' }}">Play</a>
+            <a target="_blank" href="{{ _self.play_link(work) }}">Play</a>
         {% endblock %}
     {% endembed %}
 {% endmacro %}

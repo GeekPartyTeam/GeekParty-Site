@@ -2,6 +2,7 @@
 
 {% import 'GeekPartyBundle::macros.html.twig' as macros %}
 {% import 'GeekPartyBundle::_comments/macros.html.twig' as comments_macros %}
+{% import 'GeekPartyBundle::_projects/macros.html.twig' as projects_macros %}
 
 {% block title %} {{ parent() }} :: {{ work.name }} {% endblock %}
 
@@ -23,27 +24,20 @@
                 <div class="gdp-party-info-sep"></div>
                 <p id="gdp-party-name">{{ work.name }}</p>
 
-                {# keereal - тут рейтинг как на странице с играми (works) #}
-                <div class="gdp-rating">
-                    <div class="gdp-rating-back"></div>
-                    <div class="gdp-rating-front" style="width: 80px;"></div>
-                    <span>4.7</span>
-                </div>
+                {{ projects_macros.rating(work) }}
 
-                {# keereal - ссыль на игру #}
-                <p><a href="#" class="gdp-pixel-link">Play!</a></p>
-
-                {% if is_work_uploaded(work) %}
-                    {{ macros.play_button(work) }}
-                {% else %}
-                    {{ macros.button('Not uploaded', '', 'GrayButton') }}
-                {% endif %}
-
+                <p>
+                    {% if is_work_uploaded(work) %}
+                        <a href="{{ macros.play_link(work) }}" class="gdp-pixel-link">Play!</a>
+                    {% else %}
+                        <a href="#" class="gdp-pixel-link">Not uploaded</a>
+                    {% endif %}
+                </p>
             </div>
 
 
             <div class="gdp-entry-content">
-                {{ work.longDescription|purify }}
+                <p>{{ work.longDescription|purify|raw }}</p>
 
                 <div class="socialContainerGame">
                     <div id="vk_like_game"></div>

@@ -104,10 +104,10 @@ stfalcon_tinymce:
 exercise_html_purifier:
     default:
         HTML.Allowed: >
-          p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src],
+          p[style],em,strong,ul,ol,li,a[href],img[src],span[style],sup,sub,table,tbody,tr,td,th,iframe[src|width|height|scrolling|frameborder],
           h1,h2,h3,h4,h5,br
         HTML.SafeIframe: true
-        URI.SafeIframeRegexp: $youtube.com/embed/$
+        URI.SafeIframeRegexp: $(youtube.com/embed|w.soundcloud.com)$
 
 hwi_oauth:
     connect:
@@ -119,6 +119,8 @@ hwi_oauth:
             client_id:           %fb_app_id%
             client_secret:       %fb_secret%
             scope:               email
+            options:
+                display: page
         vkontakte:
             type:                vkontakte
             client_id:           %vk_app_id%

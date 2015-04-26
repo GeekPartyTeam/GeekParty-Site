@@ -56,8 +56,8 @@
                     <div class="gdp-header-row-body gdp-js-center">
                     <span>
                         Лента новостей&nbsp;
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[править]</a>
+                        {% if is_authorised() %}
+                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[добавить новость]</a>
                         {% endif %}
                     </span>
                     </div>
@@ -65,7 +65,10 @@
 
 
                 {% for article in articles.entities %}
-                    {% include 'GeekPartyBundle::article.html.twig' with {'entity':article} %}
+                    {% include 'GeekPartyBundle::article.html.twig' with {'entity':article, 'article_links': true} %}
+                    {% if not loop.last %}
+                        <div class="gdp-entry-separator"></div>
+                    {% endif %}
                 {% endfor %}
 
                 {% include "@GeekParty/_comments/pagination.html.twig" with articles %}

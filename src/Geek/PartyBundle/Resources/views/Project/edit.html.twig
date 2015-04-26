@@ -6,10 +6,7 @@
 {% block title %} {{ parent() }} :: Редактирование проекта {% endblock %}
 
 {% block main %}
-    <div class="briefLine">
-        <div class="briefImage">
-            <img src="/img/team/edit_team.png" alt="edit" />
-        </div>
+    <div class="container">
         <div class="briefDescription">
             <p><a href="{{ path('project') }}">&larr; назад к списку</a></p>
             <h2 class="inlineBlock">Редактирование проекта</h2>
@@ -19,7 +16,7 @@
                   action="{%if new is not defined %}{{ path('project_update', { 'id': entity.id }) }}{% else %}{{ path('project_create') }}{% endif %}"
                   method="post" {{ form_enctype(edit_form) }}>
                 <div>
-                    {{ current_party }}
+                    <p>{{ current_party }}</p>
                     {{ form_errors(edit_form) }}
                     {{ form_widget(edit_form.id) }}
 
@@ -47,7 +44,7 @@
                         <div class="teamEditorControlBlock">
                             <h3>Иконка</h3>
                             {% if new is not defined %}
-                                {{ projects.icon(entry) }}
+                                {{ projects.project_icon(entity) }}
                             {% endif %}
                             <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
                             {{ form_widget(edit_form.icon) }}
@@ -55,9 +52,9 @@
 
                         <div class="teamEditorControlBlock">
                             <h3>ZIP-архив с игрой</h3>
-                            <p class="inputLabel">Архив должен содержать файл <span class="k-red">index.html</span> в корне.
-                                Размер архива не должен превышать <span class="k-red">50 Мб</span></p>
-                            <p class="k-red">Будьте внимательны, архив должен содержать файл index.html в корне, а не внутри папки</p>
+                            <p class="inputLabel">Архив должен содержать файл <span class="gdp-red">index.html</span> в корне.
+                                Размер архива не должен превышать <span class="gdp-red">50 Мб</span></p>
+                            <p class="gdp-red">Будьте внимательны, архив должен содержать файл index.html в корне, а не внутри папки</p>
 
                             {{ form_widget(edit_form.file) }}
                         </div>
@@ -78,7 +75,7 @@
                                 <div class="k-inline">
                                     {{ form_widget(delete_form) }}
                                 </div>
-                                {{ macros.submit("Удалить", "k-red") }}
+                                {{ macros.submit("Удалить", "gdp-red") }}
                             {% endif %}
                         </p>
                     </div>
