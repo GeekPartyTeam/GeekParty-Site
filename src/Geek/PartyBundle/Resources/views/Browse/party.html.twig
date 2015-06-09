@@ -38,14 +38,12 @@
                 <div class="gdp-party-info-sep"></div>
             </div>
 
-
             <div class="gdp-raw">
                 {% if text.body is not null %}
                     {{ text.body|raw }}
                 {% endif %}
                 {{ party.description|raw }}
             </div>
-
 
             {% include 'GeekPartyBundle::_projects/list.html.twig' with {'projects': works, 'show_rating': true} %}
             {% include 'GeekPartyBundle::_comments/include_links.html.twig' %}

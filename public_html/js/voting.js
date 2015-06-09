@@ -1,12 +1,14 @@
 function StarVote(voteValue, $stars, $vote)
 {
+    var STAR_WIDTH = 23.6;
+
     var onchange = null;
     this.change = function (callback) {
         onchange = callback;
     };
 
     function setStars(stars) {
-        $stars.css('width', '' + 32 * Math.floor(stars) + 'px');
+        $stars.css('width', '' + STAR_WIDTH * Math.floor(stars) + 'px');
     }
 
     setStars(voteValue);
@@ -18,16 +20,17 @@ function StarVote(voteValue, $stars, $vote)
     })
 
     .mousemove(function (e) {
+        var x = e.pageX - $(this).offset().left;
         if (!changing) {
             return;
         }
-        var x = e.pageX - $(this).offset().left;
-        setStars(1 + x / 32);
+        var y = 1 + x / STAR_WIDTH;
+        setStars(y);
     })
 
     .click(function (e) {
         var x = e.pageX - $(this).offset().left;
-        voteValue = Math.floor(1 + x / 32);
+        voteValue = Math.floor(1 + x / STAR_WIDTH);
         onchange && onchange(voteValue);
         changing = false;
         setStars(voteValue);
@@ -39,23 +42,28 @@ function StarVote(voteValue, $stars, $vote)
 }
 
 !function () {
+    var $form = $('#ProjectVoteForm');
+
     //noinspection JSUnresolvedVariable
-    if ($('.ActiveVoting').length == 0 || typeof(saveVoteUrl) == 'undefined') {
+    if ($form.length == 0 || typeof(saveVoteUrl) == 'undefined') {
         return;
     }
 
-    var $form = $('#ProjectVoteForm'),
-        voteValue = $form.data('vote'),
+    var voteValue = $form.data('vote'),
         projectId = $form.data('id')
     ;
 
-    var voterWidget = new StarVote(voteValue, $('.ProjectStarInner'), $('.ProjectStar'));
+    var voterWidget = new StarVote(voteValue,
+        $form.find('.gdp-rating-front'),
+        $form.find('.gdp-rating-back')
+    );
+
     voterWidget.change(function (v) {
         voteValue = v;
         var blinkInterval,
             $floppy = $('.Loading').show(),
             $errorMessage = $('#ErrorMessage').hide(),
-            $saved = $('#Saved').hide()
+            $saved = $('#SavedMessage').hide()
         ;
 
         //noinspection JSUnresolvedVariable

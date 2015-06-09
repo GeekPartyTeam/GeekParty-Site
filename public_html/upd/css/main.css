@@ -60,6 +60,10 @@ button.gdp-pixel-link:hover {
   color: white;
 }
 
+.SavedMessage, .Loading {
+  display: none;
+}
+
 .gdp-raw form .checkbox,
 .gdp-entry-content form .checkbox {
   padding: 0 0 0 16px;

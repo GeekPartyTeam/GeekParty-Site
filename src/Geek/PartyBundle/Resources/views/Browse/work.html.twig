@@ -68,6 +68,7 @@
                         <div class="gdp-entry-content">
                             <h4>Голосование за работу</h4>
 
+                            {# TODO: auth macro #}
                             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <p class="gdp-login-warning"> Чтобы голосовать, вам нужно авторизоваться:
                                     &nbsp;
@@ -79,23 +80,27 @@
                             {% elseif not is_work_uploaded(work) %}
                                 <p class="gdp-red">Работа не была загружена на сайт и не участвует в голосовании</p>
                             {% else %}
-                                {# keereal - todo: стили для этого блока #}
-                                <div id="ProjectVoteForm" data-id="{{ work.id }}"
-                                        data-vote="{{ vote is defined and vote ? vote.vote : 0 }}"
-                                        >
-                                    <div class="ProjectVote ActiveVoting">
-                                        <div class="ProjectStar">
-                                            <div class="ProjectStarInner">&nbsp;</div>
+                                {% set v = vote is defined and vote ? vote.vote : 0 %}
+                                <div id="ProjectVoteForm"
+                                        data-id="{{ work.id }}"
+                                        data-vote="{{ v }}"
+                                    >
+                                    <div class="gdp-rating">
+                                        <div class="gdp-rating-back">
+                                        <div class="gdp-rating-front"
+                                                style="width: {{ 23.6 * v }}px" title="{{ v }}"></div>
                                         </div>
+                                        <span class="VoteValue">{{ v|round(1)|number_format(1) }}</span>
                                     </div>
-                                    <div class="Loading"><img src="{{ asset('img/floppy32.png') }}"/></div>
-                                    <div id="Saved">Сохранено!</div>
+
+                                    <div class="Loading"><img src="{{ asset('img/l.gif') }}"/></div>
+                                    <p class="SavedMessage">Сохранено!</p>
                                     <div class="Clear"></div>
                                     <p class="gdp-red" id="ErrorMessage" style="display:none">Ошибка!</p>
                                     <p class="gdp-red">Голосуйте за игру только если вы поиграли в нее!</p>
                                     <p class="gdp-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
                                     {% if vote is defined and vote %}
-                                        <p class="">Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
+                                        <p>Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
                                     {% endif %}
                                 </div>
                             {% endif %}

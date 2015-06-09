@@ -57,7 +57,7 @@
 {% endmacro %}
 
 {% macro rating(entry) %}
-    {% if entry.party.projectVotingTime %}
+    {% if entry.party.ended %}
         {% set rating = calculate_project_rating(entry) %}
         <div class="gdp-rating">
             <div class="gdp-rating-back"></div>
