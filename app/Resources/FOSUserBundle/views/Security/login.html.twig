@@ -9,19 +9,23 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Требуется авторизация</h2>
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Требуется авторизация</h2>
+            </div>
 
-        <div class="col-md-12 k-entry-block">
-            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                Вам нужно авторизоваться, чтобы продолжить:
-                {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-            {% else %}
-                Ой, у нас сломалась авторизация. Перейдите на главную страницу и попробуйте снова
-            {% endif %}
+            <div class="col-md-12 k-entry-block">
+                <p>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        Вам нужно авторизоваться, чтобы продолжить:
+                        {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                        {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+                    {% else %}
+                        Ой, у нас сломалась авторизация. Перейдите на главную страницу и попробуйте снова
+                    {% endif %}
+                </p>
+            </div>
         </div>
     </div>
 {% endblock fos_user_content %}
