@@ -3,5 +3,9 @@
 {% block title %} {{ parent() }} :: Список комментариев {% endblock %}
 
 {% block main %}
-    {% include 'GeekPartyBundle:_comments:include_comments.html.twig' with {entities: entities, total_count: total_count} %}
+    <div class="container">
+        <div class="row">
+            {% include 'GeekPartyBundle:_comments:include_comments.html.twig' with {entities: entities, total_count: total_count} %}
+        </div>
+    </div>
 {% endblock %}
