@@ -55,6 +55,11 @@ abstract class AbstractComment
     protected $removed = false;
 
     /**
+     * @return string
+     */
+    abstract public function getType();
+
+    /**
      * @return int
      */
     public function getId()

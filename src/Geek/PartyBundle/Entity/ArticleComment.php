@@ -32,4 +32,12 @@ class ArticleComment extends AbstractComment
     {
         $this->article = $article;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return 'article';
+    }
 }

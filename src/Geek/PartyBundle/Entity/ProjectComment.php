@@ -18,7 +18,7 @@ class ProjectComment extends AbstractComment
     protected $project;
 
     /**
-     * @return mixed
+     * @return Work
      */
     public function getProject()
     {
@@ -31,5 +31,13 @@ class ProjectComment extends AbstractComment
     public function setProject($project)
     {
         $this->project = $project;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return 'project';
     }
 }
