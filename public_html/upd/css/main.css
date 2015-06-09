@@ -46,6 +46,10 @@ button.gdp-pixel-link:hover {
   color: #0aa432;
   margin: 0 0 6px 0; }
 
+.gdp-entry-content {
+  display: table-cell;
+}
+
 .gdp-raw form .checkbox,
 .gdp-entry-content form .checkbox {
   padding: 0 0 0 16px;
@@ -100,19 +104,27 @@ button.gdp-pixel-link:hover {
 
 .gdp-comment-entry {
   padding: 16px;
-  margin-bottom: 16px; }
-  .gdp-comment-entry .gdp-comment-header {
-    float: left;
-    padding: 0 16px 0 0; }
-    .gdp-comment-entry .gdp-comment-header .gdp-comment-author {
-      font: 16px/18px "Roboto";
-      margin: 0 0 6px 0;
-      font-weight: bold;
-      color: #ff9b1a; }
-    .gdp-comment-entry .gdp-comment-header .gdp-comment-date {
-      font: 14px/18px "Roboto";
-      color: #0aa432;
-      margin: 0 0 6px 0; }
+  margin-bottom: 16px;
+}
+
+.gdp-comment-entry .gdp-comment-header {
+  /*float: left;*/
+  display: table-cell;
+  padding: 0 16px 0 0;
+}
+
+.gdp-comment-entry .gdp-comment-header .gdp-comment-author {
+  font: 16px/18px "Roboto";
+  margin: 0 0 6px 0;
+  font-weight: bold;
+  color: #ff9b1a;
+}
+
+.gdp-comment-entry .gdp-comment-header .gdp-comment-date {
+  font: 14px/18px "Roboto";
+  color: #0aa432;
+  margin: 0 0 6px 0;
+}
 
 #gdp-header-state-body {
   position: absolute;
