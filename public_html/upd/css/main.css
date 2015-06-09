@@ -50,6 +50,16 @@ button.gdp-pixel-link:hover {
   display: table-cell;
 }
 
+.gdp-info-entry {
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #6cdeff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: white;
+}
+
 .gdp-raw form .checkbox,
 .gdp-entry-content form .checkbox {
   padding: 0 0 0 16px;

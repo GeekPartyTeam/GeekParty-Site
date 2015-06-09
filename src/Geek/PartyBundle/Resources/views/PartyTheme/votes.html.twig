@@ -6,12 +6,13 @@
 {% block title %} {{ parent() }} :: Голосование за тему для следующего геймджема {% endblock %}
 
 {% block main %}
+    <div class="container">
     <div class="row">
        <div class="col-md-12">
            <h2>Голосование за тему для следующего геймджема {{ current_party }}</h2>
        </div>
 
-        <div class="col-md-12 k-entry-block">
+        <div class="col-md-12 gdp-info-entry">
             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                Чтобы голосовать, вам нужно авторизоваться:
                {{ macros.auth_buttons() }}
@@ -27,7 +28,7 @@
 
     {% for t in themes %}
         <div class="row PartyThemeVote">
-            <div class="col-md-6 col-md-offset-3 k-entry-block">
+            <div class="col-md-6 col-md-offset-3 gdp-info-entry">
                 <div class="row">
                     <div class="col-md-8 PartyTheme">
                         {{ theme_macros.theme(t) }}
@@ -44,5 +45,5 @@
             </div>
         </div>
     {% endfor %}
-
+    </div>
 {% endblock %}
