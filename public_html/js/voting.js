@@ -63,7 +63,7 @@ function StarVote(voteValue, $stars, $vote)
         var blinkInterval,
             $floppy = $('.Loading').show(),
             $errorMessage = $('#ErrorMessage').hide(),
-            $saved = $('#SavedMessage').hide()
+            $saved = $('.SavedMessage').hide()
         ;
 
         //noinspection JSUnresolvedVariable
