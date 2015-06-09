@@ -1,3 +1,5 @@
+{% import 'GeekPartyBundle::_projects/macros.html.twig' as macros_project %}
+
 {% for comment in entities %}
     {% set userPage = comment.author ? path('geek_party_user_show', { id: comment.author.id }) : '' %}
     {% set userName = comment.author ? comment.author.fullname : comment.foreignAuthor %}
@@ -18,15 +20,21 @@
                 {% endif %}
             </form>
         </div>
-        {% if comment.removed %}
-            <div class="gdp-entry-content gdp-disabled">
-                <p>Комментарий удален</p>
+            <div class="gdp-entry-content{% if comment.removed %} gdp-disabled{% endif %}">
+                {% if comment.type == "article" %}
+                    <a href="{{ path('article', {id: comment.article.id}) }}">Комментарий к новости "{{ comment.article.title }}"</a>
+                {% else %}
+                    <a href="{{ macros_project.project_url(comment.project) }}">Комментарий к проекту {{ comment.project.name }}</a>
+                {% endif %}
+
+                {% if comment.removed %}
+                    <p>Комментарий удален</p>
+                {% else %}
+                    <div class="gdp-entry-content">
+                        <p>{{ comment.text|purify }}</p>
+                    </div>
+                {% endif %}
             </div>
-        {% else %}
-            <div class="gdp-entry-content">
-                <p>{{ comment.text|purify }}</p>
-            </div>
-        {% endif %}
         <div class="clearfix"></div>
     </div>
 {% endfor %}

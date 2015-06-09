@@ -7,12 +7,16 @@
     <img src="{{ self.project_icon_url(entry) }}" alt="{{ entry.name }}"/>
 {% endmacro %}
 
+{% macro project_url(entry) %}
+    {% set partyId = entry.party is not null ? entry.party.id : null %}
+    {{ path('geek_browse_work', { party: partyId, work: entry.id }) }}
+{% endmacro %}
+
 {% macro project_block(entry, current_user, show_rating) %}
     {% import 'GeekPartyBundle::_comments/macros.html.twig' as comments %}
     {% import _self as self %}
 
-    {% set partyId = entry.party is not null ? entry.party.id : null %}
-    {% set entryPage = path('geek_browse_work', { party: partyId, work: entry.id }) %}
+    {% set entryPage = self.project_url(entry) %}
 
     <div class="gdp-work gdp-border">
         <div class="gdp-work-header">
