@@ -30,12 +30,6 @@
                         <h3>Новость</h3>
                         {{ form_widget(edit_form.body) }}
 
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <h3>Голосование</h3>
-                            {{ form_widget(edit_form.poll) }}
-                        {% endif %}
-
-
                         {{ macros.submit("Сохранить") }}
 
                         {% if delete_form is defined %}
