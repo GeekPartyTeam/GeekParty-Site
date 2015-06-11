@@ -22,33 +22,6 @@
         {{ entity.body|purify }}
     </div>
 
-{% if entity.poll is not null %}
-    {% set didntVote = app.request.cookies.get('prism_poll_' ~ entity.poll.id) is null %}
-    <div class="">
-        <form action="{{ path('_edit_article', {'action':'vote'}) }}" method="POST" role="form">
-            <input type="hidden" name="poll" value="{{ entity.poll.id }}"/>
-            <h4>{{ entity.poll.name }}</h4>
-
-            {% for opinion in entity.poll.opinions %}
-                <div class="checkbox">
-                    <label>
-                        <input name="opinion[{{ opinion.id }}]" type="checkbox" {% if not didntVote %}disabled="disabled"{% endif %}/>
-                        {{ opinion.name }}
-                    </label>
-                </div>
-            {% endfor %}
-
-            <p>Проголосовало: {{ entity.poll.votes }} {% transchoice entity.poll.votes %}человек|человека|человек{% endtranschoice %}</p>
-
-            {% if didntVote %}
-                {{ macros.submit('Проголосовать') }}
-            {% else %}
-                <p>Вы уже принимали участие в этом голосовании</p>
-            {% endif %}
-
-        </form>
-    </div>
-{% endif %}
     <div class="clearfix"></div>
     {% if article_links is defined %}
         <div class="gdp-entry-footer pull-right">
