@@ -48,6 +48,7 @@ button.gdp-pixel-link:hover {
 
 .gdp-entry-content {
   display: table-cell;
+  padding: 10px 20px 0 26px;
 }
 
 .gdp-info-entry {
@@ -67,7 +68,9 @@ button.gdp-pixel-link:hover {
 .gdp-raw form .checkbox,
 .gdp-entry-content form .checkbox {
   padding: 0 0 0 16px;
-  margin: 4px 0 !important; }
+  margin: 4px 0 !important;
+}
+
 .gdp-raw p, .gdp-raw li, .gdp-raw label,
 .gdp-entry-content p,
 .gdp-entry-content li,
@@ -75,7 +78,9 @@ button.gdp-pixel-link:hover {
   margin-bottom: 12px;
   font: 16px/20px "Open Sans";
   color: #fff;
-  text-align: justify; }
+  /*text-align: justify; */
+}
+
 .gdp-raw li,
 .gdp-entry-content li {
   margin: 0;
@@ -212,7 +217,7 @@ button.gdp-pixel-link:hover {
 #gdp-login {
   position: absolute;
   right: 20px;
-  top: 120px; }
+  top: 146px; }
   #gdp-login #gdp-exit {
     font: 20px/20px "Open Sans";
     font-weight: bold;

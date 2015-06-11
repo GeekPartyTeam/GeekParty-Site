@@ -93,12 +93,9 @@ textarea {
             /*color: #ffd02e;*/
         /*}*/
 
-
-
-
-
-
-
-
-
-
+.PullRight {
+    float: right;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+}

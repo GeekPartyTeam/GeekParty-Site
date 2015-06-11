@@ -31,9 +31,12 @@
             border-right: none;
             height: 144px;
             margin: 23px 0;
-            padding: 23px 16px;
+            padding: 16px 16px 23px 16px;
             font: 18px/20px "Open Sans";
             color: #dce6cc;
+
+            min-width: 144px;
+            position: relative;
         }
-            .gdp-column-body p { text-indent: 40px; }
+            /*.gdp-column-body p { text-indent: 40px; }*/
             .gdp-column-body a { display: block; color: #f0c42e; }
