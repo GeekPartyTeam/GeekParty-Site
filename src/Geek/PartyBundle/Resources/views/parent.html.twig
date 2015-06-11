@@ -7,6 +7,8 @@
     <meta name="keywords" content="geekparty gamedevparty gamejam" />
     <meta name="description" content="GameDevParty — это цифровое творчество в режиме реального времени" />
     <meta name="vk:app_id" content="3561840" />
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
+    <script type="text/javascript"> VK.init({apiId: 3561840, onlyWidgets: true}); </script>
 
     <link rel="stylesheet" type="text/css" href="{{  asset("upd/bower_components/bootstrap/dist/css/bootstrap.css") }}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{  asset("upd/bower_components/bootstrap/dist/css/bootstrap-theme.css") }}" media="screen"/>
@@ -198,5 +200,15 @@
         </script>
         <script type="text/javascript" src="{{ asset("js/voting.js?2") }}"></script>
     {% endif %}
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-62372971-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
 </body>
 </html>
