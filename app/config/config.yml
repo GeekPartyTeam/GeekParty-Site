@@ -150,8 +150,3 @@ services:
         arguments: [ 'GeekPartyBundle:Work' ]
         calls:
             - ['setRootDir', [ %kernel.root_dir% ]]
-
-lexik_maintenance:
-    driver:
-        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'                # class for file driver
-        options: {file_path: %kernel.root_dir%/cache/lock}                         # file_path is the complete path for create the file

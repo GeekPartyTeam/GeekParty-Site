@@ -11,22 +11,21 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "~2.5",
+        "symfony/symfony": "~2.7",
         "doctrine/orm": "~2.5",
-        "doctrine/doctrine-bundle": "~1.4",
-        "symfony/monolog-bundle": "~2.5",
+        "doctrine/doctrine-bundle": "~1.5",
+        "symfony/monolog-bundle": "~2.7",
         "jms/security-extra-bundle": "~1.5",
         "jms/di-extra-bundle": "~1.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "hwi/oauth-bundle": "~0.3",
         "stfalcon/tinymce-bundle": "~0.3",
         "Exercise/HTMLPurifier-Bundle": "~0.1",
-        "sensio/framework-extra-bundle": "~2.3",
-        "sensio/distribution-bundle": "~2.3",
+        "sensio/framework-extra-bundle": "~3.0",
+        "sensio/distribution-bundle": "~3.0",
         "sensio/generator-bundle": "~2.5",
         "symfony/assetic-bundle": "~2.6",
-	    "symfony/console": "~2.5",
-        "lexik/maintenance-bundle": "~1.0",
+	    "symfony/console": "~2.7",
         "symfony/swiftmailer-bundle": "~2.3"
     },
     "scripts": {
@@ -46,5 +45,11 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "public_html"
+    },
+    "require-dev": {
+        "behat/behat": "^3.0",
+        "behat/symfony2-extension": "^2.0",
+        "behat/mink-browserkit-driver": "^1.2",
+        "behat/mink-extension": "^2.0"
     }
 }
