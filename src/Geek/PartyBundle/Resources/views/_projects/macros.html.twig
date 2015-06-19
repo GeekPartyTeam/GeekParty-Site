@@ -1,6 +1,4 @@
-{% macro project_icon_url(entry) %}
-    /works/{{ entry.party.id|url_encode }}/{{ entry.id }}_icon.png
-{% endmacro %}
+{% macro project_icon_url(entry) %}/works/{{ entry.party.id|url_encode }}/{{ entry.id }}_icon.png{% endmacro %}
 
 {% macro project_icon(entry) %}
     {% import _self as self %}
