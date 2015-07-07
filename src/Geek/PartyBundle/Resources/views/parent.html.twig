@@ -194,7 +194,7 @@
     <div id="vk_api_transport"></div>
     <script type="text/javascript" src="{{ asset("js/k-script.js") }}"></script>
     <script type="text/javascript" src="{{ asset("upd/js/main.js") }}"></script>
-    {% if current_party is defined and current_party is not null and current_party.projectVotingTime %}
+    {% if current_party|default and current_party.projectVotingTime %}
         <script type="application/javascript">
             var saveVoteUrl = '{{ path("geek_vote") }}';
         </script>
