@@ -32,6 +32,9 @@
                         {{ form_errors(edit_form) }}
                         {{ form_widget(edit_form.body) }}
                         {{ macros.submit("Сохранить") }}
+                        <div class="hidden">
+                            {{ form_rest(edit_form) }}
+                        </div>
                     </form>
 
                     {{ tinymce_init() }}

@@ -61,3 +61,11 @@ a.admin {
     z-index: 100;
     border: 2px solid black;
 }
+
+.error {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
