@@ -21,6 +21,7 @@ class PartyType extends AbstractType
         };
 
         $builder->add('id');
+        $builder->add('audienceChoiceRating', 'checkbox', ['label' => 'Включить рейтинг пользовательских симпатий']);
 
         $addDateTimeWidget('themeSubmissionStartTime');
         $addDateTimeWidget('themeSubmissionEndTime');

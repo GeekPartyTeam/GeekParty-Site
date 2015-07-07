@@ -8,6 +8,8 @@ use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\ProjectVote;
 use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
+use Geek\PartyBundle\Entity\Repository\WorkRepository;
+use Geek\PartyBundle\Entity\User;
 use Geek\PartyBundle\Entity\Work;
 use JMS\SecurityExtraBundle\Tests\Security\Authorization\Expression\Fixture\Issue22\Project;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -85,7 +87,7 @@ class BrowseController extends Base\BaseController
     {
         $id = $this->getRequest()->get('id');
         $em = $this->getDoctrine()->getManager();
-        /** @var EntityRepository $workRepo */
+        /** @var WorkRepository $workRepo */
         $projectRepo = $this->get('work.repo');
         /** @var Work $project */
         $project = $projectRepo->find($id);
@@ -107,7 +109,17 @@ class BrowseController extends Base\BaseController
         if (!$entity) {
             $entity = new ProjectVote();
             $entity->setWork($project);
-            $entity->setUser($this->getUser());
+            /** @var User $user */
+            $user = $this->getUser();
+            $entity->setUser($user);
+            $projects = $em->getRepository('GeekPartyBundle:Work')->findBy(['author' => $user]);
+            foreach ($projects as $p) {
+                /** @var Work $p */
+                if ($projectRepo->isWorkUploaded($p)) {
+                    $entity->setVotedByGameUploader(true);
+                    break;
+                }
+            }
         } else {
             $entity->setDate(new \DateTime());
         }

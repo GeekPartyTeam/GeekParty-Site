@@ -45,6 +45,10 @@ class ProjectVote
      * @ORM\Column
      */
     protected $vote = '';
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $votedByGameUploader;
 
     public function __construct()
     {
@@ -156,10 +160,10 @@ class ProjectVote
     /**
      * Set work
      *
-     * @param \Geek\PartyBundle\Entity\Work $work
+     * @param Work $work
      * @return ProjectVote
      */
-    public function setWork(\Geek\PartyBundle\Entity\Work $work = null)
+    public function setWork(Work $work = null)
     {
         $this->work = $work;
 
@@ -169,7 +173,7 @@ class ProjectVote
     /**
      * Get work
      *
-     * @return \Geek\PartyBundle\Entity\Work 
+     * @return Work
      */
     public function getWork()
     {
@@ -197,5 +201,29 @@ class ProjectVote
     public function getVote()
     {
         return $this->vote;
+    }
+
+    /**
+     * Set votedByGameUploader
+     *
+     * @param boolean $votedByGameUploader
+     *
+     * @return ProjectVote
+     */
+    public function setVotedByGameUploader($votedByGameUploader)
+    {
+        $this->votedByGameUploader = $votedByGameUploader;
+
+        return $this;
+    }
+
+    /**
+     * Get votedByGameUploader
+     *
+     * @return boolean
+     */
+    public function getVotedByGameUploader()
+    {
+        return $this->votedByGameUploader;
     }
 }

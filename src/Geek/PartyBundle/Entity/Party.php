@@ -62,6 +62,11 @@ class Party
     protected $projectVotingEndTime;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $audienceChoiceRating;
+
+    /**
      * Set id
      *
      * @param string $id
@@ -329,5 +334,29 @@ class Party
             $time = new \DateTime;
         }
         return $time > $this->getProjectVotingEndTime();
+    }
+
+    /**
+     * Set audienceChoiceRating
+     *
+     * @param boolean $audienceChoiceRating
+     *
+     * @return Party
+     */
+    public function setAudienceChoiceRating($audienceChoiceRating)
+    {
+        $this->audienceChoiceRating = $audienceChoiceRating;
+
+        return $this;
+    }
+
+    /**
+     * Get audienceChoiceRating
+     *
+     * @return boolean
+     */
+    public function getAudienceChoiceRating()
+    {
+        return $this->audienceChoiceRating;
     }
 }

@@ -93,9 +93,10 @@ class GeekExtension extends \Twig_Extension
         return count($parties) > 0 ? $parties[0] : null;
     }
 
-    public function calculateProjectRating(Work $project)
+    public function calculateProjectRating(Work $project, $authors = false)
     {
-        // TODO: ratings by party
+        $authorsKey = $authors ? 'authors' : 'audience';
+
         static $ratings;
 
         if (!$ratings) {
@@ -106,7 +107,7 @@ class GeekExtension extends \Twig_Extension
             $em = $doctrine->getManager();
             /** @var PartyRepository $repo */
             $repo = $em->getRepository('GeekPartyBundle:Party');
-            $ratings = $repo->getRatings($project->getParty());
+            $ratings = $repo->getRatings($project->getParty(), $authors);
         }
 
         if (!isset($ratings[$project->getId()])) {

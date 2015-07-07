@@ -13,7 +13,7 @@ use Geek\PartyBundle\Entity\Work;
 
 class PartyRepository extends EntityRepository
 {
-    public function getRatings(Party $party)
+    public function getRatings(Party $party, $authors = false)
     {
         $em = $this->getEntityManager();
         $conn = $em->getConnection();

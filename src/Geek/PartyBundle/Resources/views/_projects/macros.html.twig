@@ -54,14 +54,22 @@
     </div>
 {% endmacro %}
 
+{% macro rating_inner(rating) %}
+    <div class="gdp-rating">
+        <div class="gdp-rating-back"></div>
+        <div class="gdp-rating-front"
+             style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
+        <span>{{ rating|round(1)|number_format(1) }}</span>
+    </div>
+{% endmacro %}
+
 {% macro rating(entry) %}
+    {% import _self as self %}
     {% if entry.party.ended %}
-        {% set rating = calculate_project_rating(entry) %}
-        <div class="gdp-rating">
-            <div class="gdp-rating-back"></div>
-            <div class="gdp-rating-front"
-                    style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
-            <span>{{ rating|round(1)|number_format(1) }}</span>
-        </div>
+        {{ _self.rating_inner(calculate_project_rating(entry)) }}
+
+        {% if entry.party.audienceChoiceRating %}
+            {{ _self.rating_inner(calculate_project_rating(entry, true)) }}
+        {% endif %}
     {% endif %}
 {% endmacro %}
