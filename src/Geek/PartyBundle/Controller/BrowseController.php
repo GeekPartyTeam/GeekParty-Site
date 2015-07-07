@@ -43,7 +43,7 @@ class BrowseController extends Base\BaseController
 
         $works = $this->fetchWorks($partyEntity);
 
-        $parties = $partyRepo->findAll();
+        $parties = $partyRepo->findBy([], ['startTime' => 'ASC']);
 
         return $this->arrayResponse([
             'text' => $this->findTextBlock('party'),
