@@ -92,6 +92,14 @@
 
             return false;
         });
+
+        $('.RemoveButton').click(function (e) {
+            e.stopPropagation();
+            if (confirm("Are you sure?")) {
+                $('.RemoveForm').submit();
+            }
+            return false;
+        });
     });
 }();
 

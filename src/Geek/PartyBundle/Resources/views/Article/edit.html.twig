@@ -29,13 +29,20 @@
                         <h3>Новость</h3>
                         {{ form_widget(edit_form.body) }}
 
-                        {{ macros.submit("Сохранить") }}
-
-                        {% if delete_form is defined %}
-                            {{ form_widget(delete_form) }}
-                            {{ macros.submit("Удалить", "k-red") }}
-                        {% endif %}
+                        <div class="gdp-form-footer">
+                            {{ macros.submit("Сохранить") }}
+                            {% if delete_form is defined %}
+                                {{ macros.btn("Удалить", "k-red RemoveButton") }}
+                            {% endif %}
+                        </div>
                     </form>
+
+                    {% if delete_form is defined %}
+                        <form class="RemoveForm"
+                              action="{{ path('_edit_article', { 'action': 'delete', 'id': entity.id }) }}"
+                              method="post">
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -20,6 +20,10 @@
     <a href="{{ link|default('javascript:void(0)') }}" class="gdp-pixel-link {{ class }}">{{ text }}</a>
 {% endmacro %}
 
+{% macro btn(text, class) %}
+    <button class="gdp-pixel-link {{ class }}">{{ text }}</button>
+{% endmacro %}
+
 {% macro fb_button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}

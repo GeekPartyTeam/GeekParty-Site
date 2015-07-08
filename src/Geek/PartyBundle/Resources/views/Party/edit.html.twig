@@ -65,14 +65,12 @@
                         </div>
                     </div>
 
-                    <p>
+                    <div class="gdp-form-footer">
                         {{ macros.submit("Сохранить") }}
                         {% if delete_form is defined %}
-                            <span class="k-inline">
-                                {{ macros.button("Удалить", "", "k-red RemoveButton") }}
-                            </span>
+                            {{ macros.btn("Удалить", "k-red RemoveButton") }}
                         {% endif %}
-                    </p>
+                    </div>
                     {{ form_rest(edit_form) }}
                 </form>
 
@@ -100,9 +98,6 @@
                     self.setAttribute('value', value);
                 }, 0);
             });
-        });
-        $('.RemoveButton').click(function () {
-            $('.RemoveForm').submit();
         });
     </script>
 </div>

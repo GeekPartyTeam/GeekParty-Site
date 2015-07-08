@@ -4,9 +4,5 @@
         (Голоса: {{ t.votes|length }})
 
         by <a href="{{ path('geek_party_user_show', { id: t.user.id }) }}">{{ t.user.fullname  }}</a>
-        <form class="form-inline" action="{{ path("themes_remove") }}" method="post">
-            <input type="hidden" name="theme_id" value="{{ t.id }}"/>
-            <button class="gdp-pixel-link k-red" type="submit">Удалить</button>
-        </form>
     {% endif %}
 {% endmacro %}

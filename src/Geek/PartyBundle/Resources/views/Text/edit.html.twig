@@ -31,7 +31,10 @@
                     <form action="{{ path('admin_text', { 'action': 'update', 'id': entity.id }) }}" method="post" {{ form_enctype (edit_form) }}>
                         {{ form_errors(edit_form) }}
                         {{ form_widget(edit_form.body) }}
-                        {{ macros.submit("Сохранить") }}
+
+                        <div class="gdp-form-footer">
+                            {{ macros.submit("Сохранить") }}
+                        </div>
                         <div class="hidden">
                             {{ form_rest(edit_form) }}
                         </div>

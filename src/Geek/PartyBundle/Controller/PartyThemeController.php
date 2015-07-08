@@ -211,14 +211,15 @@ class PartyThemeController extends Base\BaseController
     {
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery("SELECT COUNT(v) FROM GeekPartyBundle:PartyThemeVote v
+        $query = $em->createQuery("SELECT v FROM GeekPartyBundle:PartyThemeVote v
                 JOIN v.theme t
                 JOIN t.party p
                 JOIN v.user u
                 WHERE p = :party AND u = :user");
         $query->setParameter('party', $currentParty);
         $query->setParameter('user', $this->getUser());
-        $result = $query->getResult(\Doctrine\ORM\AbstractQuery::HYDRATE_SCALAR)[0];
-        return is_array($result) && isset($result[1]) ? $result[1] != 0 : false;
+        $query->setMaxResults(1);
+        $result = $query->getResult();
+        return count($result) > 0 ? $result[0] : null;
     }
 } 
