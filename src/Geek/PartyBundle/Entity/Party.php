@@ -261,12 +261,20 @@ class Party
         return $this->getName();
     }
 
-    public function isVotingTime(\DateTime $time = null)
+    public function isThemeVotingTime(\DateTime $time = null)
     {
         if (!$time) {
             $time = new \DateTime;
         }
         return $time >= $this->getThemeVotingStartTime() && $time < $this->getThemeVotingEndTime();
+    }
+
+    public function isThemeSubmissionTime(\DateTime $time = null)
+    {
+        if (!$time) {
+            $time = new \DateTime;
+        }
+        return $time >= $this->getThemeSubmissionStartTime() && $time < $this->getThemeSubmissionEndTime();
     }
 
     /**
@@ -329,5 +337,10 @@ class Party
             $time = new \DateTime;
         }
         return $time > $this->getProjectVotingEndTime();
+    }
+
+    public function hasUserRating()
+    {
+        return $this->getProjectVotingEndTime() >= new \DateTime('2015-07-22');
     }
 }

@@ -8,7 +8,10 @@ namespace Geek\PartyBundle\Twig;
 use AppKernel;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
+use Geek\PartyBundle\Entity\Party;
+use Geek\PartyBundle\Entity\PartyTheme;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
+use Geek\PartyBundle\Entity\Repository\PartyThemeRepository;
 use Geek\PartyBundle\Entity\User;
 use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -19,11 +22,14 @@ class GeekExtension extends \Twig_Extension
     private $context;
     /** @var \AppKernel */
     private $kernel;
+    /** @var array */
+    private $ratingsCache;
 
     function __construct(SecurityContext $context, AppKernel $kernel)
     {
         $this->context = $context;
         $this->kernel = $kernel;
+        $this->ratingsCache = [];
     }
 
     /**
@@ -45,8 +51,10 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
             , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
-            , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
             , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
+            , new \Twig_SimpleFunction('get_party_theme', [$this, 'getPartyTheme'])
+            , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
+            , new \Twig_SimpleFunction('is_winner', [$this, 'isWinner'])
         ];
     }
 
@@ -93,34 +101,75 @@ class GeekExtension extends \Twig_Extension
         return count($parties) > 0 ? $parties[0] : null;
     }
 
-    public function calculateProjectRating(Work $project)
-    {
-        // TODO: ratings by party
-        static $ratings;
-
-        if (!$ratings) {
-            $ratings = [];
-
-            $doctrine = $this->kernel->getContainer()->get('doctrine');
-            /** @var EntityManager $em */
-            $em = $doctrine->getManager();
-            /** @var PartyRepository $repo */
-            $repo = $em->getRepository('GeekPartyBundle:Party');
-            $ratings = $repo->getRatings($project->getParty());
-        }
-
-        if (!isset($ratings[$project->getId()])) {
-            return 0.0;
-        }
-
-        return $ratings[$project->getId()];
-    }
-
     public function formatDate($date)
     {
         if (!is_object($date)) {
             $date = new \DateTime($date);
         }
         return $date->format('Y-m-d H:i');
+    }
+
+    /**
+     * @param Party $party
+     * @return null|string
+     */
+    public function getPartyTheme(Party $party)
+    {
+        /** @var PartyThemeRepository $partyThemeRepo */
+        $partyThemeRepo = $this->kernel->getContainer()->get('doctrine')
+            ->getManager()
+            ->getRepository('GeekPartyBundle:PartyTheme');
+
+        $themes = $partyThemeRepo->findAllSortedByVotes($party);
+        if ($themes) {
+            /** @var PartyTheme $theme */
+            $theme = $themes[0];
+
+            return $theme->getText();
+        }
+
+        return null;
+    }
+
+    /**
+     * @param Work $project
+     * @param bool|false $userRatings
+     * @return float
+     */
+    public function calculateProjectRating(Work $project, $userRatings = false)
+    {
+        $partyId = $project->getParty()->getId();
+        if (!isset($this->ratingsCache[$partyId][(string)$userRatings])) {
+            $doctrine = $this->kernel->getContainer()->get('doctrine');
+            /** @var EntityManager $em */
+            $em = $doctrine->getManager();
+            /** @var PartyRepository $repo */
+            $repo = $em->getRepository('GeekPartyBundle:Party');
+            $this->ratingsCache[$partyId][(string)$userRatings] = $userRatings ?
+                $repo->getUserRatings($project->getParty()) :
+                $repo->getRatings($project->getParty());
+        }
+
+        if (!isset($this->ratingsCache[$partyId][(string)$userRatings][$project->getId()])) {
+            return 0.0;
+        }
+
+        return $this->ratingsCache[$partyId][(string)$userRatings][$project->getId()];
+    }
+
+    /**
+     * @param Work $project
+     * @param bool|false $userRatings
+     * @return bool
+     */
+    public function isWinner(Work $project, $userRatings = false)
+    {
+        $this->calculateProjectRating($project, $userRatings);
+
+        $partyId = $project->getParty()->getId();
+        $partyRatings = $this->ratingsCache[$partyId][(string)$userRatings];
+        reset($partyRatings);
+        $firstId = key($partyRatings);
+        return $firstId == $project->getId();
     }
 }

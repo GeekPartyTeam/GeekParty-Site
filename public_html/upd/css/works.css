@@ -36,6 +36,8 @@
     width: 120px;
     margin: 0 auto;
 }
+
+
     .gdp-rating-back {
         width: 118px;
         height: 24px;
@@ -55,6 +57,9 @@
         display: block;
     }
 
+.gdp-user-rating .gdp-rating-front {
+    background: url("../img/rating-full-user.png");
+}
 
 .gdp-work-rating {
     display: block;

@@ -3,7 +3,8 @@ table {
 
 td {
   padding: 5px;
-  border: 1px #1c6c94 solid; }
+  border: 1px #1c6c94 solid;
+}
 
 p {
   margin-bottom: 12px;
@@ -268,3 +269,17 @@ a.gdp-pixel-link, .gdp-pixel-link {
       text-decoration: underline; }
 
 /*# sourceMappingURL=main.css.map */
+
+table.gdp-entry-content {
+  border: 1px solid #1c6c94;
+  border-radius: 5px;
+  padding: 0;
+}
+
+table.gdp-entry-content td {
+  border-width: 0 0 1px 0;
+}
+
+.gdp-left {
+  float: left;
+}

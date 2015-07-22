@@ -2,8 +2,11 @@
 
 namespace Geek\PartyBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\PartyTheme;
 use Geek\PartyBundle\Entity\PartyThemeVote;
+use Geek\PartyBundle\Entity\Repository\PartyThemeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,19 +14,70 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Party themes adding & voting
+ * @Route("/party")
  */
 class PartyThemeController extends Base\BaseController
 {
     /**
      * Displays a form to create a new Work entity.
      *
-     * @Route("/", name="themes_index")
+     * @Route("/{id}", name="themes_index", defaults={"id" = null})
      * @Template()
+     * @param null $id
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @internal param Request $request
      */
-    public function indexAction()
+    public function indexAction($id = null)
+    {
+        $party = $id === null ?
+            $this->getCurrentParty() :
+            $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
+
+        if (!$party) {
+            return $this->redirectToIndex();
+        }
+
+        /** @var PartyThemeRepository $partyThemeRepo */
+        $partyThemeRepo = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('GeekPartyBundle:PartyTheme');
+
+        $themes = $party->isThemeSubmissionTime() ?
+            $partyThemeRepo->findAllSortedByName($party) :
+            $partyThemeRepo->findAllSortedByVotes($party);
+
+        return $this->arrayResponse([
+            'party' => $party,
+            'themes' => $themes,
+        ]);
+    }
+
+    /**
+     * Страница со списком тем для голосования
+     *
+     * @Route("/vote", name="themes_votes")
+     * @Template()
+     * @Method("GET")
+     */
+    public function votesAction(Request $request)
     {
         $currentParty = $this->getCurrentParty();
-        return $this->themesList($currentParty->getThemeSubmissionStartTime(), $currentParty->getThemeSubmissionEndTime());
+        if (($id = $request->get('id')) && $this->isAdmin()) {
+            $currentParty = $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
+        }
+        if (!$this->isAdmin() && ( !$currentParty || !$currentParty->isThemeVotingTime() )) {
+            return $this->redirectToIndex();
+        }
+        $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
+        if (is_array($response)) {
+            $response['alreadyVoted'] = $this->getAlreadyVoted($currentParty);
+            if ($this->isAdmin()) {
+                usort($response['themes'], function (PartyTheme $a, PartyTheme $b) {
+                    return $a->getVotes()->count() < $b->getVotes()->count();
+                });
+            }
+        }
+        return $response;
     }
 
     /**
@@ -63,52 +117,16 @@ class PartyThemeController extends Base\BaseController
     }
 
     /**
-     * @param $startDate
-     * @param $endDate
+     * @param Party $party
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    private function themesList($startDate, $endDate)
+    private function themesList(Party $party)
     {
-        $currentParty = $this->getCurrentParty();
-        $now = new \DateTime();
-
-        if (!$this->isAdmin() && ( $now < $startDate || $now > $endDate )) {
-            return $this->redirectToIndex();
-        }
-
         $themes = $this->getDoctrine()
             ->getRepository('GeekPartyBundle:PartyTheme')
-            ->findBy(['party' => $currentParty], ['text' => 'ASC']);
+            ->findBy(['party' => $party], ['text' => 'ASC']);
 
         return $this->arrayResponse(['themes' => $themes]);
-    }
-
-    /**
-     * Страница со списком тем для голосования
-     *
-     * @Route("/vote", name="themes_votes")
-     * @Template()
-     * @Method("GET")
-     */
-    public function votesAction()
-    {
-        $currentParty = $this->getCurrentParty();
-        if (($id = $this->getRequest()->get('id')) && $this->isAdmin()) {
-            $currentParty = $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
-        }
-        if (!$this->isAdmin() && ( !$currentParty || !$currentParty->isVotingTime() )) {
-            return $this->redirectToIndex();
-        }
-        $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
-        if (is_array($response)) {
-            $response['alreadyVoted'] = $this->getAlreadyVoted($currentParty);
-            if ($this->isAdmin()) {
-                usort($response['themes'], function (PartyTheme $a, PartyTheme $b) {
-                    return $a->getVotes()->count() < $b->getVotes()->count();
-                });
-            }
-        }
-        return $response;
     }
 
     /**
@@ -125,7 +143,7 @@ class PartyThemeController extends Base\BaseController
     {
         $response = $this->redirect($this->generateUrl('themes_votes'));
         $currentParty = $this->getCurrentParty();
-        if (!$currentParty || !$currentParty->isVotingTime()) {
+        if (!$currentParty || !$currentParty->isThemeVotingTime()) {
             return $this->redirectToIndex();
         }
         if ($this->getAlreadyVoted($currentParty)) {

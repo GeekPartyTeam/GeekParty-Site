@@ -45,8 +45,8 @@
         <div class="clearfix"></div>
         <div class="gdp-entry-footer pull-right">
             <a href="{{ entryPage }}" class="gdp-link-more">Читать дальше</a>
-            <a href="{{ entryPage }}#comments" class="gdp-link-comments">Комментарии</a>
-            {% if (entry.author == current_user or is_granted('ROLE_ADMIN')) and current_user is not null %}
+            <a href="{{ entryPage }}#comments" class="gdp-link-comments">Комментарии ({{ entry.comments|length }})</a>
+            {% if (entry.author == current_user or is_admin()) and current_user is not null %}
                 <a href="{{ path('project_edit', {'id': entry.id}) }}" class="gdp-admin">Редактировать</a>
             {% endif %}
         </div>
@@ -55,12 +55,21 @@
 {% endmacro %}
 
 {% macro rating(entry) %}
-    {% if entry.party.ended %}
+    {% if entry.party.ended or is_admin() %}
+        {% if entry.party.hasUserRating %}
+            {% set userRating = calculate_project_rating(entry, true) %}
+            <div class="gdp-rating gdp-user-rating">
+                <div class="gdp-rating-back"></div>
+                <div class="gdp-rating-front"
+                        style="width: {{ 23.6 * userRating }}px" title="Пользовательский рейтинг: {{ userRating|round(1)|number_format(1) }}"></div>
+            </div>
+        {% endif %}
+
         {% set rating = calculate_project_rating(entry) %}
         <div class="gdp-rating">
             <div class="gdp-rating-back"></div>
             <div class="gdp-rating-front"
-                    style="width: {{ 23.6 * rating }}px" title="{{ rating }}"></div>
+                    style="width: {{ 23.6 * rating }}px" title="Рейтинг участников: {{ rating }}"></div>
             <span>{{ rating|round(1)|number_format(1) }}</span>
         </div>
     {% endif %}
