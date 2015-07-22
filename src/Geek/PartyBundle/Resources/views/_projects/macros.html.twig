@@ -62,6 +62,9 @@
                 <div class="gdp-rating-back"></div>
                 <div class="gdp-rating-front"
                         style="width: {{ 23.6 * userRating }}px" title="Пользовательский рейтинг: {{ userRating|round(1)|number_format(1) }}"></div>
+                {% if is_winner(entry) %}
+                    <span>#1</span>
+                {% endif %}
             </div>
         {% endif %}
 
