@@ -31,7 +31,7 @@
 
     {% for entry in unuploaded %}
         <div class="col-md-6 col-xs-12">
-            {{ macros_project.project_block(entry, current_user, show_rating is defined) }}
+            {{ macros_project.project_block(entry, current_user, false) }}
         </div>
         {% if loop.index % 2 == 0 %}
             <div style="clear:both"></div>

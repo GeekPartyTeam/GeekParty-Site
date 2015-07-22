@@ -72,8 +72,7 @@
                             {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <p class="gdp-login-warning"> Чтобы голосовать, вам нужно авторизоваться:
                                     &nbsp;
-                                    <a href="#"><img src="./img/icon-vk.png" /></a>
-                                    <a href="#"><img src="./img/icon-fb.png" /></a>
+                                    {{ macros.auth_buttons() }}
                                 </p>
                             {% elseif work.author == current_user %}
                                 <p class="gdp-red">Эй, за свою игру голосовать нельзя! Голосуй за другие игры</p>

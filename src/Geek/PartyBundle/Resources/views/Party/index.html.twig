@@ -4,48 +4,54 @@
 
 {% block main %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
 
-            <div class="gdp-header-row gdp-border">
-                <div class="gdp-header-row-body">
-                    <img src="{{ asset("upd/img/icon-w.png") }}" />
-                    <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | Геймджемы</span>
-                </div>
-            </div>
-
-            <!-- List -->
-            <div class="gdp-entry-content">
-
-                <div class="row">
-                    <div class="col-md-3"><p>Party</p></div>
-                    <div class="col-md-3"><p>Start</p></div>
-                    <div class="col-md-3"><p>End</p></div>
-                    <div class="col-md-3"></div>
-                </div>
-
-                {% for entity in entities %}
-                    <div class="row">
-                        <div class="col-md-3"><p>{{ entity.id }}</p></div>
-                        <div class="col-md-3"><p>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i') }}{% endif %}</p></div>
-                        <div class="col-md-3"><p>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i') }}{% endif %}</div>
-                        <div class="col-md-3">
-                            <a class="gdp-admin" href="{{ path('admin_parties', { 'action': 'edit', 'id': entity.id }) }}">[Править]</a>
-                            <a class="gdp-admin" href="{{ path('themes_index', { 'id': entity.id }) }}">[Темы]</a>
-                        </div>
+                <div class="gdp-header-row gdp-border">
+                    <div class="gdp-header-row-body">
+                        <img src="{{ asset("upd/img/icon-w.png") }}" />
+                        <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | Геймджемы</span>
                     </div>
-                {% endfor %}
+                </div>
 
-            </div> <!-- List -->
+                <!-- List -->
+                <table class="gdp-entry-content">
 
-            <div class="gdp-entry-content">
-                {% import 'GeekPartyBundle::macros.html.twig' as macros %}
-                <p>{{ macros.button("Создать", path('admin_parties', { 'action': 'edit' })) }}</p>
+                    <thead>
+                    <tr>
+                        <td><p>Party</p></td>
+                        <td><p>Start</p></td>
+                        <td><p>End</p></td>
+                        <td></td>
+                    </tr>
+                    </thead>
+
+                    {% for entity in entities %}
+                        <tr>
+                            <td><p>{{ entity.id }}</p></td>
+                            <td><p>{% if entity.startTime %}{{ entity.startTime|date('Y-m-d H:i') }}{% endif %}</p></td>
+                            <td><p>{% if entity.endTime %}{{ entity.endTime|date('Y-m-d H:i') }}{% endif %}</td>
+                            <td>
+                                <span class="gdp-left">{{ macros.button("Edit", path('admin_parties', { 'action': 'edit', 'id': entity.id })) }}</span>
+                                <span class="gdp-left">{{ macros.button("Themes", path('themes_index', { 'id': entity.id })) }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table> <!-- List -->
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
 
+                <div class="gdp-entry-content">
+                    {% import 'GeekPartyBundle::macros.html.twig' as macros %}
+                    <p>{{ macros.btn("Создать", path('admin_parties', { 'action': 'edit' })) }}</p>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

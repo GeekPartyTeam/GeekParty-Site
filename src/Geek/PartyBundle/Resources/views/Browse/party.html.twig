@@ -33,6 +33,7 @@
             <div id="gdp-party-info">
                 <div class="gdp-party-info-sep"></div>
                 <p id="gdp-party-name">{{ party.name }}</p>
+                <p id="gdp-party-amount">{{ get_party_theme(party) }}</p>
                 <p id="gdp-party-time">Начало: <span>{{ format_date(party.startTime) }}</span> / Конец: <span>{{ format_date(party.endTime) }}</span></p>
                 <p id="gdp-party-amount">Работ: <span>{{ works|length }}</span></p>
                 <div class="gdp-party-info-sep"></div>

@@ -9,21 +9,23 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Темы для следующего геймджема {{ current_party }}</h2>
+                <h2>Темы для геймджема {{ party }}</h2>
             </div>
 
-            <div class="col-md-12 gdp-comment-entry gdp-border">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <form action="{{ path("themes_add") }}" method="POST" id="teamEditorMain" class="PartyThemeForm">
-                        <input name="text" class="PartyThemeText"/>
-                        {{ macros.submit('Добавить', 'PartyThemeSubmit') }}
-                    </form>
-                {% else %}
-                    Чтобы добавить тему, вам нужно авторизоваться:
-                    {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
-                    {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
-                {% endif %}
-            </div>
+            {% if party.isThemeSubmissionTime %}
+                <div class="col-md-12 gdp-comment-entry gdp-border">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <form action="{{ path("themes_add") }}" method="POST" id="teamEditorMain" class="PartyThemeForm">
+                            <input name="text" class="PartyThemeText"/>
+                            {{ macros.submit('Добавить', 'PartyThemeSubmit') }}
+                        </form>
+                    {% else %}
+                        Чтобы добавить тему, вам нужно авторизоваться:
+                        {{ macros.fb_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "facebook"})) }}
+                        {{ macros.vk_simple_button('Войти', url("hwi_oauth_service_redirect", {service: "vkontakte"})) }}
+                    {% endif %}
+                </div>
+            {% endif %}
 
             <div class="col-md-12">
                 <ul>
