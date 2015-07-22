@@ -62,7 +62,6 @@ _edit_article:
 party_themes:
     resource: "@GeekPartyBundle/Controller/PartyThemeController.php"
     type:     annotation
-    prefix:   /party
 
 # Upload & edit project
 _edit_prject:
@@ -74,7 +73,6 @@ _edit_prject:
 _user:
     resource: "@GeekPartyBundle/Controller/UserController.php"
     type:     annotation
-    prefix:   /user
 
 # Comments
 _comment:

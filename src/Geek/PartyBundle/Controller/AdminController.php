@@ -54,18 +54,4 @@ class AdminController extends BaseController
         #                                                                              \______/
         return [];
     }
-
-    /**
-     * @Route("/users")
-     * @Template()
-     */
-    public function usersAction()
-    {
-        return [
-            'users' => $this->getDoctrine()
-                ->getManager()
-                ->getRepository('GeekPartyBundle:User')
-                ->findAll()
-        ];
-    }
 }

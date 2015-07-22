@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends BaseController
 {
     /**
-     * @Route("/{id}", requirements={"id" = "\d+"}, defaults={"id" = 1})
+     * @Route("/user/{id}", requirements={"id" = "\d+"}, defaults={"id" = 1})
      * @Template()
      * @param Request $request
      * @param $id
@@ -59,7 +59,7 @@ class UserController extends BaseController
     }
 
     /**
-     * @Route("/after_login")
+     * @Route("/user/after_login")
      * @param Request $request
      * @return RedirectResponse
      */
@@ -70,5 +70,19 @@ class UserController extends BaseController
             $url = '/';
         }
         return new RedirectResponse($url);
+    }
+
+    /**
+     * @Route("/users")
+     * @Template()
+     */
+    public function usersAction()
+    {
+        return [
+            'users' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('GeekPartyBundle:User')
+                ->findBy([], ['firstname' => 'ASC']),
+        ];
     }
 }
