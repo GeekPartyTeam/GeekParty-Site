@@ -59,9 +59,9 @@
         {% if entry.party.hasUserRating %}
             {% set userRating = calculate_project_rating(entry, true) %}
             <div class="gdp-rating gdp-user-rating">
-                <div class="gdp-rating-back"></div>
+                <div class="gdp-rating-back" title="Пользовательский рейтинг: {{ userRating|round(1)|number_format(1) }}"></div>
                 <div class="gdp-rating-front"
-                        style="width: {{ 23.6 * userRating }}px" title="Пользовательский рейтинг: {{ userRating|round(1)|number_format(1) }}"></div>
+                        style="width: {{ 23.6 * userRating }}px"></div>
                 {% if is_winner(entry, true) %}
                     <span>#1</span>
                 {% endif %}
@@ -70,9 +70,9 @@
 
         {% set rating = calculate_project_rating(entry) %}
         <div class="gdp-rating">
-            <div class="gdp-rating-back"></div>
+            <div class="gdp-rating-back" title="Рейтинг участников: {{ rating }}"></div>
             <div class="gdp-rating-front"
-                    style="width: {{ 23.6 * rating }}px" title="Рейтинг участников: {{ rating }}"></div>
+                    style="width: {{ 23.6 * rating }}px"></div>
             <span>{{ rating|round(1)|number_format(1) }}</span>
         </div>
     {% endif %}
