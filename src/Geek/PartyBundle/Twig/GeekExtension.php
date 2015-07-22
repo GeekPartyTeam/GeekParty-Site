@@ -12,6 +12,7 @@ use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\PartyTheme;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Repository\PartyThemeRepository;
+use Geek\PartyBundle\Entity\Repository\WorkRepository;
 use Geek\PartyBundle\Entity\User;
 use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -140,9 +141,7 @@ class GeekExtension extends \Twig_Extension
     {
         $partyId = $project->getParty()->getId();
         if (!isset($this->ratingsCache[$partyId][(string)$userRatings])) {
-            $doctrine = $this->kernel->getContainer()->get('doctrine');
-            /** @var EntityManager $em */
-            $em = $doctrine->getManager();
+            $em = $this->getEntityManager();
             /** @var PartyRepository $repo */
             $repo = $em->getRepository('GeekPartyBundle:Party');
             $this->ratingsCache[$partyId][(string)$userRatings] = $userRatings ?
@@ -168,8 +167,30 @@ class GeekExtension extends \Twig_Extension
 
         $partyId = $project->getParty()->getId();
         $partyRatings = $this->ratingsCache[$partyId][(string)$userRatings];
-        reset($partyRatings);
-        $firstId = key($partyRatings);
-        return $firstId == $project->getId();
+        foreach ($partyRatings as $projectId => $rating) {
+            /** @var WorkRepository $currentProject */
+            $projectRepo = $this->getEntityManager()->getRepository('GeekPartyBundle:Work');
+            /** @var Work $currentProject */
+            $currentProject = $projectRepo->find($projectId);
+            if (!$currentProject) {
+                continue;
+            }
+            if (!$projectRepo->isWorkUploaded($currentProject)) {
+                continue;
+            }
+            if ($currentProject->getId() != $project->getId()) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    /**
+     * @return \Doctrine\ORM\EntityManager
+     */
+    private function getEntityManager()
+    {
+        $doctrine = $this->kernel->getContainer()->get('doctrine');
+        return $doctrine->getManager();
     }
 }
