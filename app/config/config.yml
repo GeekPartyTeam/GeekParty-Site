@@ -13,10 +13,24 @@ framework:
     form:            true
     csrf_protection: false
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    templating:      { engines: ['twig'] }
     default_locale:  "%locale%"
     trusted_proxies: ~
     session:         ~
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: true
+    bundles:
+        - GeekPartyBundle
+    filters:
+        cssrewrite: ~
+    assets:
+        fonts:
+            inputs:
+                - '@GeekPartyBundle/Resources/public/fonts/uni05_53.ttf'
+            output: 'fonts/uni05_53.ttf'
 
 # Twig Configuration
 twig:
@@ -26,6 +40,7 @@ twig:
         fb_app_id: %fb_app_id%
         disqus_shortname: %disqus_shortname%
         admin_email: %admin_email%
+        vk_app_id: %vk_app_id%
 
 # Doctrine Configuration
 doctrine:
@@ -150,3 +165,7 @@ services:
         arguments: [ 'GeekPartyBundle:Work' ]
         calls:
             - ['setRootDir', [ %kernel.root_dir% ]]
+
+fkr_css_url_rewrite:
+    rewrite_only_if_file_exists: true
+    clear_urls: true

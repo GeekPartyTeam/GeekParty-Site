@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
             new Prism\PollBundle\PrismPollBundle(),
+            new Fkr\CssURLRewriteBundle\FkrCssURLRewriteBundle(),
             //
             new Geek\PartyBundle\GeekPartyBundle(),
         );
