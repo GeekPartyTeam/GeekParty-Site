@@ -10,7 +10,9 @@
 
                 <div class="gdp-header-row gdp-border">
                     <div class="gdp-header-row-body">
-                        <img src="{{ asset("upd/img/icon-w.png") }}" />
+                        {% image '@GeekPartyBundle/Resources/public/img/icon-w.png' %}
+                            <img src="{{ asset_url }}" alt="rule" />
+                        {% endimage %}
                         <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | Геймджемы</span>
                     </div>
                 </div>

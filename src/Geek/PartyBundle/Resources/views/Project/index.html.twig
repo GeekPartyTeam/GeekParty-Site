@@ -12,7 +12,9 @@
 
                 <div class="gdp-header-row gdp-border">
                     <div class="gdp-header-row-body">
-                        <img src="{{ asset("upd/img/icon-w.png") }}" />
+                        {% image '@GeekPartyBundle/Resources/public/img/icon-w.png' %}
+                            <img src="{{ asset_url }}" alt="rule" />
+                        {% endimage %}
                         <span>Мои работы | <a class="gdp-admin" href="{{ path("project_new") }}">[добавить работу]</a> </span>
                     </div>
                 </div>

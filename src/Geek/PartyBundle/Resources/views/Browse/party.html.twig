@@ -13,7 +13,9 @@
 
             <div class="gdp-header-row gdp-border">
                 <div class="gdp-header-row-body gdp-js-center">
-                    <img src="{{ asset("upd/img/icon-w.png") }}" />
+                    {% image '@GeekPartyBundle/Resources/public/img/icon-w.png' %}
+                        <img src="{{ asset_url }}" />
+                    {% endimage %}
                     <span>Работы участников</span>
 
                     <select class="gdp-border" onchange="location = this.options[this.selectedIndex].value;">

@@ -11,8 +11,10 @@
 
             <div class="gdp-header-row gdp-border">
                 <div class="gdp-header-row-body">
-                    <img src="{{ asset("upd/img/icon-w.png") }}" />
-                        <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | <a href="{{ path('admin_parties') }}">Геймджемы</a> | {{ entity }} </span>
+                    {% image '@GeekPartyBundle/Resources/public/img/icon-w.png' %}
+                        <img src="{{ asset_url }}" alt="rule" />
+                    {% endimage %}
+                    <span><a href="{{ path('geek_party_admin_index') }}">Админка</a> | <a href="{{ path('admin_parties') }}">Геймджемы</a> | {{ entity }} </span>
                 </div>
             </div>
 
@@ -84,22 +86,29 @@
         </div>
     </div>
 
-    <script type="application/javascript" src="/js/moment-with-locales.min.js"></script>
-    <script type="application/javascript" src="/js/rome.min.js"></script>
+    {% block javascripts %}
+        {{ parent() }}
+        {% javascripts
+        '@GeekPartyBundle/Resources/public/js/vendor/moment-with-locales.min.js'
+        '@GeekPartyBundle/Resources/public/js/vendor/rome.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
 
-    <script type="application/javascript">
-        $('.datetime').each(function () {
-            var self = this, div = $('<div></div>');
-            $(this).hide().after(div);
-            rome(div[0], {
-                initialValue: self.value
-            }).on('data', function (value) {
-                setTimeout(function () {
-                    self.setAttribute('value', value);
-                }, 0);
+        <script type="application/javascript">
+            $('.datetime').each(function () {
+                var self = this, div = $('<div></div>');
+                $(this).hide().after(div);
+                rome(div[0], {
+                    initialValue: self.value
+                }).on('data', function (value) {
+                    setTimeout(function () {
+                        self.setAttribute('value', value);
+                    }, 0);
+                });
             });
-        });
-    </script>
+        </script>
+    {% endblock %}
 </div>
 
 {{ tinymce_init() }}

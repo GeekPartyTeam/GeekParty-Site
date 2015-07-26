@@ -6,7 +6,9 @@
 				<div id="content">
 					<div class="briefLine">
 						<div class="briefImage">
-							<img src="/img/icon_rule.png" alt="rule" />
+							{% image '@GeekPartyBundle/Resources/public/img/icon_rule.png' %}
+								<img src="{{ asset_url }}" alt="rule" />
+							{% endimage %}
 						</div>
 						<div class="briefDescription">
 							<h2>Участие</h2>
@@ -18,7 +20,9 @@
 					
 					<div class="briefLine">
 						<div class="briefImage">
-							<img src="/img/team/create_team.png" alt="edit" />
+							{% image '@GeekPartyBundle/Resources/public/img/create_team.png' %}
+								<img src="{{ asset_url }}" alt="edit" />
+							{% endimage %}
 						</div>
 						<div class="briefDescription">
 						<h2>Команды</h2>
@@ -102,7 +106,9 @@
 
 					<div class="briefLine">
 						<div class="briefImage">
-							<img src="./img/icon_rule.png" alt="rule" />
+							{% image '@GeekPartyBundle/Resources/public/img/icon_rule.png' %}
+								<img src="{{ asset_url }}" alt="rule" />
+							{% endimage %}
 						</div>
 						<div class="briefDescription">
 							<h2>Вход для гостей</h2>

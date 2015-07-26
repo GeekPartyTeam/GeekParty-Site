@@ -5,13 +5,17 @@
 
 {% macro fb_simple_button(text, link, class) %}
     <a href="{{ link|default('javascript:void(0)') }}">
-        <img src="/upd/img/icon-fb.png" alt="fb" />
+        {% image '@GeekPartyBundle/Resources/public/img/icon-fb.png' %}
+            <img src="{{ asset_url }}" alt="Facebook" />
+        {% endimage %}
     </a>
 {% endmacro %}
 
 {% macro vk_simple_button(text, link, class) %}
     <a href="{{ link|default('javascript:void(0)') }}">
-        <img src="/upd/img/icon-vk.png" alt="vk" />
+        {% image '@GeekPartyBundle/Resources/public/img/icon-vk.png' %}
+            <img src="{{ asset_url }}" alt="Vkontakte" />
+        {% endimage %}
     </a>
 {% endmacro %}
 
@@ -27,7 +31,12 @@
 {% macro fb_button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <a href="{{ link|default('javascript:void(0)') }}"><img src="/img/fb.png"/>{{ text }}</a>
+            <a href="{{ link|default('javascript:void(0)') }}">
+                {% image '@GeekPartyBundle/Resources/public/img/icon-fb.png' %}
+                    <img src="{{ asset_url }}" alt="Facebook" />
+                {% endimage %}
+                {{ text }}
+            </a>
         {% endblock %}
     {% endembed %}
 {% endmacro %}
@@ -35,7 +44,12 @@
 {% macro vk_button(text, link, class) %}
     {% embed 'GeekPartyBundle::button.html.twig' %}
         {% block content %}
-            <a href="{{ link|default('javascript:void(0)') }}"><img src="/img/vk.png"/>{{ text }}</a>
+            <a href="{{ link|default('javascript:void(0)') }}">
+                {% image '@GeekPartyBundle/Resources/public/img/icon-vk.png' %}
+                    <img src="{{ asset_url }}" alt="Vkontakte" />
+                {% endimage %}
+                {{ text }}
+            </a>
         {% endblock %}
     {% endembed %}
 {% endmacro %}

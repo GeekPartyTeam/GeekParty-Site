@@ -63,7 +63,7 @@
                     <span>
                         Лента новостей&nbsp;
                         {% if is_authorised() %}
-                            <a class="gdp-admin" href="{{ path("_edit_article", {"action":"edit"}) }}">[добавить новость]</a>
+                            {{ macros.button("Добавить новость  ", path("_edit_article", {"action":"edit"}), "k-red gdp-small") }}
                         {% endif %}
                     </span>
                     </div>

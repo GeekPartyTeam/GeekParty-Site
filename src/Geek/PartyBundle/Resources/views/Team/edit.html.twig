@@ -94,7 +94,9 @@
     </script>
 						<div class="briefLine">
 							<div class="briefImage">
-								<img src="/img/team/edit_team.png" alt="edit" />
+								{% image '@GeekPartyBundle/Resources/public/img/edit_team.png' %}
+									<img src="{{ asset_url }}" alt="edit" />
+								{% endimage %}
 							</div>
 							<div class="briefDescription">
 								<p><a href="{{ path('geek_people') }}">&larr; назад к списку команд</a></p>

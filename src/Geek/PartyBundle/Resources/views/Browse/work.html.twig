@@ -14,7 +14,9 @@
         <div class="col-md-12 col-xs-12">
             <div class="gdp-header-row gdp-border">
                 <div class="gdp-header-row-body">
-                    <img src="{{ asset("upd/img/icon-w.png") }}" />
+                    {% image '@GeekPartyBundle/Resources/public/img/icon-w.png' %}
+                        <img src="{{ asset_url }}" />
+                    {% endimage %}
                     <span><a href="{{ path('geek_browse', { party: work.party.id }) }}">Работы участников | {{ work.party }}</a></span>
                 </div>
             </div>
@@ -44,7 +46,7 @@
                 <div class="socialContainerGame">
                     <div id="vk_like_game"></div>
                     <script type="text/javascript">
-                        VK.Widgets.Like("vk_like_game", {type:"button",pageImage:"http://gamedevparty.ru/img/logo.png",text:"Игра на GameDevParty — {{ work.name }}"});
+                        VK.Widgets.Like("vk_like_game", {type:"button",pageImage:"http://gamedevparty.ru/bungles/geekparty/img/logo.png",text:"Игра на GameDevParty — {{ work.name }}"});
                     </script>
                     <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
                     <div class="socialTwitterButton">

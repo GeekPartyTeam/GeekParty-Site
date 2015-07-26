@@ -28,7 +28,8 @@
 
 {% macro addComment(type, id) %}
     {% import 'GeekPartyBundle::macros.html.twig' as macros %}
-    {% set userAvatarPath = '/img/avatar.png' %}
+
+    {% set userAvatarPath = '/bundles/geekparty/img/avatar.png' %}
 
     <div class="gdp-comment-entry gdp-border">
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
