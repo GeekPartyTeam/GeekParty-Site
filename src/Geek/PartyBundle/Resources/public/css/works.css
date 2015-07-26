@@ -1,0 +1,199 @@
+/* RATING */
+.k-rating {
+    position: relative;
+    height: 25px;
+    width: 140px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+.k-rating-back {
+    position: absolute;
+    background: url("../img/rating/rating-opacity.png");
+    width: 140px;
+    height: 25px;
+    top: 0;
+}
+
+.k-rating-front {
+    position: absolute;
+    background: url("../img/rating/rating-visible.png");
+    top: 0;
+    width: 140px;
+    height: 25px;
+}
+.k-rating-label {
+    top: 26px;
+    position: absolute;
+    width: 160px;
+    text-align: center;
+    font: 20px/20px "pixel_font";
+    color: #ffd02e;
+    display: block;
+}
+
+.gdp-rating {
+    position: relative;
+    width: 120px;
+    margin: 0 auto;
+}
+
+
+    .gdp-rating-back {
+        width: 118px;
+        height: 24px;
+        background: url("../img/rating-empty.png");
+    }
+    .gdp-rating-front {
+        position: absolute;
+        top: 0;
+        background: url("../img/rating-full.png");
+        width: 118px;
+        height: 24px;
+    }
+    .gdp-rating span {
+        font: 45px/45px "pixel_font";
+        color: #ff9b1a;
+        text-align: center;
+        display: block;
+    }
+
+.gdp-user-rating .gdp-rating-front {
+    background: url("../img/rating-full-user.png");
+}
+
+.gdp-work-rating {
+    display: block;
+    font: 45px/45px "pixel_font";
+    color: #ff9b1a;
+    width: 120px;
+    text-align: center;
+}
+
+
+
+
+
+
+    #gdp-party-info {
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+    }
+
+    .gdp-party-info-sep {
+        margin: 10px auto;
+        width: 310px;
+        border-bottom: 1px solid #2f8094;
+    }
+    #gdp-party-info #gdp-party-name {
+        font: 30px/30px "Open Sans";
+        color: #ffc501;
+    }
+    #gdp-party-info #gdp-party-time {
+        font: 14px/14px "Open Sans";
+        color: #dce6cc;
+    }
+        #gdp-party-info #gdp-party-time span {
+            font: 14px/14px "Open Sans";
+            color: #ffc501;
+        }
+    #gdp-party-info #gdp-party-amount {
+        font: 16px/16px "Open Sans";
+        color: #dce6cc;
+    }
+        #gdp-party-info #gdp-party-amount span {
+            font: 16px/16px "Open Sans";
+            color: #ffc501;
+        }
+
+
+.gdp-work {
+    margin-bottom: 28px;
+    padding: 16px;
+    overflow: hidden;
+}
+    .gdp-work .gdp-work-header {
+        padding-bottom: 10px;
+    }
+        .gdp-work .gdp-work-header .gdp-work-name {
+            font: 23px/23px "Roboto";
+            margin: 0 0 6px 0;
+            font-weight: 600;
+            color: #ff9b1a;
+        }
+        .gdp-work .gdp-work-header .grp-work-author {
+            font: 14px/14px "Open Sans";
+            color: #0aa432;
+            margin: 0 0 6px 0;
+        }
+    .gdp-work p {
+        margin-bottom: 12px;
+        font: 16px/20px "Open Sans";
+        color: #fff;
+        text-align: justify;
+    }
+
+    .gdp-work-sidebar {
+        float: left
+    }
+
+    .gdp-work-rating {
+        display: block;
+        font: 45px/45px "pixel_font";
+        color: #ff9b1a;
+        width: 120px;
+        text-align: center;
+    }
+    .gdp-work-rating2 {
+        font: 36px/36px "pixel_font";
+        color: #ff9b1a;
+        text-align: center;
+    }
+
+    .gdp-work-image-holder {
+        background: #113b50;
+        width: 120px;
+        height: 110px;
+        margin: 0 10px 10px 0;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 110px;
+    }
+
+    .gdp-work-image {
+        max-width: 120px;
+        max-height: 110px;
+        text-align: center;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        display:inline-block;
+        vertical-align: middle;
+        line-height: 110px;
+    }
+
+.gdp-work-description {
+    margin-bottom: 12px;
+    font: 16px/18px "Open Sans";
+    color: #fff;
+    text-align: justify;
+}
+
+.gdp-work-span {
+    /*margin-bottom: 12px;*/
+    font: 18px/20px "Roboto";
+    color: #ff9b1a;
+    text-align: justify;
+}
+
+
+
+/*name: 30 ffc501 openSans*/
+
+/*white: 14 dce6cc openSans*/
+/*data: 14 ffc501 openSans*/
+
+/*white2: 16*/
+/*amount: 16 ffc501*/
+/**/
+/**/
