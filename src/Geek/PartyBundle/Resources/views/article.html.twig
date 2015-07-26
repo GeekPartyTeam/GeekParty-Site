@@ -7,7 +7,7 @@
         <p class="gdp-entry-title">
             <a href="{{ entryPage }}">{{ entity.title }}</a>&nbsp;
             {% if is_owner_or_admin(entity.author) %}
-                <a class="gdp-admin" href="{{ path('_edit_article', {'action':'edit', 'id':entity.id}) }}">[править]</a>
+                {{ macros.button("Править", path('_edit_article', {'action':'edit', 'id':entity.id}), "k-red gdp-small") }}
             {% endif %}
         </p>
         <p class="gdp-entry-subtitle">

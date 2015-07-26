@@ -1,18 +1,18 @@
 {{ tinymce_init() }}
 
 {% if is_admin() %}
-<div class="modal fade" id="upload_image_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form method="post" enctype="multipart/form-data">
-            <label>Выберите картинку:<input name="image" type="file"></label>
-            <div>
-              <button type="submit" class="btn">Загрузить</button>
+    <div class="modal fade" id="upload_image_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <label>Выберите картинку:<input name="image" type="file"></label>
+                        <div>
+                            <button type="submit" class="btn">Загрузить</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
-</div>
 {% endif %}
