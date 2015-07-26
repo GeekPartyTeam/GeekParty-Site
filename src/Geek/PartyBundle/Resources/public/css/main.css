@@ -53,6 +53,15 @@ a.gdp-pixel-link:hover {
   background: #0e455c;
 }
 
+a.gdp-pixel-play {
+  font: 36px "pixel_font";
+  border: 3px solid;
+}
+
+.gdp-pixel-play-container {
+  margin-top: 20px;
+}
+
 .gdp-form-footer {
   margin-top: 10px;
 }

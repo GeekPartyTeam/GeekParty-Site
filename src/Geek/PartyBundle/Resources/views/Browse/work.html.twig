@@ -30,9 +30,9 @@
 
                 {{ projects_macros.rating(work) }}
 
-                <p>
+                <p class="gdp-pixel-play-container">
                     {% if is_work_uploaded(work) %}
-                        <a href="{{ macros.play_link(work) }}" class="gdp-pixel-link">Play!</a>
+                        {{ macros.button("Play!", macros.play_link(work), 'gdp-pixel-play') }}
                     {% else %}
                         <a href="#" class="gdp-pixel-link">Not uploaded</a>
                     {% endif %}
