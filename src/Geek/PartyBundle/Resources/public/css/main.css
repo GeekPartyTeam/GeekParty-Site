@@ -58,7 +58,7 @@ a.gdp-pixel-link:hover {
 }
 
 .gdp-news-header {
-  background: url("../img/icon-news.png") 0 4px no-repeat;
+  background: url("/bundles/geekparty/img/icon-news.png") 0 4px no-repeat;
   padding: 0 0 0 26px; }
 
 .gdp-entry-title {
@@ -176,7 +176,7 @@ a.gdp-pixel-link:hover {
   min-width: 113px;
   min-height: 112px;
   z-index: 0;
-  background: url("./../img/icon-timer.png") no-repeat;
+  background: url("/bundles/geekparty/img/icon-timer.png") no-repeat;
   margin-left: 300px;
   margin-top: 16px; }
   #gdp-header-state-body p {
@@ -262,7 +262,7 @@ a.gdp-pixel-link:hover {
       color: #fff; }
 
 .gdp-header-row {
-  background: #14445e url("../img/news-header-bg.png") 0 2px repeat-x;
+  background: #14445e url("/bundles/geekparty/img/news-header-bg.png") 0 2px repeat-x;
   height: 39px;
   position: relative;
   width: 100%;

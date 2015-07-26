@@ -8,7 +8,7 @@
 }
 .k-rating-back {
     position: absolute;
-    background: url("../img/rating/rating-opacity.png");
+    background: url("/bundles/geekparty/img/rating/rating-opacity.png");
     width: 140px;
     height: 25px;
     top: 0;
@@ -16,7 +16,7 @@
 
 .k-rating-front {
     position: absolute;
-    background: url("../img/rating/rating-visible.png");
+    background: url("/bundles/geekparty/img/rating/rating-visible.png");
     top: 0;
     width: 140px;
     height: 25px;
@@ -41,12 +41,12 @@
     .gdp-rating-back {
         width: 118px;
         height: 24px;
-        background: url("../img/rating-empty.png");
+        background: url("/bundles/geekparty/img/rating-empty.png");
     }
     .gdp-rating-front {
         position: absolute;
         top: 0;
-        background: url("../img/rating-full.png");
+        background: url("/bundles/geekparty/img/rating-full.png");
         width: 118px;
         height: 24px;
     }
@@ -58,7 +58,7 @@
     }
 
 .gdp-user-rating .gdp-rating-front {
-    background: url("../img/rating-full-user.png");
+    background: url("/bundles/geekparty/img/rating-full-user.png");
 }
 
 .gdp-work-rating {

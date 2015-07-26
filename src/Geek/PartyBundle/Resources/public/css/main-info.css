@@ -15,9 +15,9 @@
 
         height: 42px;
     }
-        #gdp-column-q { background: url("./../img/icon-q.png") no-repeat; }
-        #gdp-column-p { background: url("./../img/icon-p.png") no-repeat; }
-        #gdp-column-r { background: url("./../img/icon-r.png") no-repeat; }
+        #gdp-column-q { background: url("/bundles/geekparty/img/icon-q.png") no-repeat; }
+        #gdp-column-p { background: url("/bundles/geekparty/img/icon-p.png") no-repeat; }
+        #gdp-column-r { background: url("/bundles/geekparty/img/icon-r.png") no-repeat; }
 
         .gdp-column-header span {
             font: 18px/42px "Roboto";

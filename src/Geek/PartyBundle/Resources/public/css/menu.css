@@ -1,6 +1,6 @@
 #gdp-menu {
     height: 116px;
-    background: url("/img/bg-menu.png") 0 11px repeat-x;
+    background: url("/bundles/geekparty/img/bg-menu.png") 0 11px repeat-x;
     position: relative;
 }
 
@@ -41,29 +41,29 @@
 
 @media (min-width: 991px) {
 
-        .gdp-menu-button {
-            top: 33px;
-            background: url('../img/menu-button.png');
-            width: 121px;
-            height: 56px;
-            margin-right: 21px;
-            display: inline-block;
-            position: relative;
-            border: none;
-        }
-            .gdp-menu-button span {
-                text-transform: uppercase;
-                width: 120px;
-                display: block;
-                text-align: center;
-                font: 16px/46px "pixel_font";
-                color: #5d400a;
-            }
-        .gdp-menu-button-active {
-            background: url('../img/menu-button-active.png');
-            top: 54px;
-            height: 50px;
-        }
+    .gdp-menu-button {
+        top: 33px;
+        background: url('/bundles/geekparty/img/menu-button.png');
+        width: 121px;
+        height: 56px;
+        margin-right: 21px;
+        display: inline-block;
+        position: relative;
+        border: none;
+    }
+    .gdp-menu-button span {
+        text-transform: uppercase;
+        width: 120px;
+        display: block;
+        text-align: center;
+        font: 16px/46px "pixel_font";
+        color: #5d400a;
+    }
+    .gdp-menu-button-active {
+        background: url('/bundles/geekparty/img/menu-button-active.png');
+        top: 54px;
+        height: 50px;
+    }
 }
 
 
