@@ -6,3 +6,7 @@ app/config/facebook.yml
 app/config/parameters.yml
 public_html/works
 public_html/bundles
+public_html/css/
+public_html/fonts/
+public_html/images/
+public_html/js/
