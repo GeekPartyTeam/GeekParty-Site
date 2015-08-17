@@ -1,6 +1,5 @@
-GeekParty Site
-==============
+# GameDevParty (formerly known as GeekParty)
 
-http://geekpart.ru/
+Homepage: http://gamedevparty.ru
 
-test19
+Provisioning and CI scripts: https://github.com/kipelovets/GeekPartyAnsible
