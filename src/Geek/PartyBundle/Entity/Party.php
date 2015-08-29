@@ -61,6 +61,18 @@ class Party
      */
     protected $projectVotingEndTime;
 
+    public function __construct()
+    {
+        $this->startTime = new \DateTime();
+        $this->endTime = new \DateTime();
+        $this->themeSubmissionStartTime = new \DateTime();
+        $this->themeSubmissionEndTime = new \DateTime();
+        $this->themeVotingStartTime = new \DateTime();
+        $this->themeVotingEndTime = new \DateTime();
+        $this->projectVotingStartTime = new \DateTime();
+        $this->projectVotingEndTime = new \DateTime();
+    }
+
     /**
      * Set id
      *
@@ -87,12 +99,16 @@ class Party
     /**
      * Set startTime
      *
-     * @param \DateTime $startTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setStartTime($startTime)
+    public function setStartTime(\DateTime $value = null)
     {
-        $this->startTime = $startTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->startTime = $value;
     
         return $this;
     }
@@ -110,12 +126,16 @@ class Party
     /**
      * Set endTime
      *
-     * @param \DateTime $endTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setEndTime($endTime)
+    public function setEndTime(\DateTime $value = null)
     {
-        $this->endTime = $endTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->endTime = $value;
     
         return $this;
     }
@@ -130,11 +150,17 @@ class Party
         return $this->endTime;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return preg_replace('/gp(.*)/', 'GP#$1', $this->getId());
     }
 
+    /**
+     * @return bool
+     */
     public function isCurrent()
     {
         $now = new \DateTime();
@@ -167,12 +193,16 @@ class Party
     /**
      * Set themeSubmissionStartTime
      *
-     * @param \DateTime $themeSubmissionStartTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setThemeSubmissionStartTime($themeSubmissionStartTime)
+    public function setThemeSubmissionStartTime(\DateTime $value = null)
     {
-        $this->themeSubmissionStartTime = $themeSubmissionStartTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->themeSubmissionStartTime = $value;
 
         return $this;
     }
@@ -190,12 +220,16 @@ class Party
     /**
      * Set themeSubmissionEndTime
      *
-     * @param \DateTime $themeSubmissionEndTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setThemeSubmissionEndTime($themeSubmissionEndTime)
+    public function setThemeSubmissionEndTime(\DateTime $value = null)
     {
-        $this->themeSubmissionEndTime = $themeSubmissionEndTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->themeSubmissionEndTime = $value;
 
         return $this;
     }
@@ -213,12 +247,16 @@ class Party
     /**
      * Set themeVotingStartTime
      *
-     * @param \DateTime $themeVotingStartTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setThemeVotingStartTime($themeVotingStartTime)
+    public function setThemeVotingStartTime(\DateTime $value = null)
     {
-        $this->themeVotingStartTime = $themeVotingStartTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->themeVotingStartTime = $value;
 
         return $this;
     }
@@ -236,12 +274,16 @@ class Party
     /**
      * Set themeVotingEndTime
      *
-     * @param \DateTime $themeVotingEndTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setThemeVotingEndTime($themeVotingEndTime)
+    public function setThemeVotingEndTime(\DateTime $value = null)
     {
-        $this->themeVotingEndTime = $themeVotingEndTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->themeVotingEndTime = $value;
 
         return $this;
     }
@@ -256,11 +298,18 @@ class Party
         return $this->themeVotingEndTime;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
     }
 
+    /**
+     * @param \DateTime|null $time
+     * @return bool
+     */
     public function isThemeVotingTime(\DateTime $time = null)
     {
         if (!$time) {
@@ -269,6 +318,10 @@ class Party
         return $time >= $this->getThemeVotingStartTime() && $time < $this->getThemeVotingEndTime();
     }
 
+    /**
+     * @param \DateTime|null $time
+     * @return bool
+     */
     public function isThemeSubmissionTime(\DateTime $time = null)
     {
         if (!$time) {
@@ -280,12 +333,16 @@ class Party
     /**
      * Set projectVotingStartTime
      *
-     * @param \DateTime $projectVotingStartTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setProjectVotingStartTime($projectVotingStartTime)
+    public function setProjectVotingStartTime(\DateTime $value = null)
     {
-        $this->projectVotingStartTime = $projectVotingStartTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->projectVotingStartTime = $value;
 
         return $this;
     }
@@ -303,12 +360,16 @@ class Party
     /**
      * Set projectVotingEndTime
      *
-     * @param \DateTime $projectVotingEndTime
+     * @param \DateTime $value
      * @return Party
      */
-    public function setProjectVotingEndTime($projectVotingEndTime)
+    public function setProjectVotingEndTime(\DateTime $value = null)
     {
-        $this->projectVotingEndTime = $projectVotingEndTime;
+        if ($value === null) {
+            return $this;
+        }
+
+        $this->projectVotingEndTime = $value;
 
         return $this;
     }
@@ -323,6 +384,10 @@ class Party
         return $this->projectVotingEndTime;
     }
 
+    /**
+     * @param \DateTime|null $time
+     * @return bool
+     */
     public function isProjectVotingTime(\DateTime $time = null)
     {
         if (!$time) {
@@ -331,6 +396,10 @@ class Party
         return $time >= $this->getProjectVotingStartTime() && $time < $this->getProjectVotingEndTime();
     }
 
+    /**
+     * @param \DateTime|null $time
+     * @return bool
+     */
     public function isEnded(\DateTime $time = null)
     {
         if (!$time) {
@@ -339,6 +408,9 @@ class Party
         return $time > $this->getProjectVotingEndTime();
     }
 
+    /**
+     * @return bool
+     */
     public function hasUserRating()
     {
         return $this->getProjectVotingEndTime() >= new \DateTime('2015-07-22');
