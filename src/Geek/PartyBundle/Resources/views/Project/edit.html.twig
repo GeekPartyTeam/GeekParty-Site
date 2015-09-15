@@ -41,23 +41,46 @@
 
                         {% if current_party.isCurrent or is_granted('ROLE_ADMIN') %}
 
-                        <div class="teamEditorControlBlock">
-                            <h3>Иконка</h3>
-                            {% if new is not defined %}
-                                {{ projects.project_icon(entity) }}
-                            {% endif %}
-                            <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
-                            {{ form_widget(edit_form.icon) }}
-                        </div>
+                            <div class="teamEditorControlBlock">
+                                <h3>Иконка</h3>
+                                {% if new is not defined %}
+                                    {{ projects.project_icon(entity) }}
+                                {% endif %}
+                                <p class="inputLabel">Размер иконки будет изменен на 120x110</p>
+                                {{ form_widget(edit_form.icon) }}
+                            </div>
 
-                        <div class="teamEditorControlBlock">
-                            <h3>ZIP-архив с игрой</h3>
-                            <p class="inputLabel">Архив должен содержать файл <span class="gdp-red">index.html</span> в корне.
-                                Размер архива не должен превышать <span class="gdp-red">50 Мб</span></p>
-                            <p class="gdp-red">Будьте внимательны, архив должен содержать файл index.html в корне, а не внутри папки</p>
+                            <div class="teamEditorControlBlock">
+                                <h3>ZIP-архив с Web-версией игры</h3>
+                                <p class="inputLabel">Архив должен содержать работающую в браузере версию игры.
+                                    В корне архива должен быть файл <span class="gdp-red">index.html</span>
+                                    (он будет открываться в новом окне по ссылке "Играть" на странице игры).
+                                    Размер архива не должен превышать <span class="gdp-red">50 Мб</span></p>
+                                <p class="gdp-red">Будьте внимательны, архив должен содержать файл index.html в корне, а не внутри папки</p>
 
-                            {{ form_widget(edit_form.file) }}
-                        </div>
+                                {{ form_widget(edit_form.file) }}
+                            </div>
+
+                            <div class="teamEditorControlBlock">
+                                <h3>Ссылка на версию игры для Windows</h3>
+                                {{ form_errors(edit_form.windowsBuild) }}
+                                <p class="inputLabel"></p>
+                                {{ form_widget(edit_form.windowsBuild) }}
+                            </div>
+
+                            <div class="teamEditorControlBlock">
+                                <h3>Ссылка на версию игры для MacOS</h3>
+                                {{ form_errors(edit_form.macBuild) }}
+                                <p class="inputLabel"></p>
+                                {{ form_widget(edit_form.macBuild) }}
+                            </div>
+
+                            <div class="teamEditorControlBlock">
+                                <h3>Ссылка на версию игры для Linux</h3>
+                                {{ form_errors(edit_form.linuxBuild) }}
+                                <p class="inputLabel"></p>
+                                {{ form_widget(edit_form.linuxBuild) }}
+                            </div>
 
                         {% else %}
 
@@ -72,10 +95,7 @@
                         <div class="gdp-form-footer">
                             {{ macros.submit("Сохранить") }}
                             {% if delete_form is defined %}
-                                <div class="k-inline">
-                                    {{ form_widget(delete_form) }}
-                                </div>
-                                {{ macros.submit("Удалить", "gdp-red") }}
+                                {{ macros.btn("Удалить", "k-red RemoveButton") }}
                             {% endif %}
                         </div>
                     </div>
@@ -86,6 +106,9 @@
                 <!-- {{ form_rest(edit_form) }} -->
                 {{ tinymce_init() }}
             </form>
+            {% if delete_form is defined %}
+                {{ form(delete_form, { 'attr': {'class': 'RemoveForm'} }) }}
+            {% endif %}
         </div> <!-- teamEditorBlock -->
     </div> <!-- content -->
 {% endblock %}

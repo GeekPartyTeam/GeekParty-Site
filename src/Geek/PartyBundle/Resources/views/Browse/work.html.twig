@@ -35,6 +35,18 @@
                         <a href="#" class="gdp-pixel-link">Not uploaded</a>
                     {% endif %}
                 </p>
+
+                {% if work.windowsBuild %}
+                    <p> Windows: <a href="{{ work.windowsBuild }}">{{ work.windowsBuild }}</a></p>
+                {% endif %}
+
+                {% if work.linuxBuild %}
+                    <p> Mac: <a href="{{ work.macBuild }}">{{ work.macBuild }}</a></p>
+                {% endif %}
+
+                {% if work.linuxBuild %}
+                    <p> Linux: <a href="{{ work.linuxBuild }}">{{ work.linuxBuild }}</a></p>
+                {% endif %}
             </div>
 
 

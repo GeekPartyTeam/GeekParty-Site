@@ -5,6 +5,7 @@ namespace Geek\PartyBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Geek\PartyBundle\Entity\Repository\WorkRepository")
@@ -75,6 +76,24 @@ class Work
      * @ORM\OrderBy({"date" = "DESC"})
      */
     protected $comments;
+
+    /**
+     * @ORM\Column(nullable=true)
+     * @Assert\Url()
+     */
+    protected $windowsBuild;
+
+    /**
+     * @ORM\Column(nullable=true)
+     * @Assert\Url()
+     */
+    protected $macBuild;
+
+    /**
+     * @ORM\Column(nullable=true)
+     * @Assert\Url()
+     */
+    protected $linuxBuild;
 
     /**
      * Constructor
@@ -343,8 +362,68 @@ class Work
         return $this->shortname;
     }
 
+    /**
+     * @return ArrayCollection|Collection
+     */
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWindowsBuild()
+    {
+        return $this->windowsBuild;
+    }
+
+    /**
+     * @param string $windowsBuild
+     * @return Work
+     */
+    public function setWindowsBuild($windowsBuild)
+    {
+        $this->windowsBuild = $windowsBuild;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMacBuild()
+    {
+        return $this->macBuild;
+    }
+
+    /**
+     * @param string $macBuild
+     * @return Work
+     */
+    public function setMacBuild($macBuild)
+    {
+        $this->macBuild = $macBuild;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinuxBuild()
+    {
+        return $this->linuxBuild;
+    }
+
+    /**
+     * @param string $linuxBuild
+     * @return Work
+     */
+    public function setLinuxBuild($linuxBuild)
+    {
+        $this->linuxBuild = $linuxBuild;
+
+        return $this;
     }
 }

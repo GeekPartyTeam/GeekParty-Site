@@ -19,7 +19,22 @@ class WorkRepository extends EntityRepository
 
     public function isWorkUploaded(Work $work)
     {
+        return $this->isWebBuildUploaded($work)
+            || $work->getWindowsBuild()
+            || $work->getLinuxBuild()
+            || $work->getMacBuild()
+        ;
+    }
+
+    /**
+     * @param Work $work
+     * @return bool
+     */
+    public function isWebBuildUploaded(Work $work)
+    {
         $path = '/works/' . $work->getParty()->getId() . '/' . $work->getId() . '/index.html';
         return file_exists($this->rootDir . '/../public_html' . $path);
     }
+
+
 }

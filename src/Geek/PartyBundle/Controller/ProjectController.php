@@ -53,7 +53,7 @@ class ProjectController extends Base\BaseController
                 return $redirect;
             }
 
-            $response['delete_form'] = $this->createDeleteForm($id);
+            $response['delete_form'] = $this->createDeleteForm($id)->createView();
         } else {
             $entity = new Work();
         }
@@ -87,7 +87,11 @@ class ProjectController extends Base\BaseController
             $em->persist($entity);
             $em->flush();
 
-            $response = new RedirectResponse($this->generateUrl('geek_browse'), 302);
+            $url = $this->generateUrl('geek_browse_work', [
+                'party' => $entity->getParty(),
+                'work' => $entity,
+            ]);
+            $response = new RedirectResponse($url, 302);
 
             try {
                 $this->uploadFiles($editForm, $entity);
@@ -213,7 +217,7 @@ class ProjectController extends Base\BaseController
      *
      * @Route("/{id}/update", name="project_update")
      * @Method("POST")
-     * @Template("GeekPartyBundle:Work:edit.html.twig")
+     * @Template("GeekPartyBundle:Project:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -253,7 +257,8 @@ class ProjectController extends Base\BaseController
 
     private function createDeleteForm($id)
     {
-        return $this->createFormBuilder(array('id' => $id))
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('project_delete', ['id' => $id]))
             ->add('id', 'hidden')
             ->getForm();
     }

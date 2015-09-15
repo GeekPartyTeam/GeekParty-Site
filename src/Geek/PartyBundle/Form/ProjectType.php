@@ -2,6 +2,7 @@
 
 namespace Geek\PartyBundle\Form;
 
+use Geek\PartyBundle\Entity\Work;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,14 +21,17 @@ class ProjectType extends AbstractType
             ]])
             ->add('icon', 'file', ['mapped' => false, 'required' => false])
             ->add('file', 'file', ['mapped' => false, 'required' => false])
+            ->add('windowsBuild')
+            ->add('macBuild')
+            ->add('linuxBuild')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Geek\PartyBundle\Entity\Work'
-        ));
+        $resolver->setDefaults([
+            'data_class' => Work::class,
+        ]);
     }
 
     public function getName()

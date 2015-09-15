@@ -281,3 +281,11 @@ table.gdp-entry-content td {
 .gdp-left {
   float: left;
 }
+
+.teamEditorControlBlock input[type="text"] {
+  width: 300px;
+}
+
+.teamEditorControlBlock ul li {
+  color: red;
+}

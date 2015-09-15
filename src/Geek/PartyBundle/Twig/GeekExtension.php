@@ -80,6 +80,7 @@ class GeekExtension extends \Twig_Extension
 
     public function isWorkUploaded(Work $work)
     {
+        /** @var WorkRepository $workRepo */
         $workRepo = $this->kernel->getContainer()
             ->get('work.repo')
             ;
