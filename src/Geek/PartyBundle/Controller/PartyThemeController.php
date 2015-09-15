@@ -22,10 +22,10 @@ class PartyThemeController extends Base\BaseController
      * Displays a form to create a new Work entity.
      *
      * @Route("/{id}", name="themes_index", defaults={"id" = null})
+     * @Method("GET")
      * @Template()
      * @param null $id
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     * @internal param Request $request
      */
     public function indexAction($id = null)
     {
