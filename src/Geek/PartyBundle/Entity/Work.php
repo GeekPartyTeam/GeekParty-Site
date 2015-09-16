@@ -30,11 +30,13 @@ class Work
     protected $name = '';
     
     /**
+     * @Assert\NotBlank()
      * @ORM\Column
      */
     protected $description = '';
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="text",nullable=true)
      */
     protected $longDescription = '';
