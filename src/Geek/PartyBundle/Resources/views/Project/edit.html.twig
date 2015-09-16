@@ -23,18 +23,21 @@
                     <div id="rightBorder">
                         <div class="teamEditorControlBlock">
                             <h3>Название проекта</h3>
+                            {{ form_errors(edit_form.name) }}
                             <p class="inputLabel">Максисмум 30 символов</p>
                             {{ form_widget(edit_form.name) }}
                         </div>
 
                         <div class="teamEditorControlBlock">
                             <h3>Описание проекта</h3>
+                            {{ form_errors(edit_form.description) }}
                             <p class="inputLabel"></p>
                             {{ form_widget(edit_form.description) }}
                         </div>
 
                         <div class="teamEditorControlBlock">
                             <h3>Подробное описание</h3>
+                            {{ form_errors(edit_form.longDescription) }}
                             <p class="inputLabel"></p>
                             {{ form_widget(edit_form.longDescription) }}
                         </div>
