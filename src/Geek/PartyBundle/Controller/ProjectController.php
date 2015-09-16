@@ -130,24 +130,23 @@ class ProjectController extends Base\BaseController
      * Finds and displays a Work entity.
      *
      * @Route("/{id}/show", name="project_show")
-     * @Template()
+     *
+     * @param $id
+     * @return RedirectResponse
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('GeekPartyBundle:Work')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Work entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->redirect($this->generateUrl('geek_browse_work', [
+            'party' => $entity->getParty(),
+            'work' => $entity,
+        ]));
     }
 
     /**
@@ -175,7 +174,10 @@ class ProjectController extends Base\BaseController
      *
      * @Route("/create", name="project_create")
      * @Method("POST")
-     * @Template("GeekPartyBundle:Work:new.html.twig")
+     * @Template("GeekPartyBundle:Project:edit.html.twig")
+     *
+     * @param Request $request
+     * @return array|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
@@ -190,6 +192,9 @@ class ProjectController extends Base\BaseController
      *
      * @Route("/{id}/edit", name="project_edit")
      * @Template()
+     *
+     * @param $id
+     * @return array
      */
     public function editAction($id)
     {
@@ -218,6 +223,10 @@ class ProjectController extends Base\BaseController
      * @Route("/{id}/update", name="project_update")
      * @Method("POST")
      * @Template("GeekPartyBundle:Project:edit.html.twig")
+     *
+     * @param Request $request
+     * @param $id
+     * @return array|RedirectResponse
      */
     public function updateAction(Request $request, $id)
     {
@@ -229,11 +238,15 @@ class ProjectController extends Base\BaseController
      *
      * @Route("/{id}/delete", name="project_delete")
      * @Method("POST")
+     *
+     * @param Request $request
+     * @param $id
+     * @return null|RedirectResponse
      */
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
