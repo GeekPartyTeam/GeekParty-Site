@@ -21,7 +21,7 @@ class PartyThemeController extends Base\BaseController
     /**
      * Displays a form to create a new Work entity.
      *
-     * @Route("/{id}", name="themes_index", defaults={"id" = null})
+     * @Route("/list/{id}", name="themes_index", defaults={"id" = null})
      * @Method("GET")
      * @Template()
      * @param null $id
@@ -68,7 +68,7 @@ class PartyThemeController extends Base\BaseController
         if (!$this->isAdmin() && ( !$currentParty || !$currentParty->isThemeVotingTime() )) {
             return $this->redirectToIndex();
         }
-        $response = $this->themesList($currentParty->getThemeVotingStartTime(), $currentParty->getThemeVotingEndTime());
+        $response = $this->themesList($currentParty);
         if (is_array($response)) {
             $response['alreadyVoted'] = $this->getAlreadyVoted($currentParty);
             if ($this->isAdmin()) {
