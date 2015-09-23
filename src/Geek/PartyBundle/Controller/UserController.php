@@ -13,6 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserController extends BaseController
 {
@@ -84,5 +86,25 @@ class UserController extends BaseController
                 ->getRepository('GeekPartyBundle:User')
                 ->findBy([], ['firstname' => 'ASC']),
         ];
+    }
+
+    /**
+     * @Route("/fake_login")
+     * @return RedirectResponse
+     */
+    public function fakeLoginAction()
+    {
+        if (!$this->container->getParameter('fake_login_enabled')) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $user = $this->getDoctrine()->getManager()
+            ->getRepository('GeekPartyBundle:User')
+            ->findOneBy(['username' => 'admin'])
+        ;
+        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        $this->get('security.token_storage')->setToken($token);
+
+        return new RedirectResponse($this->generateUrl('geek_index'));
     }
 }

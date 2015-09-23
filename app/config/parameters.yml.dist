@@ -18,3 +18,4 @@ parameters:
     vk_app_secret: 123
     disqus_shortname: geekparty
     admin_email: geekparty.ru@gmail.com
+    fake_login_enabled: false
