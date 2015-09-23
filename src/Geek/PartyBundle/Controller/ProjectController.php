@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Project (Work) controller.
@@ -22,19 +23,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class ProjectController extends Base\BaseController
 {
-    public function checkRights(Work $entity)
-    {
-        if ((!$this->getUser() || $entity->getAuthor() !== $this->getUser()) &&
-            !$this->isAdmin()
-        ) {
-            return $this->redirect($this->generateUrl('geek_index'));
-        }
-
-        return null;
-    }
-
+    /**
+     * @param Request $request
+     * @param string|null $id
+     * @return array|RedirectResponse
+     */
     public function update(Request $request, $id = null)
     {
+        $this->get('logger')->info("Updating project $id");
+
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $workEntityRepository = $em->getRepository('GeekPartyBundle:Work');
@@ -49,9 +46,7 @@ class ProjectController extends Base\BaseController
                 throw $this->createNotFoundException('Unable to find Work entity.');
             }
 
-            if (null !== ($redirect = $this->checkRights($entity))) {
-                return $redirect;
-            }
+            $this->checkRights($entity);
 
             $response['delete_form'] = $this->createDeleteForm($id)->createView();
         } else {
@@ -62,7 +57,6 @@ class ProjectController extends Base\BaseController
         $editForm->submit($request);
 
         if ($editForm->isValid()) {
-
             if ($entity->getId()) {
                 $workWithSameId = $workEntityRepository->find($entity->getId());
                 if ($workWithSameId && $workWithSameId !== $entity) {
@@ -95,11 +89,10 @@ class ProjectController extends Base\BaseController
 
             try {
                 $this->uploadFiles($editForm, $entity);
+                return $response;
             } catch (InvalidUploadedFile $e) {
                 $this->addErrorMessage($e->getMessage());
             }
-
-            return $response;
         }
 
         $response['entity'] = $entity;
@@ -121,9 +114,9 @@ class ProjectController extends Base\BaseController
             'author' => $this->getUser()
         ]);
 
-        return $this->arrayResponse(array(
+        return $this->arrayResponse([
             'works' => $entities,
-        ));
+        ]);
     }
 
     /**
@@ -163,10 +156,10 @@ class ProjectController extends Base\BaseController
         $entity = new Work();
         $form   = $this->createForm(new ProjectType(), $entity);
 
-        return $this->arrayResponse(array(
+        return $this->arrayResponse([
             'entity' => $entity,
             'edit_form'   => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -210,11 +203,11 @@ class ProjectController extends Base\BaseController
         $editForm = $this->createForm(new ProjectType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->arrayResponse(array(
+        return $this->arrayResponse([
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -257,9 +250,7 @@ class ProjectController extends Base\BaseController
                 throw $this->createNotFoundException('Unable to find Work entity.');
             }
 
-            if (null !== ($redirect = $this->checkRights($entity))) {
-                return $redirect;
-            }
+            $this->checkRights($entity);
 
             $em->remove($entity);
             $em->flush();
@@ -268,6 +259,10 @@ class ProjectController extends Base\BaseController
         return $this->redirect($this->generateUrl('geek_index'));
     }
 
+    /**
+     * @param int $id
+     * @return Form
+     */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
@@ -285,6 +280,8 @@ class ProjectController extends Base\BaseController
      */
     private function uploadIcon(UploadedFile $file, $entityId, $partyDir)
     {
+        $this->get('logger')->info("Uploading icon for $entityId");
+
         if (strpos($file->getMimeType(), 'image/') !== 0) {
             throw new InvalidUploadedFile('Иконка должна быть картинкой PNG или JPG');
         }
@@ -293,9 +290,9 @@ class ProjectController extends Base\BaseController
         $path = $partyDir . '/' . $filename;
         $file->move($partyDir, $filename);
         $im = new \Imagick($path);
-        $im->resizeimage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
-        $im->writeimage($path);
-        return array($file, $path);
+        $im->resizeImage(120, 110, \Imagick::FILTER_UNDEFINED, 1, true);
+        $im->writeImage($path);
+        return [$file, $path];
     }
 
     /**
@@ -306,6 +303,8 @@ class ProjectController extends Base\BaseController
      */
     private function uploadGame(UploadedFile $file, $entityId, $partyDir)
     {
+        $this->get('logger')->info("Uploading archive for $entityId");
+
         if ($file->getMimeType() != 'application/zip') {
             throw new InvalidUploadedFile('Архив должен быть в формате ZIP');
         }
@@ -315,6 +314,9 @@ class ProjectController extends Base\BaseController
             mkdir($dir, 0777, true);
         }
         $file->move($dir, 'archive.zip');
+
+        $this->get('logger')->info("Extracting archive for $entityId");
+
         $zip = new \ZipArchive();
         if ($zip->open($path)) {
             $li = $zip->locateName('index.html');
@@ -325,6 +327,8 @@ class ProjectController extends Base\BaseController
             $zip->extractTo($dir);
         }
         unlink($path);
+
+        $this->get('logger')->info("Done extracting archive for $entityId");
     }
 
     /**
@@ -333,15 +337,19 @@ class ProjectController extends Base\BaseController
      */
     private function uploadFiles(Form $editForm, Work $entity)
     {
+        $this->get('logger')->info("Uploading files for {$entity->getId()}");
+
         $partyDir = $this->get('kernel')->getRootDir() . '/../public_html/works/' . $entity->getParty()->getId();
         if (!is_dir($partyDir)) {
             mkdir($partyDir, 0777, true);
         }
 
-        if ($iconFile = $editForm['icon']->getData()) {
+        $iconFile = $editForm['icon']->getData();
+        if ($iconFile) {
             $this->uploadIcon($iconFile, $entity->getId(), $partyDir);
         }
-        if ($gameFile = $editForm['file']->getData()) {
+        $gameFile = $editForm['file']->getData();
+        if ($gameFile) {
             if ($entity->getParty()->isCurrent() || $this->isAdmin()) {
                 $this->uploadGame($gameFile, $entity->getId(), $partyDir);
             } else {
@@ -352,8 +360,21 @@ class ProjectController extends Base\BaseController
         }
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     private function forwardToUploadClosedPage()
     {
         return $this->render('GeekPartyBundle:Project:closed.html.twig');
+    }
+
+    /**
+     * @param Work $entity
+     */
+    private function checkRights(Work $entity)
+    {
+        if (($entity->getAuthor() !== $this->getUser()) && !$this->isAdmin()) {
+            throw new AccessDeniedHttpException();
+        }
     }
 }
