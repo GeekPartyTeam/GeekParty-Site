@@ -3,6 +3,7 @@
 namespace Geek\PartyBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Exception\InvalidUploadedFile;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -10,11 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Geek\PartyBundle\Entity\Work;
 use Geek\PartyBundle\Form\ProjectType;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use JMS\DiExtraBundle\Annotation as DI;
 
 /**
  * Project (Work) controller.
@@ -23,6 +24,12 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class ProjectController extends Base\BaseController
 {
+    /**
+     * @DI\Inject("geek.party.repository")
+     * @var PartyRepository
+     */
+    private $partyRepository;
+
     /**
      * @param Request $request
      * @param string|null $id
@@ -35,6 +42,8 @@ class ProjectController extends Base\BaseController
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $workEntityRepository = $em->getRepository('GeekPartyBundle:Work');
+        /** @var PartyRepository $partyRepository */
+        $partyRepository = $em->getRepository('GeekPartyBundle:Party');
 
         $response = [];
 
@@ -71,7 +80,7 @@ class ProjectController extends Base\BaseController
             }
 
             if (!$entity->getParty()) {
-                $currentParty = $this->getCurrentParty();
+                $currentParty = $partyRepository->getCurrentParty();
                 $entity->setParty($currentParty);
             }
             if (!$entity->getAuthor()) {
@@ -150,7 +159,7 @@ class ProjectController extends Base\BaseController
      */
     public function newAction()
     {
-        if (!$this->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
+        if (!$this->partyRepository->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
             return $this->forwardToUploadClosedPage();
         }
         $entity = new Work();
@@ -174,7 +183,7 @@ class ProjectController extends Base\BaseController
      */
     public function createAction(Request $request)
     {
-        if (!$this->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
+        if (!$this->partyRepository->getCurrentParty()->isCurrent() && !$this->isAdmin()) {
             return $this->forwardToUploadClosedPage();
         }
         return $this->update($request);

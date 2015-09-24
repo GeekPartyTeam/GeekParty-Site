@@ -1,6 +1,3 @@
-{% if current_party is not defined %}
-    {% set current_party = get_current_party() %}
-{% endif %}
 {% if now is not defined %}
     {% set now = "now"|date('Y-m-d H:i:s') %}
 {% endif %}

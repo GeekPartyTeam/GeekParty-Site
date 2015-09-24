@@ -29,9 +29,11 @@ class PartyThemeController extends Base\BaseController
      */
     public function indexAction($id = null)
     {
+        $partyRepository = $this->getPartyRepository();
+
         $party = $id === null ?
-            $this->getCurrentParty() :
-            $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
+            $partyRepository->getCurrentParty() :
+            $partyRepository->find($id);
 
         if (!$party) {
             return $this->redirectToIndex();
@@ -61,7 +63,9 @@ class PartyThemeController extends Base\BaseController
      */
     public function votesAction(Request $request)
     {
-        $currentParty = $this->getCurrentParty();
+        $currentParty = $this->getPartyRepository()
+            ->getCurrentParty();
+
         if (($id = $request->get('id')) && $this->isAdmin()) {
             $currentParty = $this->getDoctrine()->getManager()->find('GeekPartyBundle:Party', $id);
         }
@@ -106,7 +110,7 @@ class PartyThemeController extends Base\BaseController
         }
 
         $theme = new PartyTheme();
-        $theme->setParty($this->getCurrentParty());
+        $theme->setParty($this->getPartyRepository()->getCurrentParty());
         $theme->setText($text);
         $theme->setUser($this->getUser());
         $em = $this->getDoctrine()->getManager();
@@ -142,7 +146,7 @@ class PartyThemeController extends Base\BaseController
     public function voteAction(Request $request)
     {
         $response = $this->redirect($this->generateUrl('themes_votes'));
-        $currentParty = $this->getCurrentParty();
+        $currentParty = $this->getPartyRepository()->getCurrentParty();
         if (!$currentParty || !$currentParty->isThemeVotingTime()) {
             return $this->redirectToIndex();
         }
@@ -239,5 +243,13 @@ class PartyThemeController extends Base\BaseController
         $query->setMaxResults(1);
         $result = $query->getResult();
         return count($result) > 0 ? $result[0] : null;
+    }
+
+    /**
+     * @return \Geek\PartyBundle\Entity\Repository\PartyRepository
+     */
+    public function getPartyRepository()
+    {
+        return $this->getDoctrine()->getManager()->getRepository('GeekPartyBundle:Party');
     }
 } 

@@ -51,7 +51,6 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
-            , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
             , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
             , new \Twig_SimpleFunction('get_party_theme', [$this, 'getPartyTheme'])
             , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
@@ -85,22 +84,6 @@ class GeekExtension extends \Twig_Extension
             ->get('work.repo')
             ;
         return $workRepo->isWorkUploaded($work);
-    }
-
-    public function getCurrentParty()
-    {
-        $doctrine = $this->kernel->getContainer()->get('doctrine');
-        $em = $doctrine->getManager();
-        $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p WHERE p.endTime > :time ORDER BY p.endTime ASC")
-            ->setParameter('time', new \DateTime())
-            ->getResult();
-
-        if (count($parties) == 0) {
-            $parties = $em->createQuery("SELECT p FROM GeekPartyBundle:Party p ORDER BY p.endTime DESC")
-                ->getResult();
-        }
-
-        return count($parties) > 0 ? $parties[0] : null;
     }
 
     public function formatDate($date)

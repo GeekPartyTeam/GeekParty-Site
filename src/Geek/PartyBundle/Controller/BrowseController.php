@@ -76,7 +76,7 @@ class BrowseController extends Base\BaseController
         return $this->arrayResponse([
             'party' => $party,
             'work' => $workEntity,
-            'vote' => $this->getVote($workEntity),
+            'vote' => $this->getUserVote($workEntity),
             'comments' => AbstractCommentRepository::extractCommentsPage($workEntity->getComments(), $from),
         ]);
     }
@@ -103,7 +103,7 @@ class BrowseController extends Base\BaseController
             return new JsonResponse(['error' => "Голос должен быть от 1 до 5 кирок"]);
         }
 
-        $entity = $this->getVote($project);
+        $entity = $this->getUserVote($project);
         if (!$entity) {
             $entity = new ProjectVote();
             $entity->setWork($project);
@@ -186,16 +186,12 @@ class BrowseController extends Base\BaseController
      * @param Work $project
      * @return ProjectVote|null
      */
-    private function getVote(Work $project)
+    private function getUserVote(Work $project)
     {
         if (!$this->getUser()) {
             return null;
         }
-        $currentParty = $this->getCurrentParty();
-        if ($project->getParty() != $currentParty) {
-            return null;
-        }
-        if (!$currentParty->isProjectVotingTime()) {
+        if (!$project->getParty()->isProjectVotingTime()) {
             return null;
         }
         /** @var \Doctrine\ORM\EntityManager $em */
