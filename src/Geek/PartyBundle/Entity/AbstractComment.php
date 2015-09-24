@@ -38,7 +38,7 @@ abstract class AbstractComment
      */
     protected $userAgent = '';
     /**
-     * @ORM\Column
+     * @ORM\Column(type="text")
      */
     protected $text;
     /**
