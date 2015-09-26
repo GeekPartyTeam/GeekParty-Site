@@ -117,6 +117,11 @@ class GeekExtension extends \Twig_Extension
      */
     public function getPartyTheme(Party $party)
     {
+        $now = new \DateTime();
+        if ($now < $party->getThemeVotingEndTime()) {
+            return null;
+        }
+
         /** @var PartyThemeRepository $partyThemeRepo */
         $partyThemeRepo = $this->kernel->getContainer()->get('doctrine')
             ->getManager()
