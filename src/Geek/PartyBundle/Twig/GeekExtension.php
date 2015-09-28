@@ -51,6 +51,7 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
             , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
+            , new \Twig_SimpleFunction('work_has_web_build', [$this, 'workHasWebBuild'])
             , new \Twig_SimpleFunction('get_current_party', [$this, 'getCurrentParty'])
             , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
             , new \Twig_SimpleFunction('get_party_theme', [$this, 'getPartyTheme'])
@@ -78,6 +79,10 @@ class GeekExtension extends \Twig_Extension
         return $this->context->isGranted('IS_AUTHENTICATED_FULLY');
     }
 
+    /**
+     * @param Work $work
+     * @return bool
+     */
     public function isWorkUploaded(Work $work)
     {
         /** @var WorkRepository $workRepo */
@@ -189,6 +194,19 @@ class GeekExtension extends \Twig_Extension
             }
             return true;
         }
+    }
+
+    /**
+     * @param Work $work
+     * @return bool
+     */
+    public function workHasWebBuild(Work $work)
+    {
+        /** @var WorkRepository $workRepo */
+        $workRepo = $this->kernel->getContainer()
+            ->get('work.repo');
+
+        return $workRepo->isWebBuildUploaded($work);
     }
 
     /**
