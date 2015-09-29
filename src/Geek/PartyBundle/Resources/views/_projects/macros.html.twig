@@ -10,6 +10,14 @@
     {{ path('geek_browse_work', { party: partyId, work: entry.id }) }}
 {% endmacro %}
 
+{% macro project_author(entry) %}
+    {% set userPage = entry.author ? path('geek_party_user_show', { id: entry.author.id }) : '' %}
+    {% set userName = entry.author ? entry.author.fullname : 'UFO' %}
+
+    by <a {% if entry.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
+    @{{ format_date(entry.time) }}
+{% endmacro %}
+
 {% macro project_block(entry, current_user, show_rating) %}
     {% import 'GeekPartyBundle::_comments/macros.html.twig' as comments %}
     {% import _self as self %}
@@ -20,12 +28,9 @@
         <div class="gdp-work-header">
             <p class="gdp-work-name"><a href="{{ entryPage }}">{{ entry.name }}</a></p>
 
-            {% set userPage = entry.author ? path('geek_party_user_show', { id: entry.author.id }) : '' %}
-            {% set userName = entry.author ? entry.author.fullname : 'UFO' %}
 
             <p class="grp-work-author">
-                by <a {% if entry.author %}href="{{ userPage }}"{% endif %}>{{ userName }}</a>
-                @{{ format_date(entry.time) }}
+                {{ self.project_author(entry) }}
             </p>
 
         </div>

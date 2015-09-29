@@ -142,17 +142,21 @@ class PartyRepository extends EntityRepository
         static $party;
 
         if (!$party) {
-            $party = $this->getEntityManager()
+            $parties = $this->getEntityManager()
                 ->createQuery("SELECT p FROM GeekPartyBundle:Party p WHERE p.endTime > :time ORDER BY p.endTime ASC")
                 ->setParameter('time', new \DateTime())
                 ->setMaxResults(1)
-                ->getSingleResult();
+                ->getResult();
 
-            if (!$party) {
-                $party = $this->getEntityManager()
+            if (!$parties) {
+                $parties = $this->getEntityManager()
                     ->createQuery("SELECT p FROM GeekPartyBundle:Party p ORDER BY p.endTime DESC")
                     ->setMaxResults(1)
-                    ->getSingleResult();
+                    ->getResult();
+            }
+
+            if ($parties) {
+                $party = current($parties);
             }
         }
 
