@@ -74,7 +74,7 @@ class Work
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="ProjectComment", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="ProjectComment", mappedBy="project", cascade={"remove"})
      * @ORM\OrderBy({"date" = "DESC"})
      */
     protected $comments;
