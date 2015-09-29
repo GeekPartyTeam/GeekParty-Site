@@ -1,16 +1,17 @@
 services:
-  geek.party.repository:
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: [ 'GeekPartyBundle:Party' ]
+    geek.party.repository:
+      class: Geek\PartyBundle\Entity\Repository\PartyRepository
+      factory_service: doctrine.orm.entity_manager
+      factory_method: getRepository
+      arguments: [ 'GeekPartyBundle:Party' ]
 
-  geek.twig_global_vars:
-    class: Geek\PartyBundle\Listener\TwigGlobalVarsLitener
-    arguments:
-        - @twig
-        - @geek.party.repository
-    tags:
-        -
-            name: kernel.event_listener
-            event: kernel.request
-            method: onKernelRequest
+    geek.twig_global_vars:
+      class: Geek\PartyBundle\Listener\TwigGlobalVarsLitener
+      arguments:
+          - @twig
+          - @geek.party.repository
+      tags:
+          -
+              name: kernel.event_listener
+              event: kernel.request
+              method: onKernelRequest
