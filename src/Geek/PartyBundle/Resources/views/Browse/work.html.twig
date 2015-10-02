@@ -46,6 +46,18 @@
                 {% if work.linuxBuild %}
                     <p> Linux: <a href="{{ work.linuxBuild }}">{{ work.linuxBuild }}</a></p>
                 {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% set ban = get_project_ban(work) %}
+                    <div class="gdp-comment-entry gdp-border">
+                        <form action="{{ path("admin_project_ban") }}" method="POST" class="PartyThemeForm">
+                            <input type="hidden" name="project_id" value="{{ work.id }}"/>
+                            <label><input type="checkbox" name="banned" {% if ban is not null %}checked="checked"{% endif %}/>Забанен</label>
+                            <label>Причина: <input name="comment" class="PartyThemeText"/></label>
+                            {{ macros.submit('Добавить', 'PartyThemeSubmit') }}
+                        </form>
+                    </div>
+                {% endif %}
             </div>
 
 
