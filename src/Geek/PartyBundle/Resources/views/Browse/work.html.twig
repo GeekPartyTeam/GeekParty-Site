@@ -25,26 +25,44 @@
                 <p id="gdp-party-name">{{ work.name }}</p>
                 <p class="gdp-entry-subtitle">{{ projects_macros.project_author(work) }}</p>
 
-                {{ projects_macros.rating(work) }}
+                {% if is_project_banned(work) %}
+                    <div class="gdp-comment-entry gdp-border">
+                        {% set ban = get_project_ban(work) %}
+                        Работа забанена администратором по причине: {{ ban.comment }}
+                    </div>
+                {% else %}
+                    {{ projects_macros.rating(work) }}
 
-                <p>
-                    {% if work_has_web_build(work) %}
-                        <a href="{{ macros.play_link(work) }}" class="gdp-pixel-link">Play!</a>
-                    {% else %}
-                        <a href="#" class="gdp-pixel-link">Not uploaded</a>
+                    <p>
+                        {% if work_has_web_build(work) %}
+                            <a href="{{ macros.play_link(work) }}" class="gdp-pixel-link">Play!</a>
+                        {% else %}
+                            <a href="#" class="gdp-pixel-link">Not uploaded</a>
+                        {% endif %}
+                    </p>
+
+                    {% if work.windowsBuild %}
+                        <p> Windows: <a href="{{ work.windowsBuild }}">{{ work.windowsBuild }}</a></p>
                     {% endif %}
-                </p>
 
-                {% if work.windowsBuild %}
-                    <p> Windows: <a href="{{ work.windowsBuild }}">{{ work.windowsBuild }}</a></p>
+                    {% if work.macBuild %}
+                        <p> Mac: <a href="{{ work.macBuild }}">{{ work.macBuild }}</a></p>
+                    {% endif %}
+
+                    {% if work.linuxBuild %}
+                        <p> Linux: <a href="{{ work.linuxBuild }}">{{ work.linuxBuild }}</a></p>
+                    {% endif %}
                 {% endif %}
-
-                {% if work.linuxBuild %}
-                    <p> Mac: <a href="{{ work.macBuild }}">{{ work.macBuild }}</a></p>
-                {% endif %}
-
-                {% if work.linuxBuild %}
-                    <p> Linux: <a href="{{ work.linuxBuild }}">{{ work.linuxBuild }}</a></p>
+                {% if is_granted('ROLE_ADMIN') %}
+                    {% set ban = get_project_ban(work) %}
+                    <div class="gdp-comment-entry gdp-border">
+                        <form action="{{ path("admin_project_ban") }}" method="POST" class="PartyThemeForm">
+                            <input type="hidden" name="project_id" value="{{ work.id }}"/>
+                            <label><input type="checkbox" value="1" name="banned" {% if ban is not null %}checked="checked"{% endif %}/>&nbsp;Забанить работу.</label>
+                            <label>Причина: <input name="comment" class="PartyThemeText" value="{{ ban ? ban.comment : '' }}"/></label>
+                            {{ macros.submit('Сохранить', 'PartyThemeSubmit') }}
+                        </form>
+                    </div>
                 {% endif %}
             </div>
 
@@ -108,7 +126,7 @@
                                     <div class="Clear"></div>
                                     <p class="gdp-red" id="ErrorMessage" style="display:none">Ошибка!</p>
                                     <p class="gdp-red">Голосуйте за игру только если вы поиграли в нее!</p>
-                                    <p class="gdp-red">Проголосуйте за 5 игр, чтобы ваши голоса имели максимальный вес</p>
+                                    <p class="gdp-red">Проголосуйте за 5 и более игр, чтобы ваши голоса имели максимальный вес</p>
                                     {% if vote is defined and vote %}
                                         <p>Вы уже голосовали за эту игру, но вы можете изменить свой голос</p>
                                     {% endif %}

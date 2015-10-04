@@ -80,6 +80,10 @@ _comment:
     type:     annotation
     prefix:   /comment
 
+geek_admin:
+    resource: "@GeekPartyBundle/Controller/Admin/"
+    type:     annotation
+
 # Auth & security
 _auth:
     resource: routing_security.yml

@@ -11,8 +11,14 @@ html {
     overflow-y: scroll;
 }
 
-html, body { background: #0f2c3b; }
+html, body {
+    background: #0f2c3b;
+    color: #fff;
+}
 
+input {
+    color: #000;
+}
 
 a { color: #ffd02e; text-decoration: none; }
 a:hover { color: #ffd02e; }

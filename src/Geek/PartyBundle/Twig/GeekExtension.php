@@ -10,8 +10,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Geek\PartyBundle\Entity\Party;
 use Geek\PartyBundle\Entity\PartyTheme;
+use Geek\PartyBundle\Entity\ProjectBan;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Repository\PartyThemeRepository;
+use Geek\PartyBundle\Entity\Repository\ProjectBanRepository;
 use Geek\PartyBundle\Entity\Repository\WorkRepository;
 use Geek\PartyBundle\Entity\User;
 use Geek\PartyBundle\Entity\Work;
@@ -56,6 +58,8 @@ class GeekExtension extends \Twig_Extension
             , new \Twig_SimpleFunction('get_party_theme', [$this, 'getPartyTheme'])
             , new \Twig_SimpleFunction('calculate_project_rating', [$this, 'calculateProjectRating'])
             , new \Twig_SimpleFunction('is_winner', [$this, 'isWinner'])
+            , new \Twig_SimpleFunction('is_project_banned', [$this, 'isProjectBanned'])
+            , new \Twig_SimpleFunction('get_project_ban', [$this, 'getProjectBan'])
         ];
     }
 
@@ -190,6 +194,32 @@ class GeekExtension extends \Twig_Extension
             ->get('work.repo');
 
         return $workRepo->isWebBuildUploaded($work);
+    }
+
+    /**
+     * @param Work $project
+     * @return bool
+     */
+    public function isProjectBanned(Work $project)
+    {
+        /** @var ProjectBanRepository $banRepo */
+        $banRepo = $this->kernel->getContainer()
+            ->get('geek.ban.repo');
+
+        return $banRepo->isBanned($project);
+    }
+
+    /**
+     * @param Work $project
+     * @return null|ProjectBan
+     */
+    public function getProjectBan(Work $project)
+    {
+        /** @var ProjectBanRepository $banRepo */
+        $banRepo = $this->kernel->getContainer()
+            ->get('geek.ban.repo');
+
+        return $banRepo->findBan($project);
     }
 
     /**

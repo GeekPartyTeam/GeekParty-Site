@@ -151,3 +151,8 @@ services:
         arguments: [ 'GeekPartyBundle:Work' ]
         calls:
             - ['setRootDir', [ %kernel.root_dir% ]]
+    geek.ban.repo:
+            class: Geek\PartyBundle\Entity\Repository\ProjectBanRepository
+            factory_service: doctrine
+            factory_method: getRepository
+            arguments: [ 'GeekPartyBundle:ProjectBan' ]
