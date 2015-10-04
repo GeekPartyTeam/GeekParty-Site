@@ -24,7 +24,7 @@ class ProjectBan
 
     /**
      * @var Work
-     * @ORM\ManyToOne(targetEntity="Work", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Work")
      * @ORM\OrderBy({"date" = "DESC"})
      */
     protected $project;

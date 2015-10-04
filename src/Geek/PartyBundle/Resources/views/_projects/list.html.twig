@@ -3,11 +3,14 @@
 
 {% set unuploaded = {} %}
 {% set uploaded = {} %}
+{% set banned = {} %}
 {% for entry in projects %}
-    {% if not is_work_uploaded(entry) %}
-        {% set unuploaded = unuploaded|merge([entry]) %}
-    {% else %}
+    {% if is_project_banned(entry) %}
+        {% set banned = banned|merge([entry]) %}
+    {% elseif is_work_uploaded(entry) %}
         {% set uploaded = uploaded|merge([entry]) %}
+    {% else %}
+        {% set unuploaded = unuploaded|merge([entry]) %}
     {% endif %}
 {% endfor %}
 
@@ -30,6 +33,21 @@
     <h4>Незагруженные работы</h4>
 
     {% for entry in unuploaded %}
+        <div class="col-md-6 col-xs-12">
+            {{ macros_project.project_block(entry, current_user, false) }}
+        </div>
+        {% if loop.index % 2 == 0 %}
+            <div style="clear:both"></div>
+        {% endif %}
+	{% endfor %}
+{% endif %}
+
+{% if is_admin() and banned|length > 0 %}
+    <div class="gdp-entry-separator"></div>
+
+    <h4>Забаненные работы</h4>
+
+    {% for entry in banned %}
         <div class="col-md-6 col-xs-12">
             {{ macros_project.project_block(entry, current_user, false) }}
         </div>
