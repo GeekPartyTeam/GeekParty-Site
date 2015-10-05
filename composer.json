@@ -29,7 +29,8 @@
         "symfony/swiftmailer-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "^2.2",
-        "doctrine/doctrine-migrations-bundle": "^1.0"
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "twig/twig": "~1"
     },
     "scripts": {
         "post-install-cmd": [

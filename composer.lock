@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28a660dfb1574ae4204cf7a35fc3237c",
+    "hash": "c04e34785566fedc811e0ae43812e141",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -931,16 +931,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945"
+                "reference": "88f43a947dd20441e4454a028ef7fe6d84f46f9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/e6a83bedbe67579cb0bfb688e982e617943a2945",
-                "reference": "e6a83bedbe67579cb0bfb688e982e617943a2945",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/88f43a947dd20441e4454a028ef7fe6d84f46f9c",
+                "reference": "88f43a947dd20441e4454a028ef7fe6d84f46f9c",
                 "shasum": ""
             },
             "require": {
@@ -972,8 +972,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\ORM\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\ORM\\": "lib/Doctrine/ORM"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1004,7 +1004,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-08-31 12:59:39"
+            "time": "2015-10-04 22:56:17"
         },
         {
             "name": "exercise/htmlpurifier-bundle",
@@ -2453,6 +2453,64 @@
             "time": "2015-10-02 11:51:59"
         },
         {
+            "name": "symfony/security-acl",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-acl.git",
+                "reference": "ec72d7849cd334b161c60ceb6e8f6fa05a507516"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security-acl/zipball/ec72d7849cd334b161c60ceb6e8f6fa05a507516",
+                "reference": "ec72d7849cd334b161c60ceb6e8f6fa05a507516",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/security-core": "~2.4|~3.0.0"
+            },
+            "require-dev": {
+                "doctrine/common": "~2.2",
+                "doctrine/dbal": "~2.2",
+                "psr/log": "~1.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "For using the built-in ACL implementation",
+                "symfony/class-loader": "For using the ACL generateSql script",
+                "symfony/finder": "For using the ACL generateSql script"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\Acl\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - ACL (Access Control List)",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-22 11:24:41"
+        },
+        {
             "name": "symfony/swiftmailer-bundle",
             "version": "dev-master",
             "source": {
@@ -2511,23 +2569,27 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.4",
+            "version": "2.8.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1fdf23fe28876844b887b0e1935c9adda43ee645"
+                "reference": "ef7aeaa47c144d4f6cd9de01726ed1d8caeb0df9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1fdf23fe28876844b887b0e1935c9adda43ee645",
-                "reference": "1fdf23fe28876844b887b0e1935c9adda43ee645",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/ef7aeaa47c144d4f6cd9de01726ed1d8caeb0df9",
+                "reference": "ef7aeaa47c144d4f6cd9de01726ed1d8caeb0df9",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "~2.3",
+                "doctrine/common": "~2.4",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
+                "symfony/security-acl": "~2.7",
                 "twig/twig": "~1.20|~2.0"
+            },
+            "conflict": {
+                "phpdocumentor/reflection": "<1.0.7"
             },
             "replace": {
                 "symfony/asset": "self.version",
@@ -2550,18 +2612,20 @@
                 "symfony/http-foundation": "self.version",
                 "symfony/http-kernel": "self.version",
                 "symfony/intl": "self.version",
+                "symfony/ldap": "self.version",
                 "symfony/locale": "self.version",
                 "symfony/monolog-bridge": "self.version",
                 "symfony/options-resolver": "self.version",
                 "symfony/process": "self.version",
                 "symfony/property-access": "self.version",
+                "symfony/property-info": "self.version",
                 "symfony/proxy-manager-bridge": "self.version",
                 "symfony/routing": "self.version",
                 "symfony/security": "self.version",
-                "symfony/security-acl": "self.version",
                 "symfony/security-bundle": "self.version",
                 "symfony/security-core": "self.version",
                 "symfony/security-csrf": "self.version",
+                "symfony/security-guard": "self.version",
                 "symfony/security-http": "self.version",
                 "symfony/serializer": "self.version",
                 "symfony/stopwatch": "self.version",
@@ -2577,19 +2641,20 @@
             },
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
-                "doctrine/dbal": "~2.2",
+                "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.2,>=2.2.3",
+                "doctrine/orm": "~2.4,>=2.4.5",
                 "egulias/email-validator": "~1.2",
                 "ircmaxell/password-compat": "~1.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0",
+                "phpdocumentor/reflection": "^1.0.7",
                 "symfony/phpunit-bridge": "self.version"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2629,24 +2694,24 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-09-08 14:26:39"
+            "time": "2015-10-05 07:20:16"
         },
         {
             "name": "twig/twig",
-            "version": "dev-master",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ce074e5c0cea010f7b138e793ea3c37358c73053"
+                "reference": "efaf5036e6857616379b78648ffdb5fdafb92c87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ce074e5c0cea010f7b138e793ea3c37358c73053",
-                "reference": "ce074e5c0cea010f7b138e793ea3c37358c73053",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/efaf5036e6857616379b78648ffdb5fdafb92c87",
+                "reference": "efaf5036e6857616379b78648ffdb5fdafb92c87",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": ">=5.2.7"
             },
             "require-dev": {
                 "symfony/debug": "~2.7",
@@ -2655,7 +2720,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "1.22-dev"
                 }
             },
             "autoload": {
@@ -2690,7 +2755,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-10-04 08:43:21"
+            "time": "2015-10-04 08:38:04"
         }
     ],
     "packages-dev": [
@@ -2839,12 +2904,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/Mink.git",
-                "reference": "0a2789063c86e49ae3640efd36fb13e525765410"
+                "reference": "ef3458103b68015cb271554e4e1a278332afa0cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/Mink/zipball/0a2789063c86e49ae3640efd36fb13e525765410",
-                "reference": "0a2789063c86e49ae3640efd36fb13e525765410",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/ef3458103b68015cb271554e4e1a278332afa0cc",
+                "reference": "ef3458103b68015cb271554e4e1a278332afa0cc",
                 "shasum": ""
             },
             "require": {
@@ -2889,7 +2954,7 @@
                 "testing",
                 "web"
             ],
-            "time": "2015-09-21 19:50:04"
+            "time": "2015-10-05 11:06:32"
         },
         {
             "name": "behat/mink-browserkit-driver",
@@ -3263,12 +3328,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "12259bb1352612df9ec24048714a3bedafe79674"
+                "reference": "84b40c563a4eb4251670a23b23f808b32fcf74f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/12259bb1352612df9ec24048714a3bedafe79674",
-                "reference": "12259bb1352612df9ec24048714a3bedafe79674",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/84b40c563a4eb4251670a23b23f808b32fcf74f5",
+                "reference": "84b40c563a4eb4251670a23b23f808b32fcf74f5",
                 "shasum": ""
             },
             "require": {
@@ -3317,7 +3382,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-09-24 07:56:07"
+            "time": "2015-10-03 05:44:56"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3503,12 +3568,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b6f7e333ad1e1212f36706be94f0026304b5ebe6"
+                "reference": "af124ca5972f4f4862382d8a32b94e479d13684b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b6f7e333ad1e1212f36706be94f0026304b5ebe6",
-                "reference": "b6f7e333ad1e1212f36706be94f0026304b5ebe6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/af124ca5972f4f4862382d8a32b94e479d13684b",
+                "reference": "af124ca5972f4f4862382d8a32b94e479d13684b",
                 "shasum": ""
             },
             "require": {
@@ -3569,7 +3634,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-02 15:00:24"
+            "time": "2015-10-05 09:52:42"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3577,12 +3642,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "4f526b7e2c42cacf32c86e1e0c9ab9d3b24273cf"
+                "reference": "28fffaf4c2b72812b3975a029c1a3d920cf5ea01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4f526b7e2c42cacf32c86e1e0c9ab9d3b24273cf",
-                "reference": "4f526b7e2c42cacf32c86e1e0c9ab9d3b24273cf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/28fffaf4c2b72812b3975a029c1a3d920cf5ea01",
+                "reference": "28fffaf4c2b72812b3975a029c1a3d920cf5ea01",
                 "shasum": ""
             },
             "require": {
@@ -3625,7 +3690,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-09-02 07:30:58"
+            "time": "2015-10-02 06:54:34"
         },
         {
             "name": "sebastian/comparator",

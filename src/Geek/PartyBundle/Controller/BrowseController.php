@@ -9,7 +9,6 @@ use Geek\PartyBundle\Entity\ProjectVote;
 use Geek\PartyBundle\Entity\Repository\AbstractCommentRepository;
 use Geek\PartyBundle\Entity\Repository\PartyRepository;
 use Geek\PartyBundle\Entity\Work;
-use JMS\SecurityExtraBundle\Tests\Security\Authorization\Expression\Fixture\Issue22\Project;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
