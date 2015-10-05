@@ -163,7 +163,7 @@ class BrowseController extends Base\BaseController
             $sort = $sortByVoteCount;
         }
 
-        if ($partyEntity->isEnded()) {
+        if ($partyEntity->isShowingResultsTime()) {
             $ratings = $partyRepo->getRatings($partyEntity);
                 $sortByRating = function (Work $a, Work $b) use ($ratings) {
                 if (!isset($ratings[$a->getId()])) {
