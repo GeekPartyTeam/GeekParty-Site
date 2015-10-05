@@ -30,6 +30,7 @@ class PartyType extends AbstractType
         $addDateTimeWidget('endTime');
         $addDateTimeWidget('projectVotingStartTime');
         $addDateTimeWidget('projectVotingEndTime');
+        $addDateTimeWidget('showResultsTime');
 
         $builder->add('description', 'textarea', [
                  'attr' => [
