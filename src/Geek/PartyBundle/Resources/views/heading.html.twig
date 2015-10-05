@@ -12,8 +12,9 @@
     {% set endTime = current_party.endTime|date('Y-m-d H:i:s') %}
     {% set projectVotingStartTime = current_party.projectVotingStartTime|date('Y-m-d H:i:s') %}
     {% set projectVotingEndTime = current_party.projectVotingEndTime|date('Y-m-d H:i:s') %}
+    {% set showResultsTime = current_party.showResultsTime|date('Y-m-d H:i:s') %}
 
-    {% if projectVotingEndTime < now %}
+    {% if showResultsTime < now %}
         {% set message = current_party.name ~ " состоялось!" %}
         {% set belowMessage = "<a href='" ~ path("geek_browse", {party: current_party.id}) ~ "'>Результаты голосования</a>" %}
 
@@ -52,6 +53,10 @@
         {% set aboveMessage = "Голосование за работы " ~ current_party.name ~ " закончится через:" %}
         {% set targetDate = projectVotingEndTime %}
         {% set belowMessage = "<a href='" ~ path("geek_browse") ~ "'>Голосовать</a>" %}
+
+    {% elseif showResultsTime > now %}
+        {% set aboveMessage = "Результаты " ~ current_party.name ~ " будут объявлены через:" %}
+        {% set targetDate = showResultsTime %}
 
     {% endif %}
 

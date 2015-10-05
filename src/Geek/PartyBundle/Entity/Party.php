@@ -61,6 +61,14 @@ class Party
      */
     protected $projectVotingEndTime;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $showResultsTime;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->startTime = new \DateTime();
@@ -71,6 +79,7 @@ class Party
         $this->themeVotingEndTime = new \DateTime();
         $this->projectVotingStartTime = new \DateTime();
         $this->projectVotingEndTime = new \DateTime();
+        $this->showResultsTime = new \DateTime();
     }
 
     /**
@@ -385,6 +394,25 @@ class Party
     }
 
     /**
+     * @return mixed
+     */
+    public function getShowResultsTime()
+    {
+        return $this->showResultsTime;
+    }
+
+    /**
+     * @param mixed $showResultsTime
+     * @return Party
+     */
+    public function setShowResultsTime($showResultsTime)
+    {
+        $this->showResultsTime = $showResultsTime;
+
+        return $this;
+    }
+
+    /**
      * @param \DateTime|null $time
      * @return bool
      */
@@ -393,7 +421,17 @@ class Party
         if (!$time) {
             $time = new \DateTime;
         }
+
         return $time >= $this->getProjectVotingStartTime() && $time < $this->getProjectVotingEndTime();
+    }
+
+    public function isShowingResultsTime(\DateTimeInterface $time = null)
+    {
+        if (!$time) {
+            $time = new \DateTime;
+        }
+
+        return $time >= $this->getShowResultsTime();
     }
 
     /**

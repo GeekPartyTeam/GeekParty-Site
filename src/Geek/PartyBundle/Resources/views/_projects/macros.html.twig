@@ -60,7 +60,7 @@
 {% endmacro %}
 
 {% macro rating(entry) %}
-    {% if entry.party.ended or is_admin() %}
+    {% if entry.party.showingResultsTime or is_admin() %}
         {% if entry.party.hasUserRating %}
             {% set userRating = calculate_project_rating(entry, true) %}
             <div class="gdp-rating gdp-user-rating">
