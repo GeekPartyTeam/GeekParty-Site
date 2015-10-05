@@ -51,7 +51,6 @@ class GeekExtension extends \Twig_Extension
             new \Twig_SimpleFunction('is_owner_or_admin', [$this, 'isOwnerOrAdmin'])
             , new \Twig_SimpleFunction('is_authorised', [$this, 'isAuthorised'])
             , new \Twig_SimpleFunction('is_admin', [$this, 'isAdmin'])
-            , new \Twig_SimpleFunction('file_exists', [$this, 'fileExists'])
             , new \Twig_SimpleFunction('is_work_uploaded', [$this, 'isWorkUploaded'])
             , new \Twig_SimpleFunction('work_has_web_build', [$this, 'workHasWebBuild'])
             , new \Twig_SimpleFunction('format_date', [$this, 'formatDate'])
