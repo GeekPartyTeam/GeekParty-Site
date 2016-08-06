@@ -17,6 +17,8 @@ class Version20150925003609 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->skipIf(!$schema->hasTable('TeamMember'));
+
         $this->addSql('ALTER TABLE TeamMember DROP FOREIGN KEY FK_752B5942296CD8AE');
         $this->addSql('DROP TABLE Team');
         $this->addSql('DROP TABLE TeamMember');

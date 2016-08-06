@@ -18,6 +18,8 @@ class Version20151005130856 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->skipIf($schema->getTable('Party')->hasColumn('showResultsTime'));
+
         $this->addSql('ALTER TABLE Party ADD showResultsTime DATETIME NOT NULL');
         $this->addSql('UPDATE Party SET showResultsTime = projectVotingEndTime');
     }
